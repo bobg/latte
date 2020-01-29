@@ -1,0 +1,549 @@
+\input texinfo @c -*- texinfo -*-
+@c %**start of header
+@setfilename liblatte.info
+@settitle Latte Library
+@c @setchapternewpage odd
+@c %**end of header
+
+@ifinfo
+@dircategory Latte - the Language for Transforming Text
+@direntry
+* liblatte: (liblatte).                        Programming with Latte.
+@end direntry
+
+This is the programmer guide for Latte, the Language for Transforming
+Text.
+
+Copyright @copyright{} 1998 Zanshin Inc.
+
+The contents of this file are subject to the Zanshin Public License
+Version 1.0 (the "License"); you may not use this file except in
+compliance with the License.  You should have received a copy of the
+License with Latte; see the file COPYING.  You may also obtain a copy of
+the License at <http://www.zanshin.com/ZPL.html>.
+
+Documents distributed under the License are distributed on an "AS IS"
+basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the
+License for the specific language governing rights and limitations under
+the License.
+
+The Original Code is Latte.
+
+The Initial Developer of the Original Code is Zanshin, Inc.
+
+This product includes software developed by the University of
+California, Berkeley and its contributors.
+@end ifinfo
+
+@titlepage
+@title Latte Library
+@author Bob Glickstein
+
+@page
+@vskip 0pt plus 1filll
+
+Copyright @copyright{} 1998 Zanshin Inc.
+
+The contents of this file are subject to the Zanshin Public License
+Version 1.0 (the "License"); you may not use this file except in
+compliance with the License.  You should have received a copy of the
+License with Latte; see the file COPYING.  You may also obtain a copy of
+the License at <http://www.zanshin.com/ZPL.html>.
+
+Documents distributed under the License are distributed on an "AS IS"
+basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+License for the specific language governing rights and limitations under
+the License.
+
+The Original Code is Latte.
+
+The Initial Developer of the Original Code is Zanshin, Inc.
+
+This product includes software developed by the University of
+California, Berkeley and its contributors.
+@end titlepage
+
+@node Top, Introduction, (dir), (dir)
+
+@ifinfo
+This is the programmer guide for Latte, the Language for Transforming
+Text.
+@end ifinfo
+
+@menu
+* Introduction::                
+* Latte processing overview::   
+* Latte_Reader::                
+* Latte_Obj::                   
+* Latte_Visitor::               
+* Whitespace and file locations::  
+* Shared strings::              
+* Miscellaneous details::       
+* Writing new Latte applications::  
+* Index::                       
+@end menu
+
+@node Introduction, Latte processing overview, Top, Top
+@chapter Introduction
+
+This document describes the programming interface to the Latte library.
+Latte is the Language for Transforming Text.  With the Latte library it
+is possible to write programs that process Latte-formatted documents,
+e.g. to translate them into other formats.  One such translator program,
+@code{latte-html}, converts Latte files into HTML files.  It comes with
+Latte, and its implementation will serve as an instructional tool
+throughout this manual.
+
+
+Regrettably, this document is not yet complete.  Until it is,
+programmers interested in using the Latte library should contact
+@email{latte-dev@@zanshin.com} for information and assistance.
+
+
+@node Latte processing overview, Latte_Reader, Introduction, Top
+@chapter Latte processing overview
+
+To process a file of Latte input, the caller creates a @dfn{reader} and
+a @dfn{visitor}.  The reader is responsible for parsing the input into a
+variety of data structures and evaluating those structures.  The visitor
+is responsible for performing the desired processing on the results.
+
+Each top-level expression recognized by the reader is immediately
+evaluated and then ``visited'' by the visitor.  (The action of the
+visitor in @code{latte-html} is to evaluate the expression, adjust the
+resulting text according to certain HTML rules, and then output it.)
+
+@node Latte_Reader, Latte_Obj, Latte processing overview, Top
+@chapter Latte_Reader
+
+
+
+@deftypefn Constructor {} Latte_Reader (istream &@var{stream}, const shstring &@var{filename})
+@deftypefnx Constructor {} Latte_Reader (istream &@var{stream}, const shstring &@var{filename}, Latte_Activation &@var{activation})
+
+Constructs a new @code{Latte_Reader}.  Input is from @var{stream}.  The
+name of the stream is @var{filename} (used in error messages and to set
+the Latte variable @code{\__FILE__}).  The optional argument
+@var{activation} contains variable bindings; if omitted, a new global
+activation is created and populated with some intrinsic global
+definitions (presently only @code{\__latte-version__}).
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Reader} member fn} void install_standard_definitions ()
+
+Populates the reader's activation with the standard intrinsic variable
+definitions, primarily the definitions of Latte's built-in functions.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Reader} member fn} void process (Latte_Visitor &@var{visitor})
+
+Consumes the input and processes it using @var{visitor}.
+
+@end deftypefn
+
+@c  @deftypefn {@code{Latte_Reader} member fn} bool processed () const
+
+@c  Indicates whether processing is complete.  Use this after calling
+@c  @code{process()} to test whether the input file ended with an unclosed
+@c  brace-pair or an unsatisfied named-parameter assignment.  Return value
+@c  is true if all is well, false otherwise.
+
+@c  @end deftypefn
+
+@c  @deftypefn {@code{Latte_Reader} member fn} {const Latte_Obj &} unprocessed () const
+
+@c  Returns the innermost incomplete object from the input.  For use in
+@c  error reporting.
+
+@c  @emph{Call this only when @code{processed()} returns false!}
+
+@c  @end deftypefn
+
+@node Latte_Obj, Latte_Visitor, Latte_Reader, Top
+@chapter Latte_Obj
+
+Calling @code{Latte_Reader::process()} creates a series of
+@code{Latte_Obj} trees that are then handed to a @code{Latte_Visitor}.
+@code{Latte_Obj} is an abstract base class for a rich variety of
+subclasses.
+
+@code{Latte_Obj} has a collection of virtual functions for testing which
+subclass an object belongs to.
+
+@deftypefn {@code{Latte_Obj} virtual member fn} {Latte_Assignment *} as_assignment ()
+@deftypefnx {} {const Latte_Assignment *} as_assignment () const
+
+If @code{this} is a @code{Latte_Assignment}, returns it, else returns
+@code{NULL}.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Obj} virtual member fn} {Latte_Boolean *} as_boolean ()
+@deftypefnx {} {const Latte_Boolean *} as_boolean () const
+
+If @code{this} is a @code{Latte_Boolean}, returns it, else returns
+@code{NULL}.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Obj} virtual member fn} {Latte_Group *} as_group ()
+@deftypefnx {} {const Latte_Group *} as_group () const
+
+If @code{this} is a @code{Latte_Group}, returns it, else returns
+@code{NULL}.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Obj} virtual member fn} {Latte_List *} as_list ()
+@deftypefnx {} {const Latte_List *} as_list () const
+
+If @code{this} is a @code{Latte_List}, returns it, else returns
+@code{NULL}.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Obj} virtual member fn} {Latte_Nested *} as_nested ()
+@deftypefnx {} {const Latte_Nested *} as_nested () const
+
+If @code{this} is a @code{Latte_Nested}, returns it, else returns
+@code{NULL}.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Obj} virtual member fn} {Latte_Operator *} as_operator ()
+@deftypefnx {} {const Latte_Operator *} as_operator () const
+
+If @code{this} is a @code{Latte_Operator}, returns it, else returns
+@code{NULL}.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Obj} virtual member fn} {Latte_Param *} as_param ()
+@deftypefnx {} {const Latte_Param *} as_param () const
+
+If @code{this} is a @code{Latte_Param}, returns it, else returns
+@code{NULL}.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Obj} virtual member fn} {Latte_Str *} as_str ()
+@deftypefnx {} {const Latte_Str *} as_str () const
+
+If @code{this} is a @code{Latte_Str}, returns it, else returns
+@code{NULL}.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Obj} virtual member fn} {Latte_Tangible *} as_tangible ()
+@deftypefnx {} {const Latte_Tangible *} as_tangible () const
+
+If @code{this} is a @code{Latte_Tangible}, returns it, else returns
+@code{NULL}.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Obj} virtual member fn} {Latte_VarRef *} as_varref ()
+@deftypefnx {} {const Latte_VarRef *} as_varref () const
+
+If @code{this} is a @code{Latte_VarRef}, returns it, else returns
+@code{NULL}.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Obj} virtual member fn} {Latte_WsNode *} as_wsnode ()
+@deftypefnx {} {const Latte_WsNode *} as_wsnode () const
+
+If @code{this} is a @code{Latte_WsNode}, returns it, else returns
+@code{NULL}.
+
+@end deftypefn
+
+Every Latte object has a boolean value and a numeric value.
+
+@deftypefn {@code{Latte_Obj} virtual member fn} bool bool_val () const
+
+Returns the boolean value of @code{this}.  By the default
+implementation, the boolean value of every Latte object is true except
+for an empty @code{Latte_List} or @code{Latte_Group}, and except for a
+false-valued @code{Latte_Boolean}.  (This does not prevent defining a
+new subclass that overrides @code{bool_val()} and creates new false
+Latte values.)
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Obj} virtual member fn} Latte_Number_t numeric_val () const
+
+Returns the numeric value of @code{this}.  By the default
+implementation, the numeric value of every Latte object is zero except
+for @code{Latte_Str} objects whose strings can be parsed as numbers.
+(This does not prevent defining a new subclass that overrides
+@code{numeric_val()} and creates new Latte objects with non-zero numeric
+values.)
+
+The type @code{Latte_Number_t} is either @code{long} or @code{double},
+depending on an option given when Latte is compiled.  If the
+preprocessor symbol @code{ENABLE_FLOATING_POINT} (in
+@file{latte-conf.h}) is defined, then @code{Latte_Number_t} is
+@code{double}, otherwise it's @code{long}.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Obj} member fn} {Refcounter<Latte_Obj>} eval (Latte_Activation &@var{activation})
+
+Evaluates @code{this} in the scope of @var{activation} and returns the
+result.  Every Latte object evaluates to some Latte object; by the
+default implementation, most simply evaluate to themselves.
+
+Note, @code{eval()} is not a virtual member function.  To define a new
+subclass with different evaluation rules, override @code{do_eval()}, not
+@code{eval()}.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Obj} virtual member fn} bool self_evaluating () const
+
+Returns true if @code{this} will definitely evaluate to itself when
+@code{eval()} is called; returns false if @code{this} @emph{may not}
+evaluate to itself.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Obj} virtual member fn} void visit (Latte_Visitor &@var{visitor})
+
+``Visit'' @code{this} with @var{visitor}.  This calls
+@code{visitor.visit_@var{foo}()} where @var{foo} is one of
+@code{assignment}, @code{boolean}, @code{closure}, @code{group},
+@code{list}, @code{nested}, @code{operator}, @code{param},
+@code{varref}, @code{wsnode}, and @code{str}, depending on which
+@code{Latte_Obj} subclass @code{this} belongs to.
+
+@end deftypefn
+
+
+@menu
+* Latte_Tangible::              
+* Latte_Nested::                
+* Other Latte_Obj subclasses::  
+@end menu
+
+@node Latte_Tangible, Latte_Nested, Latte_Obj, Latte_Obj
+@section Latte_Tangible
+
+@node Latte_Nested, Other Latte_Obj subclasses, Latte_Tangible, Latte_Obj
+@section Latte_Nested
+
+@node Other Latte_Obj subclasses,  , Latte_Nested, Latte_Obj
+@section Other Latte_Obj subclasses
+
+@node Latte_Visitor, Whitespace and file locations, Latte_Obj, Top
+@chapter Latte_Visitor
+
+@deftypefn {@code{Latte_Visitor} virtual member fn} void visit_assignment (Latte_Assignment &@var{assignment})
+
+Called by @code{Latte_Obj::visit()} when the @code{Latte_Obj} is
+actually a @code{Latte_Assignment}.  The default implementation does
+nothing.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Visitor} virtual member fn} void visit_boolean (Latte_Boolean &@var{boolean})
+
+Called by @code{Latte_Obj::visit()} when the @code{Latte_Obj} is
+actually a @code{Latte_Boolean}.  The default implementation does
+nothing.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Visitor} virtual member fn} void visit_closure (Latte_Closure &@var{closure})
+
+Called by @code{Latte_Obj::visit()} when the @code{Latte_Obj} is
+actually a @code{Latte_Closure}.  The default implementation does
+nothing.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Visitor} virtual member fn} void visit_group (Latte_Group &@var{group})
+
+Called by @code{Latte_Obj::visit()} when the @code{Latte_Obj} is
+actually a @code{Latte_Group}.  The default implementation recursively
+calls @code{Latte_Obj::visit()} on each member of @var{group} in order.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Visitor} virtual member fn} void visit_list (Latte_List &@var{list})
+
+Called by @code{Latte_Obj::visit()} when the @code{Latte_Obj} is actually
+a @code{Latte_List}.  The default implementation recursively calls
+@code{Latte_Obj::visit()} on each member of @var{list} in order.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Visitor} virtual member fn} void visit_nested (Latte_Nested &@var{nested})
+
+Called by @code{Latte_Obj::visit()} when the @code{Latte_Obj} is actually
+a @code{Latte_Nested}.  The default implementation calls
+@code{Latte_Obj::visit()} on the @code{Latte_Obj} contained within
+@var{nested}.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Visitor} virtual member fn} void visit_operator (Latte_Operator &@var{operator})
+
+Called by @code{Latte_Obj::visit()} when the @code{Latte_Obj} is actually
+a @code{Latte_Operator}.  The default implementation does nothing.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Visitor} virtual member fn} void visit_param (Latte_Param &@var{param})
+
+Called by @code{Latte_Obj::visit()} when the @code{Latte_Obj} is actually
+a @code{Latte_Param}.  The default implementation does nothing.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Visitor} virtual member fn} void visit_str (Latte_Str &@var{str})
+
+Called by @code{Latte_Obj::visit()} when the @code{Latte_Obj} is actually
+a @code{Latte_Str}.  This function is ``pure virtual'' in
+@code{Latte_Visitor}; there is no default implementation, and subclasses
+are required to override it.
+
+In @code{latte-html}, the @code{LatteHtml_HtmlVisitor} class supplies an
+implementation of @code{visit_str()} that works as follows:
+
+@itemize @bullet
+
+@item
+It calls @code{Latte_Visitor::suggest_wstate()} to determine the proper
+whitespace to emit before the string;
+
+@item
+It emits the suggested whitespace;
+
+@item
+If the whitespace included two or more newlines, and if processing is
+not presently inside a call to @w{@code{@{\pre @dots{}@}}}, it emits the
+HTML paragraph tag @samp{<p>};
+
+@item
+If processing is presently inside a call to @w{@code{@{\html
+@dots{}@}}}, it emits the string literally; otherwise it emits each
+character of the string one at a time, converting @samp{<}, @samp{>},
+@samp{&}, and @samp{"} to @samp{&lt;}, @samp{&gt;}, @samp{&amp;}, and
+@samp{&quot;}, respectively.
+
+@end itemize
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Visitor} virtual member fn} void visit_varref (Latte_VarRef &@var{varref})
+
+Called by @code{Latte_Obj::visit()} when the @code{Latte_Obj} is
+actually a @code{Latte_VarRef}.  The default implementation does
+nothing.
+
+@end deftypefn
+
+@deftypefn {@code{Latte_Visitor} virtual member fn} void visit_wsnode (Latte_WsNode &@var{wsnode})
+
+Called by @code{Latte_Obj::visit()} when the @code{Latte_Obj} is
+actually a @code{Latte_WsNode}.  The default implementation notes the
+whitespace contained in @var{wsnode} for possible use in subsequent
+calls to @code{suggest_wstate()}; then it calls
+@code{Latte_Obj::visit()} on the nested object within @var{wsnode}.
+
+@end deftypefn
+
+@node Whitespace and file locations, Shared strings, Latte_Visitor, Top
+@chapter Whitespace and file locations
+
+@node Shared strings, Miscellaneous details, Whitespace and file locations, Top
+@chapter Shared strings
+
+@node Miscellaneous details, Writing new Latte applications, Shared strings, Top
+@chapter Miscellaneous details
+
+@menu
+* Reference counting::          
+* Debug log::                   
+* Restorer::                    
+@end menu
+
+@node Reference counting, Debug log, Miscellaneous details, Miscellaneous details
+@section Reference counting
+
+@node Debug log, Restorer, Reference counting, Miscellaneous details
+@section Debug log
+
+@node Restorer,  , Debug log, Miscellaneous details
+@section Restorer
+
+A @code{Restorer} is an object that holds a reference to some variable,
+and a value for that variable.  It assigns the value to the variable
+when it goes out of scope.
+
+Its name comes from the fact that it's usually used to restore the value
+of a variable that has been temporarily changed for the duration of some
+function.  For example, here's how @code{Latte_Obj::eval()} keeps track
+of its recursion depth:
+
+@example
+static unsigned int depth = 0;
+Restorer<unsigned int> depth_restorer(depth);
+
+++depth;
+
+...
+val = do_eval(activation);
+...
+@end example
+
+@noindent
+At the end of the function, @code{depth} is restored to the value it had
+before the @code{++depth} statement.  This is more reliable than
+
+@example
+++depth;
+
+...
+val = do_eval(activation);
+...
+
+--depth;
+@end example
+
+@noindent
+since @code{do_eval()} may throw an exception which could cause the
+@w{@code{--depth}} to be skipped.  A @code{Restorer}, on the other hand,
+will restore the old value even when the scope ends because of an
+exception.
+
+@deftypefn Constructor {} Restorer<T> (T &@var{var})
+
+Constructs a new @code{Restorer} on a variable of type @code{T}.  The
+current value of @var{var} is recorded.  When this @code{Restorer} is
+destructed, that value is assigned back to @var{var}.
+
+@end deftypefn
+
+@deftypefn Constructor {} Restorer<T> (T &@var{var}, const T &@var{now}, const T &@var{later})
+
+Alternative constructor that immediately assigns to @var{var} the value
+@var{now}, and that assigns @var{later} to @var{var} when the
+@code{Restorer} is destructed.
+
+@end deftypefn
+
+@node Writing new Latte applications, Index, Miscellaneous details, Top
+@chapter Writing new Latte applications
+
+@node Index,  , Writing new Latte applications, Top
+@unnumbered Index
+
+@printindex fn
+
+@contents
+
+@bye

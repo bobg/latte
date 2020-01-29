@@ -1,0 +1,5 @@
+{\if {\member? b {a b c d}} OK no}
+{\if {\member? {b} {a b c d}} no OK}
+{\if {\member? b {a {b} c d}} no OK}
+{\if {\member? {c d} {{a b} {c d} {e f}}} OK no}
+{\if {\member? x {a b c d}} no OK}

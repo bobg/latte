@@ -1,0 +1,24 @@
+{\if {\greater? 2 1} OK bad}
+{\if {\greater? 1 2} bad OK}
+{\if {\greater? 1 2 3} bad OK}
+{\if {\greater? 1 3 2} bad OK}
+{\if {\greater? 3 2 1} OK bad}
+{\if {\less? 2 1} bad OK}
+{\if {\less? 1 2} OK bad}
+{\if {\less? 1 2 3} OK bad}
+{\if {\less? 1 3 2} bad OK}
+{\if {\less? 3 2 1} bad OK}
+{\if {\greater-equal? 2 1} OK bad}
+{\if {\greater-equal? 2 2 1} OK bad}
+{\if {\greater-equal? 2 1 2} bad OK}
+{\if {\greater-equal? 1 2} bad OK}
+{\if {\greater-equal? 1 2 3} bad OK}
+{\if {\greater-equal? 1 3 2} bad OK}
+{\if {\greater-equal? 3 2 1} OK bad}
+{\if {\less-equal? 2 1} bad OK}
+{\if {\less-equal? 1 2} OK bad}
+{\if {\less-equal? 1 2 2} OK bad}
+{\if {\less-equal? 2 1 2} bad OK}
+{\if {\less-equal? 1 2 3} OK bad}
+{\if {\less-equal? 1 3 2} bad OK}
+{\if {\less-equal? 3 2 1} bad OK}

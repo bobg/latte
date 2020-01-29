@@ -1,0 +1,54 @@
+-*- outline -*-
+
+*   Latte 2.1 released (25 October 1999)
+**     Fix for gcc 2.95 compiler error
+**     One more speedup -- swapped Latte definition of \while for compiled
+**     New macros in standard.latte: \defmacro and \foreach
+
+*   Latte 2.0 released (21 October 1999 -- happy birthday, Latte!)
+**     Speed optimizations
+**     Bug fixes
+**     New parser (unfortunately, syntax error reporting is slightly degraded)
+**     latte-text translator (rudimentary)
+**     New string inequality operators
+**     New operator \funcall
+**     \varref operator removed
+**     New latte-html option -p for including </p> at para ends.  Imperfect.
+**     shdeque<> is a "shared deque" and is the basis for Latte_List
+**     New error type, "Useless subexpression"
+**     Bonus Perl script, html-latte.pl (converts HTML to Latte)
+**     Current directory implicity searched for library files after LATTE_PATH
+**     Macros, quote, and quasiquote
+**     Eval rules greatly sanitized
+***       Top-level forms evaluated top-down instead of inside out
+***       "Visitors" no longer responsible for evaluating expressions
+***       Redundant evals eliminated
+***       Closure-value ambiguity eliminated
+Closures return the value of their last subexpression.  Previously,
+closures constructed a list of all subexpression values and returned
+that, BUT unwrapped that list if it contained exactly one
+subexpression, leading to confusion for callers.
+
+*   Latte 1.1 released (10 November 1998)
+**     Support for building RedHat-style RPM distributions
+**     Support for MacOS and Win32
+**     API documentation partially completed
+**     No need to install flex to build Latte
+**     Debugging output slightly improved
+**     Flex-generated symbols are now renamed to avoid name clashes
+**     New generic character-entity functions \ch and \chx
+**     Command-line enhancements: -o FILE; and `-' means stdin
+**     Error messages now give a useful backtrace
+
+*   Latte 1.0.1 released (26 October 1998)
+**     Now compiles on Solaris
+...after working around some compiler bugs
+
+**     Fix --enable-floating-point
+**     Optimize some list accesses
+**     \nth now understands a negative index like \substr and \subseq do
+**     Some function arguments are more rigorously range-checked
+**     Error reports now count function arguments from 1, not 0
+**     Fix \while so it doesn't build a useless implicit list of values
+
+*   Latte 1.0 released (21 October 1998)

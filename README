@@ -1,0 +1,83 @@
+-*- text -*-
+
+This is Latte, the Language for Transforming Text.
+
+Latte is copyright 1998,1999 Zanshin Inc.    <http://www.zanshin.com/>
+
+    The contents of this file are subject to the Zanshin Public
+    License Version 1.0 (the "License"); you may not use this file
+    except in compliance with the License.  You should have received a
+    copy of the License with Latte; see the file COPYING.  You may
+    also obtain a copy of the License at
+    <http://www.zanshin.com/ZPL.html>.
+
+    Software distributed under the License is distributed on an "AS
+    IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+    implied. See the License for the specific language governing
+    rights and limitations under the License.
+
+    The Original Code is Latte.
+
+    The Initial Developer of the Original Code is Zanshin, Inc.
+
+Latte was created by Bob Glickstein <http://www.zanshin.com/~bobg> and
+is dedicated to the amazing and wonderful Suzanne Glickstein.
+
+Latte is a simple language for marking up text in a very expressive
+way.  This distribution includes the Latte library, which allows you
+to build translators from Latte to any other text format you choose,
+and a demonstration application that converts Latte text into HTML,
+allowing you to write web pages in a much saner language than HTML.
+
+Complete documentation is available in Texinfo and Info formats in the
+Latte distribution.  An HTML version of the documentation is available
+on the Latte website at <http://www.latte.org/>.
+
+Several aspects of HTML are annoying to write.  Using <p> tags in
+every paragraph, for example, when it ought to suffice simply to leave
+a blank line between paragraphs.  Having to match every <foo> with a
+</foo>, when other languages allow blocks to be delimited by simple
+matching typographical characters like { and }.  (Plus, text editors
+have a hard time helping you keep constructs like <foo> and </foo>
+correctly balanced.)  Having to use special magic to include the
+characters <, >, &, and ", which are all too common in text documents.
+Having no way to define higher-level macros or subroutines for
+frequently used constructs.
+
+Latte solves these by introducing a simpler syntax that also has a
+facility for defining transformation functions.  Here are some
+comparisons:
+
+    HTML                                  LATTE
+
+  <b><i>Bold-italic</i></b>             {\b {\i Bold-italic}}
+
+  <b><i>Bold-italic</b></i> (ERROR!)    (Latte not prone to this error.)
+
+  <ul>                                  {\ul {\li First item}
+   <li>First item                            {\li Second item}}
+   <li>Second item
+  </ul>
+
+  <table>                               {\def {\person \=name \=rank \=serial}
+   <tr valign=top>                       {\tr \valign=top
+    <td><b>Name</b></td>                  {\td {\b \name}}
+    <td>Rank</td>                         {\td \rank}
+    <td>Serial number</td>                {\td \serial}}}
+   </tr>                                {\table
+   <tr valign=top>                       {\person \name=Name
+    <td><b>Second name</b></td>                   \rank=Rank
+    <td>Second rank</td>                          \serial={Serial number}}
+    <td>Second serial number</td>        {\person \name={Second name}
+   </tr>                                          \rank={Second rank}
+  </table>                                        \serial={Second serial
+                                                           number}}}
+
+  &quot;Penn &amp; Teller&quot;         "Penn & Teller"
+
+  <p>                                   Not needed; just separate
+					paragraphs with blank lines
+					like you normally would.
+
+Any resemblance between the names Latte and LaTeX is purely
+coincidental :-)

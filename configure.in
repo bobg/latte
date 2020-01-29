@@ -1,0 +1,201 @@
+dnl Process this file with autoconf to produce configure
+
+dnl Copyright 1998,1999 Zanshin Inc.          <http://www.zanshin.com>
+
+dnl The contents of this file are subject to the Zanshin Public License
+dnl Version 1.0 (the "License"); you may not use this file except in
+dnl compliance with the License.  You should have received a copy of the
+dnl License with Latte; see the file COPYING.  You may also obtain a copy
+dnl of the License at <http://www.zanshin.com/ZPL.html>.
+dnl 
+dnl Software distributed under the License is distributed on an "AS IS"
+dnl basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+dnl the License for the specific language governing rights and limitations
+dnl under the License.
+dnl 
+dnl The Original Code is Latte.
+dnl 
+dnl The Initial Developer of the Original Code is Zanshin, Inc.
+
+AC_INIT(latte.h)
+
+dnl VERSION NUMBERING -- ADJUST BEFORE MAKING A DISTRIBUTION
+
+AM_INIT_AUTOMAKE(latte, 2.1)
+AM_CONFIG_HEADER(latte-conf.h)
+
+LIBLATTE_VERSION=5:1:0
+AC_SUBST(LIBLATTE_VERSION)
+
+dnl RPM_REV should be reset to 0 any time AM_INIT_AUTOMAKE changes.
+dnl It should be incremented if interim patches have been applied.
+
+RPM_REV=0
+AC_SUBST(RPM_REV)
+
+dnl Double-check these URLs
+
+LATTE_URL=http://www.latte.org/
+AC_SUBST(LATTE_URL)
+
+dnl DO NOT EDIT BELOW THIS LINE unless you know what you are doing
+
+AC_LANG_CPLUSPLUS
+
+AC_ARG_ENABLE(floating-point,
+	      [  --enable-floating-point floating point features [default=no]],
+	      [if test "x$enableval" = xyes
+	       then AC_DEFINE(ENABLE_FLOATING_POINT)
+		    LIBS="$LIBS -lm"
+	       fi])
+AC_ARG_ENABLE(whitespace-opt,
+	     [  --enable-whitespace-opt whitespace optimization [default=yes]],
+	      [if test "x$enableval" = xyes
+	       then AC_DEFINE(ENABLE_WHITESPACE_OPT)
+	       fi],
+	      [AC_DEFINE(ENABLE_WHITESPACE_OPT)])
+
+AC_ARG_PROGRAM
+
+AC_PROG_LN_S
+AC_PROG_CXX
+AC_PROG_INSTALL
+
+AM_DISABLE_SHARED
+AM_PROG_LIBTOOL
+
+AC_CACHE_CHECK([for libintl],
+               latte_cv_lib_intl,
+               AC_CHECK_LIB(intl, gettext,
+                            [latte_cv_lib_intl=yes
+                             LIBS="$LIBS -lintl"],
+                            [latte_cv_lib_intl=no]))
+
+AC_CHECK_HEADERS(fstream fstream.h iosfwd iosfwd.h iostream iostream.h)
+AC_CHECK_HEADERS(string.h libintl.h wait.h)
+
+AC_CACHE_CHECK([for getopt_long],
+               latte_cv_func_getopt_long,
+               AC_CHECK_FUNC(getopt_long,
+                             [latte_cv_func_getopt_long=yes],
+                             [latte_cv_func_getopt_long=no]))
+AM_CONDITIONAL(BUILD_GETOPT, test "x$latte_cv_func_getopt_long" = xno)
+
+oldcppflags=$CPPFLAGS
+CPPFLAGS="$CPPFLAGS -I. -DCONFIGURE_IS_RUNNING=1"
+AC_CACHE_CHECK([whether C++ bug prevents compiling shdeque],
+               latte_cv_c_shdeque_is_beyond_me,
+               AC_TRY_COMPILE([#include <shdeque.h>],
+                              [shdeque<int> x;],
+                              [latte_cv_c_shdeque_is_beyond_me=no],
+                              [latte_cv_c_shdeque_is_beyond_me=yes]))
+CPPFLAGS=$oldcppflags
+if test "x$latte_cv_c_shdeque_is_beyond_me" = xyes
+then
+  AC_DEFINE(SHDEQUE_IS_BEYOND_ME)
+  echo ' (you might want to consider upgrading your C++ compiler)'
+fi
+
+AC_CACHE_CHECK([whether -fhandle-exceptions is needed],
+	       latte_cv_c_handle_exceptions_flag,
+	       AC_TRY_COMPILE([],
+			      [extern void foo();
+			       try { foo(); } catch (...) { exit(1); }],
+			      [latte_cv_c_handle_exceptions_flag=no],
+			      [latte_cv_c_handle_exceptions_flag=yes]))
+if test "x$latte_cv_c_handle_exceptions_flag" = xyes
+then
+  CXXFLAGS="-fhandle-exceptions $CXXFLAGS"
+fi
+
+AC_CACHE_CHECK([for mutable],
+	       latte_cv_c_mutable,
+	       AC_TRY_COMPILE([],
+			      [struct X { mutable int y; } x;],
+			      [latte_cv_c_mutable=yes],
+			      [latte_cv_c_mutable=no]))
+if test "x$latte_cv_c_mutable" = xyes
+then
+  AC_DEFINE(HAVE_MUTABLE)
+fi
+
+AC_CACHE_CHECK([for two-iterator string constructor],
+	       latte_cv_lib_two_iterator_string_ctor,
+	       AC_TRY_COMPILE([#include <string>],
+			      [string s; string t(s.begin(), s.end());],
+			      [latte_cv_lib_two_iterator_string_ctor=yes],
+			      [latte_cv_lib_two_iterator_string_ctor=no]))
+if test "x$latte_cv_lib_two_iterator_string_ctor" = xyes
+then
+  AC_DEFINE(HAVE_TWO_ITERATOR_STRING_CTOR)
+fi
+
+AC_CACHE_CHECK([for November 96 deque],
+	       latte_cv_lib_nov96deque,
+	       AC_TRY_COMPILE([#include <deque>],
+			      [deque<int> d;
+			       deque<int> e(d.begin(), d.end());],
+			      [latte_cv_lib_nov96deque=yes],
+			      [latte_cv_lib_nov96deque=no]))
+if test "x$latte_cv_lib_nov96deque" = xyes
+then
+  AC_DEFINE(HAVE_NOV96_DEQUE)
+fi
+
+AC_CACHE_CHECK([for November 96 stack template],
+	       latte_cv_lib_nov96stack,
+	       AC_TRY_COMPILE([#include <stack>],
+			      [stack<int> s; s.push(7);],
+			      [latte_cv_lib_nov96stack=yes],
+			      [latte_cv_lib_nov96stack=no]))
+if test "x$latte_cv_lib_nov96stack" = xyes
+then
+  AC_DEFINE(HAVE_NOV96_STACK)
+fi
+
+AC_CACHE_CHECK([for vector::resize],
+	       latte_cv_func_vector_resize,
+	       AC_TRY_COMPILE([#include <vector>],
+			      [vector<char *> v; v.resize(8, "foo");],
+			      [latte_cv_func_vector_resize=yes],
+			      [latte_cv_func_vector_resize=no]))
+if test "x$latte_cv_func_vector_resize" = xyes
+then
+  AC_DEFINE(HAVE_VECTOR_RESIZE)
+fi
+
+AC_CACHE_CHECK([for string::erase],
+	       latte_cv_func_string_erase,
+	       AC_TRY_COMPILE([#include <string>],
+			      [string s; s.erase(1);],
+			      [latte_cv_func_string_erase=yes],
+			      [latte_cv_func_string_erase=no]))
+if test "x$latte_cv_func_string_erase" = xno
+then
+  AC_CACHE_CHECK([for string::remove],
+		 latte_cv_func_string_remove,
+		 AC_TRY_COMPILE([#include <string>],
+				[string s; s.remove(1);],
+				[latte_cv_func_string_remove=yes],
+				[latte_cv_func_string_remove=no]))
+  if test "x$latte_cv_func_string_remove" = xyes
+  then
+    AC_DEFINE(USE_STRING_REMOVE)
+  else
+    echo 'Your STL string implementation is unusable.'
+    echo 'Please inform <latte-dev@zanshin.com>.'
+    exit 1
+  fi
+fi
+
+AM_PATH_LISPDIR
+
+## The following section is for latte.spec.in via Makefile.am
+#
+CONFIGURE_ARGS=`echo " $ac_configure_args" | sed 's/--prefix=[^ ]*//'`
+AC_SUBST(CONFIGURE_ARGS)
+AM_CONDITIONAL(BUILD_SHARED, test "${enable_shared}" = yes)
+#
+## end latte.spec.in section
+
+AC_OUTPUT(Makefile doc/Makefile tests/Makefile)

@@ -1,0 +1,105 @@
+\; Copyright 1998,1999 Zanshin Inc.          <http://www.zanshin.com/>
+
+\; The contents of this file are subject to the Zanshin Public License Version
+\; 1.0 (the "License"); you may not use this file except in compliance with the
+\; License.  You should have received a copy of the License with Latte; see
+\; the file COPYING.  You may also obtain a copy of the License at
+\; <http://www.zanshin.com/ZPL.html>.
+\; 
+\; Software distributed under the License is distributed on an "AS IS" basis,
+\; WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+\; for the specific language governing rights and limitations under the
+\; License.
+\; 
+\; The Original Code is Latte.
+\; 
+\; The Initial Developer of the Original Code is Zanshin, Inc.
+
+
+\; car - first element of a group
+{\def {\car \list}
+  {\nth 0 \list}}
+
+\; front - synonym for car
+{\def \front \car}
+
+\; back - last element of a group
+{\def {\back \list}
+  {\nth {\subtract {\length \list} 1} \list}}
+
+\; cdr - all elements of a group except the first
+{\def {\cdr \list}
+  {\subseq \list 1}}
+
+\; rdc - all elements of a group except the last
+{\def {\rdc \list}
+  {\subseq \list 0 -1}}
+
+\; group - construct a group from the arguments
+{\def {\group \&rest}
+  \rest}
+
+\; reverse - reverse top-level group elements
+{\def {\reverse \list}
+  {\and \list
+        {\push-back {\car \list}
+                    {\reverse {\cdr \list}}}}}
+
+\; lmap - apply a function to each element of a group
+{\def {\lmap \fn \seq}
+  {\if \seq
+       {\cons {\funcall \fn {\car \seq}}
+              {\lmap \fn {\cdr \seq}}}
+    {}}}
+
+\; member - test whether an element appears in a group
+{\def {\member? \elt \list}
+  {\and \list
+        {\or {\equal? \elt {\car \list}}
+             {\member? \elt {\cdr \list}}}}}
+
+\; zero? - test whether argument is 0
+{\def {\zero? \obj}
+  {\equal? \obj 0}}
+
+{\def {\compose \f \g}
+  {\lambda {\x} {\f {\g \x}}}}
+
+{\def \caar {\compose \car \car}}
+{\def \cadr {\compose \car \cdr}}
+{\def \cdar {\compose \cdr \car}}
+{\def \cddr {\compose \cdr \cdr}}
+
+{\def \defmacro
+  {\macro {\params \&body}
+   \`{\def \,{\car \params}
+       {\macro \,{\cdr \params} \,@\body}}}}
+
+\;  This is a perfectly good definition of \let, but it's slower
+\;  than the intrinsic one in definitions.cxx.
+
+\;  {\defmacro {\let \bindings \&body}
+\;   \`{{\lambda \,{\lmap \car \bindings} \,@\body}
+\;      \,@{\lmap \cadr \bindings}}}
+
+{\defmacro {\letrec \bindings \&body}
+ \`{\let \,{\lmap {\lambda {\x} {\group \x {}}}
+                  {\lmap \car \bindings}}
+     \,@{\lmap {\lambda {\x} \`{\set! \,{\car \x} \,{\cadr \x}}}
+               \bindings}
+     \,@\body}}
+
+\;  {\defmacro {\while \test \&body}
+\;     \`{\letrec {{\fn {\lambda {}
+\;                       {\if \,\test
+\;                            {\,@\body
+\;                             {\fn}}}}}}
+\;        {\fn}}}
+
+{\defmacro {\foreach \var \values \&body}
+ \`{\let {{\vals \,\values}
+          {\,\var {}}}
+     {\while \vals
+       {\set! \,\var {\car \vals}}
+       {\set! \vals {\cdr \vals}}
+       \,@\body}}}

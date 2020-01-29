@@ -1,0 +1,2233 @@
++-------
+| Author: bobg    Date: 1999-10-25 17:33
+| File:
+|   closure.cxx
+
+Patch line that gives gcc 2.95 heartburn.
+
++-------
+| Author: bobg    Date: 1999-10-22 23:49
+| Files:
+|   Makefile.am definitions.cxx standard.latte
+
+Add another item to the pre-distribution checklist (to wit: "Notify
+latte mailing list subscribers").
+
+Restore the compiled form of \while, comment-out the version in
+standard.latte.
+
+Define \defmacro and \foreach in standard.latte.
+
++-------
+| Author: bobg    Date: 1999-10-22 05:43
+| File:
+|   NEWS
+
+Insert release date.
+
++-------
+| Author: bobg    Date: 1999-10-22 04:27
+| File:
+|   latte.spec.in
+
+In the RPM, place html-latte.pl in /usr/doc/latte.
+
++-------
+| Author: bobg    Date: 1999-10-22 04:25
+| File:
+|   configure.in
+
+Update LIBLATTE_VERSION.
+
++-------
+| Author: bobg    Date: 1999-10-22 04:05
+| Files:
+|   Makefile.am NEWS TODO assignment.cxx boolean.cxx closure.cxx
+|   configure.in definitions.cxx grammar.y group.cxx latte-deque.h
+|   latte-fstream.h latte-html.cxx latte-html.h latte-log.h latte-stack.h
+|   latte-string.h latte-vector.h latte.el list.cxx load.cxx mutable.h
+|   nested.cxx operator.cxx param.cxx quote.cxx refcount.h restorer.h
+|   shstring.h str.cxx syntax.lxx varref.cxx visitor.cxx wsnode.cxx
+
+Update copyright notices.  Distribute html-latte.pl.
+
++-------
+| Author: bobg    Date: 1999-10-22 03:46
+| Files:
+|   Makefile.am NEWS grammar.y latte.h latte.spec.in syntax.lxx text.latte
+
+Improve syntax-error reporting from new lexer and parser.  Add
+i686-RPM rule.  Update text.latte for Latte 2.0.
+
++-------
+| Author: bobg    Date: 1999-10-22 03:46
+| File:
+|   doc/latte.texi
+
+Mention latte-text.
+
++-------
+| Author: bobg    Date: 1999-10-21 19:37
+| Files:
+|   Makefile.am grammar.y latte.spec.in syntax.lxx
+
+Update RPM-creating code for RPM version 3 (per Bart) and automake
+1.4.  Fix bug that left a spurious trailing quotation mark in quoted
+strings in lexer.
+
++-------
+| Author: bobg    Date: 1999-10-20 20:12
+| File:
+|   doc/latte.texi
+
+Remove a cross-reference that breaks texi2dvi (and hence "make distcheck").
+
++-------
+| Author: bobg    Date: 1999-10-20 20:12
+| File:
+|   grammar.y
+
+Add missing file, and include more files in the distribution.
+
++-------
+| Author: bobg    Date: 1999-10-20 20:11
+| File:
+|   Makefile.am
+
+Add missing file, and include more files in the distribution.
+
++-------
+| Author: bobg    Date: 1999-10-20 18:44
+| Files:
+|   website/buildnotes.latte website/correspond.latte
+|   website/download.latte website/upgrade.latte
+
+Update.  Point at mailman-managed Latte mailing list page.
+
++-------
+| Author: bobg    Date: 1999-10-20 18:43
+| File:
+|   doc/liblatte.texi
+
+Remove obsolete information from (still skeletal) liblatte.texi.
+
++-------
+| Author: bobg    Date: 1999-10-20 18:43
+| Files:
+|   ChangeLog NEWS closure.cxx latte-html-cli.cxx latte-log.h latte.spec.in
+|   operator.cxx
+
+Update ChangeLog and NEWS.  Get rid of -dapply.  Change "Source" in
+latte-spec.in to point to our web server.
+
++-------
+| Author: bobg    Date: 1999-10-18 19:21
+| Files:
+|   latte-text.h latte.el latte.h list.cxx load.cxx nested.cxx operator.cxx
+|   param.cxx quote.cxx reader.cxx str.cxx syntax.lxx varref.cxx
+|   visitor.cxx wsnode.cxx
+
+Stuff I've been working on for the past N months.  I plan to do a
+Latte 2.0 release on Friday as a birthday gift to myself (it's also
+Latte's 1st anniversary).
+
+Revert to using flex for lexing, since eliminating flex didn't speed
+anything up, and using flex is a lot more expressive.  At the same
+time, switch to bison for parsing instead of maintaining a parse stack
+"by hand."  This was for expressiveness and also to simplify the
+evaluation rules: previously, expressions were evaluated as soon as
+they were parsed (meaning inner, nested expressions would eval before
+outer ones), which caused some ambiguities that made using Latte for
+conventional programming difficult.  (The idea was to prevent the
+parse/eval stack from growing too large, but it didn't work out that
+way.)  The new rules are just what you'd expect in an interpreted
+language: parse a top-level form, then evaluate it top-down.
+
+Eliminate \varref; it just wasn't doing what it should, and couldn't
+easily be made to.
+
+Add quoted expressions of four types: quote, quasiquote, unquote, and
+unquote-splicing.  Also add macros.  It's now possible to write new
+special forms; e.g., \let in terms of \lambda.
+
+The four kinds of quoted expression look like this:
+
+  \'expr
+  \`expr
+  \,expr
+  \,@expr
+
+which looks perfectly normal if you're familiar with Lisp/Scheme.
+
+Remove from the visitor classes responsibility for evaling the
+expressions they visit.  Remove from closures and builtins the
+responsibility for evaling their args.  Evaling is now completely
+encapsulated in the parser, thank God, rather than performed all over
+the freakin' place.
+
+No longer return a list of subexpression values when evaling a
+closure.  Instead, return the value of the last subexpression, like
+any sane Lisp-like language.  This eliminates the ambiguity of not
+being able to distinguish a function that wants to return a single
+object that's a list from a function that wants to return a bunch of
+objects.  The new exception Latte_Closure::Useless alerts the user to
+closure subexpressions that have no side effects and don't participate
+in the result.
+
+Rewrite Bart's StrcmpOp to use string::compare().
+
+Add \funcall as a variant of \apply.
+
+Wrap some function bodies in a new set of braces as dictated by the
+new closure-eval rules.
+
+Add -dapply to latte-html.  It's less verbose but not as useful as
+-deval.
+
+Slightly update latte.el.
+
+Fix a bug in lexer column counting.
+
+Fix a bug that caused quoted strings to appear in the output preceded
+by no whitespace!
+
+Bump version number to 2.0 (although a little remains to be done).
+Update some copyright notices.
+
++-------
+| Author: bobg    Date: 1999-10-18 19:20
+| Files:
+|   Makefile.am assignment.cxx boolean.cxx closure.cxx configure.in
+|   definitions.cxx group.cxx latte-html-cli.cxx latte-html.cxx
+|   latte-html.h latte-log.h latte-text-cli.cxx latte-text.cxx
+
+Stuff I've been working on for the past N months.  I plan to do a
+Latte 2.0 release on Friday as a birthday gift to myself (it's also
+Latte's 1st anniversary).
+
+Revert to using flex for lexing, since eliminating flex didn't speed
+anything up, and using flex is a lot more expressive.  At the same
+time, switch to bison for parsing instead of maintaining a parse stack
+"by hand."  This was for expressiveness and also to simplify the
+evaluation rules: previously, expressions were evaluated as soon as
+they were parsed (meaning inner, nested expressions would eval before
+outer ones), which caused some ambiguities that made using Latte for
+conventional programming difficult.  (The idea was to prevent the
+parse/eval stack from growing too large, but it didn't work out that
+way.)  The new rules are just what you'd expect in an interpreted
+language: parse a top-level form, then evaluate it top-down.
+
+Eliminate \varref; it just wasn't doing what it should, and couldn't
+easily be made to.
+
+Add quoted expressions of four types: quote, quasiquote, unquote, and
+unquote-splicing.  Also add macros.  It's now possible to write new
+special forms; e.g., \let in terms of \lambda.
+
+The four kinds of quoted expression look like this:
+
+  \'expr
+  \`expr
+  \,expr
+  \,@expr
+
+which looks perfectly normal if you're familiar with Lisp/Scheme.
+
+Remove from the visitor classes responsibility for evaling the
+expressions they visit.  Remove from closures and builtins the
+responsibility for evaling their args.  Evaling is now completely
+encapsulated in the parser, thank God, rather than performed all over
+the freakin' place.
+
+No longer return a list of subexpression values when evaling a
+closure.  Instead, return the value of the last subexpression, like
+any sane Lisp-like language.  This eliminates the ambiguity of not
+being able to distinguish a function that wants to return a single
+object that's a list from a function that wants to return a bunch of
+objects.  The new exception Latte_Closure::Useless alerts the user to
+closure subexpressions that have no side effects and don't participate
+in the result.
+
+Rewrite Bart's StrcmpOp to use string::compare().
+
+Add \funcall as a variant of \apply.
+
+Wrap some function bodies in a new set of braces as dictated by the
+new closure-eval rules.
+
+Add -dapply to latte-html.  It's less verbose but not as useful as
+-deval.
+
+Slightly update latte.el.
+
+Fix a bug in lexer column counting.
+
+Fix a bug that caused quoted strings to appear in the output preceded
+by no whitespace!
+
+Bump version number to 2.0 (although a little remains to be done).
+Update some copyright notices.
+
++-------
+| Author: schaefer    Date: 1999-09-09 23:16
+| Files:
+|   configure.in definitions.cxx
+
+Add string versions of the \ge? \gt? \le? \lt? functions.
+Bump RPM minor number.
+
++-------
+| Author: bobg    Date: 1999-07-01 20:21
+| File:
+|   definitions.cxx
+
+Conditionally compile ugly unwrapping hack.
+
++-------
+| Author: schaefer    Date: 1999-06-02 00:06
+| File:
+|   Makefile.am
+
+Add text.latte to EXTRA_DIST.
+
++-------
+| Author: schaefer    Date: 1999-06-02 00:01
+| File:
+|   Makefile.am
+
+Mention latte-text.h so it will go into the dist tar.
+
++-------
+| Author: bobg    Date: 1999-04-08 19:15
+| File:
+|   str.cxx
+
+Use %.f, not %g.
+
++-------
+| Author: bobg    Date: 1999-04-06 00:22
+| File:
+|   latte-text.cxx
+
+Eliminate compiler warning when --enable-floating-point.
+
++-------
+| Author: bobg    Date: 1999-03-10 18:15
+| Files:
+|   Makefile.am closure.cxx configure.in definitions.cxx latte-html-cli.cxx
+|   latte-text-cli.cxx latte-text.cxx latte-text.h latte.el latte.h
+|   reader.cxx
+
+Beginnings of latte-text translator.
+
+Beginnings of a macro facility for Latte.
+
+Bugfixes in latte.el indentation function and lexer whitespace
+tracking.
+
++-------
+| Author: bobg    Date: 1999-02-18 16:53
+| File:
+|   memo.cxx
+
+New file.
+
++-------
+| Author: bobg    Date: 1999-02-18 16:52
+| Files:
+|   Makefile.am memo.h reader.cxx
+
+Fix `\\' bug in new lexer, discovered at Amazon.
+
+Don't use a static template data member in memo.h; it breaks Latte
+under the alpha OSF/1 4.0 linker (and the GNU linker isn't available
+for that platform!).
+
++-------
+| Author: schaefer    Date: 1999-02-06 22:07
+| File:
+|   configure.in
+
+Bob forgot to reset RPM_REV.
+
++-------
+| Author: bobg    Date: 1999-02-06 21:24
+| Files:
+|   Makefile.am configure.in latte-deque.h latte-fstream.h
+|   latte-html-cli.cxx latte-html.cxx latte-html.h latte-stack.h
+|   latte-string.h latte-vector.h latte.h mutable.h reader.cxx refcount.h
+|   restorer.h shstring.h syntax.lxx
+
+Hand-code a new lexer, eliminating the dependency on flex.  Remove
+flex-related files from the distribution.
+
+Bump version number to 1.2.
+
+Don't try to include not-yet-created latte-conf.h when doing test
+compiles while configure is running.
+
+New option, `-p' (`--closepar') dictates whether to include </p> at
+the ends of paragraphs.  Warning, </p> placement is imprecise
+w.r.t. the HTML standard.
+
+New SyntaxError subclasses thrown and caught:
+Latte_Reader::NotIdentifier and Latte_Reader::IncompleteString.
+
+Fix column-counting bug in deprecated syntax.lxx.
+
++-------
+| Author: bobg    Date: 1999-01-26 23:35
+| Files:
+|   latte-html-cli.cxx memo.h operator.cxx
+
+Add copyright notice to html-latte.pl.  Make `-o' work as advertised.
+Reimplement `memo' class, adding a reset_all() function.
+
++-------
+| Author: schaefer    Date: 1998-12-03 17:09
+| File:
+|   configure.in
+
+Bump RPM_REV, because Bob has made changes without bumping the version number.
+
++-------
+| Author: bobg    Date: 1998-12-03 00:35
+| File:
+|   load.cxx
+
+Make it an error to try to load a library that doesn't exist.
+
+When loading library FOO, check for FOO and FOO.latte after checking
+(and failing to find) DIR/FOO and DIR/FOO.latte for each element DIR
+of the load path.
+
++-------
+| Author: bobg    Date: 1998-12-02 22:54
+| Files:
+|   closure.cxx definitions.cxx fileloc.cxx group.cxx latte-html.cxx
+|   latte-string.cxx latte.h refcount.h shdeque.h shstring.cxx varref.cxx
+|   wsnode.cxx wstate.cxx
+
+Code-factoring (into Latte_WsNode::wrap()).  Speed up operator==
+implementations by first testing (this == &other).  Use `mutate' where
+needed in Refcounted.
+
++-------
+| Author: bobg    Date: 1998-12-02 02:19
+| Files:
+|   acconfig.h configure.in latte.h
+
+Configure-time test for whether to use shdeque.
+
++-------
+| Author: bobg    Date: 1998-12-02 01:55
+| Files:
+|   Makefile.am definitions.cxx group.cxx latte.h list.cxx memo.h
+|   nested.cxx operator.cxx shdeque.h varref.cxx
+
+A number of optimizations, speeding up latte-html by about 35%.
+
+shdeque<> is a "shared deque" analogous to shstring (which is a shared
+string).  It's now the base class of Latte_List.
+
+memo<> is a memoizing object that calls a function to supply a value,
+then caches the value.  It's used to save time in calls to
+self_evaluating() and get_operator().
+
+Some redundant calls to eval() are gone.
+
++-------
+| Author: bobg    Date: 1998-11-30 18:57
+| Files:
+|   Makefile.am definitions.cxx latte.h list.cxx shdeque.h
+
+Shared deque implementation.
+
++-------
+| Author: bobg    Date: 1998-11-11 06:56
+| File:
+|   Makefile.am
+
+D'oh!  A horrible typo.
+
++-------
+| Author: schaefer    Date: 1998-11-11 06:54
+| Files:
+|   Makefile.am latte.spec.in
+
+Add two new make variables, LDCONFIG_REQ and LDCONFIG_RUN, which get set in
+the BUILD_SHARED conditional to require and run ldconfig only when building
+a shared object RPM.  Substitute these into the spec file.
+
+Use #LDCONFIG_REQ# and #LDCONFIG_RUN# in latte.spec.in.  Drop the gzip of
+the info files from the install section as it leads to verification and
+uninstall warnings about the info files being missing.
+
++-------
+| Author: bobg    Date: 1998-11-11 03:55
+| File:
+|   README
+
+Tweak wording.
+
++-------
+| Author: bobg    Date: 1998-11-10 22:55
+| File:
+|   Makefile.am
+
+More win-dist tweaking.
+
++-------
+| Author: bobg    Date: 1998-11-10 22:48
+| Files:
+|   ChangeLog Makefile.am NEWS configure.in
+
+Tweak the way Windows distributions are made.  Update
+LIBLATTE_VERSION.
+
++-------
+| Author: bobg    Date: 1998-11-10 21:22
+| Files:
+|   Makefile.am NEWS
+
+Add win-dist and latte.zip rules to Makefile.am.  They depend on a
+hand-built latte executable named latte-$(VERSION).exe being present
+in the top-level source dir.
+
++-------
+| Author: schaefer    Date: 1998-11-10 03:26
+| File:
+|   Makefile.am
+
+Add an "if BUILD_SHARED" block (already supported by an AM_CONDITIONAL in
+configure.in) that set a variable to some code that tests for -static in
+LDFLAGS whenver configure was run with --enable-shared.  Use this variable
+as the first command under the $(PACKAGE).spec target so that the build
+fails early if the configuration is incompatible with LDFLAGS.
+
+Rearannge dependencies for the .src.rpm target so that the .spec is last.
+This prevents the failure output of the test above from being lost in the
+voluminous recursive output gerated by the "dist" dependency; otherwise
+the reason for the "error 1" is very mysterious.
+cvs diff: Diffing .
+
++-------
+| Author: schaefer    Date: 1998-11-10 02:20
+| Files:
+|   Makefile.am latte.spec.in
+
+Back out the previous LIBLATTE_LA change and instead move #LLIBLATTE_LA# to
+the latte-devel section of the spec file, as further discussion with Bob
+indicates it is probably useful only to developers.
+
+Substitute #libdir# by $(libdir) when building latte.spec.
+
+Since we're now removing the RPM build subtrees, mkdir failures to recreate
+them should not be ignored.
+
+Add a comment to the spec file to explain why "libtool --finish" is not run,
+even though "make install" warns us to run it.
+
++-------
+| Author: bobg    Date: 1998-11-10 00:58
+| File:
+|   Makefile.am
+
+Fix bugs in the mac-src and win-src make targets.
+
+In the .src.rpm rule, make sure to rm -rf the several directories
+before creating them, to ensure they're empty.  Also, use more
+portable calling sequence for `ln'.
+
++-------
+| Author: schaefer    Date: 1998-11-10 00:49
+| Files:
+|   Makefile.am latte.spec.in
+
+Install liblatte.la along with the shared libraries, but not by itself.
+
+Add the "build root is in /tmp" sanity check to %clean, just for paranoia.
+
++-------
+| Author: schaefer    Date: 1998-11-10 00:29
+| File:
+|   latte.spec.in
+
+Move installation of liblatte.info to the latte-devel package.
+
++-------
+| Author: bobg    Date: 1998-11-09 21:19
+| Files:
+|   FlexLexer.h Makefile.am README TODO activation.cxx assignment.cxx
+|   boolean.cxx closure.cxx configure.in definitions.cxx env.cxx
+|   fileloc.cxx group.cxx html.latte latte-deque.h latte-fstream.h
+|   latte-html-cli.cxx latte-html.cxx latte-html.h latte-iosfwd.h
+|   latte-log.cxx latte-log.h latte-stack.h latte-string.cxx latte-string.h
+|   latte-vector.h latte.cxx latte.el latte.h list.cxx load.cxx mutable.h
+|   nested.cxx operator.cxx param.cxx reader.cxx refcount.h restorer.h
+|   shstring.cxx shstring.h standard.latte str.cxx syntax.lxx tangible.cxx
+|   varref.cxx visitor.cxx wsnode.cxx wstate.cxx
+
+Add FlexLexer.h to the distribution, so casual builders of Latte don't
+need flex.
+
+Add trailing slash to Zanshin URL.
+
+Use real filename, not a temp filename, for flex output.  This makes
+the #line directives refer to the right thing.
+
+Remove "list:{...}" from Latte_List::render().
+
+Define {\ch ...} and {\chx ...} for HTML character-entity generation.
+Redefine the \c-* functions in terms of \ch.  Eliminate duplicates.
+
+Change --debug=eval output format to be more useful (but just as
+overwhelmingly voluminous).
+
+Use flex's "prefix" option to avoid possible name clashes with
+flex-generated symbols in other code that someone may want to link
+Latte with.
+
++-------
+| Author: schaefer    Date: 1998-11-07 02:04
+| File:
+|   latte.spec.in
+
+Split the binary RPM into two packages, latte-devel and latte, the latte(r)
+of which contains the latte-html executable and its supporting files (with
+the shared libraries if not built statically), and the former of which has
+the include files, liblatte.info, and static library.
+
++-------
+| Author: schaefer    Date: 1998-11-06 23:56
+| Files:
+|   Makefile.am configure.in latte.spec.in
+
+Use @PACKAGE@, $(PACKAGE) and #PACKAGE# in place of "latte".
+
+Set RPM_REV to 0.
+
++-------
+| Author: schaefer    Date: 1998-11-06 23:16
+| File:
+|   latte.spec.in
+
+Use the %clean section to remove the DESTDIR after building the binary RPM.
+
++-------
+| Author: schaefer    Date: 1998-11-06 23:15
+| File:
+|   Makefile.am
+
+Drop the command that removes the BuildRoot after constructing the binary RPM.
+
++-------
+| Author: bobg    Date: 1998-11-06 05:34
+| Files:
+|   Makefile.am configure.in definitions.cxx latte-iosfwd.h latte.h
+|   load.cxx
+
+Add latte-iosfwd.h, for portably forward-declaring iostream stuff.
+Run flex with -B to generate a non-interactive scanner (and also
+possibly work around an iostream bug under CodeWarrior).  Begin
+defining win-src and mac-src make targets that create copies of the
+source code tweaked for their respective platforms.
+
+Bump version number to 1.1.
+
+Only include the definition of \process-output and related code if
+HAVE_WAIT_H is true.
+
+Make file-related stuff in load.cxx more portable.  The directory
+separator string is now defined by platform.  The Latte filename
+extension is .lat (yecch) under Windows.  The default Latte path is
+empty on non-Unix platforms.  An empty path means \load-library should
+simply look for the named file in the current directory.
+
++-------
+| Author: bobg    Date: 1998-11-06 04:43
+| File:
+|   latte-html-cli.cxx
+
+Use unistd.h, not cunistd.
+
++-------
+| Author: bobg    Date: 1998-11-06 04:37
+| File:
+|   latte-html-cli.cxx
+
+Include cunistd for unlink().
+
++-------
+| Author: schaefer    Date: 1998-11-05 23:26
+| File:
+|   Makefile.am
+
+Look for liblatte.la in top_builddir, not top_srcdir.
+
++-------
+| Author: bobg    Date: 1998-11-05 20:27
+| Files:
+|   Makefile.am configure.in latte.spec.in
+
+Merge changes from latte-rpm branch.
+
++-------
+| Author: schaefer    Date: 1998-11-05 20:15
+| File:
+|   Makefile.am
+
+Final (I hope) tweaks:
+
+Send warning and error echoes to stderr.
+
+Issue a warning if the RPM is not being built by root (otherwise installing
+the binary RPM may issue "unknown user" warnings).  I hope `id -u` is OK on
+any platform that has "rpm", but in any case it's only a warning.
+
+Sleep 5 seconds after printing a warning to give the user time to hit ctrl-C
+and to keep the warning output from being lost in the tar flood that follows.
+
++-------
+| Author: schaefer    Date: 1998-11-05 19:00
+| File:
+|   latte.spec.in
+
+Add Vendor: Zanshin, substitute the LATTE_URL in Distribution:, substitute
+RPM_REV in Release:, and use the LATTE_FTP substitution prefix in Source:.
+
++-------
+| Author: schaefer    Date: 1998-11-05 18:56
+| File:
+|   configure.in
+
+Add some comments (dnl ...) noting where version numbering is and (for RPM)
+how it should be determined and changed.
+
+Add substitution of RPM_REV, the "release number" that gets tacked on to the
+end of the version number when computing the file name of the .rpm files.
+It's 3 right now for purposes of test installs on zagzig.
+
+Add substitution of LATTE_FTP, the head of the FTP URL for the latte source.
+
++-------
+| Author: schaefer    Date: 1998-11-05 18:50
+| File:
+|   Makefile.am
+
+Move dist-hook up above all the RPM stuff.  Mention updating RPM_REV in the
+dist-hook output, since making the RPMs depends on dist.
+
+Add some comments about what's going on in the RPM section.
+
+Substitute RPM_REV, LATTE_URL, and LATTE_FTP when processing latte.spec.in.
+
+Rearrange dependencies so that "make latte-rpm" builds the .src.rpm file,
+rather than the other way around.  Add dependencies of all the possible
+architecture binary RPMs on the .src.rpm.  Add "ppc" to the "supported"
+architectures in the .src.rpm build rules.  Issue a warning if -all-static
+doesn't appear in LDFLAGS when building RPMs, but build anyway.  Remove @
+from a few commands so they'll echo.  Don't fail make of the .src.rpm when
+unable to find the corresponding binary RPM; instead test for that in the
+rule for making the binary RPM.  (That last isn't ideal, but ...)
+
++-------
+| Author: schaefer    Date: 1998-11-05 05:21
+| File:
+|   latte.spec.in
+
+Add a %post section which runs ldconfig (not always needed, but safe), runs
+install-info, and gzip's the installed info files.
+
++-------
+| Author: schaefer    Date: 1998-11-05 01:29
+| File:
+|   latte.spec.in
+
+Replace all configure-style @FOO@ with #FOO# referenced by new sed script
+in Makefile.am.
+
+Stop passing --prefix to configure and instead specify DESTDIR before
+make install.
+
+Replace gobs of hardwired filenames with #FOO# symbols that get replaced via
+the new sed script at make time.
+
++-------
+| Author: schaefer    Date: 1998-11-05 01:25
+| File:
+|   configure.in
+
+Move most of the latte.spec.in stuff to Makefile.am, replacing it with an
+AM_CONDITIONAL directive here.
+
+Don't output latte.spec from configure, it's now built by a make rule.
+
++-------
+| Author: schaefer    Date: 1998-11-05 01:23
+| File:
+|   Makefile.am
+
+Add a giant sed script that generates latte.spec from latte.spec.in by
+interpolating both Make-variables and variables from the liblatte.la script
+generated by libtool.
+
++-------
+| Author: schaefer    Date: 1998-11-04 22:13
+| Files:
+|   ChangeLog TODO configure.in definitions.cxx fileloc.cxx
+|   latte-html-cli.cxx latte-html.cxx latte-html.h latte.cxx latte.h
+|   reader.cxx
+
+Merge with trunk changes since latte-1.0.1 release.
+
++-------
+| Author: schaefer    Date: 1998-11-04 22:11
+| File:
+|   Makefile.am
+
+Merge with trunk changes since 1.0.1.
+
+Clarify some of the the dist-hook output.
+
++-------
+| Author: schaefer    Date: 1998-11-04 22:10
+| File:
+|   latte.spec.in
+
+Bump RPM release number to 2 so the .rpm appears newer than latte-1.0.1.
+This needs to be reset to 0 or 1 before another "official" latte release.
+
+Adapt to changed file locations and added files since latte-1.0.1 release.
+
++-------
+| Author: bobg    Date: 1998-11-03 18:33
+| File:
+|   latte-html-cli.cxx
+
+branches:  1.3.2;
+Add `-o FILE'.  Make filename `-' mean standard input.  Check for
+failure when opening input and output files.  Remove
+Latte_Reader::init() (undoing unnecessary code factoring).
+
++-------
+| Author: bobg    Date: 1998-11-03 18:33
+| Files:
+|   TODO latte.h reader.cxx
+
+Add `-o FILE'.  Make filename `-' mean standard input.  Check for
+failure when opening input and output files.  Remove
+Latte_Reader::init() (undoing unnecessary code factoring).
+
++-------
+| Author: bobg    Date: 1998-10-30 22:49
+| Files:
+|   ChangeLog configure.in fileloc.cxx latte-html-cli.cxx latte.cxx latte.h
+
+As a Latte_Error exception unwinds the stack, adorn it with the
+current file location of each stack frame.  Then report a backtrace
+when latte-html dies with an error.
+
+This depends on being able to throw a Derived, catch it as a Base&,
+then re-throw and catch it as a Derived&.  Apparently, older gcc can't
+manage this, but the only effect should be a slightly less useful
+error message, not total failure.
+
++-------
+| Author: bobg    Date: 1998-10-30 20:05
+| Files:
+|   Makefile.am configure.in latte-html-cli.cxx latte-html.cxx latte-html.h
+|   latte.h
+
+Separate the latte-html CLI from the rest of the non-liblatte parts of
+latte-html.  This will allow other UIs to be placed on latte-html, and
+will also allow other HTML-related Latte apps to be written (e.g., an
+intelligent scanner for URLs in Latte documents).
+
+Change LATTE_URL to http://www.latte.org/.
+
++-------
+| Author: bobg    Date: 1998-10-29 05:15
+| Files:
+|   ChangeLog Makefile.am TODO definitions.cxx gen-changelog.pl
+
+Install include files in pkgincludedir (/usr/local/include/latte), not
+in includedir (/usr/local/include).
+
+Don't use a Latte_Group::const_iterator where a
+Latte_List::const_iterator is called for.
+
++-------
+| Author: schaefer    Date: 1998-10-28 23:06
+| Files:
+|   AUTHORS ChangeLog NEWS configure.in definitions.cxx latte-html.cxx
+|   str.cxx
+
+Merge with latte-1_0_1
+
++-------
+| Author: bobg    Date: 1998-10-27 05:41
+| File:
+|   AUTHORS
+
+Thank Johnny Tevessen.
+
++-------
+| Author: bobg    Date: 1998-10-27 05:35
+| File:
+|   configure.in
+
+Libtool version for liblatte -> 3:0:1.
+
++-------
+| Author: bobg    Date: 1998-10-27 04:47
+| Files:
+|   definitions.cxx str.cxx
+
+Use static_cast when assigning calls to numeric_val() to longs.
+
+Coalesce the >, <, >=, and <= operators into a single class, IneqOp.
+
+Use %g when sprintf-formatting floating-point numbers.
+
++-------
+| Author: bobg    Date: 1998-10-27 04:25
+| Files:
+|   definitions.cxx latte-html.cxx
+
+Revisit all the uses of Latte_Number_t and make sure we're not
+assuming it's integral.  In particular, don't try to do
+(Latte_Number_t % Latte_Number_t).
+
+Deques have random-access iterators; don't iterate to find the nth
+position!
+
+Make \nth understand a negative number the same way \subseq and
+\substr do.
+
+Be more rigorous about checking argument ranges in several places.
+
+When reporting operator errors, add 1 to any argument numbers for
+human consumption.
+
+Fixes latte/189, latte/201, and latte/203.
+
++-------
+| Author: schaefer    Date: 1998-10-27 03:07
+| File:
+|   definitions.cxx
+
+Merge changes from HEAD revision
+
++-------
+| Author: bobg    Date: 1998-10-27 02:12
+| File:
+|   definitions.cxx
+
+Fix \while so that it doesn't build up useless implicit lists of
+values.  Fixes latte/191.
+
++-------
+| Author: schaefer    Date: 1998-10-26 19:43
+| Files:
+|   Makefile.am acconfig.h configure.in latte-deque.h latte-html.cxx
+|   latte-string.h latte-vector.h latte.h list.cxx
+
+Merge changes from HEAD revision
+
++-------
+| Author: bobg    Date: 1998-10-26 18:57
+| Files:
+|   Makefile.am acconfig.h configure.in latte-deque.h latte-html.cxx
+|   latte-string.cxx latte-string.h latte-vector.h latte.h list.cxx
+
+Add latte-string.cxx to the build, defining operators <, <<, and ==
+for latte_strings.
+
+USE_VECTOR_RESERVE -> HAVE_VECTOR_RESIZE
+
+Version -> 1.0.1
+
+Add -lintl.
+
+In latte_deque ctor, use deque<>() form for initializing superclass.
+
+Include cstdlib in latte-html.cxx for srandom declaration.
+
+Redefine latte_vector::resize() in terms of insert() and erase(), not
+reserve().
+
+latte_deque< Refcounter<Latte_Obj> > -> Latte_ObjDeque
+
++-------
+| Author: schaefer    Date: 1998-10-25 20:45
+| File:
+|   latte.spec.in
+
+Propagate LDFLAGS from the environment in which the source RPM was configured.
+Preserve configure arguments but override --prefix to match Build Root:.
+List the shared library objects in %files only when configured to build them.
+
+This spec could be broken into "latte.spec" and "latte-devel.spec" where the
+latter contains the /usr/include/*.h files, so people who don't want to write
+new latte apps don't have to install the headers.  It's also probably the case
+that those headers should be relocated below /usr/include/latte/.
+
++-------
+| Author: schaefer    Date: 1998-10-25 20:37
+| File:
+|   configure.in
+
+Merge from HEAD.
+
+Add a section that defines a collection of variables used by latte.spec.in.
+These include the names of the shared library files and the arguments passed
+to configure.
+
++-------
+| Author: schaefer    Date: 1998-10-25 20:34
+| Files:
+|   AUTHORS ChangeLog TODO definitions.cxx
+
+Merge from HEAD revision
+
++-------
+| Author: bobg    Date: 1998-10-22 04:10
+| File:
+|   ChangeLog
+
+ChangeLog
+
++-------
+| Author: bobg    Date: 1998-10-22 04:08
+| File:
+|   AUTHORS
+
+Thank Ben.
+
++-------
+| Author: bobg    Date: 1998-10-22 04:05
+| File:
+|   configure.in
+
+Cut-n-paste-o spotted by Ben Liblit.
+
++-------
+| Author: bobg    Date: 1998-10-22 02:51
+| Files:
+|   Makefile.am TODO configure.in definitions.cxx
+
+Remove RPM support from Makefile.am and configure.in.  Define \getenv
+function (needed for "make distcheck" to work).
+
++-------
+| Author: schaefer    Date: 1998-10-22 00:49
+| File:
+|   Makefile.am
+
+Add "ppc" to the list of subdirectories created during "make latte-rpm".
+
++-------
+| Author: schaefer    Date: 1998-10-22 00:39
+| File:
+|   Makefile.am
+
+Under latte-rpm, make some additional subdirectories that "rpm" expects to
+find to put its output in.  Move the binary .rpm files out of those subdirs,
+not out of the base RPMS dir.  Only remove the build root if it appears to
+be under /tmp, in case some lunatic actually builds and installs in his real
+system root.
+
++-------
+| Author: schaefer    Date: 1998-10-22 00:02
+| File:
+|   latte.spec.in
+
+Add --enable-shared to configure args.
+
++-------
+| Author: schaefer    Date: 1998-10-21 23:06
+| File:
+|   configure.in
+
+Add latte.spec to AC_OUTPUT.
+
++-------
+| Author: schaefer    Date: 1998-10-21 23:01
+| File:
+|   Makefile.am
+
+Remove the build root (really the fake install root) after the .rpm files have
+been generated.
+
++-------
+| Author: bobg    Date: 1998-10-21 23:00
+| File:
+|   munge-logs.pl
+
+Helps to generate ChangeLog.
+
++-------
+| Author: schaefer    Date: 1998-10-21 22:26
+| File:
+|   Makefile.am
+
+Build rules for latte RPM files.  Not yet confirmed working.
+
++-------
+| Author: bobg    Date: 1998-10-21 22:16
+| File:
+|   Makefile.am
+
+Include getopt.c, getopt1.c, and getopt.h in the distribution.
+
++-------
+| Author: bobg    Date: 1998-10-21 22:12
+| File:
+|   Makefile.am
+
+Add latte-fstream.h
+
++-------
+| Author: bobg    Date: 1998-10-21 00:28
+| File:
+|   TODO
+
+Something I thought of.
+
++-------
+| Author: bobg    Date: 1998-10-20 20:45
+| Files:
+|   NEWS TODO latte-html.cxx
+
+NEWS -> "1.0 released"
+
+"standard input" -> "[standard input]"
+
++-------
+| Author: bobg    Date: 1998-10-19 22:48
+| File:
+|   html.latte
+
+The value of an HTML attribute is no longer expanded inside a call to
+{\html ...}.  This means {\a \href="foo" ...} will now become
+
+ <a href="&quot;foo&quot;">...</a>
+
+instead of
+
+ <a href=""foo"">...</a>
+
++-------
+| Author: bobg    Date: 1998-10-19 18:01
+| Files:
+|   TODO definitions.cxx latte-html.cxx latte.h visitor.cxx
+
+No TODO items left for 1.0!
+
+Rewrite \include.  It was improperly designed and would only work
+correctly when called from the top level of a Latte file.  The new
+implementation solves that problem and has the additional benefit of
+not being latte-html specific.  Accordingly, it has moved into
+liblatte, along with a new Latte_Visitor subclass used to implement it
+called Latte_Listify.
+
++-------
+| Author: bobg    Date: 1998-10-19 04:56
+| Files:
+|   ChangeLog Makefile.am TODO configure.in definitions.cxx fileloc.cxx
+|   latte-html.cxx latte.h load.cxx str.cxx visitor.cxx
+
+Version number to 0.23.
+
+More adminitions for "make dist".
+
+Down to almost no TODOs.
+
+Make unary \subtract work.  Address all "xxx check for error" comments
+throughout the source.  Implicitly stringify arguments to some Latte
+intrinsics.  Export the stringifying visitor.  Merge LoadFileOp and
+LoadLibraryOp into one object.  Add new exception types for system and
+file errors.  Elide dead code.
+
++-------
+| Author: bobg    Date: 1998-10-17 00:23
+| Files:
+|   TODO configure.in latte-html.cxx latte.h load.cxx
+
+Bump Latte version number to 0.22.
+
+Add {\include ...} to latte-html.  It's for including other Latte
+files without discarding their text (the way {\load-file ...} does).
+
++-------
+| Author: bobg    Date: 1998-10-16 19:17
+| Files:
+|   ChangeLog TODO
+
+Completely reformat ChangeLog.
+
++-------
+| Author: bobg    Date: 1998-10-16 00:30
+| Files:
+|   INSTALL TODO
+
+Make INSTALL Latte-specific.
+
++-------
+| Author: bobg    Date: 1998-10-15 14:13
+| Files:
+|   TODO configure.in definitions.cxx html.latte latte-html.cxx latte.h
+|   reader.cxx standard.latte
+
+Bump version number to 0.21.
+
+Remove \car, \cdr, and a variety of other intrinsic operators.
+Instead, define them in standard.latte.
+
+Make \error exit not by calling exit() but by throwing a fatal
+exception.
+
+Rename \insert-file to \file-contents and \insert-output to
+\process-output.
+
+Make {\head ...} automatically output the meta tag:
+
+  <meta name="generator" content="Latte 0.21">
+
+(or whatever the version number happens to be).  We may also wish to
+emit a <link ...> tag pointing to the Latte home page, but I'm not
+sure what it should contain.
+
+Put the predefinition of __latte-version__ into the Latte_Reader
+ctor.
+
++-------
+| Author: bobg    Date: 1998-10-14 22:53
+| File:
+|   configure.in
+
+Bump version number to 0.20.  Change LATTE_URL to
+http://www.zanshin.com/latte/.
+
++-------
+| Author: bobg    Date: 1998-10-14 19:33
+| Files:
+|   latte-conf.h latte-conf.h.in syntax.cxx
+
+Remove remaining built-source files from CVS.
+
++-------
+| Author: bobg    Date: 1998-10-14 19:24
+| Files:
+|   TODO conf.cxx latte-conf.h latte-html.cxx
+
+Remove conf.cxx from CVS.  It was causing more problems than it
+solved.
+
+Tweak the HTML preamble again.
+
++-------
+| Author: bobg    Date: 1998-10-07 19:47
+| Files:
+|   configure.in latte-html.cxx
+
+Resume emitting <p> tags from \html; too many problems arise otherwise.
+
++-------
+| Author: bobg    Date: 1998-10-07 18:47
+| Files:
+|   conf.cxx configure.in html.latte latte-conf.h latte-html.cxx
+
+Bump version number to 0.18.
+
+Introduce \_pre, which suppresses auto-generation of <p> tags.  Use it
+in the definition of \pre.  Also use \_pre's internal mechanism in the
+definition of \html, so <p> isn't automatically generated within
+{\html ...} either.
+
++-------
+| Author: bobg    Date: 1998-10-07 18:27
+| Files:
+|   TODO conf.cxx configure.in latte-conf.h latte-html.cxx latte.h
+
+Bump version number to 0.17.
+
+Output <p> tags at the beginnings of paragraphs rather than at the
+ends of paragraphs.
+
+Further improve the HTML preamble.  The DOCTYPE declaration now claims
+"DTD HTML 4.0" when --strict is given, and "DTD HTML 4.0 Transitional"
+when --strict is not given.  The DTD url is similarly variable.
+
+Do better at reporting "processing incomplete" errors; latte-html will
+now report the location of the beginning of the innermost incomplete
+form.  Note that this is usually only roughly correct in the case of
+unbalanced braces.
+
+Eliminate unused t_ELLIPSIS lexer token value.
+
++-------
+| Author: bobg    Date: 1998-10-05 22:42
+| File:
+|   closure.cxx
+
+Never assign positional arguments to named parameters when invoking
+closures, even when there are excess positional args.  Instead,
+evaluate (for side effects) and then silently drop the excess
+positional args.
+
++-------
+| Author: bobg    Date: 1998-10-05 22:20
+| File:
+|   html.latte
+
+Make sure all boolean HTML attributes are treated as such.
+
++-------
+| Author: bobg    Date: 1998-10-05 22:11
+| File:
+|   html.latte
+
+Add named parameter `nonstandard' to every HTML tag function.
+
++-------
+| Author: bobg    Date: 1998-10-05 21:46
+| File:
+|   latte-html.cxx
+
+Add --fragment, for producing HTML fragments.  (Eliminates the HTML
+preamble and postamble from the output.)
+
++-------
+| Author: bobg    Date: 1998-10-05 21:16
+| File:
+|   html.latte
+
+Emit a <p> at the beginning of a <body>.  Fixes latte/172.
+
++-------
+| Author: bobg    Date: 1998-10-05 18:13
+| Files:
+|   Makefile.am conf.cxx configure.in latte-conf.h latte-conf.h.in latte.el
+|   syntax.cxx
+
+Add some generated files to CVS.
+
+Add a "Automatically generated" comment to the top of conf.cxx.
+
+Add more caveats to "make disthook".
+
+Bump version number to 0.16.
+
+Use AC_CACHE_CHECK, not AC_CACHE_VAL, and use AC_CHECK_FUNC, not
+AC_CHECK_FUNCS, when looking for getopt_long.  This allows us to print
+a "checking for..." message and to avoid defining HAVE_GETOPT_LONG.
+
+Rewrite the latte-mode line indenter and un-uncomment it.
+
++-------
+| Author: bobg    Date: 1998-09-28 21:53
+| Files:
+|   acconfig.h configure.in definitions.cxx latte-conf.h.in latte-html.cxx
+|   latte-string.h shstring.h
+
+Apply Bart's patch after some editorial changes.  It adds a test for
+string::remove() when string::erase() isn't present (as in the older
+GNU libstdc++).  In the process, I made a pass over the source to
+ensure that latte_string, not string, is used everywhere.
+
++-------
+| Author: bobg    Date: 1998-09-28 21:21
+| Files:
+|   TODO configure.in
+
+New post-beta TODO item, new mail address for configure failure.
+
++-------
+| Author: bobg    Date: 1998-09-27 18:19
+| Files:
+|   ChangeLog TODO latte-html.cxx latte-log.h latte.cxx latte.el latte.h
+|   param.cxx reader.cxx syntax.lxx varref.cxx
+
+Don't emit the lang= HTML attribute unless --lang= was given on the
+command line.  Add --debug=mem, which reports the number of extant and
+ever-allocated Latte_Objs, every hundredth ctor-or-dtor call.
+
+Add \"...\" syntax for encapsulating literal strings.  These work
+exactly like unquoted words, but may contain whitespace and other
+things a single unquoted word may not contain.  (This was a post-beta
+task, but it was gnawing at me.)
+
+Fix broken Latte_Param::render().  Remove Latte_VarRef::render() dead
+code.
+
+Adapt Latte_Reader string processing to handle both kinds of string
+syntax.  Add new syntax to syntax.lxx.  NOTE TO GREG: you'll need to
+regenerate syntax.cxx.
+
++-------
+| Author: bobg    Date: 1998-09-26 00:42
+| Files:
+|   TODO closure.cxx definitions.cxx html.latte latte-log.cxx
+
+More TODO management.
+
+In \append and \cons, do a special dance to preserve whitespace at
+beginning-of-group boundaries.
+
+In \apply, eval all the args before invoking the given operator.  From
+a long comment in ApplyOp:
+    args are now eval'd before invoking the operator.  this means that
+    operators that want some arguments uneval'd can't be called with
+    apply (perhaps we will need an apply-quoting), and that most
+    operators will redundantly re-eval their args when called with
+    apply.  But without evaling first, we can't pass the last arg's
+    individual elements as individual args to the operator when the
+    last arg eval's to a list, and that's essential.
+
+Make \downcase and \upcase take any number of arguments, and return a
+singleton or a list as in Latte_Closure::apply().
+
+Don't use (unsigned) size_t to hold the arguments to \substr.  Fix a
+usage of string::substr() therein.
+
+Don't make divide a synonym for multiply.
+
+Rename all the HTML character-entity Latte functions from foo to c-foo
+to avoid collisions like \not and \divide.
+
+Streamline latte-log a bit.
+
++-------
+| Author: fox    Date: 1998-09-25 21:45
+| File:
+|   latte-log.cxx
+
+lose, at least temporarily, Lawndart-derived log code in favor of
+unix-style logging -- cerr should work for a console app, and we'll
+revisit log output in the context of the appropriate plug-in.
+
++-------
+| Author: fox    Date: 1998-09-25 21:36
+| File:
+|   closure.cxx
+
+work around another conditional expression type conflict in CW 4
+
++-------
+| Author: fox    Date: 1998-09-25 21:34
+| File:
+|   definitions.cxx
+
+lose InsertOutputOp for Mac
+
++-------
+| Author: bobg    Date: 1998-09-25 04:08
+| Files:
+|   Makefile.am QA README TODO definitions.cxx
+
+Include standard.latte in distributions.  Don't claim html.latte is
+BUILT_SOURCE.
+
+Shuffle around TODO items after some discussion with Herr President.
+Also create the beginnings of a QA plan.
+
+Fix \varref to require a string argument (not to try to stringify
+whatever its argument may be).
+
++-------
+| Author: bobg    Date: 1998-09-25 03:40
+| Files:
+|   AUTHORS COPYING ChangeLog Makefile.am README TODO activation.cxx
+|   assignment.cxx boolean.cxx closure.cxx configure.in definitions.cxx
+|   env.cxx fileloc.cxx group.cxx html.latte latte-deque.h latte-fstream.h
+|   latte-html.cxx latte-log.cxx latte-log.h latte-stack.h latte-string.h
+|   latte-vector.h latte.cxx latte.el latte.h list.cxx load.cxx mutable.h
+|   nested.cxx operator.cxx param.cxx reader.cxx refcount.h restorer.h
+|   shstring.cxx shstring.h standard.latte str.cxx syntax.lxx tangible.cxx
+|   varref.cxx visitor.cxx wsnode.cxx wstate.cxx
+
+Add license boilerplate everywhere.
+
+Define all remaining pre-beta operators, including: ceil, divide,
+explode, floor, modulo, multiply, operator?, subtract.
+
+Automatically load standard.latte before html.latte.  Both are now
+suppressed with -n.  Install standard.latte along with html.latte.
+
+Avoid some calls to LatteLog when the relevant latte_log_flags bit
+isn't set.
+
++-------
+| Author: bobg    Date: 1998-09-24 23:23
+| File:
+|   definitions.cxx
+
+Get the names right in ConsOp and WarnOp when the instance is actually
+a push-back or an error operator, respectively.
+
++-------
+| Author: bobg    Date: 1998-09-24 23:20
+| Files:
+|   TODO assignment.cxx boolean.cxx closure.cxx definitions.cxx group.cxx
+|   latte-html.cxx latte-log.cxx latte.cxx latte.h list.cxx nested.cxx
+|   operator.cxx param.cxx standard.latte str.cxx varref.cxx wsnode.cxx
+
+Remove done TODO items.
+
+Give every Latte_Obj class a render(), not just the Latte_Tangible
+subtree.  Note, render() no longer tries to preserve the appearance of
+the input; it's now exclusively used for debugging.
+
+Adjust the few existing calls to LatteLog to be truly useful.
+
+Solve a trivial Mac portability problem in latte-log.cxx.
+
+When a closure evals to a single object, return just that object, not
+a list containing the one object.  Solves numerous bugs, mainly in
+recursion.  Note, "false" values do not count for purposes of
+determining the length of the list generated by a closure application.
+
+Add push-back (a.k.a. snoc), error, subseq and substr operators.
+
+Begin to define standard.latte, a library of non-intrinsics such as
+member?.
+
+Change all eval's to do_eval's, and create a new front-end call,
+Latte_Obj::eval().  The front end is responsible for outputting useful
+debugging info around calls to do_eval().
+
+Fix bugs in Latte_Nested; now all Latte_Obj subtypes are correctly
+detected inside a Latte_Nested.
+
++-------
+| Author: bobg    Date: 1998-09-22 23:55
+| Files:
+|   TODO closure.cxx configure.in definitions.cxx group.cxx latte-html.cxx
+|   latte.h list.cxx operator.cxx
+
+Remove more done TODO items.  Get rid of the Latte_Objs type.
+Latte_List takes its place as a non-Latte_Tangible list of
+Latte_Obj's.  Latte_Group now inherits form Latte_List and
+Latte_Tangible.  Everything derived from Latte_Obj now inherits
+virtually.
+
+Bump Latte version number to 0.14.
+
++-------
+| Author: bobg    Date: 1998-09-22 23:21
+| Files:
+|   TODO definitions.cxx latte-string.h
+
+Remove more done TODO items.  Don't misuse Latte_Group in WhileOp.
+Add string-append (a.k.a. concat), string?, upcase, downcase, and
+equal? operators.
+
++-------
+| Author: srw    Date: 1998-09-22 22:47
+| File:
+|   COPYING
+
+remove date stamp
+
++-------
+| Author: srw    Date: 1998-09-22 22:33
+| File:
+|   COPYING
+
+Sonoma -> Marin
+
++-------
+| Author: srw    Date: 1998-09-22 22:18
+| File:
+|   COPYING
+
+Zanshinify the NPL: change occurences of Netscape, move arbitration
+venue to Sonoma County, and don't require the use of "JAMS/EndDispute"
+for arbitration.
+
++-------
+| Author: bobg    Date: 1998-09-22 21:08
+| Files:
+|   TODO definitions.cxx latte-html.cxx latte.h
+
+Remove done TODO items.  Define append, group, group?, and nth
+operators.  (Many more to come.)  Define new operator error
+OutOfRange, and report such errors.
+
++-------
+| Author: bobg    Date: 1998-09-21 20:40
+| File:
+|   Makefile.am
+
+Require automake 1.3.
+
++-------
+| Author: bobg    Date: 1998-09-21 18:14
+| Files:
+|   ChangeLog TODO html.latte latte-html.cxx visitor.cxx
+
+Remove one TODO item, add another.
+
+Add "--strict" option to latte-html.  It defines the latte variable
+`\strict-html4' Without it, html.latte won't warn about using
+deprecated forms.
+
+Improve whitespace handling even more.  Now <foo >bar</foo> comes out
+as <foo>bar</foo>.
+
+HTML tag parameters now automatically get double-quoted.
+
++-------
+| Author: bobg    Date: 1998-09-19 01:24
+| File:
+|   latte-html.cxx
+
+Use more canonical comment syntax.
+
++-------
+| Author: bobg    Date: 1998-09-18 23:54
+| File:
+|   latte-html.cxx
+
+Mention -L variant of --lang in the help text.
+
++-------
+| Author: bobg    Date: 1998-09-18 23:53
+| Files:
+|   Makefile.am TODO configure.in latte-html.cxx latte.h
+
+Define LATTE_URL in configure.in (right now it points into my personal
+website, but that should change).  Use it in the new HTML preamble in
+the output of latte-html.  It's available at runtime in the new extern
+symbol `latte_url'.
+
+Remove the "Cause HTML preamble to mention Latte" TODO item.
+
+Make the HTML preamble fairly rigorous, including the lang tag for the
+opening HTML.  It defaults to "en" but can be set with the new --lang
+option to latte-html.
+
++-------
+| Author: bobg    Date: 1998-09-18 19:09
+| File:
+|   html.latte
+
+Correct some erroneous tag parameter info (undeprecate things that
+shouldn't have been deprecated, add some that were missing).
+
++-------
+| Author: bobg    Date: 1998-09-17 20:32
+| Files:
+|   ChangeLog TODO configure.in
+
+Update ChangeLog, remove finished TODO item.  Bump Latte version
+number to 0.13.  Remove configure.in test for Perl.
+
++-------
+| Author: bobg    Date: 1998-09-17 18:23
+| Files:
+|   COPYING COPYING.LIB INSTALL Makefile.am TODO closure.cxx configure.in
+|   definitions.cxx getopt.c getopt.h getopt1.c html.latte latte.cxx
+|   latte.h varref.cxx
+
+Insert the Mozilla Public License in COPYING and call it the Zanshin
+Public License; we'll have to tweak this.
+
+Add COPYING.LIB to cover the getopt files.
+
+Add INSTALL (which is presently just a duplicate of the default
+INSTALL, but will get tweaked).
+
+Juggle TODO items.
+
+Add some LatteLog calls that probably aren't very helpful.
+
+Rename the \map operator to \lmap to avoid a name conflict with an
+HTML element.  Ditto for \var -> \varref.
+
+Improve whitespace handling in \warn.
+
+Completely rewrite html.latte to include all elements and entities of
+HTML 4.0.  Also warns when deprecated forms are used.  Not, HTML
+entity "&not;" is presently commented out because of a conflict with
+the Latte operator \not.
+
+Add an operator<< for Latte_Obj that calls render() if the Obj is a
+Tangible, otherwise outputs the hex address.
+
++-------
+| Author: bobg    Date: 1998-09-16 23:37
+| File:
+|   TODO
+
+Remove done items.
+
++-------
+| Author: bobg    Date: 1998-09-16 19:32
+| Files:
+|   ChangeLog closure.cxx latte-html.cxx latte.h
+
+Catch and properly report errors of the form
+
+  {\foo \bar=baz ...}
+
+when \foo doesn't have a \bar named parameter.  This is done with the
+new Latte_Operator::IllegalAssignment error type.
+
+Tweak the --help text.
+
++-------
+| Author: bobg    Date: 1998-09-16 01:50
+| Files:
+|   ChangeLog closure.cxx definitions.cxx html.latte latte-html.cxx latte.h
+
+Create a new exception class in Latte_Operator called Latte_OpError.
+In addition to the FileLoc of a Latte_Error, a Latte_OpError also
+includes the name of the operator throwing the exception.  The name of
+the operator comes from the new virtual function
+Latte_Operator::name().  Also, Latte_Operator::Latte_BadType now
+includes the number of the argument that is of the wrong type.
+
+Flesh out the --help string and do something useful with illegal
+command line options.
+
+Define \nbsp function.
+
+Silence a const warning.
+
++-------
+| Author: bobg    Date: 1998-09-15 21:17
+| Files:
+|   configure.in getopt.c getopt1.c latte-conf.h.in
+
+Modify GNU getopt code to work in Latte.
+
++-------
+| Author: bobg    Date: 1998-09-15 19:51
+| Files:
+|   ChangeLog configure.in
+
+Make --disable-shared the default.
+
++-------
+| Author: bobg    Date: 1998-09-14 23:22
+| Files:
+|   ChangeLog getopt.c getopt.h getopt1.c
+
+Update ChangeLog, add fallback getopt sources from GNU.
+
++-------
+| Author: bobg    Date: 1998-09-14 23:07
+| Files:
+|   ChangeLog Makefile.am TODO closure.cxx configure.in definitions.cxx
+|   fileloc.cxx latte-conf.h.in latte-html.cxx latte-log.cxx latte-log.h
+|   latte.cxx latte.h
+
+Add doc subdirectory to top-level Makefile.am.  Add latte-log facility
+for debugging.  Add long option parsing, and add --version, --help
+(not yet wired up), and --debug options.  Remove
+"-I/usr/local/include/g++".
+
+Bump version number to 0.12.  Test in configure.in for iostream
+vs. iostream.h (but the outcome is not yet used).  Test for
+getopt_long and include getopt.c and getopt1.c in the build if not
+found.  Update configure.in "cache" variables to have proper names.
+
+Start putting calls to LatteLog in various places.  Add operator<< for
+FileLoc objects.
+
+Use the no-auto-whitespace version of StringifyVisitor when getting a
+filename from the arguments to \insert-file.
+
+Define latte_init(), calls latte_default_path() (optionally) and sets
+latte_log_flags to 0.
+
++-------
+| Author: bobg    Date: 1998-09-11 22:41
+| File:
+|   TODO
+
+Add "create self-tests" task for beta.
+
++-------
+| Author: bobg    Date: 1998-09-11 22:14
+| Files:
+|   README TODO definitions.cxx latte-fstream.h latte-html.cxx load.cxx
+
+Create latte-fstream.h to encapsulate fstream/fstream.h platform
+differences.
+
+Rewrite README a bit.
+
+Reorganize TODO into pre-beta and post-beta tasks.
+
++-------
+| Author: bobg    Date: 1998-09-11 20:29
+| Files:
+|   Makefile.am activation.cxx assignment.cxx boolean.cxx closure.cxx
+|   configure.in definitions.cxx env.cxx fileloc.cxx group.cxx html.latte
+|   latte-deque.h latte-html.cxx latte-stack.h latte-string.h
+|   latte-vector.h latte.cxx latte.el latte.h list.cxx load.cxx mutable.h
+|   nested.cxx operator.cxx param.cxx reader.cxx refcount.h restorer.h
+|   shstring.cxx shstring.h str.cxx syntax.lxx tangible.cxx varref.cxx
+|   visitor.cxx wsnode.cxx wstate.cxx
+
+Assign copyright to Zanshin; insert placeholders for licensing terms.
+
++-------
+| Author: bobg    Date: 1998-09-11 20:18
+| Files:
+|   AUTHORS COPYING ChangeLog Makefile.am NEWS README TODO acconfig.h
+|   activation.cxx assignment.cxx boolean.cxx closure.cxx configure.in
+|   definitions.cxx env.cxx fileloc.cxx group.cxx html.latte
+|   latte-conf.h.in latte-deque.h latte-html.cgi latte-html.cxx
+|   latte-stack.h latte-string.h latte-vector.h latte.cxx latte.el latte.h
+|   list.cxx load.cxx mutable.h nested.cxx operator.cxx param.cxx
+|   reader.cxx refcount.h restorer.h shstring.cxx shstring.h str.cxx
+|   syntax.lxx tangible.cxx varref.cxx visitor.cxx wsnode.cxx wstate.cxx
+
+branches:  1.1.1;
+Initial revision
+
++-------
+| Author: bobg    Date: 1998-09-11 20:18
+| Files:
+|   AUTHORS COPYING ChangeLog Makefile.am NEWS README TODO acconfig.h
+|   activation.cxx assignment.cxx boolean.cxx closure.cxx configure.in
+|   definitions.cxx env.cxx fileloc.cxx group.cxx html.latte
+|   latte-conf.h.in latte-deque.h latte-html.cgi latte-html.cxx
+|   latte-stack.h latte-string.h latte-vector.h latte.cxx latte.el latte.h
+|   list.cxx load.cxx mutable.h nested.cxx operator.cxx param.cxx
+|   reader.cxx refcount.h restorer.h shstring.cxx shstring.h str.cxx
+|   syntax.lxx tangible.cxx varref.cxx visitor.cxx wsnode.cxx wstate.cxx
+
+Latte
+
++-------
+| Author: bobg    Date: 1998-08-28 17:22
+| File:
+|   latte.texi
+
+Remove obsolete doc.
+
++-------
+| Author: bobg    Date: 1998-08-28 17:21
+| File:
+|   html.latte
+
+Define \base.
+
++-------
+| Author: bobg    Date: 1998-08-19 04:51
+| Files:
+|   README TODO configure.in definitions.cxx group.cxx html.latte
+|   latte-html.cxx latte.el latte.h load.cxx
+
+Dedicate Latte to my sister.
+
+Implement command-line options for latte-html.
+
+Use AM_PROG_LEX.  Check for <fstream> and <fstream.h>.
+
+Add \while, \var, \warn, \random, \insert-file, and \insert-output.
+
+Fix bug with detecting operator nesting.
+
+Surround output with <html> and </html>.
+
+Comment out indentation rules.  Fontify \\ and \/.
+
++-------
+| Author: bobg    Date: 1998-01-27 19:46
+| Files:
+|   ChangeLog NEWS latte-stack.h
+
+Fix header omit-o.
+
++-------
+| Author: bobg    Date: 1998-01-27 19:15
+| Files:
+|   TODO acconfig.h configure.in definitions.cxx latte-deque.h
+|   latte-stack.h latte-string.h latte.h shstring.cxx
+
+Change configure-time symbols to be more suitable for export.  Define
+latte_deque::append.
+
++-------
+| Author: bobg    Date: 1998-01-27 08:24
+| Files:
+|   Makefile.am TODO acconfig.h configure.in latte-deque.h latte-stack.h
+|   latte-string.h latte-vector.h latte.h load.cxx shstring.cxx shstring.h
+
+Add portability headers.
+
++-------
+| Author: bobg    Date: 1998-01-27 07:50
+| Files:
+|   Makefile.am acconfig.h configure.in latte.h mutable.h refcount.h
+|   restorer.h shstring.h
+
+Back to using a config header.
+
++-------
+| Author: bobg    Date: 1998-01-27 07:29
+| Files:
+|   TODO closure.cxx configure.in definitions.cxx group.cxx html.latte
+|   latte-html.cxx latte.h latte.texi load.cxx shstring.h
+
+Change all Latte_Groups to Latte_Lists (with wsnodes in many cases),
+except ones created by the reader.  Add configure tests for
+-fhandle-exceptions, a decent stack<>, and vector::resize().  Adjust
+whitespace in html.latte using \/.  (More to come.)  Add portability
+code to latte.h to make it work with g++/libg++ 2.7.x.  More
+documentation.  Don't use list::clear(), use list::erase(begin, end).
+
++-------
+| Author: bobg    Date: 1998-01-26 04:30
+| Files:
+|   TODO definitions.cxx latte.texi shstring.cxx shstring.h
+
+Never stack-allocate Refcounted objects.  Add more intrinsics.  Fix
+shstring: each shstring::Rep contained two instances of string!
+
++-------
+| Author: bobg    Date: 1998-01-25 20:53
+| Files:
+|   ChangeLog configure.in definitions.cxx latte-html.cgi latte-html.cxx
+|   latte.h reader.cxx
+
+Bump minor version number and liblatte version.  Add
+Latte_Reader::global_activation() accessor.  Automatically
+"load-library html" at startup in latte-html.  Create latte-html.cgi.
+
++-------
+| Author: bobg    Date: 1998-01-24 21:23
+| Files:
+|   TODO closure.cxx latte.h
+
+Fix rest/named parameter handling.
+
++-------
+| Author: bobg    Date: 1998-01-24 19:41
+| File:
+|   Makefile.am
+
+Rename the TEST.out files to TEST.exp to avoid "make" brain damage.
+
++-------
+| Author: bobg    Date: 1998-01-24 19:26
+| File:
+|   visitor.cxx
+
+Another whitespace fix.  This makes the two failing "make check" tests
+start working.
+
++-------
+| Author: bobg    Date: 1998-01-24 09:07
+| Files:
+|   Makefile.am NEWS
+
+Add more warnings to "make dist" and update NEWS.
+
++-------
+| Author: bobg    Date: 1998-01-24 08:51
+| File:
+|   ChangeLog
+
+ChangeLog
+
++-------
+| Author: bobg    Date: 1998-01-24 08:46
+| Files:
+|   Makefile.am configure.in definitions.cxx
+
+Add an ETAGS_ARGS to Makefile.am.  Change the way "make check" is
+done.  Fix a bug in \add (didn't eval its args) and \if (didn't wsnode
+its result).  Add tests for all the intrinsics.  (Two don't currently
+pass because of whitespace fu).
+
++-------
+| Author: bobg    Date: 1998-01-24 07:23
+| Files:
+|   Makefile.am TODO assignment.cxx boolean.cxx closure.cxx configure.in
+|   group.cxx latte-html.cxx latte.h list.cxx load.cxx nested.cxx
+|   operator.cxx param.cxx str.cxx varref.cxx visitor.cxx
+
+Get rid of evalnode and userobj.  Make all versions of visit() call
+Latte_Visitor::visit_*.  Bump minor version and liblatte "current"
+version.
+
++-------
+| Author: bobg    Date: 1998-01-22 00:19
+| Files:
+|   Makefile.am configure.in load.cxx
+
+Correct some problems in the distribution.
+
++-------
+| Author: bobg    Date: 1998-01-21 09:13
+| Files:
+|   Makefile.am NEWS README TODO closure.cxx configure.in definitions.cxx
+|   group.cxx html.latte latte-html.cxx latte.h load.cxx operator.cxx
+|   reader.cxx syntax.lxx
+
+It works well enough to generate my home page!!
+
+Update the README slightly.  Banish EvalNodes.  Bump minor version
+number.  Make `apply()' a protected member of Latte_Operator; the
+public interface is now `call_apply()', which ensures that the result
+of apply() gets eval'd.  Add more standard operators, including
+file-loading facilities.  Improve the group eval semantics.  Update
+html.latte.  (Note: \table is broken.)  Fix inverted logic error in
+Latte_Obj::bool_val().  Make HtmlObj a Latte_Nested instead of a
+Latte_UserObj.  Add "\/" syntax for canceling whitespace up to the
+point where it appears.
+
++-------
+| Author: bobg    Date: 1998-01-21 02:22
+| Files:
+|   Makefile.am README TODO activation.cxx boolean.cxx definitions.cxx
+|   latte-html.cxx latte.h
+
+Replace Latte_Null with Latte_Boolean, so we can have a generic truth
+value as well as a generic falsehood value (mainly for the benefit of
+NotOp).  Define several new operators.  Fix as_assignment() bug.  Fix
+error message typo.  Add dist-shar to automake options.
+
++-------
+| Author: bobg    Date: 1998-01-20 21:13
+| Files:
+|   closure.cxx definitions.cxx latte.h visitor.cxx wstate.cxx
+
+Fix whitespace problems.  Still seeking a total understanding of
+whitespace stuff, to avoid these kinds of problems altogether.
+
+Return a WsNode from CarOp::apply; this'll have to be done elsewhere,
+too.
+
++-------
+| Author: bobg    Date: 1998-01-20 08:41
+| Files:
+|   Makefile.am TODO configure.in definitions.cxx latte.h latte.texi
+|   varref.cxx
+
+Add a notice when running "make dist" that will remind me to keep the
+version numbers up to date.  Define `if' and `set!' operators.  Define
+Latte_Var::lookup().  Restore some "mutate" calls.
+
++-------
+| Author: bobg    Date: 1998-01-20 07:51
+| Files:
+|   Makefile.am syntax.lxx
+
+Oops, don't try to install obsolete latte-conf.h.
+
++-------
+| Author: bobg    Date: 1998-01-20 07:45
+| Files:
+|   configure.in syntax.lxx
+
+No longer need to check for strstream.h.
+
++-------
+| Author: bobg    Date: 1998-01-20 07:42
+| Files:
+|   Makefile.am acconfig.h configure.in latte.h mutable.h refcount.h
+|   restorer.h shstring.h
+
+Switch back to no config header.
+
++-------
+| Author: bobg    Date: 1998-01-20 07:21
+| Files:
+|   Makefile.am TODO activation.cxx assignment.cxx closure.cxx configure.in
+|   definitions.cxx env.cxx fileloc.cxx group.cxx latte-html.cxx latte.cxx
+|   latte.el latte.h latte.texi list.cxx mutable.h nested.cxx param.cxx
+|   reader.cxx refcount.h restorer.h shstring.cxx shstring.h str.cxx
+|   syntax.lxx tangible.cxx varref.cxx visitor.cxx wsnode.cxx wstate.cxx
+
+Add copyright notices.
+
++-------
+| Author: bobg    Date: 1998-01-20 06:56
+| Files:
+|   TODO configure.in definitions.cxx group.cxx latte.cxx latte.h list.cxx
+|   nested.cxx str.cxx varref.cxx visitor.cxx wsnode.cxx
+
+Bump minor version number.  Arrange for eval() to always FULLY eval.
+As such, remove the activation arg from numeric_val and bool_val.
+EvalNodes are probably no longer needed, but I won't get rid of them
+just yet.  Aggressively self-evaluate groups when possible.  Make
+lists work like groups when eval'd, except for apply semantics.
+Create a WsNode::eval that duplicates the WsNode on output.
+
++-------
+| Author: bobg    Date: 1998-01-20 05:59
+| Files:
+|   Makefile.am TODO acconfig.h assignment.cxx closure.cxx configure.in
+|   definitions.cxx group.cxx latte-html.cxx latte.cxx latte.el latte.h
+|   latte.texi list.cxx mutable.h nested.cxx param.cxx reader.cxx
+|   refcount.h restorer.h shstring.h str.cxx syntax.lxx varref.cxx
+|   visitor.cxx wsnode.cxx wstate.cxx
+
+Switch to using an autoconf config header.  I'll probably switch back.
+Generalize nested Latte_Obj's as Latte_Nested.  This includes
+Latte_EvalNode and the new Latte_WsNode (which transfers its Wstate to
+the contained object during visitor traversal).  Get rid of the whole
+clone() API, obviated by WsNodes (only VarRef::eval was using clone in
+order to transfer ws to the result).  Add several standard
+definitions, with many more to go.  Make bool_val and numeric_val take
+activations, so they can call eval if necessary to get the *real* bool
+or numeric val.  Exit with error on exceptions.  Put together a useful
+version of latte-mode.  Differentiate between crlf, cr, and lf on
+input.  Reintroduce whitespace "optimizing" as a compile-time option.
+Flesh out manual introduction a bit.  Start providing for "make check"
+tests.
+
++-------
+| Author: bobg    Date: 1998-01-19 08:26
+| File:
+|   TODO
+
+List operators to define.
+
++-------
+| Author: bobg    Date: 1998-01-19 07:46
+| Files:
+|   TODO latte-html.cxx latte.h varref.cxx
+
+Better (but still not great) error handling.
+
++-------
+| Author: bobg    Date: 1998-01-19 06:59
+| Files:
+|   closure.cxx latte-html.cxx latte.h
+
+Solve some whitespace problems; fix an infinite recursion in
+Latte_EvalNode and HtmlObj.  Add an evalnode to HtmlOp::apply()
+output.  Add automatic "<p>" tag generation.
+
++-------
+| Author: bobg    Date: 1998-01-19 03:47
+| Files:
+|   closure.cxx group.cxx latte-html.cxx latte.h reader.cxx varref.cxx
+
+Create evalnodes in some places.  Override all the as_* routines in
+Latte_EvalNode to operate on the nested object (except for
+as_evalnode(), which returns true).  Flesh out Latte_EvalNode.  Fix a
+whitespace problem.  Crudely catch errors.  Use
+Latte_Activation::define() in Latte_Reader::define_global().
+
++-------
+| Author: bobg    Date: 1998-01-19 02:45
+| File:
+|   definitions.cxx
+
+Do not return value from DefOp::apply().
+
++-------
+| Author: bobg    Date: 1998-01-19 02:29
+| Files:
+|   closure.cxx definitions.cxx latte-html.cxx latte.h
+
+Fill in various clone() and visit() ops.  Create
+Latte_Reader::install_standard_definitions().  Make empty Latte_Lists
+be "false".
+
++-------
+| Author: bobg    Date: 1998-01-19 02:06
+| Files:
+|   activation.cxx closure.cxx definitions.cxx env.cxx latte.h
+
+Flesh out activations and environments some more.  Finish (?) defining
+closures, including rest params and named params.  Finish (?) DefOp.
+Add some Latte_Operator exception types.
+
++-------
+| Author: bobg    Date: 1998-01-19 01:10
+| Files:
+|   TODO closure.cxx definitions.cxx group.cxx latte.h param.cxx reader.cxx
+|   str.cxx
+
+Write the closure ctor (which still needs a little work).  Write
+Latte_Param, the type of "named" and "rest" (but not positional)
+formal params.  Make Latte_Tangible::render virtual.  Flesh out
+reader.
+
++-------
+| Author: bobg    Date: 1998-01-18 23:48
+| Files:
+|   Makefile.am activation.cxx assignment.cxx closure.cxx definitions.cxx
+|   latte.h param.cxx reader.cxx wstate.cxx
+
+Rename Latte_Param (\foo=bar) to Latte_Assignment in preparation for
+defining a Latte_Param that covers param declarations in lambda forms.
+
++-------
+| Author: bobg    Date: 1998-01-18 02:23
+| Files:
+|   Makefile.am TODO activation.cxx closure.cxx definitions.cxx group.cxx
+|   latte-html.cxx latte.cxx latte.h list.cxx reader.cxx str.cxx varref.cxx
+|   visitor.cxx
+
+Start fleshing out closures.  Don't pass Latte_BindingEnv's when a
+companion Latte_Activation is being passed.  Use "mutate" in
+Latte_Activation::lookup().
+
++-------
+| Author: bobg    Date: 1998-01-17 18:47
+| Files:
+|   Makefile.am activation.cxx definitions.cxx env.cxx group.cxx
+|   latte-html.cxx latte.h reader.cxx visitor.cxx
+
+Make Latte_Activation::lookup() return a non-const reference, so
+values in an activation can be changed.  Define
+Latte_Activation::extend().  Pass the surrounding group's wstate and
+fileloc to apply().  Flesh out html stuff.  Flesh out closures
+(incompletely).  Begin defining standard definitions.  Add
+Latte_Reader::define_global().  Add smart whitespace behavior to
+Latte_Visitor.
+
++-------
+| Author: bobg    Date: 1998-01-17 08:12
+| Files:
+|   TODO tangible.cxx
+
+Forgot to add tangible.cxx.
+
++-------
+| Author: bobg    Date: 1998-01-17 07:58
+| Files:
+|   Makefile.am activation.cxx group.cxx latte-html.cxx latte.cxx latte.h
+|   list.cxx mutable.h param.cxx reader.cxx refcount.h restorer.h str.cxx
+|   varref.cxx
+
+Create Latte_Tangible, which is the Latte_Obj subtype that holds
+wstate and fileloc info.
+
+Change Latte_List to Latte_Group, and add a new Latte_Objs subtype,
+Latte_List, that's simply a list of objs without the tangibility or
+fancy eval semantics.  Add Latte_Null, and a singleton object of that
+type.
+
++-------
+| Author: bobg    Date: 1998-01-17 06:31
+| Files:
+|   Makefile.am TODO latte-html.cxx latte.h
+
+Add restorer.h to the install.  Flesh out Latte_HtmlObj (which now
+contains an arbitrary subobj).  Add Latte_Str::str().
+
++-------
+| Author: bobg    Date: 1998-01-16 09:21
+| Files:
+|   AUTHORS ChangeLog Makefile.am NEWS README TODO activation.cxx
+|   configure.in env.cxx fileloc.cxx html.latte latte-html.cxx latte.cxx
+|   latte.el latte.h latte.texi list.cxx mutable.h param.cxx reader.cxx
+|   refcount.h restorer.h shstring.cxx shstring.h str.cxx syntax.lxx
+|   varref.cxx wstate.cxx
+
+initial
+

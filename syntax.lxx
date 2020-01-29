@@ -1,0 +1,89 @@
+/* Copyright 1998,1999 Zanshin Inc.          <http://www.zanshin.com/>
+ *
+ * The contents of this file are subject to the Zanshin Public License Version
+ * 1.0 (the "License"); you may not use this file except in compliance with the
+ * License.  You should have received a copy of the License with Latte; see
+ * the file COPYING.  You may also obtain a copy of the License at
+ * <http://www.zanshin.com/ZPL.html>.
+ * 
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ * 
+ * The Original Code is Latte.
+ * 
+ * The Initial Developer of the Original Code is Zanshin, Inc.
+ */
+
+%option c++
+%option 8bit
+%option noyywrap
+%option yyclass="Latte_Reader"
+%option yylineno
+%option prefix="latte"
+
+%x QuotedStr
+
+%{
+#define DONT_INCLUDE_FLEXLEXER
+#include <latte.h>
+#include <grammar.tab.h>
+%}
+
+identifier [A-Za-z_][A-Za-z_0-9?!+-]*
+space " "
+tab \t
+
+%%
+
+{space}+ { m_column += YYLeng(); m_ws.space(YYLeng()); }
+{tab}+   { m_column = m_ws.tab(YYLeng(), m_column); }
+
+\{     { ++m_column; return '{'; }
+
+\}     { ++m_column; return '}'; }
+
+\r\n { m_column = 0; m_ws.crlf(1); }
+\r   { m_column = 0; m_ws.cr(1); }
+\n   { m_column = 0; m_ws.lf(1); }
+
+\\;.*\r\n   { m_column = 0; }
+\\;.*[\r\n] { m_column = 0; }
+\\;.*       { /* must be EOF, do nothing */ }
+
+\\\/ { m_column += 2; m_ws.reset_ws(); }
+
+\\[ \t]*\r\n   { m_column = 0; }
+\\[ \t]*[\r\n] { m_column = 0; }
+
+\\{identifier}	  { m_column += YYLeng(); return VAR_REF; }
+\\={identifier}	  { m_column += YYLeng(); return PARAM_NAME; }
+\\{identifier}=	  { m_column += YYLeng(); return PARAM_ASSIGN; }
+\\&{identifier}	  { m_column += YYLeng(); return REST_PARAM; }
+
+\\'  { m_column += 2; return QUOTE; }
+\\`  { m_column += 2; return QUASIQUOTE; }
+\\,@ { m_column += 3; return UNQUOTE_SPLICING; }
+\\,  { m_column += 2; return UNQUOTE; }
+
+([^ \t\\{}\r\n]|(\\[ \t\\{}]))+ { m_column += YYLeng(); return STR; }
+
+\\\" { m_column += 2;
+       m_quoted_string_line = yylineno;
+       BEGIN(QuotedStr); }
+<QuotedStr>\\\" { m_column += 2;
+                  yyleng -= 2;
+                  /* why was this here?   m_ws.reset_ws(); */
+                  BEGIN(0);
+                  return STR; }
+<QuotedStr>\r\n { m_column = 0; yymore(); }
+<QuotedStr>\r { m_column = 0; yymore(); }
+<QuotedStr>\n { m_column = 0; yymore(); }
+<QuotedStr>[^\\\r\n\t] { ++m_column; yymore(); }
+<QuotedStr>{tab} { Latte_Wstate tmpws;
+                   m_column = tmpws.tab(1, m_column);
+                   yymore(); }
+<QuotedStr>\\[^"] { m_column += 2; yymore(); }
+<QuotedStr><<EOF>> { throw IncompleteString(Latte_FileLoc(filename(),
+                                             m_quoted_string_line)); }

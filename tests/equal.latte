@@ -1,0 +1,7 @@
+{\if {\equal? a a} OK no}
+{\if {\equal? a a a} OK no}
+{\if {\equal? a a b} no OK}
+{\if {\equal? {b c} {a b c}} no OK}
+{\if {\equal? {b c} {\cdr {a b c}}} OK no}
+{\if {\zero? {\add 6 -6}} OK no}
+{\if {\zero? 78} no OK}

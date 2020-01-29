@@ -1,0 +1,1444 @@
+\; Copyright 1998 Zanshin Inc.               <http://www.zanshin.com/>
+
+\; The contents of this file are subject to the Zanshin Public License Version
+\; 1.0 (the "License"); you may not use this file except in compliance with the
+\; License.  You should have received a copy of the License with Latte; see
+\; the file COPYING.  You may also obtain a copy of the License at
+\; <http://www.zanshin.com/ZPL.html>.
+\; 
+\; Software distributed under the License is distributed on an "AS IS" basis,
+\; WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+\; for the specific language governing rights and limitations under the
+\; License.
+\; 
+\; The Original Code is Latte.
+\; 
+\; The Initial Developer of the Original Code is Zanshin, Inc.
+
+{\def {\ch \name} {\html &\name;}}
+{\def {\chx \num} {\html &#\num;}}
+
+{\def {\c-aacute} {\ch aacute}}
+{\def {\c-acirc}  {\ch acirc}}
+{\def {\c-acute}  {\ch acute}}
+{\def {\c-aelig}  {\ch aelig}}
+{\def {\c-agrave} {\ch agrave}}
+{\def {\c-aring}  {\ch aring}}
+{\def {\c-atilde} {\ch atilde}}
+{\def {\c-auml}   {\ch auml}}
+{\def {\c-brvbar} {\ch brvbar}}
+{\def {\c-ccedil} {\ch ccedil}}
+{\def {\c-cedil}  {\ch cedil}}
+{\def {\c-cent}   {\ch cent}}
+{\def {\c-copy}   {\ch copy}}
+{\def {\c-curren} {\ch curren}}
+{\def {\c-deg}    {\ch deg}}
+{\def {\c-divide} {\ch divide}}
+{\def {\c-eacute} {\ch eacute}}
+{\def {\c-ecirc}  {\ch ecirc}}
+{\def {\c-egrave} {\ch egrave}}
+{\def {\c-eth}    {\ch eth}}
+{\def {\c-euml}   {\ch euml}}
+{\def {\c-frac12} {\ch frac12}}
+{\def {\c-frac14} {\ch frac14}}
+{\def {\c-frac34} {\ch frac34}}
+{\def {\c-iacute} {\ch iacute}}
+{\def {\c-icirc}  {\ch icirc}}
+{\def {\c-iexcl}  {\ch iexcl}}
+{\def {\c-igrave} {\ch igrave}}
+{\def {\c-iquest} {\ch iquest}}
+{\def {\c-iuml}   {\ch iuml}}
+{\def {\c-laquo}  {\ch laquo}}
+{\def {\c-macr}   {\ch macr}}
+{\def {\c-micro}  {\ch micro}}
+{\def {\c-middot} {\ch middot}}
+{\def {\c-nbsp}   {\ch nbsp}}
+{\def {\c-not}    {\ch not}}
+{\def {\c-ntilde} {\ch ntilde}}
+{\def {\c-oacute} {\ch oacute}}
+{\def {\c-ocirc}  {\ch ocirc}}
+{\def {\c-ograve} {\ch ograve}}
+{\def {\c-ordf}   {\ch ordf}}
+{\def {\c-ordm}   {\ch ordm}}
+{\def {\c-oslash} {\ch oslash}}
+{\def {\c-otilde} {\ch otilde}}
+{\def {\c-ouml}   {\ch ouml}}
+{\def {\c-para}   {\ch para}}
+{\def {\c-plusmn} {\ch plusmn}}
+{\def {\c-pound}  {\ch pound}}
+{\def {\c-raquo}  {\ch raquo}}
+{\def {\c-reg}    {\ch reg}}
+{\def {\c-sect}   {\ch sect}}
+{\def {\c-shy}    {\ch shy}}
+{\def {\c-sup1}   {\ch sup1}}
+{\def {\c-sup2}   {\ch sup2}}
+{\def {\c-sup3}   {\ch sup3}}
+{\def {\c-szlig}  {\ch szlig}}
+{\def {\c-thorn}  {\ch thorn}}
+{\def {\c-times}  {\ch times}}
+{\def {\c-uacute} {\ch uacute}}
+{\def {\c-ucirc}  {\ch ucirc}}
+{\def {\c-ugrave} {\ch ugrave}}
+{\def {\c-uml}    {\ch uml}}
+{\def {\c-uuml}   {\ch uuml}}
+{\def {\c-yacute} {\ch yacute}}
+{\def {\c-yen}    {\ch yen}}
+{\def {\c-yuml}   {\ch yuml}}
+
+{\def {\_tag \name \params \bools \deprs \nonstandard \=depr}
+  {{\if {\and \depr \strict-html4}
+     {\warn Using deprecated tag \name}}
+   {\html <\name}
+   \/ {\let {{\x {}}}
+        {\while \params
+          {\let {{\pname {\car \params}}
+                 {\pval {\car {\cdr \params}}}}
+            {\if \pval
+              {\set! \x {\cons {{}\pname{}={\html "}\pval{\html "}} \x}}}}
+          {\set! \params {\cdr {\cdr \params}}}}
+        {\while \nonstandard
+          {\let {{\pname {\car \nonstandard}}
+                 {\pval {\car {\cdr \nonstandard}}}}
+            {\if \pval
+              {{\if \strict-html4
+                 {\warn Using nonstandard attribute \pname in \name}}
+               {\set! \x {\cons {{}\pname{}={\html "}\pval{\html "}} \x}}}}}
+          {\set! \nonstandard {\cdr {\cdr \nonstandard}}}}
+        {\while \bools
+          {\let {{\pname {\car \bools}}
+                 {\pval {\car {\cdr \bools}}}}
+            {\if \pval
+              {\set! \x {\cons \pname \x}}}}
+          {\set! \bools {\cdr {\cdr \bools}}}}
+        {\while \deprs
+          {\let {{\pname {\car \deprs}}
+                 {\pval {\car {\cdr \deprs}}}}
+            {\if \pval
+              {{\if \strict-html4
+                 {\warn Using deprecated attribute \pname in \name}}
+               {\set! \x {\cons {{}\pname{}={\html "}\pval{\html "}} \x}}}}}
+          {\set! \deprs {\cdr {\cdr \deprs}}}}
+        \x}
+   \/{\html >}}}
+
+{\def {\_bal-tag \name \params \bools \deprs \nonstandard \=depr \&rest}
+  {{\_tag \depr=\depr \name \params \bools \deprs \nonstandard}
+   \/\rest
+   \/{\html </\name>}}}
+
+{\def {\a \=nonstandard
+       \=accesskey \=charset \=class \=coords \=dir \=href \=hreflang \=id
+       \=lang \=name \=onblur \=onclick \=ondblclick \=onfocus \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=rel \=rev \=shape \=style \=tabindex
+       \=target \=title \=type \&rest}
+      {\_bal-tag a
+		 {accesskey \accesskey charset \charset class \class coords
+		  \coords dir \dir href \href hreflang \hreflang id \id lang
+		  \lang name \name onblur \onblur onclick \onclick ondblclick
+		  \ondblclick onfocus \onfocus onkeydown \onkeydown
+		  onkeypress \onkeypress onkeyup \onkeyup onmousedown
+		  \onmousedown onmousemove \onmousemove onmouseout
+		  \onmouseout onmouseover \onmouseover onmouseup \onmouseup
+		  rel \rel rev \rev shape \shape style \style tabindex
+		  \tabindex target \target title \title type \type}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\abbr \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag abbr
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\acronym \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag acronym
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\address \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag address
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\b \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag b
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\bdo \=nonstandard
+       \=class \=dir \=id \=lang \=style \=title \&rest}
+      {\_bal-tag bdo
+		 {class \class dir \dir id \id lang \lang style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\big \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag big
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\blockquote \=nonstandard
+       \=cite \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag blockquote
+		 {cite \cite class \class dir \dir id \id lang \lang onclick
+		  \onclick ondblclick \ondblclick onkeydown \onkeydown
+		  onkeypress \onkeypress onkeyup \onkeyup onmousedown
+		  \onmousedown onmousemove \onmousemove onmouseout
+		  \onmouseout onmouseover \onmouseover onmouseup \onmouseup
+		  style \style title \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\body \=nonstandard
+       \=alink \=background \=bgcolor \=class \=dir \=id \=lang \=link
+       \=onclick \=ondblclick \=onkeydown \=onkeypress \=onkeyup \=onload
+       \=onmousedown \=onmousemove \=onmouseout \=onmouseover \=onmouseup
+       \=onunload \=style \=text \=title \=vlink \&rest}
+      {\_bal-tag body
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onload \onload onmousedown
+		  \onmousedown onmousemove \onmousemove onmouseout
+		  \onmouseout onmouseover \onmouseover onmouseup \onmouseup
+		  onunload \onunload style \style title \title}
+		 {}
+		 {alink \alink background \background bgcolor \bgcolor link
+		  \link text \text vlink \vlink}
+                 \nonstandard
+                 {\if \rest {\html <p>}}\rest}}
+{\def {\button \=nonstandard
+       \=accesskey \=class \=dir \=disabled \=id \=lang \=name \=onblur
+       \=onclick \=ondblclick \=onfocus \=onkeydown \=onkeypress \=onkeyup
+       \=onmousedown \=onmousemove \=onmouseout \=onmouseover \=onmouseup
+       \=style \=tabindex \=title \=type \=value \&rest}
+      {\_bal-tag button
+		 {accesskey \accesskey class \class dir \dir id \id lang
+		  \lang name \name onblur \onblur onclick \onclick ondblclick
+		  \ondblclick onfocus \onfocus onkeydown \onkeydown
+		  onkeypress \onkeypress onkeyup \onkeyup onmousedown
+		  \onmousedown onmousemove \onmousemove onmouseout
+		  \onmouseout onmouseover \onmouseover onmouseup \onmouseup
+		  style \style tabindex \tabindex title \title type \type
+		  value \value}
+		 {disabled \disabled}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\caption \=nonstandard
+       \=align \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag caption
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {align \align}
+                 \nonstandard
+                 \rest}}
+{\def {\cite \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag cite
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\code \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag code
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\colgroup \=nonstandard
+       \=align \=char \=charoff \=class \=dir \=id \=lang \=onclick
+       \=ondblclick \=onkeydown \=onkeypress \=onkeyup \=onmousedown
+       \=onmousemove \=onmouseout \=onmouseover \=onmouseup \=span \=style
+       \=title \=valign \=width \&rest}
+      {\_bal-tag colgroup
+		 {align \align char \char charoff \charoff class \class dir
+		  \dir id \id lang \lang onclick \onclick ondblclick
+		  \ondblclick onkeydown \onkeydown onkeypress \onkeypress
+		  onkeyup \onkeyup onmousedown \onmousedown onmousemove
+		  \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup span \span style \style
+		  title \title valign \valign width \width}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\dd \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag dd
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\del \=nonstandard
+       \=cite \=class \=datetime \=dir \=id \=lang \=onclick \=ondblclick
+       \=onkeydown \=onkeypress \=onkeyup \=onmousedown \=onmousemove
+       \=onmouseout \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag del
+		 {cite \cite class \class datetime \datetime dir \dir id \id
+		  lang \lang onclick \onclick ondblclick \ondblclick
+		  onkeydown \onkeydown onkeypress \onkeypress onkeyup
+		  \onkeyup onmousedown \onmousedown onmousemove \onmousemove
+		  onmouseout \onmouseout onmouseover \onmouseover onmouseup
+		  \onmouseup style \style title \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\dfn \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag dfn
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\div \=nonstandard
+       \=align \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag div
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {align \align}
+                 \nonstandard
+                 \rest}}
+{\def {\dl \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag dl
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\dt \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag dt
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\em \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag em
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\fieldset \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag fieldset
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\form \=nonstandard
+       \=accept-charset \=action \=class \=dir \=enctype \=id \=lang \=method
+       \=onclick \=ondblclick \=onkeydown \=onkeypress \=onkeyup
+       \=onmousedown \=onmousemove \=onmouseout \=onmouseover \=onmouseup
+       \=onreset \=onsubmit \=style \=target \=title \&rest}
+      {\_bal-tag form
+		 {accept-charset \accept-charset action \action class \class
+		  dir \dir enctype \enctype id \id lang \lang method \method
+		  onclick \onclick ondblclick \ondblclick onkeydown
+		  \onkeydown onkeypress \onkeypress onkeyup \onkeyup
+		  onmousedown \onmousedown onmousemove \onmousemove
+		  onmouseout \onmouseout onmouseover \onmouseover onmouseup
+		  \onmouseup onreset \onreset onsubmit \onsubmit style \style
+		  target \target title \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\frameset \=nonstandard
+       \=class \=cols \=id \=onload \=onunload \=rows \=style \=title \&rest}
+      {\_bal-tag frameset
+		 {class \class cols \cols id \id onload \onload onunload
+		  \onunload rows \rows style \style title \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\h1 \=nonstandard
+       \=align \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag h1
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {align \align}
+                 \nonstandard
+                 \rest}}
+{\def {\h2 \=nonstandard
+       \=align \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag h2
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {align \align}
+                 \nonstandard
+                 \rest}}
+{\def {\h3 \=nonstandard
+       \=align \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag h3
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {align \align}
+                 \nonstandard
+                 \rest}}
+{\def {\h4 \=nonstandard
+       \=align \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag h4
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {align \align}
+                 \nonstandard
+                 \rest}}
+{\def {\h5 \=nonstandard
+       \=align \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag h5
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {align \align}
+                 \nonstandard
+                 \rest}}
+{\def {\h6 \=nonstandard
+       \=align \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag h6
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {align \align}
+                 \nonstandard
+                 \rest}}
+{\def {\head \=nonstandard
+       \=dir \=lang \=profile \&rest}
+      {\_bal-tag head
+		 {dir \dir lang \lang profile \profile}
+		 {}
+		 {}
+                 \nonstandard
+                 {{\meta
+                   \name=generator
+                   \content={Latte \__latte-version__}}
+                  \/\rest}}}
+{\def {\i \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag i
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\iframe \=nonstandard
+       \=align \=class \=frameborder \=height \=id \=longdesc \=marginheight
+       \=marginwidth \=name \=scrolling \=src \=style \=target \=title
+       \=width \&rest}
+      {\_bal-tag iframe
+		 {align \align class \class frameborder \frameborder height
+		  \height id \id longdesc \longdesc marginheight
+		  \marginheight marginwidth \marginwidth name \name scrolling
+		  \scrolling src \src style \style target \target title
+		  \title width \width}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\ins \=nonstandard
+       \=cite \=class \=datetime \=dir \=id \=lang \=onclick \=ondblclick
+       \=onkeydown \=onkeypress \=onkeyup \=onmousedown \=onmousemove
+       \=onmouseout \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag ins
+		 {cite \cite class \class datetime \datetime dir \dir id \id
+		  lang \lang onclick \onclick ondblclick \ondblclick
+		  onkeydown \onkeydown onkeypress \onkeypress onkeyup
+		  \onkeyup onmousedown \onmousedown onmousemove \onmousemove
+		  onmouseout \onmouseout onmouseover \onmouseover onmouseup
+		  \onmouseup style \style title \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\kbd \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag kbd
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\label \=nonstandard
+       \=accesskey \=class \=dir \=for \=id \=lang \=onblur \=onclick
+       \=ondblclick \=onfocus \=onkeydown \=onkeypress \=onkeyup
+       \=onmousedown \=onmousemove \=onmouseout \=onmouseover \=onmouseup
+       \=style \=title \&rest}
+      {\_bal-tag label
+		 {accesskey \accesskey class \class dir \dir for \for id \id
+		  lang \lang onblur \onblur onclick \onclick ondblclick
+		  \ondblclick onfocus \onfocus onkeydown \onkeydown
+		  onkeypress \onkeypress onkeyup \onkeyup onmousedown
+		  \onmousedown onmousemove \onmousemove onmouseout
+		  \onmouseout onmouseover \onmouseover onmouseup \onmouseup
+		  style \style title \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\legend \=nonstandard
+       \=accesskey \=align \=class \=dir \=id \=lang \=onclick \=ondblclick
+       \=onkeydown \=onkeypress \=onkeyup \=onmousedown \=onmousemove
+       \=onmouseout \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag legend
+		 {accesskey \accesskey class \class dir \dir id \id lang
+		  \lang onclick \onclick ondblclick \ondblclick onkeydown
+		  \onkeydown onkeypress \onkeypress onkeyup \onkeyup
+		  onmousedown \onmousedown onmousemove \onmousemove
+		  onmouseout \onmouseout onmouseover \onmouseover onmouseup
+		  \onmouseup style \style title \title}
+		 {}
+		 {align \align}
+                 \nonstandard
+                 \rest}}
+{\def {\li \=nonstandard
+       \=class \=compact \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \=type \=value \&rest}
+      {\_bal-tag li
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {compact \compact type \type value \value}
+                 \nonstandard
+                 \rest}}
+{\def {\map \=nonstandard
+       \=class \=dir \=id \=lang \=name \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag map
+		 {class \class dir \dir id \id lang \lang name \name onclick
+		  \onclick ondblclick \ondblclick onkeydown \onkeydown
+		  onkeypress \onkeypress onkeyup \onkeyup onmousedown
+		  \onmousedown onmousemove \onmousemove onmouseout
+		  \onmouseout onmouseover \onmouseover onmouseup \onmouseup
+		  style \style title \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\noframes \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag noframes
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\noscript \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag noscript
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\object \=nonstandard
+       \=align \=archive \=border \=class \=classid \=codebase \=codetype
+       \=data \=declare \=dir \=height \=hspace \=id \=lang \=name \=onclick
+       \=ondblclick \=onkeydown \=onkeypress \=onkeyup \=onmousedown
+       \=onmousemove \=onmouseout \=onmouseover \=onmouseup \=standby \=style
+       \=tabindex \=title \=type \=usemap \=vspace \=width \&rest}
+      {\_bal-tag object
+		 {archive \archive class \class classid \classid codebase
+		  \codebase codetype \codetype data \data
+		  dir \dir id \id lang \lang name \name onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup standby \standby style
+		  \style tabindex \tabindex title \title type \type usemap
+		  \usemap}
+		 {declare \declare}
+		 {align \align border \border height \height hspace \hspace
+		  vspace \vspace width \width}
+                 \nonstandard
+                 \rest}}
+{\def {\ol \=nonstandard
+       \=class \=compact \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=start \=style \=title \=type \&rest}
+      {\_bal-tag ol
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {compact \compact start \start type \type}
+                 \nonstandard
+                 \rest}}
+{\def {\optgroup \=nonstandard
+       \=class \=dir \=disabled \=id \=label \=lang \=onclick \=ondblclick
+       \=onkeydown \=onkeypress \=onkeyup \=onmousedown \=onmousemove
+       \=onmouseout \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag optgroup
+		 {class \class dir \dir id \id label \label lang \lang
+		  onclick \onclick ondblclick \ondblclick onkeydown
+		  \onkeydown onkeypress \onkeypress onkeyup \onkeyup
+		  onmousedown \onmousedown onmousemove \onmousemove
+		  onmouseout \onmouseout onmouseover \onmouseover onmouseup
+		  \onmouseup style \style title \title}
+		 {disabled \disabled}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\option \=nonstandard
+       \=class \=dir \=disabled \=id \=label \=lang \=onclick \=ondblclick
+       \=onkeydown \=onkeypress \=onkeyup \=onmousedown \=onmousemove
+       \=onmouseout \=onmouseover \=onmouseup \=selected \=style \=title
+       \=value \&rest}
+      {\_bal-tag option
+		 {class \class dir \dir id \id label \label lang \lang
+		  onclick \onclick ondblclick \ondblclick onkeydown
+		  \onkeydown onkeypress \onkeypress onkeyup \onkeyup
+		  onmousedown \onmousedown onmousemove \onmousemove
+		  onmouseout \onmouseout onmouseover \onmouseover onmouseup
+		  \onmouseup style \style title \title value \value}
+		 {disabled \disabled selected \selected}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\pre \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \=width \&rest}
+      {\_bal-tag pre
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {width \width}
+                 \nonstandard
+                 {\_pre \rest}}}        \; \_pre suppresses auto <p> emission
+{\def {\q \=nonstandard
+       \=cite \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag q
+		 {cite \cite class \class dir \dir id \id lang \lang onclick
+		  \onclick ondblclick \ondblclick onkeydown \onkeydown
+		  onkeypress \onkeypress onkeyup \onkeyup onmousedown
+		  \onmousedown onmousemove \onmousemove onmouseout
+		  \onmouseout onmouseover \onmouseover onmouseup \onmouseup
+		  style \style title \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\samp \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag samp
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\script \=nonstandard
+       \=charset \=defer \=language \=src \=type \&rest}
+      {\_bal-tag script
+		 {charset \charset src \src type \type}
+		 {defer \defer}
+		 {language \language}
+                 \nonstandard
+                 \rest}}
+{\def {\select \=nonstandard
+       \=class \=dir \=disabled \=id \=lang \=multiple \=name \=onblur
+       \=onchange \=onclick \=ondblclick \=onfocus \=onkeydown \=onkeypress
+       \=onkeyup \=onmousedown \=onmousemove \=onmouseout \=onmouseover
+       \=onmouseup \=size \=style \=tabindex \=title \&rest}
+      {\_bal-tag select
+		 {class \class dir \dir id \id lang \lang name \name onblur
+		  \onblur onchange \onchange onclick \onclick ondblclick
+		  \ondblclick onfocus \onfocus onkeydown \onkeydown
+		  onkeypress \onkeypress onkeyup \onkeyup onmousedown
+		  \onmousedown onmousemove \onmousemove onmouseout
+		  \onmouseout onmouseover \onmouseover onmouseup \onmouseup
+		  size \size style \style tabindex \tabindex title \title}
+		 {disabled \disabled multiple \multiple}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\small \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag small
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\span \=nonstandard
+       \=align \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag span
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {align \align}
+                 \nonstandard
+                 \rest}}
+{\def {\strong \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag strong
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\style \=nonstandard
+       \=dir \=lang \=media \=title \=type \&rest}
+      {\_bal-tag style
+		 {dir \dir lang \lang media \media title \title type \type}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\sub \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag sub
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\sup \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag sup
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\table \=nonstandard
+       \=align \=bgcolor \=border \=cellpadding \=cellspacing \=class \=dir
+       \=frame \=id \=lang \=onclick \=ondblclick \=onkeydown \=onkeypress
+       \=onkeyup \=onmousedown \=onmousemove \=onmouseout \=onmouseover
+       \=onmouseup \=rules \=style \=summary \=title \=width \&rest}
+      {\_bal-tag table
+		 {border \border cellpadding \cellpadding cellspacing
+		  \cellspacing class \class dir \dir frame \frame id \id lang
+		  \lang onclick \onclick ondblclick \ondblclick onkeydown
+		  \onkeydown onkeypress \onkeypress onkeyup \onkeyup
+		  onmousedown \onmousedown onmousemove \onmousemove
+		  onmouseout \onmouseout onmouseover \onmouseover onmouseup
+		  \onmouseup rules \rules style \style summary \summary title
+		  \title width \width}
+		 {}
+		 {align \align bgcolor \bgcolor}
+                 \nonstandard
+                 \rest}}
+{\def {\tbody \=nonstandard
+       \=align \=char \=charoff \=class \=dir \=id \=lang \=onclick
+       \=ondblclick \=onkeydown \=onkeypress \=onkeyup \=onmousedown
+       \=onmousemove \=onmouseout \=onmouseover \=onmouseup \=style \=title
+       \=valign \&rest}
+      {\_bal-tag tbody
+		 {align \align char \char charoff \charoff class \class dir
+		  \dir id \id lang \lang onclick \onclick ondblclick
+		  \ondblclick onkeydown \onkeydown onkeypress \onkeypress
+		  onkeyup \onkeyup onmousedown \onmousedown onmousemove
+		  \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title \title
+		  valign \valign}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+
+\; xxx oops: nowrap is both boolean and deprecated
+{\def {\td \=nonstandard
+       \=abbr \=align \=axis \=bgcolor \=char \=charoff \=class
+       \=colspan \=dir \=headers \=height \=id \=lang \=nowrap
+       \=onclick \=ondblclick \=onkeydown \=onkeypress \=onkeyup
+       \=onmousedown \=onmousemove \=onmouseout \=onmouseover
+       \=onmouseup \=rowspan \=scope \=style \=title \=valign \=width
+       \&rest}
+      {\_bal-tag td
+		 {abbr \abbr align \align axis \axis char \char charoff
+		  \charoff class \class colspan \colspan dir \dir headers
+		  \headers id \id lang \lang onclick \onclick ondblclick
+		  \ondblclick onkeydown \onkeydown onkeypress \onkeypress
+		  onkeyup \onkeyup onmousedown \onmousedown onmousemove
+		  \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup rowspan \rowspan scope
+		  \scope style \style title \title valign \valign}
+		 {}
+		 {bgcolor \bgcolor height \height nowrap \nowrap width
+		  \width}
+                 \nonstandard
+                 \rest}}
+
+{\def {\textarea \=nonstandard
+       \=accesskey \=class \=cols \=dir \=disabled \=id \=lang \=name
+       \=onblur \=onchange \=onclick \=ondblclick \=onfocus \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=onselect \=readonly \=rows \=style
+       \=tabindex \=title \&rest}
+      {\_bal-tag textarea
+		 {accesskey \accesskey class \class cols \cols dir \dir id
+		  \id lang \lang name \name onblur \onblur onchange \onchange
+		  onclick \onclick ondblclick \ondblclick onfocus \onfocus
+		  onkeydown \onkeydown onkeypress \onkeypress onkeyup
+		  \onkeyup onmousedown \onmousedown onmousemove \onmousemove
+		  onmouseout \onmouseout onmouseover \onmouseover onmouseup
+		  \onmouseup onselect \onselect rows \rows style \style
+		  tabindex \tabindex title \title}
+		 {disabled \disabled readonly \readonly}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\tfoot \=nonstandard
+       \=align \=char \=charoff \=class \=dir \=id \=lang \=onclick
+       \=ondblclick \=onkeydown \=onkeypress \=onkeyup \=onmousedown
+       \=onmousemove \=onmouseout \=onmouseover \=onmouseup \=style \=title
+       \=valign \&rest}
+      {\_bal-tag tfoot
+		 {align \align char \char charoff \charoff class \class dir
+		  \dir id \id lang \lang onclick \onclick ondblclick
+		  \ondblclick onkeydown \onkeydown onkeypress \onkeypress
+		  onkeyup \onkeyup onmousedown \onmousedown onmousemove
+		  \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title \title
+		  valign \valign}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+
+\; xxx oops: nowrap is both boolean and deprecated
+{\def {\th \=nonstandard
+       \=abbr \=align \=axis \=bgcolor \=char \=charoff \=class
+       \=colspan \=dir \=headers \=height \=id \=lang \=nowrap
+       \=onclick \=ondblclick \=onkeydown \=onkeypress \=onkeyup
+       \=onmousedown \=onmousemove \=onmouseout \=onmouseover
+       \=onmouseup \=rowspan \=scope \=style \=title \=valign \=width
+       \&rest}
+      {\_bal-tag th
+		 {abbr \abbr align \align axis \axis char \char charoff
+		  \charoff class \class colspan \colspan dir \dir headers
+		  \headers id \id lang \lang onclick \onclick ondblclick
+		  \ondblclick onkeydown \onkeydown onkeypress \onkeypress
+		  onkeyup \onkeyup onmousedown \onmousedown onmousemove
+		  \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup rowspan \rowspan scope
+		  \scope style \style title \title valign \valign}
+		 {}
+		 {bgcolor \bgcolor height \height nowrap \nowrap width
+		  \width}
+                 \nonstandard
+                 \rest}}
+
+{\def {\thead \=nonstandard
+       \=align \=char \=charoff \=class \=dir \=id \=lang \=onclick
+       \=ondblclick \=onkeydown \=onkeypress \=onkeyup \=onmousedown
+       \=onmousemove \=onmouseout \=onmouseover \=onmouseup \=style \=title
+       \=valign \&rest}
+      {\_bal-tag thead
+		 {align \align char \char charoff \charoff class \class dir
+		  \dir id \id lang \lang onclick \onclick ondblclick
+		  \ondblclick onkeydown \onkeydown onkeypress \onkeypress
+		  onkeyup \onkeyup onmousedown \onmousedown onmousemove
+		  \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title \title
+		  valign \valign}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\title \=nonstandard
+       \=dir \=lang \&rest}
+      {\_bal-tag title
+		 {dir \dir lang \lang}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\tr \=nonstandard
+       \=align \=bgcolor \=char \=charoff \=class \=dir \=id \=lang \=onclick
+       \=ondblclick \=onkeydown \=onkeypress \=onkeyup \=onmousedown
+       \=onmousemove \=onmouseout \=onmouseover \=onmouseup \=style \=title
+       \=valign \&rest}
+      {\_bal-tag tr
+		 {align \align char \char charoff \charoff class \class dir
+		  \dir id \id lang \lang onclick \onclick ondblclick
+		  \ondblclick onkeydown \onkeydown onkeypress \onkeypress
+		  onkeyup \onkeyup onmousedown \onmousedown onmousemove
+		  \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title \title
+		  valign \valign}
+		 {}
+		 {bgcolor \bgcolor}
+                 \nonstandard
+                 \rest}}
+{\def {\tt \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag tt
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\ul \=nonstandard
+       \=class \=compact \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \=type \&rest}
+      {\_bal-tag ul
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {compact \compact type \type}
+                 \nonstandard
+                 \rest}}
+{\def {\var \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag var
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\applet \=nonstandard
+       \=align \=alt \=archive \=class \=code \=codebase \=height \=hspace
+       \=id \=name \=object \=style \=title \=vspace \=width \&rest}
+      {\_bal-tag applet \depr=1
+		 {align \align alt \alt archive \archive class \class code
+		  \code codebase \codebase height \height hspace \hspace id
+		  \id name \name object \object style \style title \title
+		  vspace \vspace width \width}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\center \=nonstandard
+       \&rest}
+      {\_bal-tag center \depr=1
+		 {}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\dir \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag dir \depr=1
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\font \=nonstandard
+       \=class \=color \=dir \=face \=id \=lang \=size \=style \=title
+       \&rest}
+      {\_bal-tag font \depr=1
+		 {class \class color \color dir \dir face \face id \id lang
+		  \lang size \size style \style title \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\menu \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag menu \depr=1
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\s \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag s \depr=1
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\strike \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag strike \depr=1
+		 {class \class dir \dir id \id lang \lang onclick \onclick
+		  ondblclick \ondblclick onkeydown \onkeydown onkeypress
+		  \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+		  onmousemove \onmousemove onmouseout \onmouseout onmouseover
+		  \onmouseover onmouseup \onmouseup style \style title
+		  \title}
+		 {}
+		 {}
+                 \nonstandard
+                 \rest}}
+{\def {\u \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+      {\_bal-tag u \depr=1
+                 {class \class dir \dir id \id lang \lang onclick \onclick
+	          ondblclick \ondblclick onkeydown \onkeydown onkeypress
+	          \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+	          onmousemove \onmousemove onmouseout \onmouseout onmouseover
+	          \onmouseover onmouseup \onmouseup style \style title \title}
+                  {}
+	          {}
+                  \nonstandard
+                  \rest}}
+{\def {\p \=nonstandard
+       \=align \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title}
+      {\_tag p
+	     {class \class dir \dir id \id lang \lang onclick \onclick
+	      ondblclick \ondblclick onkeydown \onkeydown onkeypress
+	      \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+	      onmousemove \onmousemove onmouseout \onmouseout onmouseover
+	      \onmouseover onmouseup \onmouseup style \style title \title}
+	     {}
+	     {align \align}
+             \nonstandard}}
+{\def {\area \=nonstandard
+       \=accesskey \=alt \=class \=coords \=dir \=href \=id \=lang \=name
+       \=nohref \=onblur \=onclick \=ondblclick \=onfocus \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=shape \=style \=tabindex \=target \=title
+       \=usemap}
+      {\_tag area
+	     {accesskey \accesskey alt \alt class \class coords \coords dir
+	      \dir href \href id \id lang \lang name \name
+	      onblur \onblur onclick \onclick ondblclick \ondblclick onfocus
+	      \onfocus onkeydown \onkeydown onkeypress \onkeypress onkeyup
+	      \onkeyup onmousedown \onmousedown onmousemove \onmousemove
+	      onmouseout \onmouseout onmouseover \onmouseover onmouseup
+	      \onmouseup shape \shape style \style tabindex \tabindex target
+	      \target title \title usemap \usemap}
+	     {nohref \nohref}
+	     {}
+             \nonstandard}}
+{\def {\base \=nonstandard
+       \=href \=target}
+      {\_tag base
+	     {href \href target \target}
+	     {}
+	     {}
+             \nonstandard}}
+{\def {\br \=nonstandard
+       \=class \=clear \=id \=style \=title}
+      {\_tag br
+	     {class \class id \id style \style title \title}
+	     {}
+	     {clear \clear}
+             \nonstandard}}
+{\def {\col \=nonstandard
+       \=align \=char \=charoff \=class \=dir \=id \=lang \=onclick
+       \=ondblclick \=onkeydown \=onkeypress \=onkeyup \=onmousedown
+       \=onmousemove \=onmouseout \=onmouseover \=onmouseup \=span \=style
+       \=title \=valign \=width}
+      {\_tag col
+	     {align \align char \char charoff \charoff class \class dir \dir
+	      id \id lang \lang onclick \onclick ondblclick \ondblclick
+	      onkeydown \onkeydown onkeypress \onkeypress onkeyup \onkeyup
+	      onmousedown \onmousedown onmousemove \onmousemove onmouseout
+	      \onmouseout onmouseover \onmouseover onmouseup \onmouseup span
+	      \span style \style title \title valign \valign width \width}
+	     {}
+	     {}
+             \nonstandard}}
+{\def {\frame \=nonstandard
+       \=class \=frameborder \=id \=longdesc \=marginheight \=marginwidth
+       \=name \=noresize \=scrolling \=src \=style \=target \=title}
+      {\_tag frame
+	     {class \class frameborder \frameborder id \id longdesc \longdesc
+	      marginheight \marginheight marginwidth \marginwidth name \name
+	      scrolling \scrolling src \src style \style
+	      target \target title \title}
+	     {noresize \noresize}
+	     {}
+             \nonstandard}}
+
+\; xxx oops: noshade is both boolean and deprecated
+{\def {\hr \=nonstandard
+       \=align \=class \=id \=noshade \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=size \=style \=title \=width}
+      {\_tag hr
+	     {class \class id \id onclick \onclick ondblclick \ondblclick
+	      onkeydown \onkeydown onkeypress \onkeypress onkeyup \onkeyup
+	      onmousedown \onmousedown onmousemove \onmousemove onmouseout
+	      \onmouseout onmouseover \onmouseover onmouseup \onmouseup style
+	      \style title \title}
+	     {}
+	     {align \align noshade \noshade size \size width \width}
+             \nonstandard}}
+
+{\def {\img \=nonstandard
+       \=align \=alt \=border \=class \=dir \=height \=hspace \=id \=ismap
+       \=lang \=longdesc \=onclick \=ondblclick \=onkeydown \=onkeypress
+       \=onkeyup \=onmousedown \=onmousemove \=onmouseout \=onmouseover
+       \=onmouseup \=src \=style \=title \=usemap \=vspace \=width}
+      {\_tag img
+	     {align \align alt \alt class \class dir \dir height
+	      \height hspace \hspace id \id lang \lang
+	      longdesc \longdesc onclick \onclick ondblclick
+	      \ondblclick onkeydown \onkeydown onkeypress \onkeypress
+	      onkeyup \onkeyup onmousedown \onmousedown onmousemove
+	      \onmousemove onmouseout \onmouseout onmouseover
+	      \onmouseover onmouseup \onmouseup src \src style \style
+	      title \title usemap \usemap vspace \vspace width \width}
+	     {ismap \ismap}
+	     {border \border}
+             \nonstandard}}
+{\def {\input \=nonstandard
+       \=accept \=accesskey \=alt \=checked \=class \=dir \=disabled \=id
+       \=lang \=maxlength \=name \=onblur \=onchange \=onclick \=ondblclick
+       \=onfocus \=onkeydown \=onkeypress \=onkeyup \=onmousedown
+       \=onmousemove \=onmouseout \=onmouseover \=onmouseup \=onselect
+       \=readonly \=size \=src \=style \=tabindex \=title \=type \=usemap
+       \=value}
+      {\_tag input
+	     {accept \accept accesskey \accesskey alt \alt class \class dir
+	      \dir id \id lang \lang maxlength \maxlength name \name onblur
+	      \onblur onchange \onchange onclick \onclick ondblclick
+	      \ondblclick onfocus \onfocus onkeydown \onkeydown onkeypress
+	      \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+	      onmousemove \onmousemove onmouseout \onmouseout onmouseover
+	      \onmouseover onmouseup \onmouseup onselect \onselect size \size
+	      src \src style \style tabindex \tabindex title \title type
+	      \type usemap \usemap value \value}
+	     {checked \checked disabled \disabled readonly \readonly}
+	     {}
+             \nonstandard}}
+{\def {\link \=nonstandard
+       \=charset \=class \=dir \=href \=hreflang \=id \=lang \=media
+       \=onclick \=ondblclick \=onkeydown \=onkeypress \=onkeyup
+       \=onmousedown \=onmousemove \=onmouseout \=onmouseover \=onmouseup
+       \=rel \=rev \=style \=target \=title \=type}
+      {\_tag link
+	     {charset \charset class \class dir \dir href \href hreflang
+	      \hreflang id \id lang \lang media \media onclick \onclick
+	      ondblclick \ondblclick onkeydown \onkeydown onkeypress
+	      \onkeypress onkeyup \onkeyup onmousedown \onmousedown
+	      onmousemove \onmousemove onmouseout \onmouseout onmouseover
+	      \onmouseover onmouseup \onmouseup rel \rel rev \rev style
+	      \style target \target title \title type \type}
+	     {}
+	     {}
+             \nonstandard}}
+{\def {\meta \=nonstandard
+       \=content \=dir \=http-equiv \=lang \=name \=scheme}
+      {\_tag meta
+	     {content \content dir \dir http-equiv \http-equiv lang \lang
+	      name \name scheme \scheme}
+	     {}
+	     {}
+             \nonstandard}}
+{\def {\param \=nonstandard
+       \=id \=name \=type \=value \=valuetype}
+      {\_tag param
+	     {id \id name \name type \type value \value valuetype \valuetype}
+	     {}
+	     {}
+             \nonstandard}}
+{\def {\basefont \=nonstandard
+       \=class \=color \=dir \=face \=id \=lang \=size \=style \=title}
+      {\_tag basefont \depr=1
+	     {class \class color \color dir \dir face \face id \id lang \lang
+	      size \size style \style title \title}
+	     {}
+	     {}
+             \nonstandard}}
+{\def {\isindex \=nonstandard
+       \=class \=dir \=id \=lang \=prompt \=style \=title}
+      {\_tag isindex \depr=1
+	     {class \class dir \dir id \id lang \lang prompt \prompt style
+	      \style title \title}
+	     {}
+	     {}
+             \nonstandard}}

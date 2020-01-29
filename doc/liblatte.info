@@ -1,0 +1,504 @@
+This is liblatte.info, produced by Makeinfo version 3.12f from
+liblatte.texi.
+
+INFO-DIR-SECTION Latte - the Language for Transforming Text
+START-INFO-DIR-ENTRY
+* liblatte: (liblatte).                        Programming with Latte.
+END-INFO-DIR-ENTRY
+
+   This is the programmer guide for Latte, the Language for Transforming
+Text.
+
+   Copyright (C) 1998 Zanshin Inc.
+
+   The contents of this file are subject to the Zanshin Public License
+Version 1.0 (the "License"); you may not use this file except in
+compliance with the License.  You should have received a copy of the
+License with Latte; see the file COPYING.  You may also obtain a copy of
+the License at <http://www.zanshin.com/ZPL.html>.
+
+   Documents distributed under the License are distributed on an "AS IS"
+basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the
+License for the specific language governing rights and limitations under
+the License.
+
+   The Original Code is Latte.
+
+   The Initial Developer of the Original Code is Zanshin, Inc.
+
+   This product includes software developed by the University of
+California, Berkeley and its contributors.
+
+
+File: liblatte.info,  Node: Top,  Next: Introduction,  Prev: (dir),  Up: (dir)
+
+   This is the programmer guide for Latte, the Language for Transforming
+Text.
+
+* Menu:
+
+* Introduction::
+* Latte processing overview::
+* Latte_Reader::
+* Latte_Obj::
+* Latte_Visitor::
+* Whitespace and file locations::
+* Shared strings::
+* Miscellaneous details::
+* Writing new Latte applications::
+* Index::
+
+
+File: liblatte.info,  Node: Introduction,  Next: Latte processing overview,  Prev: Top,  Up: Top
+
+Introduction
+************
+
+   This document describes the programming interface to the Latte
+library.  Latte is the Language for Transforming Text.  With the Latte
+library it is possible to write programs that process Latte-formatted
+documents, e.g. to translate them into other formats.  One such
+translator program, `latte-html', converts Latte files into HTML files.
+It comes with Latte, and its implementation will serve as an
+instructional tool throughout this manual.
+
+   Regrettably, this document is not yet complete.  Until it is,
+programmers interested in using the Latte library should contact
+<latte-dev@zanshin.com> for information and assistance.
+
+
+File: liblatte.info,  Node: Latte processing overview,  Next: Latte_Reader,  Prev: Introduction,  Up: Top
+
+Latte processing overview
+*************************
+
+   To process a file of Latte input, the caller creates a "reader" and
+a "visitor".  The reader is responsible for parsing the input into a
+variety of data structures and evaluating those structures.  The visitor
+is responsible for performing the desired processing on the results.
+
+   Each top-level expression recognized by the reader is immediately
+evaluated and then "visited" by the visitor.  (The action of the
+visitor in `latte-html' is to evaluate the expression, adjust the
+resulting text according to certain HTML rules, and then output it.)
+
+
+File: liblatte.info,  Node: Latte_Reader,  Next: Latte_Obj,  Prev: Latte processing overview,  Up: Top
+
+Latte_Reader
+************
+
+ - Constructor:  Latte_Reader (istream &STREAM, const shstring
+          &FILENAME)
+ - Constructor:  Latte_Reader (istream &STREAM, const shstring
+          &FILENAME, Latte_Activation &ACTIVATION)
+     Constructs a new `Latte_Reader'.  Input is from STREAM.  The name
+     of the stream is FILENAME (used in error messages and to set the
+     Latte variable `\__FILE__').  The optional argument ACTIVATION
+     contains variable bindings; if omitted, a new global activation is
+     created and populated with some intrinsic global definitions
+     (presently only `\__latte-version__').
+
+
+ - `Latte_Reader' member fn: void install_standard_definitions ()
+     Populates the reader's activation with the standard intrinsic
+     variable definitions, primarily the definitions of Latte's
+     built-in functions.
+
+
+ - `Latte_Reader' member fn: void process (Latte_Visitor &VISITOR)
+     Consumes the input and processes it using VISITOR.
+
+
+
+File: liblatte.info,  Node: Latte_Obj,  Next: Latte_Visitor,  Prev: Latte_Reader,  Up: Top
+
+Latte_Obj
+*********
+
+   Calling `Latte_Reader::process()' creates a series of `Latte_Obj'
+trees that are then handed to a `Latte_Visitor'.  `Latte_Obj' is an
+abstract base class for a rich variety of subclasses.
+
+   `Latte_Obj' has a collection of virtual functions for testing which
+subclass an object belongs to.
+
+ - `Latte_Obj' virtual member fn: Latte_Assignment * as_assignment ()
+ - : const Latte_Assignment * as_assignment () const
+     If `this' is a `Latte_Assignment', returns it, else returns `NULL'.
+
+
+ - `Latte_Obj' virtual member fn: Latte_Boolean * as_boolean ()
+ - : const Latte_Boolean * as_boolean () const
+     If `this' is a `Latte_Boolean', returns it, else returns `NULL'.
+
+
+ - `Latte_Obj' virtual member fn: Latte_Group * as_group ()
+ - : const Latte_Group * as_group () const
+     If `this' is a `Latte_Group', returns it, else returns `NULL'.
+
+
+ - `Latte_Obj' virtual member fn: Latte_List * as_list ()
+ - : const Latte_List * as_list () const
+     If `this' is a `Latte_List', returns it, else returns `NULL'.
+
+
+ - `Latte_Obj' virtual member fn: Latte_Nested * as_nested ()
+ - : const Latte_Nested * as_nested () const
+     If `this' is a `Latte_Nested', returns it, else returns `NULL'.
+
+
+ - `Latte_Obj' virtual member fn: Latte_Operator * as_operator ()
+ - : const Latte_Operator * as_operator () const
+     If `this' is a `Latte_Operator', returns it, else returns `NULL'.
+
+
+ - `Latte_Obj' virtual member fn: Latte_Param * as_param ()
+ - : const Latte_Param * as_param () const
+     If `this' is a `Latte_Param', returns it, else returns `NULL'.
+
+
+ - `Latte_Obj' virtual member fn: Latte_Str * as_str ()
+ - : const Latte_Str * as_str () const
+     If `this' is a `Latte_Str', returns it, else returns `NULL'.
+
+
+ - `Latte_Obj' virtual member fn: Latte_Tangible * as_tangible ()
+ - : const Latte_Tangible * as_tangible () const
+     If `this' is a `Latte_Tangible', returns it, else returns `NULL'.
+
+
+ - `Latte_Obj' virtual member fn: Latte_VarRef * as_varref ()
+ - : const Latte_VarRef * as_varref () const
+     If `this' is a `Latte_VarRef', returns it, else returns `NULL'.
+
+
+ - `Latte_Obj' virtual member fn: Latte_WsNode * as_wsnode ()
+ - : const Latte_WsNode * as_wsnode () const
+     If `this' is a `Latte_WsNode', returns it, else returns `NULL'.
+
+
+   Every Latte object has a boolean value and a numeric value.
+
+ - `Latte_Obj' virtual member fn: bool bool_val () const
+     Returns the boolean value of `this'.  By the default
+     implementation, the boolean value of every Latte object is true
+     except for an empty `Latte_List' or `Latte_Group', and except for a
+     false-valued `Latte_Boolean'.  (This does not prevent defining a
+     new subclass that overrides `bool_val()' and creates new false
+     Latte values.)
+
+
+ - `Latte_Obj' virtual member fn: Latte_Number_t numeric_val () const
+     Returns the numeric value of `this'.  By the default
+     implementation, the numeric value of every Latte object is zero
+     except for `Latte_Str' objects whose strings can be parsed as
+     numbers.  (This does not prevent defining a new subclass that
+     overrides `numeric_val()' and creates new Latte objects with
+     non-zero numeric values.)
+
+     The type `Latte_Number_t' is either `long' or `double', depending
+     on an option given when Latte is compiled.  If the preprocessor
+     symbol `ENABLE_FLOATING_POINT' (in `latte-conf.h') is defined,
+     then `Latte_Number_t' is `double', otherwise it's `long'.
+
+
+ - `Latte_Obj' member fn: Refcounter<Latte_Obj> eval (Latte_Activation
+          &ACTIVATION)
+     Evaluates `this' in the scope of ACTIVATION and returns the
+     result.  Every Latte object evaluates to some Latte object; by the
+     default implementation, most simply evaluate to themselves.
+
+     Note, `eval()' is not a virtual member function.  To define a new
+     subclass with different evaluation rules, override `do_eval()', not
+     `eval()'.
+
+
+ - `Latte_Obj' virtual member fn: bool self_evaluating () const
+     Returns true if `this' will definitely evaluate to itself when
+     `eval()' is called; returns false if `this' _may not_ evaluate to
+     itself.
+
+
+ - `Latte_Obj' virtual member fn: void visit (Latte_Visitor &VISITOR)
+     "Visit" `this' with VISITOR.  This calls `visitor.visit_FOO()'
+     where FOO is one of `assignment', `boolean', `closure', `group',
+     `list', `nested', `operator', `param', `varref', `wsnode', and
+     `str', depending on which `Latte_Obj' subclass `this' belongs to.
+
+
+* Menu:
+
+* Latte_Tangible::
+* Latte_Nested::
+* Other Latte_Obj subclasses::
+
+
+File: liblatte.info,  Node: Latte_Tangible,  Next: Latte_Nested,  Prev: Latte_Obj,  Up: Latte_Obj
+
+Latte_Tangible
+==============
+
+
+File: liblatte.info,  Node: Latte_Nested,  Next: Other Latte_Obj subclasses,  Prev: Latte_Tangible,  Up: Latte_Obj
+
+Latte_Nested
+============
+
+
+File: liblatte.info,  Node: Other Latte_Obj subclasses,  Prev: Latte_Nested,  Up: Latte_Obj
+
+Other Latte_Obj subclasses
+==========================
+
+
+File: liblatte.info,  Node: Latte_Visitor,  Next: Whitespace and file locations,  Prev: Latte_Obj,  Up: Top
+
+Latte_Visitor
+*************
+
+ - `Latte_Visitor' virtual member fn: void visit_assignment
+          (Latte_Assignment &ASSIGNMENT)
+     Called by `Latte_Obj::visit()' when the `Latte_Obj' is actually a
+     `Latte_Assignment'.  The default implementation does nothing.
+
+
+ - `Latte_Visitor' virtual member fn: void visit_boolean (Latte_Boolean
+          &BOOLEAN)
+     Called by `Latte_Obj::visit()' when the `Latte_Obj' is actually a
+     `Latte_Boolean'.  The default implementation does nothing.
+
+
+ - `Latte_Visitor' virtual member fn: void visit_closure (Latte_Closure
+          &CLOSURE)
+     Called by `Latte_Obj::visit()' when the `Latte_Obj' is actually a
+     `Latte_Closure'.  The default implementation does nothing.
+
+
+ - `Latte_Visitor' virtual member fn: void visit_group (Latte_Group
+          &GROUP)
+     Called by `Latte_Obj::visit()' when the `Latte_Obj' is actually a
+     `Latte_Group'.  The default implementation recursively calls
+     `Latte_Obj::visit()' on each member of GROUP in order.
+
+
+ - `Latte_Visitor' virtual member fn: void visit_list (Latte_List &LIST)
+     Called by `Latte_Obj::visit()' when the `Latte_Obj' is actually a
+     `Latte_List'.  The default implementation recursively calls
+     `Latte_Obj::visit()' on each member of LIST in order.
+
+
+ - `Latte_Visitor' virtual member fn: void visit_nested (Latte_Nested
+          &NESTED)
+     Called by `Latte_Obj::visit()' when the `Latte_Obj' is actually a
+     `Latte_Nested'.  The default implementation calls
+     `Latte_Obj::visit()' on the `Latte_Obj' contained within NESTED.
+
+
+ - `Latte_Visitor' virtual member fn: void visit_operator
+          (Latte_Operator &OPERATOR)
+     Called by `Latte_Obj::visit()' when the `Latte_Obj' is actually a
+     `Latte_Operator'.  The default implementation does nothing.
+
+
+ - `Latte_Visitor' virtual member fn: void visit_param (Latte_Param
+          &PARAM)
+     Called by `Latte_Obj::visit()' when the `Latte_Obj' is actually a
+     `Latte_Param'.  The default implementation does nothing.
+
+
+ - `Latte_Visitor' virtual member fn: void visit_str (Latte_Str &STR)
+     Called by `Latte_Obj::visit()' when the `Latte_Obj' is actually a
+     `Latte_Str'.  This function is "pure virtual" in `Latte_Visitor';
+     there is no default implementation, and subclasses are required to
+     override it.
+
+     In `latte-html', the `LatteHtml_HtmlVisitor' class supplies an
+     implementation of `visit_str()' that works as follows:
+
+        * It calls `Latte_Visitor::suggest_wstate()' to determine the
+          proper whitespace to emit before the string;
+
+        * It emits the suggested whitespace;
+
+        * If the whitespace included two or more newlines, and if
+          processing is not presently inside a call to `{\pre ...}', it
+          emits the HTML paragraph tag `<p>';
+
+        * If processing is presently inside a call to `{\html ...}', it
+          emits the string literally; otherwise it emits each character
+          of the string one at a time, converting `<', `>', `&', and
+          `"' to `&lt;', `&gt;', `&amp;', and `&quot;', respectively.
+
+
+
+ - `Latte_Visitor' virtual member fn: void visit_varref (Latte_VarRef
+          &VARREF)
+     Called by `Latte_Obj::visit()' when the `Latte_Obj' is actually a
+     `Latte_VarRef'.  The default implementation does nothing.
+
+
+ - `Latte_Visitor' virtual member fn: void visit_wsnode (Latte_WsNode
+          &WSNODE)
+     Called by `Latte_Obj::visit()' when the `Latte_Obj' is actually a
+     `Latte_WsNode'.  The default implementation notes the whitespace
+     contained in WSNODE for possible use in subsequent calls to
+     `suggest_wstate()'; then it calls `Latte_Obj::visit()' on the
+     nested object within WSNODE.
+
+
+
+File: liblatte.info,  Node: Whitespace and file locations,  Next: Shared strings,  Prev: Latte_Visitor,  Up: Top
+
+Whitespace and file locations
+*****************************
+
+
+File: liblatte.info,  Node: Shared strings,  Next: Miscellaneous details,  Prev: Whitespace and file locations,  Up: Top
+
+Shared strings
+**************
+
+
+File: liblatte.info,  Node: Miscellaneous details,  Next: Writing new Latte applications,  Prev: Shared strings,  Up: Top
+
+Miscellaneous details
+*********************
+
+* Menu:
+
+* Reference counting::
+* Debug log::
+* Restorer::
+
+
+File: liblatte.info,  Node: Reference counting,  Next: Debug log,  Prev: Miscellaneous details,  Up: Miscellaneous details
+
+Reference counting
+==================
+
+
+File: liblatte.info,  Node: Debug log,  Next: Restorer,  Prev: Reference counting,  Up: Miscellaneous details
+
+Debug log
+=========
+
+
+File: liblatte.info,  Node: Restorer,  Prev: Debug log,  Up: Miscellaneous details
+
+Restorer
+========
+
+   A `Restorer' is an object that holds a reference to some variable,
+and a value for that variable.  It assigns the value to the variable
+when it goes out of scope.
+
+   Its name comes from the fact that it's usually used to restore the
+value of a variable that has been temporarily changed for the duration
+of some function.  For example, here's how `Latte_Obj::eval()' keeps
+track of its recursion depth:
+
+     static unsigned int depth = 0;
+     Restorer<unsigned int> depth_restorer(depth);
+     
+     ++depth;
+     
+     ...
+     val = do_eval(activation);
+     ...
+
+At the end of the function, `depth' is restored to the value it had
+before the `++depth' statement.  This is more reliable than
+
+     ++depth;
+     
+     ...
+     val = do_eval(activation);
+     ...
+     
+     --depth;
+
+since `do_eval()' may throw an exception which could cause the
+`--depth' to be skipped.  A `Restorer', on the other hand, will restore
+the old value even when the scope ends because of an exception.
+
+ - Constructor:  Restorer<T> (T &VAR)
+     Constructs a new `Restorer' on a variable of type `T'.  The
+     current value of VAR is recorded.  When this `Restorer' is
+     destructed, that value is assigned back to VAR.
+
+
+ - Constructor:  Restorer<T> (T &VAR, const T &NOW, const T &LATER)
+     Alternative constructor that immediately assigns to VAR the value
+     NOW, and that assigns LATER to VAR when the `Restorer' is
+     destructed.
+
+
+
+File: liblatte.info,  Node: Writing new Latte applications,  Next: Index,  Prev: Miscellaneous details,  Up: Top
+
+Writing new Latte applications
+******************************
+
+
+File: liblatte.info,  Node: Index,  Prev: Writing new Latte applications,  Up: Top
+
+Index
+*****
+
+* Menu:
+
+* Latte_Reader:                          Latte_Reader.
+* Restorer<T>:                           Restorer.
+* as_assignment:                         Latte_Obj.
+* as_boolean:                            Latte_Obj.
+* as_group:                              Latte_Obj.
+* as_list:                               Latte_Obj.
+* as_nested:                             Latte_Obj.
+* as_operator:                           Latte_Obj.
+* as_param:                              Latte_Obj.
+* as_str:                                Latte_Obj.
+* as_tangible:                           Latte_Obj.
+* as_varref:                             Latte_Obj.
+* as_wsnode:                             Latte_Obj.
+* bool_val:                              Latte_Obj.
+* eval:                                  Latte_Obj.
+* install_standard_definitions:          Latte_Reader.
+* numeric_val:                           Latte_Obj.
+* process:                               Latte_Reader.
+* self_evaluating:                       Latte_Obj.
+* visit:                                 Latte_Obj.
+* visit_assignment:                      Latte_Visitor.
+* visit_boolean:                         Latte_Visitor.
+* visit_closure:                         Latte_Visitor.
+* visit_group:                           Latte_Visitor.
+* visit_list:                            Latte_Visitor.
+* visit_nested:                          Latte_Visitor.
+* visit_operator:                        Latte_Visitor.
+* visit_param:                           Latte_Visitor.
+* visit_str:                             Latte_Visitor.
+* visit_varref:                          Latte_Visitor.
+* visit_wsnode:                          Latte_Visitor.
+
+
+
+Tag Table:
+Node: Top1134
+Node: Introduction1526
+Node: Latte processing overview2288
+Node: Latte_Reader3003
+Node: Latte_Obj4076
+Node: Latte_Tangible8739
+Node: Latte_Nested8871
+Node: Other Latte_Obj subclasses9016
+Node: Latte_Visitor9166
+Node: Whitespace and file locations12999
+Node: Shared strings13176
+Node: Miscellaneous details13331
+Node: Reference counting13561
+Node: Debug log13726
+Node: Restorer13860
+Node: Writing new Latte applications15400
+Node: Index15579
+
+End Tag Table

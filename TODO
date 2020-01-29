@@ -1,0 +1,30 @@
+-*- outline -*-
+
+*   Do after 1.0:
+**     Improve syntax-error reporting
+**     Create \let*
+**     Web-based archives for Latte mailing list
+**     Digitally sign distributions
+**     Optimization pass
+**     Write programmer manual
+**     Add charset handling (labeling and translation)
+**     Consider -Dfoo=bar for Latte vars
+**     Strategically place more calls to LatteLog
+**     Create library of higher-level Latte and HTML functions
+**     Flesh out README
+**     Create template mechanism
+**     Have a catch-all case in the lexer
+**     Catch out-of-memory errors
+**     Implicit \&rest param to catch too many positional params?
+**     Redo documentation in Latte format
+**     More environment detail
+***       Latte variables for detecting platform etc.
+***       All command-line args should be accessible via latte vars
+***       Accessor/mutator functions for environment vars
+
+**     Operators:
+***       generic character-entity function taking and producing hex values
+***       Numeric equality operator?
+
+**     Latte site-search support
+Latte library functions with a Perl engine.

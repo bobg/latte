@@ -1,0 +1,578 @@
+\; Copyright 1998,1999 Zanshin Inc.          <http://www.zanshin.com/>
+
+\; The contents of this file are subject to the Zanshin Public License Version
+\; 1.0 (the "License"); you may not use this file except in compliance with the
+\; License.  You should have received a copy of the License with Latte; see
+\; the file COPYING.  You may also obtain a copy of the License at
+\; <http://www.zanshin.com/ZPL.html>.
+\; 
+\; Software distributed under the License is distributed on an "AS IS" basis,
+\; WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+\; for the specific language governing rights and limitations under the
+\; License.
+\; 
+\; The Original Code is Latte.
+\; 
+\; The Initial Developer of the Original Code is Zanshin, Inc.
+
+{\def {\c-aacute} á}
+\; {\def {\c-acirc} }
+{\def {\c-acute}  ´}
+{\def {\c-aelig}  æ}
+{\def {\c-agrave} à}
+{\def {\c-aring}  å}
+{\def {\c-atilde} ã}
+{\def {\c-auml}   ä}
+\; {\def {\c-brvbar} }
+{\def {\c-ccedil} ç}
+{\def {\c-cedil}  ¸}
+\; {\def {\c-cent} }
+{\def {\c-copy} (c)}                    \; xxx fix
+\; {\def {\c-curren} }
+{\def {\c-deg}    °}
+\; {\def {\c-divide} }
+{\def {\c-eacute} é}
+\; {\def {\c-ecirc}  }
+{\def {\c-egrave} è}
+{\def {\c-eth} þ}                       \; xxx right?
+{\def {\c-euml} ë}
+{\def {\c-frac12} 1/2}                  \; xxx fix
+{\def {\c-frac14} 1/4}                  \; xxx fix
+{\def {\c-frac34} 3/4}                  \; xxx fix
+{\def {\c-iacute} í}
+\; {\def {\c-icirc} }
+{\def {\c-iexcl} ¡}
+{\def {\c-igrave} ì}
+{\def {\c-iquest} ¿}
+{\def {\c-iuml} ï}
+{\def {\c-laquo} «}
+\; {\def {\c-macr} }
+{\def {\c-micro} u}                     \; xxx fix
+{\def {\c-middot} .}                    \; xxx fix
+{\def {\c-nbsp} \" \"}
+{\def {\c-not} !}                       \; xxx fix
+{\def {\c-ntilde} ñ}
+{\def {\c-oacute} ó}
+\; {\def {\c-ocirc} }
+{\def {\c-ograve} ò}
+\; {\def {\c-ordf} }
+\; {\def {\c-ordm} }
+{\def {\c-oslash} ø}
+{\def {\c-otilde} õ}
+{\def {\c-ouml} ö}
+{\def {\c-para} P}                      \; xxx fix
+{\def {\c-plusmn} +/-}                  \; xxx fix
+{\def {\c-pound} #}                     \; xxx fix
+{\def {\c-raquo} »}
+{\def {\c-reg} (r)}                     \; xxx fix
+{\def {\c-sect} S}                      \; xxx fix
+{\def {\c-shy} -}                       \; xxx fix
+\; {\def {\c-sup1} }
+\; {\def {\c-sup2} }
+\; {\def {\c-sup3} }
+\; {\def {\c-szlig} }
+{\def {\c-thorn} ð}                     \; xxx right?
+{\def {\c-times} x}                     \; xxx fix
+{\def {\c-uacute} ú}
+\; {\def {\c-ucirc} }
+{\def {\c-ugrave} ù}
+{\def {\c-uml} ¨}
+{\def {\c-uuml} ü}
+{\def {\c-yacute} ý}
+{\def {\c-yen} Y}                       \; xxx fix
+{\def {\c-yuml} ÿ}
+
+{\def {\a \=nonstandard
+       \=accesskey \=charset \=class \=coords \=dir \=href \=hreflang \=id
+       \=lang \=name \=onblur \=onclick \=ondblclick \=onfocus \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=rel \=rev \=shape \=style \=tabindex
+       \=target \=title \=type \&rest}
+  \rest}
+{\def {\abbr \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\acronym \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\address \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\b \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  {*\rest*}}
+{\def {\bdo \=nonstandard
+       \=class \=dir \=id \=lang \=style \=title \&rest}
+  \rest}
+{\def {\big \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\blockquote \=nonstandard
+       \=cite \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  {\_indent \rest}}
+{\def {\body \=nonstandard
+       \=alink \=background \=bgcolor \=class \=dir \=id \=lang \=link
+       \=onclick \=ondblclick \=onkeydown \=onkeypress \=onkeyup \=onload
+       \=onmousedown \=onmousemove \=onmouseout \=onmouseover \=onmouseup
+       \=onunload \=style \=text \=title \=vlink \&rest}
+  \rest}
+{\def {\button \=nonstandard
+       \=accesskey \=class \=dir \=disabled \=id \=lang \=name \=onblur
+       \=onclick \=ondblclick \=onfocus \=onkeydown \=onkeypress \=onkeyup
+       \=onmousedown \=onmousemove \=onmouseout \=onmouseover \=onmouseup
+       \=style \=tabindex \=title \=type \=value \&rest}
+  \rest}
+{\def {\caption \=nonstandard
+       \=align \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\cite \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  {"\rest"}}
+{\def {\code \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\colgroup \=nonstandard
+       \=align \=char \=charoff \=class \=dir \=id \=lang \=onclick
+       \=ondblclick \=onkeydown \=onkeypress \=onkeyup \=onmousedown
+       \=onmousemove \=onmouseout \=onmouseover \=onmouseup \=span \=style
+       \=title \=valign \=width \&rest}
+  \rest}
+{\def {\dd \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  {\_indent \rest}}
+{\def {\del \=nonstandard
+       \=cite \=class \=datetime \=dir \=id \=lang \=onclick \=ondblclick
+       \=onkeydown \=onkeypress \=onkeyup \=onmousedown \=onmousemove
+       \=onmouseout \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\dfn \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  {"\rest"}}
+{\def {\div \=nonstandard
+       \=align \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\dl \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\dt \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\em \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  {*\rest*}}
+{\def {\fieldset \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\form \=nonstandard
+       \=accept-charset \=action \=class \=dir \=enctype \=id \=lang \=method
+       \=onclick \=ondblclick \=onkeydown \=onkeypress \=onkeyup
+       \=onmousedown \=onmousemove \=onmouseout \=onmouseover \=onmouseup
+       \=onreset \=onsubmit \=style \=target \=title \&rest}
+  \rest}
+{\def {\frameset \=nonstandard
+       \=class \=cols \=id \=onload \=onunload \=rows \=style \=title
+       \&rest}
+  \rest}
+{\def {\h1 \=nonstandard
+       \=align \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\h2 \=nonstandard
+       \=align \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\h3 \=nonstandard
+       \=align \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\h4 \=nonstandard
+       \=align \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\h5 \=nonstandard
+       \=align \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\h6 \=nonstandard
+       \=align \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\head \=nonstandard
+       \=dir \=lang \=profile \&rest}
+  \; nothing
+}
+{\def {\i \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  {*\rest*}}
+{\def {\iframe \=nonstandard
+       \=align \=class \=frameborder \=height \=id \=longdesc \=marginheight
+       \=marginwidth \=name \=scrolling \=src \=style \=target \=title
+       \=width \&rest}
+  \rest}
+{\def {\ins \=nonstandard
+       \=cite \=class \=datetime \=dir \=id \=lang \=onclick \=ondblclick
+       \=onkeydown \=onkeypress \=onkeyup \=onmousedown \=onmousemove
+       \=onmouseout \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\kbd \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\label \=nonstandard
+       \=accesskey \=class \=dir \=for \=id \=lang \=onblur \=onclick
+       \=ondblclick \=onfocus \=onkeydown \=onkeypress \=onkeyup
+       \=onmousedown \=onmousemove \=onmouseout \=onmouseover \=onmouseup
+       \=style \=title \&rest}
+  \rest}
+{\def {\legend \=nonstandard
+       \=accesskey \=align \=class \=dir \=id \=lang \=onclick \=ondblclick
+       \=onkeydown \=onkeypress \=onkeyup \=onmousedown \=onmousemove
+       \=onmouseout \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\li \=nonstandard
+       \=class \=compact \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \=type \=value
+       \&rest}
+  {- {\_indent \rest}}}
+{\def {\map \=nonstandard
+       \=class \=dir \=id \=lang \=name \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\noframes \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\noscript \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\object \=nonstandard
+       \=align \=archive \=border \=class \=classid \=codebase \=codetype
+       \=data \=declare \=dir \=height \=hspace \=id \=lang \=name \=onclick
+       \=ondblclick \=onkeydown \=onkeypress \=onkeyup \=onmousedown
+       \=onmousemove \=onmouseout \=onmouseover \=onmouseup \=standby \=style
+       \=tabindex \=title \=type \=usemap \=vspace \=width \&rest}
+  \rest}
+{\def {\ol \=nonstandard
+       \=class \=compact \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=start \=style \=title \=type
+       \&rest}
+  \rest}
+{\def {\optgroup \=nonstandard
+       \=class \=dir \=disabled \=id \=label \=lang \=onclick \=ondblclick
+       \=onkeydown \=onkeypress \=onkeyup \=onmousedown \=onmousemove
+       \=onmouseout \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\option \=nonstandard
+       \=class \=dir \=disabled \=id \=label \=lang \=onclick \=ondblclick
+       \=onkeydown \=onkeypress \=onkeyup \=onmousedown \=onmousemove
+       \=onmouseout \=onmouseover \=onmouseup \=selected \=style \=title
+       \=value \&rest}
+  \rest}
+{\def {\pre \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \=width \&rest}
+  {\_pre \rest}}
+{\def {\q \=nonstandard
+       \=cite \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  {"\rest"}}
+{\def {\samp \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\script \=nonstandard
+       \=charset \=defer \=language \=src \=type \&rest}
+  \rest}
+{\def {\select \=nonstandard
+       \=class \=dir \=disabled \=id \=lang \=multiple \=name \=onblur
+       \=onchange \=onclick \=ondblclick \=onfocus \=onkeydown \=onkeypress
+       \=onkeyup \=onmousedown \=onmousemove \=onmouseout \=onmouseover
+       \=onmouseup \=size \=style \=tabindex \=title \&rest}
+  \rest}
+{\def {\small \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\span \=nonstandard
+       \=align \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\strong \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  {*\rest*}}
+{\def {\style \=nonstandard
+       \=dir \=lang \=media \=title \=type \&rest}
+  \rest}
+{\def {\sub \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\sup \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\table \=nonstandard
+       \=align \=bgcolor \=border \=cellpadding \=cellspacing \=class \=dir
+       \=frame \=id \=lang \=onclick \=ondblclick \=onkeydown \=onkeypress
+       \=onkeyup \=onmousedown \=onmousemove \=onmouseout \=onmouseover
+       \=onmouseup \=rules \=style \=summary \=title \=width \&rest}
+  \rest}
+{\def {\tbody \=nonstandard
+       \=align \=char \=charoff \=class \=dir \=id \=lang \=onclick
+       \=ondblclick \=onkeydown \=onkeypress \=onkeyup \=onmousedown
+       \=onmousemove \=onmouseout \=onmouseover \=onmouseup \=style \=title
+       \=valign \&rest}
+  \rest}
+{\def {\td \=nonstandard
+       \=abbr \=align \=axis \=bgcolor \=char \=charoff \=class
+       \=colspan \=dir \=headers \=height \=id \=lang \=nowrap
+       \=onclick \=ondblclick \=onkeydown \=onkeypress \=onkeyup
+       \=onmousedown \=onmousemove \=onmouseout \=onmouseover
+       \=onmouseup \=rowspan \=scope \=style \=title \=valign \=width
+       \&rest}
+  \rest}
+{\def {\textarea \=nonstandard
+       \=accesskey \=class \=cols \=dir \=disabled \=id \=lang \=name
+       \=onblur \=onchange \=onclick \=ondblclick \=onfocus \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=onselect \=readonly \=rows \=style
+       \=tabindex \=title \&rest}
+  \rest}
+{\def {\tfoot \=nonstandard
+       \=align \=char \=charoff \=class \=dir \=id \=lang \=onclick
+       \=ondblclick \=onkeydown \=onkeypress \=onkeyup \=onmousedown
+       \=onmousemove \=onmouseout \=onmouseover \=onmouseup \=style \=title
+       \=valign \&rest}
+  \rest}
+{\def {\th \=nonstandard
+       \=abbr \=align \=axis \=bgcolor \=char \=charoff \=class
+       \=colspan \=dir \=headers \=height \=id \=lang \=nowrap
+       \=onclick \=ondblclick \=onkeydown \=onkeypress \=onkeyup
+       \=onmousedown \=onmousemove \=onmouseout \=onmouseover
+       \=onmouseup \=rowspan \=scope \=style \=title \=valign \=width
+       \&rest}
+  \rest}
+{\def {\thead \=nonstandard
+       \=align \=char \=charoff \=class \=dir \=id \=lang \=onclick
+       \=ondblclick \=onkeydown \=onkeypress \=onkeyup \=onmousedown
+       \=onmousemove \=onmouseout \=onmouseover \=onmouseup \=style \=title
+       \=valign \&rest}
+  \rest}
+{\def {\title \=nonstandard
+       \=dir \=lang \&rest}
+  \; nothing
+}
+{\def {\tr \=nonstandard
+       \=align \=bgcolor \=char \=charoff \=class \=dir \=id \=lang \=onclick
+       \=ondblclick \=onkeydown \=onkeypress \=onkeyup \=onmousedown
+       \=onmousemove \=onmouseout \=onmouseover \=onmouseup \=style \=title
+       \=valign \&rest}
+  \rest}
+{\def {\tt \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\ul \=nonstandard
+       \=class \=compact \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \=type \&rest}
+  \rest}
+{\def {\var \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\applet \=nonstandard
+       \=align \=alt \=archive \=class \=code \=codebase \=height \=hspace
+       \=id \=name \=object \=style \=title \=vspace \=width \&rest}
+  \rest}
+{\def {\center \=nonstandard
+       \&rest}
+  \rest}
+{\def {\dir \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\font \=nonstandard
+       \=class \=color \=dir \=face \=id \=lang \=size \=style \=title
+       \&rest}
+  \rest}
+{\def {\menu \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\s \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\strike \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  \rest}
+{\def {\u \=nonstandard
+       \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title \&rest}
+  {_\rest{}_}}
+{\def {\p \=nonstandard
+       \=align \=class \=dir \=id \=lang \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=style \=title}
+  {\"\"
+
+\"\"}}
+{\def {\area \=nonstandard
+       \=accesskey \=alt \=class \=coords \=dir \=href \=id \=lang \=name
+       \=nohref \=onblur \=onclick \=ondblclick \=onfocus \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=shape \=style \=tabindex \=target \=title
+       \=usemap}
+  \; nothing
+}
+{\def {\base \=nonstandard
+       \=href \=target}
+  \; nothing
+}
+{\def {\br \=nonstandard
+       \=class \=clear \=id \=style \=title}
+  {\"\"
+\"\"}}
+{\def {\col \=nonstandard
+       \=align \=char \=charoff \=class \=dir \=id \=lang \=onclick
+       \=ondblclick \=onkeydown \=onkeypress \=onkeyup \=onmousedown
+       \=onmousemove \=onmouseout \=onmouseover \=onmouseup \=span \=style
+       \=title \=valign \=width}
+  \; nothing
+}
+{\def {\frame \=nonstandard
+       \=class \=frameborder \=id \=longdesc \=marginheight \=marginwidth
+       \=name \=noresize \=scrolling \=src \=style \=target \=title}
+  \; nothing
+}
+{\def {\hr \=nonstandard
+       \=align \=class \=id \=noshade \=onclick \=ondblclick \=onkeydown
+       \=onkeypress \=onkeyup \=onmousedown \=onmousemove \=onmouseout
+       \=onmouseover \=onmouseup \=size \=style \=title \=width}
+  --------------------------------
+}
+{\def {\img \=nonstandard
+       \=align \=alt \=border \=class \=dir \=height \=hspace \=id \=ismap
+       \=lang \=longdesc \=onclick \=ondblclick \=onkeydown \=onkeypress
+       \=onkeyup \=onmousedown \=onmousemove \=onmouseout \=onmouseover
+       \=onmouseup \=src \=style \=title \=usemap \=vspace \=width}
+  \; nothing
+}
+{\def {\input \=nonstandard
+       \=accept \=accesskey \=alt \=checked \=class \=dir \=disabled \=id
+       \=lang \=maxlength \=name \=onblur \=onchange \=onclick \=ondblclick
+       \=onfocus \=onkeydown \=onkeypress \=onkeyup \=onmousedown
+       \=onmousemove \=onmouseout \=onmouseover \=onmouseup \=onselect
+       \=readonly \=size \=src \=style \=tabindex \=title \=type \=usemap
+       \=value}
+  \; nothing
+}
+{\def {\link \=nonstandard
+       \=charset \=class \=dir \=href \=hreflang \=id \=lang \=media
+       \=onclick \=ondblclick \=onkeydown \=onkeypress \=onkeyup
+       \=onmousedown \=onmousemove \=onmouseout \=onmouseover \=onmouseup
+       \=rel \=rev \=style \=target \=title \=type}
+  \; nothing
+}
+{\def {\meta \=nonstandard
+       \=content \=dir \=http-equiv \=lang \=name \=scheme}
+  \; nothing
+}
+{\def {\param \=nonstandard
+       \=id \=name \=type \=value \=valuetype}
+  \; nothing
+}
+{\def {\basefont \=nonstandard
+       \=class \=color \=dir \=face \=id \=lang \=size \=style
+       \=title}
+  \; nothing
+}
+{\def {\isindex \=nonstandard
+       \=class \=dir \=id \=lang \=prompt \=style \=title}
+  \; nothing
+}
+
+{\def \_bullets {}}
+{\def \ul
+  {\macro {\&rest}
+   \`{{\set! \_bullets {\cons - \_bullets}}
+      \,@\rest
+      {\set! \_bullets {\cdr \_bullets}}}}}
+{\def \ol
+  {\macro {\&rest}
+   \`{{\set! \_bullets {\cons 1 \_bullets}}
+      \,@\rest
+      {\set! \_bullets {\cdr \_bullets}}}}}
+{\def {\li \&rest}
+  {\let {{\x {\car \_bullets}}}
+    {{\if {\equal? \x -}
+       \x
+       {{\set! \_bullets {\cons {\add 1 \x}
+                          {\cdr \_bullets}}}
+        \x.}}
+     \rest}}}

@@ -1,0 +1,2748 @@
+\input texinfo @c -*- texinfo -*-
+@c %**start of header
+@setfilename latte.info
+@settitle Latte
+@c @setchapternewpage odd
+@c %**end of header
+
+@ifinfo
+@dircategory Latte - the Language for Transforming Text
+@direntry
+* latte: (latte).                              Writing Latte documents.
+@end direntry
+
+This is the user guide for Latte, the Language for Transforming Text.
+
+Copyright @copyright{} 1998 Zanshin Inc.
+
+The contents of this file are subject to the Zanshin Public License
+Version 1.0 (the "License"); you may not use this file except in
+compliance with the License.  You should have received a copy of the
+License with Latte; see the file COPYING.  You may also obtain a copy of
+the License at <http://www.zanshin.com/ZPL.html>.
+
+Documents distributed under the License are distributed on an "AS IS"
+basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.  See the
+License for the specific language governing rights and limitations under
+the License.
+
+The Original Code is Latte.
+
+The Initial Developer of the Original Code is Zanshin, Inc.
+
+This product includes software developed by the University of
+California, Berkeley and its contributors.
+@end ifinfo
+
+@titlepage
+@title Latte
+@subtitle The Language for Transforming Text
+@author Bob Glickstein
+
+@page
+@vskip 0pt plus 1filll
+
+Copyright @copyright{} 1998 Zanshin Inc.
+
+The contents of this file are subject to the Zanshin Public License
+Version 1.0 (the "License"); you may not use this file except in
+compliance with the License.  You should have received a copy of the
+License with Latte; see the file COPYING.  You may also obtain a copy of
+the License at <http://www.zanshin.com/ZPL.html>.
+
+Documents distributed under the License are distributed on an "AS IS"
+basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+License for the specific language governing rights and limitations under
+the License.
+
+The Original Code is Latte.
+
+The Initial Developer of the Original Code is Zanshin, Inc.
+
+This product includes software developed by the University of
+California, Berkeley and its contributors.
+@end titlepage
+
+@syncodeindex vr fn
+
+@node Top, Introduction, (dir), (dir)
+
+@ifinfo
+This is the user guide for Latte, the Language for Transforming Text.
+@end ifinfo
+
+@menu
+* Introduction::                
+* Latte examples::              
+* Latte syntax::                
+* Latte builtins::              
+* Writing HTML with Latte::     
+* The latte-text translator::   
+* Future directions::           
+* Further information::         
+* Pedigree::                    
+* Function and Variable Index::  
+@end menu
+
+@node Introduction, Latte examples, Top, Top
+@chapter Introduction
+
+Latte, the Language for Transforming Text, is a very simple and powerful
+language for including @dfn{markup} in text documents.  Markup refers to
+information in the text that isn't strictly part of the text but
+describes it---for example, to specify that a certain word should appear
+in boldface, or that a certain phrase is to be rendered as a chapter
+heading.
+
+Many languages for text markup already exist.  The best-known one is
+HTML (Hypertext Markup Language), the language of World-Wide Web
+documents.  Other well-known markup languages are SGML, @TeX{}, and
+troff.
+
+Why create a new markup language?  Because the existing languages lack
+generality.  HTML can't easily be used for anything except web
+documents.  @TeX{} can't easily be used for anything except printed
+books, articles, business letters, and the like.
+
+Latte, on the other hand, defines a very simple syntax that is suitable
+for every task requiring text markup.  Latte also provides a software
+library that makes it easy for programmers to create @dfn{translators}
+from Latte into other languages.  One such translator,
+@code{latte-html}, comes with Latte and can convert Latte documents into
+HTML.  Another, @code{latte-text}, produces a plain text version of the
+very same source document.  Many other Latte translators are planned.
+
+HTML authors generally find it easier to write in Latte than in HTML
+(@pxref{Latte vs. HTML}).
+
+Latte documents can therefore be used for everything HTML is used for
+@emph{and} everything @TeX{} is used for @emph{and} everything troff is
+used for, etc.  In fact, a single Latte document can be run through
+different translators to produce HTML, @TeX{}, and plain text versions.
+
+Latte is dedicated to my sister, the amazing Suzanne Glickstein.
+
+@node Latte examples, Latte syntax, Introduction, Top
+@chapter Latte examples
+
+Here are some examples illustrating the use of Latte to write World Wide
+Web documents.
+
+@example
+@{\head @{\title Our document@}@}
+@{\body
+ @{\h1 Our document@}
+
+ Here is our first WWW document produced with
+ @{\a \href=http://www.latte.org/ Latte@}.
+
+ We can't wait to get started on our second document!@}
+@end example
+
+This short Latte document produces the following HTML when run through
+@code{latte-html -f}:
+
+@example
+<head><title>Our document</title></head>
+<body><p><h1>Our document</h1>
+
+ <p>Here is our first WWW document produced with
+ <a href="http://www.latte.org/">Latte</a>.
+
+ <p>We can't wait to get started on our second document!</body>
+@end example
+
+Observe that Latte uses curly braces (@samp{@{} and @samp{@}}) to group
+text, and a backslash (@samp{\}) to introduce markup keywords.
+
+This example only uses Latte keywords that are exact analogs of HTML
+tags: @code{head}, @code{title}, @code{body}, @code{h1}, @code{a}, and
+the attribute @code{href}.  It's possible to write Latte documents that
+contain nothing but HTML analogs, but the real power of Latte is
+revealed when its own features are combined with those of the target
+language.
+
+For instance, note that the document title of the previous example,
+@code{Our document}, appears twice in the Latte and HTML versions---once
+inside the @code{title} tag and once inside the @code{h1} tag.  It
+shouldn't be necessary to write the document's title twice, though.  It
+should suffice to write it once and by some mechanism have it appear in
+the two places it's needed.  Also, writing it twice is an invitation to
+error: if the document title ever changes, it's possible to update it in
+one place and forget to update it in the other.
+
+Here's a version of the first example that solves that problem:
+
+@example
+@{\def \doctitle @{Our document@}@}
+@{\head @{\title \doctitle@}@}
+@{\body
+ @{\h1 \doctitle@}
+
+ Here is our first WWW document produced with
+ @{\a \href=http://www.latte.org/ Latte@}.
+
+ We can't wait to get started on our second document!@}
+@end example
+
+This version begins by using the Latte procedure @code{\def} to define a
+new @dfn{variable} named @code{\doctitle}.  The value of
+@code{\doctitle} is @code{Our document}.  This value is substituted in
+the two places that @code{\doctitle} is used when this file is processed
+with @code{latte-html}.
+
+Now suppose the enthusiastic authors of this example decide that every
+WWW document they write will have the same text in the @code{title}
+section as in an @code{h1} section at the beginning of the document
+body.  Rather than structure every Latte file along these lines:
+
+@example
+@{\def \doctitle @dots{}@}
+@{\head @{\title \doctitle@}@}
+@{\body
+ @{\h1 \doctitle@}
+
+ @dots{}@}
+@end example
+
+@noindent
+they can define a @dfn{function} to do that work for them:
+
+@example
+@{\def @{\document \doctitle \&content@}
+  @{@{\head @{\title \doctitle@}@}
+   @{\body
+     @{\h1 \doctitle@}@}
+
+    \content@}@}
+@end example
+
+@noindent
+and can now write each document in abbreviated fashion:
+
+@example
+@{\document @{Our second document@}
+  This was as exciting to
+  write as our first!@}
+@end example
+
+@node Latte syntax, Latte builtins, Latte examples, Top
+@chapter Latte syntax
+
+When a Latte translator program such as @code{latte-html} reads a Latte
+file, it considers the contents as a sequence of Latte
+@dfn{expressions}.  An expression is one of the following things:
+
+@itemize @bullet
+
+@item
+A @dfn{word}---that is, any sequence of characters containing no
+whitespace, no backslash, and no curly braces;
+
+@item
+A @dfn{quoted string}---that is, any sequence of characters enclosed in
+a pair of @w{@code{\" @dots{} \"}} delimiters.
+
+@item
+A @dfn{variable reference}---that is, a backslash followed by the name
+of a variable.  Variable names in Latte must begin with a letter or an
+underscore, and may be followed by zero or more letters, underscores, or
+digits, plus the characters @samp{?}, @samp{!}, @samp{+}, and @samp{-}.
+
+@item
+A @dfn{group}, which is a pair of curly braces surrounding zero or more
+@dfn{subexpressions}.
+
+@item
+A @dfn{quoted expression}---that is, any Latte expression preceded by
+one of Latte's quote symbols: @code{\'}, @code{\`}, @code{\,}, and
+@code{\,@@}.
+
+@end itemize
+
+These are all covered in more detail in the sections that follow.  Other
+constructs that may appear in a Latte file are:
+
+@itemize @bullet
+
+@item
+Whitespace, naturally.  Latte handles whitespace in a special way; see
+@ref{Whitespace}.
+
+@item
+Comments.  These begin with @samp{\;} and continue to the end of the
+line.  Latte discards comments when reading Latte files.
+
+@item
+The ``forget-whitespace'' symbol, written @samp{\/}.  Wherever this
+appears, it has the effect of canceling all the whitespace Latte has
+read since the last expression.
+
+@end itemize
+
+@menu
+* Words and strings::           
+* Variables::                   
+* Groups::                      
+* Quoted expressions::          
+* Whitespace::                  
+* Latte vs. HTML::              
+@end menu
+
+@node Words and strings, Variables, Latte syntax, Latte syntax
+@section Words and strings
+
+Most Latte files consist mainly of ``words.''  Simply put, words are
+those sequences of characters that aren't categorized as any other kind
+of Latte construct.  To be more precise, a Latte word is a sequence of
+characters that does not include whitespace, backslashes, or curly
+braces.  However, any of those characters @emph{can} be included in a
+word by @dfn{escaping} them with a backslash.
+
+Here's an example:
+
+@example
+In a Latte "word," you must use \\ to escape \\, \@{ and \@}.
+@end example
+
+@noindent
+This example contains these fourteen Latte words:
+
+@enumerate
+@item
+In
+@item
+a
+@item
+Latte
+@item
+"word,"
+@item
+you
+@item
+must
+@item
+use
+@item
+\
+@item
+to
+@item
+escape
+@item
+\,
+@item
+@{
+@item
+and
+@item
+@}.
+@end enumerate
+
+In Latte, whitespace is not normally part of a word (it's handled
+specially; @pxref{Whitespace}).  Sometimes, however, it's desirable to
+force Latte to consider a single word to include some whitespace,
+especially when you wish to affix whitespace to the beginning or end of
+a word.  This is best accomplished by using a quoted string, which Latte
+treats exactly like a word.  A quoted string begins with @samp{\"} and
+ends with @samp{\"}.  Inside a quoted string, only backslash must be
+escaped (with a backslash); every other character, including @samp{"},
+@samp{@{}, and @samp{@}}, can be written normally.  Quoted strings are
+therefore also useful for text that contains a lot of curly braces, such
+as fragments of C or Perl programs.
+
+Note that the only way to represent an empty word in Latte is with
+quoting: @code{\"\"}.
+
+@node Variables, Groups, Words and strings, Latte syntax
+@section Variables
+
+A Latte variable can hold a single Latte expression as its value.  That
+value is substituted wherever the variable is used.
+
+The expression
+
+@example
+@{\def \@var{varname} @var{expression}@}
+@end example
+
+@noindent
+creates a new variable named @var{varname} whose value is
+@var{expression}.
+
+The expression
+
+@example
+@{\set! \@var{varname} @var{expression}@}
+@end example
+
+@noindent
+assigns the new value @var{expression} to @var{varname}, which must
+previously have been defined with @code{\def}.
+
+The expression
+
+@example
+@{\let @{@{\@var{varname1} @var{expression1}@}
+       @{\@var{varname2} @var{expression2}@}
+       @dots{}@}
+  @var{body} @dots{}@}
+@end example
+
+@noindent
+assigns @var{expression1} to @var{varname1}, @var{expression2} to
+@var{varname2}, and so on, then executes @var{body} with those variables
+in effect.  Outside of the @code{\let} expression, those variables do
+not exist.
+
+@menu
+* Scope::                       
+* Function parameters::         
+@end menu
+
+@node Scope, Function parameters, Variables, Variables
+@subsection Scope
+
+It is possible to have a variable outside a @code{\let} with the same
+name as a variable inside a @code{\let}.  Suppose the variable is
+@code{\foo}.  Then the definition inside the @code{\let} @dfn{hides} or
+@dfn{shadows} the definition outside the @code{\let}, like so:
+
+@example
+@{\def \foo 7@}
+
+@{\let @{@{\foo 12@}@}
+  The value of foo is \foo@}
+
+Now the value of foo is \foo
+@end example
+
+@noindent
+This example yields the following text:
+
+@display
+The value of foo is 12
+
+Now the value of foo is 7
+@end display
+
+The region in which a variable is visible is called its @dfn{scope}.
+Different computer languages have different @dfn{scoping rules}.  Latte
+uses @dfn{lexical scope}, also sometimes called @dfn{static scope}.
+This means that you can always tell by looking at the Latte file exactly
+which variable is meant by each variable reference---it's always the one
+defined in the textually innermost enclosing scope.@footnote{Under
+another popular set of scoping rules called @dfn{dynamic scope}, the
+variable meant by a particular variable reference can actually change
+from moment to moment, depending on differences in the order in which
+functions are executing.}
+
+@node Function parameters,  , Scope, Variables
+@subsection Function parameters
+
+The parameters of Latte functions (@pxref{Groups}) are variables whose
+scope is the body of the function for which they're defined.  There are
+three kinds of function parameter in Latte:
+
+@table @dfn
+
+@item positional parameter
+This is the simplest kind of parameter.  In the definition of the
+function, a positional parameter is written exactly like an ordinary
+variable.  When the function is invoked, the first actual argument is
+assigned to the first positional parameter, the second actual argument
+is assigned to the second positional parameter, and so
+on.@footnote{What's the difference between a ``parameter'' and an
+``argument''?  The terms are usually used interchangeably, but
+technically speaking, ``parameter'' refers to the variable in the
+function definition, while ``argument'' is the value that gets passed in
+when the function is called.  The value of the argument is assigned to
+the parameter.}
+@c Wow, self-plagiarism.
+Here's an example of a function with two positional parameters:
+
+@example
+@{\def @{\function \param1 \param2@}
+  @{My arguments are \param1 and \param2.@}@}
+
+@{\function red green@}
+  @result{} My arguments are red and green.
+@end example
+
+If fewer arguments are given than there are positional parameters, then
+the excess parameters get the default value @code{@{@}} (i.e., the empty
+group).  If too many arguments are given and there is no ``rest
+parameter'' (see below), the excess arguments are silently ignored.
+
+@item named parameter
+When a function is invoked, a named parameter only gets a value when the
+caller explicitly assigns it a value by name.  In the parameter list of
+the function definition, a named parameter is indicated by
+@code{\=@var{param}}.  When the function is called, its named parameters
+are given values by writing @code{\@var{param}=@var{value}}.  (There
+must be no whitespace between @code{\@var{param}} and the @code{=} that
+follows it.)  In the body of a function, named parameters are referenced
+like ordinary variables.
+
+Example:
+
+@example
+@{\def @{\function \=param@}
+  @{\if \param
+    @{My param is \param@}@}@}
+
+@{\function \param=@{full of eels@}@}
+  @result{} My param is full of eels
+@end example
+
+Any named parameter not given a value gets the value @code{@{@}} by
+default.
+
+Note that one difference between positional parameters and named
+parameters is that the caller of a function need not know the names of
+positional parameters in order to use them, but must know the names of
+named parameters in order to use those.
+
+When a function is invoked, any named parameter assignments do not
+affect matching up arguments to @emph{positional} parameters.  Named
+parameter assignments may be given in any order, anywhere in the
+argument list, without changing the meaning of the function call.
+
+@item rest parameter
+Every function may have one rest parameter, which is denoted in the
+parameter list by @code{\&@var{param}}.  The value of this parameter is
+a Latte group containing excess arguments that could not be assigned to
+positional parameters.  Example:
+
+@example
+@{\def @{\function \param1 \param2 \&rest@}
+  @{The first two parameters are \param1 and \param2
+   The remaining parameters are \rest@}@}
+
+@{\function a b c d e@}
+  @result{} The first two parameters are a and b
+     The remaining parameters are c d e
+@end example
+
+Latte makes extensive use of rest parameters in functions that are HTML
+analogs, allowing Latte to represent an arbitrary amount of enclosed
+text easily (@pxref{Balanced tag functions}).  For example, here is a
+simplified definition of @code{\a} (with some essential details removed
+for clarity), which emits an HTML anchor:
+
+@example
+@{\def @{\a \=href \&rest@}
+  @{<a @{\if \href
+        @{href="\href"@}@} >
+   \rest
+   </a>@}@}
+@end example
+
+@noindent
+Now when @code{\a} is called as follows:
+
+@example
+@{\a \href=http://www.latte.org/
+    The Language for Transforming Text@}
+@end example
+
+@noindent
+the five excess arguments---@code{The}, @code{Language}, @code{for},
+@code{Transforming}, and @code{Text}---are grouped together in
+@code{\rest} and emitted between the @code{<a>} and @code{</a>} tags,
+yielding
+
+@display
+<a href="http://www.latte.org/">
+The Language for Transforming Text
+</a>
+@end display
+
+(One of the details removed for clarity is the precise whitespace
+arrangement in the output of this example, but we return to this example
+with greater precision in @ref{Whitespace}.)
+
+@end table
+
+@node Groups, Quoted expressions, Variables, Latte syntax
+@section Groups
+
+A group in Latte is an expression composed of a sequence of zero or more
+subexpressions surrounded by @samp{@{} and @samp{@}}.
+
+Groups serve two purposes.  The first is to gather multiple expressions
+into a single expression, for use in contexts where only a single
+expression is allowed.  For example, only a single expression may be
+passed as the value when defining a variable with @code{\def}.  If the
+value happens to be a single word, grouping isn't needed:
+
+@example
+@{\def \var Hello@}
+@end example
+
+@noindent
+but for more complex values, grouping is needed:
+
+@example
+@{\def \var @{Hello there@}@}
+@end example
+
+The other use of groups in Latte is for performing @dfn{function calls}.
+When the first subexpression of a group is a function (that is, when it
+is a variable reference whose @emph{value} is a function, or when it is
+some other Latte expression yielding a function), then that function is
+called, passing the remaining subexpressions to it as arguments.  (The
+rules for how arguments are interpreted by functions are described in
+@ref{Function parameters}.)  The entire group is then replaced with the
+value produced by the function call.
+
+Of special interest is the variant of @code{\def} that looks like this:
+
+@example
+@{\def @{\var @dots{}@}
+  @var{body} @dots{}@}
+@end example
+
+@noindent
+When the first argument to @code{\def} is a group rather than a variable
+reference, then it is interpreted as a function definition.  For details
+on using @code{\def}, see @ref{Latte builtins}.
+
+@node Quoted expressions, Whitespace, Groups, Latte syntax
+@section Quoted expressions
+
+A quoted expression is a Latte expression preceded by a quote symbol, of
+which there are four kinds described below.
+
+Quoting expressions is for preventing them from being evaluated, or
+exerting control over @emph{when} they're evaluated.  In Latte this is
+generally necessary only when writing macros (@pxref{Functions on
+functions}).
+
+Here are the four kinds of quoted expressions:
+
+@table @code
+
+@findex quote
+@findex ordinary quote
+@item \'@var{expr}
+
+This is an @dfn{ordinary quote} that, when evaluated, yields @var{expr}
+exactly as written.  Example:
+
+@example
+\'@{\add 3 4@}
+  @result{} @{\add 3 4@}
+@end example
+
+@findex quasiquote
+@item \`@var{expr}
+
+This is called @dfn{quasiquote} and works just like the ordinary quote,
+except that individual subexpressions of @var{expr} may be
+@dfn{unquoted}.
+
+The result of evaluating a quasiquoted expression is that expression
+itself, except with any unquoted subexpressions replaced by their
+values.  (See below for example.)
+
+@findex unquote
+@item \,@var{expr}
+
+This is an @dfn{unquote}.  When it appears inside a quasiquoted
+expression, it causes @var{expr} to be evaluated.  Example:
+
+@example
+\`@{\add \,@{\multiply 3 4@} 5@}
+  @result{} @{\add 12 5@}
+@end example
+
+@findex unquote-splicing
+@findex splicing unquote
+@item \,@@@var{expr}
+
+This is called @dfn{unquote-splicing}, or @dfn{splicing unquote}.  It
+works just like unquote, except that if the result of evaluating
+@var{expr} is a group, then the result of @code{\,@@@var{expr}} is
+@emph{the individual elements of that group} rather than @emph{the group
+containing the elements}.  This is used for ``splicing'' the elements of
+a list into the containing list at the same nesting level.  Example:
+
+@example
+\`@{a b \,@@@{\group c d e@} f@}
+  @result{} @{a b c d e f@}
+@end example
+
+See the documentation for @code{\macro} for an example using the
+different forms of quote.
+
+@end table
+
+@node Whitespace, Latte vs. HTML, Quoted expressions, Latte syntax
+@section Whitespace
+
+As mentioned earlier, a Latte translator divides a Latte file into
+expressions.  Whitespace is not considered an expression.  Instead, each
+expression gets associated with @emph{the whitespace that precedes it in
+the Latte file}.  For example, when given the following input:
+
+@example
+@{\document @{Our second document@}
+  This was as exciting to
+  write as our first!@}
+@end example
+
+@noindent
+Latte divides it up as follows:
+
+@itemize @bullet
+@item
+A group preceded by no whitespace, consisting of:
+@itemize @bullet
+@item
+The variable reference @code{\document} preceded by no whitespace;
+@item
+A group preceded by a single space, consisting of:
+@itemize @bullet
+@item
+The word @code{Our} preceded by no whitespace;
+@item
+The word @code{second} preceded by a single space;
+@item
+The word @code{document} preceded by a single space
+@end itemize
+@item
+The word @code{This} preceded by one newline and two spaces;
+@item
+The word @code{was} preceded by one space;
+@item
+The word @code{as} preceded by one space;
+@item
+The word @code{exciting} preceded by one space;
+@item
+The word @code{to} preceded by one space;
+@item
+The word @code{write} preceded by one newline and two spaces;
+@item
+The word @code{as} preceded by one space;
+@item
+The word @code{our} preceded by one space;
+@item
+The word @code{first!} preceded by one space.
+@end itemize
+@end itemize
+
+The whitespace attached to an expression follows the expression wherever
+it goes (e.g., whether the expression is assigned to variables, passed
+to functions, etc.).  However, that may not be the whitespace used when
+and if the expression is emitted as output.  In general, when emitting
+output, expressions inherit the preceding-whitespace of the context in
+which they're used, not the context in which they're defined.
+
+Here are some examples:
+
+@example
+@{\def \foo Hello@}
+
+"\foo"
+  @result{} "Hello"
+@end example
+
+@noindent
+In this example, even though @code{Hello} is preceded by a single space
+where it's assigned to @code{\foo}, the @emph{use} of @code{\foo} has
+zero spaces preceding it, so the result contains no space between
+@code{"} and @code{Hello}.
+
+@example
+@{\def @{\a \=href \&rest@}
+  @{<a @{\if \href
+        @{href="\href"@}@} >
+   \rest
+   </a>@}@}
+
+@{\a \href=foo bar@}
+  @result{} <a href="foo" >
+       bar
+       </a>
+@end example
+
+@noindent
+Why, in the output, is there just one space between @code{a} and
+@code{href}?  In the definition of @code{\a}, the subexpression
+@code{@{href="\href"@}} is preceded by a newline and several spaces.
+However, it's used inside an @code{\if} expression, which itself is
+preceded by only one space.  When the @code{\if} expression is replaced
+by the @code{@{href="\href"@}} subexpression, the subexpression inherits
+its whitespace.
+
+A word about the ``forget-whitespace'' symbol, @code{\/}.  When this
+appears in a Latte file, all the whitespace that precedes it is
+canceled.  This can be useful when you want the Latte source to include
+whitespace for readability, but you don't want that whitespace to appear
+in the output.
+
+@node Latte vs. HTML,  , Whitespace, Latte syntax
+@section Latte vs. HTML
+
+@quotation
+HTML was never supposed to be something that you would see@dots{} it
+staggers me that people have actually put up with having to write HTML
+by hand.
+
+@flushright
+---Tim Berners-Lee, inventor of HTML
+@end flushright
+@end quotation
+
+Here are some shortcomings of HTML that are remedied by Latte.
+
+@table @asis
+
+@item Matching tags
+
+In HTML, most markup tags come in beginning-ending pairs that must match
+and nest properly.  For instance, @code{<b><i>text</i></b>} is how you'd
+put @code{text} in a bold-italic typeface.  But if you write
+@code{<b><i>text</b></i>}, it's an error.  Plus, all those paired tags
+create a lot of visual clutter, making HTML hard for humans to read.
+And most text editors can't offer much help in identifying and
+navigating matching sets of tags.
+
+On the other hand, Latte uses curly braces to group text, which most
+text editors are already able to handle well.  And Latte only requires
+beginning tags, not ending tags, reducing visual clutter and eliminating
+the potential for mismatches.
+
+@item Paragraph tags
+
+HTML requires @code{<p>} to appear at the beginning of each paragraph.
+Since most of us are accustomed to denoting paragraph breaks with just a
+blank line, it's easy to forget the @code{<p>}.  When the @code{<p>} is
+remembered, it adds more clutter to the text.
+
+When @code{latte-html} outputs one or more blank lines, it automatically
+includes a @code{<p>}.  @xref{Automatic HTML processing}.
+
+@item Metacharacters
+
+HTML defines numerous @dfn{metacharacters}---characters that trigger
+special processing.  These include @samp{<}, @samp{>}, @samp{&}, and
+@samp{"}.  Wherever you wish to include these characters in a document,
+you must use a named ``character entity'' instead: @code{&lt;},
+@code{&gt;}, @code{&amp;}, and @code{&quot;}.
+
+Not only are these characters bad choices for metacharacters in
+documents that are mostly textual (and may therefore be expected to
+contain several occurrences of @samp{"} and @samp{&} at least), but
+their character entity replacements are verbose and are not visually
+related to the characters they replace.
+
+In Latte, the only metacharacters are @samp{\}, @samp{@{}, and
+@samp{@}}, and to use these characters literally, it is only necessary
+to escape them with a backslash.  When @code{latte-html} encounters HTML
+metacharacters such as @code{&}, it automatically emits the
+corresponding HTML character entity.
+
+@item Repeated text and constructs
+
+HTML has no macro facility; no way to store text that is used repeatedly
+in a document, and no way to define shorthand for oft-used idioms.
+Consequently, HTML documents may contain redundant stretches of text (as
+we saw in the first example; @pxref{Latte examples}) or complex,
+repeated, and difficult-to-diagnose layout directives.
+
+Latte is a full-fledged programming language.  Not only can repeated
+constructs be encapsulated in variables and functions, but these
+variables and functions can have descriptive names that indicate their
+purpose.  Instead of dozens of nested @code{<table>}, @code{<tr>}, and
+@code{<td>} tags, for instance, each with dozens of attribute settings,
+one can lay out a complex page with something simple like:
+
+@example
+@{\layout \top-margin=@{@dots{}@}
+         \left-margin=@{@dots{}@}
+         @dots{}main body@dots{}@}
+@end example
+
+@end table
+
+@node Latte builtins, Writing HTML with Latte, Latte syntax, Top
+@chapter Latte builtins
+
+This chapter is a reference guide to the built-in functions of Latte.
+It does not describe the HTML-related functions of @code{latte-html}.
+For those, see @ref{HTML functions}.
+
+Most of these functions are intrinsic to Latte.  However, some are
+loaded at runtime from the library file @file{standard.latte}.
+
+@menu
+* Control structures::          
+* Functions on variables::      
+* Functions on functions::      
+* Group functions::             
+* Boolean functions::           
+* Text functions::              
+* Arithmetical functions::      
+* File functions::              
+* Other functions::             
+* Predefined variables::        
+@end menu
+
+@node Control structures, Functions on variables, Latte builtins, Latte builtins
+@section Control structures
+
+@defun if test then-expr else-expr
+
+Evaluates @var{test}.  If the result is true (@pxref{Boolean
+functions}), evaluates @var{then-expr}, otherwise evaluates
+@var{else-expr}.
+
+The result of the @code{\if} is the result of whichever of the
+@var{then-expr} or @var{else-expr} is invoked.  If @var{else-expr} is
+omitted, it is taken to be @code{@{@}} by default.
+
+@end defun
+
+@defun while test body @dots{}
+
+Evaluates @var{test}.  If the result is true, evaluates the @var{body}
+subexpressions, then repeats.
+
+The result is the @emph{concatenation} of the results of each invocation
+of the @var{body} expressions.  For example:
+
+@example
+@{\def \i 0@}
+@{\while @{\less? \i 3@}
+  i is \i
+  @{\set! \i @{\add \i 1@}@}@}
+  @result{} i is 0
+     i is 1
+     i is 2
+@end example
+
+@end defun
+
+@defun foreach \var group body @dots{}
+
+Evaluates @var{group}.  Then, for each element in the result, sets
+@var{\var} to that value and evaluates the @var{body} subexpressions.
+
+@end defun
+
+@node Functions on variables, Functions on functions, Control structures, Latte builtins
+@section Functions on variables
+
+@defun def \var value
+
+Creates a new variable \@var{var} in the innermost scope
+(@pxref{Scope}), evaluates @var{value}, and assigns the result to the
+new variable.
+
+@end defun
+
+@defun def @{\var params @dots{}@} body @dots{}
+
+Creates a new function whose parameters are given by @var{params} and
+whose body consists of @var{body}; assigns the function to the new
+variable \@var{var} in the innermost scope.
+
+The parameter list @var{params} consists of zero or more positional
+parameters and named parameters, plus one optional rest parameter.
+@xref{Function parameters}.
+
+When the function is invoked, the @var{body} expressions are evaluated
+one at a time in sequence.  The return value of the function is the
+value of the last @var{body} expression.
+
+@display
+@strong{This behavior differs from that of Latte versions prior to 2.0!}
+In those versions, user-defined functions constructed an implicit group
+containing the values of all @var{body} expressions.  That behavior
+introduced an ambiguity in the case of functions that sometimes returned
+a group and sometimes returned some other kind of value.  The new
+behavior more closely matches that of other related programming
+languages (@pxref{Pedigree}).
+
+To ensure that a function written for the old Latte works under the
+current Latte, it should generally suffice to convert this:
+
+@example
+@{\def @{\func @var{args} @dots{}@}
+  @var{body1} @var{body2} @dots{}@}
+@end example
+
+@noindent
+into this:
+
+@example
+@{\def @{\func @var{args} @dots{}@}
+  @{@var{body1} @var{body2} @dots{}@}@}
+@end example
+
+@vindex useless
+To aid in this transition, a new kind of error is detected by Latte.
+Invoking a user-defined function that contains subexpressions that have
+no side effects and don't participate in the return value signals a
+``Useless subexpression'' error.
+
+@end display
+
+Note that @code{@{\def @{\var @var{params} @dots{}@} @var{body}
+@dots{}@}} is exactly equivalent to
+
+@example
+@{\def \@var{var}
+      @{\lambda @{@var{params} @dots{}@}
+        @var{body} @dots{}@}@}
+@end example
+
+The @code{\lambda} function is described in @ref{Functions on
+functions}.
+
+@end defun
+
+@defun defmacro @{\var params @dots{}@} body @dots{}
+
+Like @w{@code{@{\def @{@var{\var} @var{params} @dots{}@} @var{body}
+@dots{}}}, but creates a macro instead of a function.  See @code{\macro}
+(@pxref{Functions on functions}).
+
+@end defun
+
+@defun let @{@{\var value@} @dots{}@} body @dots{}
+
+Assigns to each \@var{\var} the result of evaluating each @var{value},
+then evaluates @var{body} in the scope of those variables.  Note that
+every @var{value} is evaluated before any of the \@var{var}s is
+assigned, so the @var{value}s cannot refer to the \@var{var}s.  In other
+words, this is an error:
+
+@example
+@{\let @{@{\list @{x y z@}@}
+       @{\first @{\front \list@}@}@}
+  @dots{}@}
+@end example
+
+@noindent
+To get the desired effect, you can do this:
+
+@example
+@{\let @{@{\list @{x y z@}@}@}
+  @{\let @{@{\first @{\front \list@}@}@}
+    @dots{}@}@}
+@end example
+
+@noindent
+or this:
+
+@example
+@{\let @{@{\list @{x y z@}@}
+       @{\first @{@}@}@}
+  @{\set! \first @{\front \list@}@}
+  @dots{}@}
+@end example
+
+The value of the @code{\let} expression is the result of evaluating the
+last @var{body} expression.
+
+@display
+@strong{This behavior differs from that of Latte versions prior to 2.0!}
+In those versions, @code{\let} expressions constructed an implicit group
+containing the values of all @var{body} expressions.  See @code{\def}
+@c why does this not work in texi2dvi:  (@pxref{Functions on variables})
+for a discussion of this change.
+
+To ensure that a @code{\let} expression written for the old Latte works
+under the current Latte, it should generally suffice to convert this:
+
+@example
+@{\let @{@{@var{\var} @var{val}@} @dots{}@}
+  @var{body1} @var{body2} @dots{}@}
+@end example
+
+@noindent
+into this:
+
+@example
+@{\let @{@{@var{\var} @var{val}@} @dots{}@}
+  @{@var{body1} @var{body2} @dots{}@}@}
+@end example
+
+To aid in this transition, a new kind of error is detected by Latte.
+Invoking a @code{\let} expression that contains subexpressions that have
+no side effects and don't participate in the return value signals a
+``Useless subexpression'' error.
+
+@end display
+
+Note that
+
+@example
+@{\let @{@{@var{\var} @var{val}@} @dots{}@}
+  @var{body} @dots{}@}
+@end example
+
+@noindent
+is equivalent to
+
+@example
+@{@{\lambda @{@var{\var} @dots{}@} @var{body} @dots{}@} @var{val} @dots{}@}
+@end example
+
+@end defun
+
+@defun set! \var value
+
+Assigns to existing variable \@var{var} the result of evaluating
+@var{value}.
+
+@end defun
+
+@node Functions on functions, Group functions, Functions on variables, Latte builtins
+@section Functions on functions
+
+@defun funcall function args @dots{}
+
+Evaluates @var{function}; the result must be a Latte function.  Then
+evaluates all of the @var{args}.  The function yielded by @var{function}
+is then invoked, with @var{args} passed in as its arguments.
+
+@example
+@{\funcall \add 2 3 4@} @result{} 9
+@end example
+
+@end defun
+
+@defun apply function args @dots{} last-arg
+
+Exactly like @code{\funcall}, except that if the value of @var{last-arg}
+is a group, then @emph{its elements}, not the group, are passed
+individually to @var{function}.
+
+@example
+@{\apply \add 2 3 4@} @result{} 9
+
+@{\let @{@{\numbers @{2 3 4@}@}@}
+  @{\apply \add 6 \numbers@}@} @result{} 15
+@end example
+
+@end defun
+
+@defun lambda @{params @dots{}@} body @dots{}
+
+Creates a Latte function with parameter list given by @var{params} and
+body given by @var{body}.
+
+A full discussion of user-defined functions in Latte appears in the
+description for @code{\def} (@pxref{Functions on variables}).
+
+@end defun
+
+@defun macro @{params @dots{}@} body @dots{}
+
+Like @code{\lambda}, this produces a new Latte function with the given
+parameter list and body; but the function produced is a special kind
+called a @dfn{macro}.  When the macro is evaluated by passing it some
+argument:
+
+@enumerate
+
+@item
+
+the arguments are @emph{not evaluated};
+
+@item
+
+the macro body is evaluated using the non-evaluated argument values;
+
+@item
+
+the result of @emph{that} is then evaluated.
+
+@end enumerate
+
+For example, here's how to use a macro to define a function called
+@code{\unless}.
+
+@example
+
+@{\def \unless
+  @{\macro @{\test \&body@}
+   \`@{\if @{\not \,\test@} \,\body@}@}@}
+
+@end example
+
+The idea is for @w{@code{@{\unless @var{test} @var{body} @dots{}@}}} to
+evaluate @var{body} only when @var{test} is false.  Here's how the macro
+definition works when @code{\unless} is called like this:
+
+@example
+
+@{\unless @{\zero? \x@}
+  @{\set! \x @{\subtract \x 1@}@}@}
+
+@end example
+
+@enumerate
+
+@item
+
+The argument value @w{@code{@{\zero? \x@}}} is assigned to the macro
+parameter @code{\test}, and the remaining arguments (in this example,
+the sole body expression) are gathered into a group and assigned to
+@code{\body} (so @code{\body} equals @w{@code{@{@{\set! \x @{\subtract
+\x 1@}@}@}@}}}).
+
+@item
+
+The body of the macro is evaluated.  This is a quasiquoted expression
+(@pxref{Quoted expressions}), so first, nested unquoted expressions are
+evaluated:
+
+@enumerate
+
+@item
+
+@code{\,\test} @result{} @code{@{\zero? \x@}}
+
+@item
+
+@code{\,\body} @result{} @code{@{@{\set! \x @{\subtract \x 1@}@}@}@}}
+
+@end enumerate
+
+@noindent
+and then the quasiquoted expression is returned with the unquoted
+subexpressions replaced by their values:
+
+@example
+
+@{\if @{\not @{\zero? \x@}@}
+     @{@{\set! \x @{\subtract \x 1@}@}@}@}@}
+
+@end example
+
+@item
+
+The resulting expression is evaluated normally.
+
+@end enumerate
+
+@end defun
+
+@defun compose f1 f2
+
+Produces a new function of one argument that yields @w{@code{@{@var{f1}
+@{@var{f2} @var{x}@}@}}} (where @var{x} is the argument).  Naturally,
+@var{f1} and @var{f2} must both be functions of one argument.
+
+This is used in the definition of @code{\cadr} et al. (@pxref{Group
+functions}):
+
+@example
+
+@{\def \cadr @{\compose \car \cdr@}@}
+
+@end example
+
+@end defun
+
+@defun lmap function group
+
+Evaluates @var{function}, which must yield a function, and @var{group},
+which must yield a group.  Then applies @var{function} to each element
+of @var{group} in turn, yielding a group containing the result of each
+function call.
+
+Example:
+
+@example
+@{\def @{\add1 \x@} @{\add \x 1@}@}
+@{\lmap \add1 @{3 4 5@}@} @result{} 4 5 6
+@end example
+
+@end defun
+
+@node Group functions, Boolean functions, Functions on functions, Latte builtins
+@section Group functions
+
+@defun append expr @dots{}
+
+Each @var{expr} is evaluated, and a group of expressions is constructed
+as follows: if @var{expr}'s value is a group, its elements are
+individually added to the result; otherwise @var{expr}'s value is added
+as a single element.
+
+@end defun
+
+@defun back group
+
+Yields the last element of the given @var{group}.
+
+@end defun
+
+@defun car group
+
+Yields the first element from the given @var{group}.  Synonym for
+@code{\front}.
+
+@end defun
+
+@defun cdr group
+
+Yields the elements of @var{group} minus the first element.
+
+Example:
+
+@example
+@{\cdr @{a b c@}@} @result{} b c
+@end example
+
+@end defun
+
+@defun caar expr
+@defunx cadr expr
+@defunx cdar expr
+@defunx cddr expr
+
+Produces @w{@{\car @{\car @var{expr}@}@}}, @w{@{\car @{\cdr
+@var{expr}@}@}}, @w{@{\cdr @{\car @var{expr}@}@}}, @w{@{\cdr @{\cdr
+@var{expr}@}@}}, respectively.
+
+These functions are defined in @file{standard.latte} using
+@code{\compose} (@pxref{Functions on functions}).
+
+@end defun
+
+@defun cons expr group
+
+Constructs a new group consisting of @var{expr} followed by the elements
+of @var{group}.  Synonym for @code{\push-front}.
+
+@end defun
+
+@defun empty? group
+
+Yields a true value if @var{group} is empty, false otherwise.
+@xref{Boolean functions}.  Equivalent to
+
+@example
+@{\equal? 0 @{\length @var{group}@}@}
+@end example
+
+@end defun
+
+@defun front group
+
+Yields the first element from the given @var{group}.  Synonym for
+@code{\car}.
+
+@end defun
+
+@defun group expr @dots{}
+
+Constructs a group consisting of all the given @var{expr}s.
+
+@end defun
+
+@defun length group
+
+Returns the number of elements in @var{group}.  Can also be used on text
+strings; see @ref{Text functions}.
+
+@end defun
+
+@defun member? expr group
+
+Returns a true value if @var{expr} is @code{\equal?} to any member of
+@var{group}, false otherwise.
+
+@end defun
+
+@defun nth n group
+
+Returns the @var{n}th element of @var{group}, counting from 0.  Can also
+be used on text strings.
+
+@end defun
+
+@defun push-back expr group
+
+Constructs a new group consisting of the elements of @var{group}
+followed by @var{expr}.  Synonym for @code{\snoc}.
+
+@end defun
+
+@defun push-front expr group
+
+Constructs a new group consisting of @var{expr} followed by the elements
+of @var{group}.  Synonym for @code{\cons}.
+
+@end defun
+
+@defun rdc group
+
+Yields the elements of @var{group} minus the last element.
+
+Example:
+
+@example
+@{\rdc @{a b c@}@} @result{} a b
+@end example
+
+@end defun
+
+@defun reverse group
+
+Reverses the elements of @var{group}.  Does not reverse the elements of
+nested groups.
+
+Examples:
+
+@example
+@{\reverse @{a b c@}@} @result{} c b a
+
+@{\reverse @{a @{b c@} d@}@} @result{} d b c a
+@end example
+
+@end defun
+
+@defun snoc expr group
+
+Constructs a new group consisting of the elements of @var{group}
+followed by @var{expr}.  Synonym for @code{\push-back}.
+
+@end defun
+
+@defun subseq group from to
+
+Constructs a new group consisting of the elements of @var{group}
+beginning at @var{from} and ending before @var{to}.  Both @var{from} and
+@var{to} count from 0.  If either is negative, positions are counted
+backward from the end of @var{group} rather than forward from the front.
+If @var{to} is omitted, the new group contains the elements from
+@var{from} through the end of @var{group}.
+
+Examples:
+
+@example
+@{\subseq @{a b c d e@} 1 3@} @result{} b c
+
+@{\subseq @{a b c d e@} -2@} @result{} d e
+@end example
+
+@end defun
+
+@node Boolean functions, Text functions, Group functions, Latte builtins
+@section Boolean functions
+
+@dfn{Boolean} values are truth and falsehood.  In Latte, every value is
+considered ``true'' (for purposes of the test clauses in @code{\if} and
+@code{\while}) except for the empty group, @code{@{@}}, which is false.
+Note that the value @code{0} (zero), which is false in languages such as
+C and Perl, is true in Latte.
+
+@defun and expr @dots{}
+
+Evaluates each @var{expr} in turn until one yields falsehood.  If no
+expression yields falsehood, returns the value of the last one.
+Otherwise returns @code{@{@}}.
+
+@end defun
+
+@defun not expr
+
+Negates the truth value of @var{expr}.  If @var{expr} is true, yields
+@code{@{@}}.  If @var{expr} is false, yields the Latte ``truth object.''
+(The ``truth object'' is a boolean value with no displayable
+representation that is only used for this purpose.)
+
+@end defun
+
+@defun or expr @dots{}
+
+Evaluates each @var{expr} in turn until one yields truth, then returns
+that value.  If no expression is true, returns @code{@{@}}.
+
+@end defun
+
+@node Text functions, Arithmetical functions, Boolean functions, Latte builtins
+@section Text functions
+
+@defun concat string @dots{}
+
+Constructs a new string by concatenating all the @var{string} arguments.
+Synonym for @code{\string-append}.
+
+@end defun
+
+@defun downcase string @dots{}
+
+Constructs a group containing all the @var{string} values converted to
+lower case.
+
+@end defun
+
+@defun explode string @dots{}
+
+Constructs a group whose elements are the individual characters of the
+given @var{string} values.
+
+@end defun
+
+@defun length string
+
+Returns the number of characters in @var{string}.  Can also be used on
+groups; see @ref{Group functions}.
+
+@end defun
+
+@defun nth n string
+
+Returns the @var{n}th character of @var{string}, counting from 0.  Can
+also be used on groups.
+
+@end defun
+
+@defun string-append string @dots{}
+
+Constructs a new string by concatenating all the @var{string} arguments.
+Synonym for @code{\concat}.
+
+@end defun
+
+@defun string-ge? string @dots{}
+
+Returns truth if each @var{string} is greater than or equal to the ones
+following it (``monotonically non-increasing''), else returns falsehood.
+Synonym for @code{\string-greater-equal?}.
+
+Example:
+
+@example
+@{\string-ge? three three ten ten seven one@}
+@end example
+
+@noindent
+is true.
+
+@end defun
+
+@defun string-greater-equal? string @dots{}
+
+Returns truth if each @var{string} is greater than or equal to the ones
+following it (``monotonically non-increasing''), else returns falsehood.
+Synonym for @code{\string-ge?}.
+
+@end defun
+
+@defun string-greater? string @dots{}
+
+Returns truth if each @var{string} is strictly greater than the ones
+following it (``monotonically decreasing''), else returns falsehood.
+Synonym for @code{\string-gt?}.
+
+@end defun
+
+@defun string-gt? string @dots{}
+
+Returns truth if each @var{string} is strictly greater than the ones
+following it (``monotonically decreasing''), else returns falsehood.
+Synonym for @code{\string-greater?}.
+
+Example:
+
+@example
+@{\string-gt? three ten seven one@}
+@end example
+
+@noindent
+is true.
+
+@end defun
+
+@defun string-le? string @dots{}
+
+Returns truth if each @var{string} is less than or equal to the ones
+following it (``monotonically non-decreasing''), else returns falsehood.
+Synonym for @code{\string-less-equal?}.
+
+Example:
+
+@example
+@{\string-le? one seven ten ten three three@}
+@end example
+
+@noindent
+is true.
+
+@end defun
+
+@defun string-less-equal? string @dots{}
+
+Returns truth if each @var{string} is less than or equal to the ones
+following it (``monotonically non-decreasing''), else returns falsehood.
+Synonym for @code{\string-le?}.
+
+@end defun
+
+@defun string-less? string @dots{}
+
+Returns truth if each @var{string} is strictly less than the ones
+following it (``monotonically increasing''), else returns falsehood.
+Synonym for @code{\string-lt?}.
+
+@end defun
+
+@defun string-lt? string @dots{}
+
+Returns truth if each @var{string} is strictly less than the ones
+following it (``monotonically increasing''), else returns falsehood.
+
+Example:
+
+@example
+@{\string-lt? one seven ten three@}
+@end example
+
+@noindent
+is true.
+
+@end defun
+
+@defun substr string from to
+
+Constructs a new string consisting of the characters of @var{string}
+beginning at @var{from} and ending before @var{to}.  Both @var{from} and
+@var{to} count from 0.  If either is negative, positions are counted
+backward from the end of @var{string} rather than forward from the
+front.  If @var{to} is omitted, the new string contains the characters
+from @var{from} through the end of @var{string}.
+
+Examples:
+
+@example
+@{\substr abcde 1 3@} @result{} bc
+
+@{\substr abcde -2@} @result{} de
+@end example
+
+@end defun
+
+@defun upcase string @dots{}
+
+Constructs a group containing all the @var{string} values converted to
+upper case.
+
+@end defun
+
+@node Arithmetical functions, File functions, Text functions, Latte builtins
+@section Arithmetical functions
+
+When Latte is installed, it can be configured for integer arithmetic
+only or for integer and floating-point arithmetic.  If integer
+arithmetic only, then a number is any Latte string consisting of one or
+more digits, with an optional leading plus or minus sign.  If integer
+and floating-point, then a number is any integer (as described)
+optionally followed by a decimal point and zero or more digits.
+
+@defun add number @dots{}
+
+Adds all the given @var{number}s.
+
+@end defun
+
+@defun ceil number
+
+Rounds @var{number} up to the next integer.  If Latte is configured for
+integer-only arithmetic, @var{number} is returned unchanged.
+
+@end defun
+
+@defun divide number @dots{}
+
+Divides the first @var{number} by each successive argument.  An attempt
+to divide by zero triggers an error.
+
+@end defun
+
+@defun floor number
+
+Rounds @var{number} down to the next integer.  If Latte is configured
+for integer-only arithmetic, @var{number} is returned unchanged.
+
+@end defun
+
+@defun ge? number @dots{}
+
+Returns truth if each @var{number} is greater than or equal to the ones
+following it (``monotonically non-increasing''), else returns falsehood.
+Synonym for @code{\greater-equal?}.
+
+Example:
+
+@example
+@{\ge? 10 10 7 3 3 1@}
+@end example
+
+@noindent
+is true.
+
+@end defun
+
+@defun greater-equal? number @dots{}
+
+Returns truth if each @var{number} is greater than or equal to the ones
+following it (``monotonically non-increasing''), else returns falsehood.
+Synonym for @code{\ge?}.
+
+@end defun
+
+@defun greater? number @dots{}
+
+Returns truth if each @var{number} is strictly greater than the ones
+following it (``monotonically decreasing''), else returns falsehood.
+Synonym for @code{\gt?}.
+
+@end defun
+
+@defun gt? number @dots{}
+
+Returns truth if each @var{number} is strictly greater than the ones
+following it (``monotonically decreasing''), else returns falsehood.
+Synonym for @code{\greater?}.
+
+Example:
+
+@example
+@{\gt? 10 7 3 1@}
+@end example
+
+@noindent
+is true.
+
+@end defun
+
+@defun le? number @dots{}
+
+Returns truth if each @var{number} is less than or equal to the ones
+following it (``monotonically non-decreasing''), else returns falsehood.
+Synonym for @code{\less-equal?}.
+
+Example:
+
+@example
+@{\le? 1 3 3 7 10 10@}
+@end example
+
+@noindent
+is true.
+
+@end defun
+
+@defun less-equal? number @dots{}
+
+Returns truth if each @var{number} is less than or equal to the ones
+following it (``monotonically non-decreasing''), else returns falsehood.
+Synonym for @code{\le?}.
+
+@end defun
+
+@defun less? number @dots{}
+
+Returns truth if each @var{number} is strictly less than the ones
+following it (``monotonically increasing''), else returns falsehood.
+Synonym for @code{\lt?}.
+
+@end defun
+
+@defun lt? number @dots{}
+
+Returns truth if each @var{number} is strictly less than the ones
+following it (``monotonically increasing''), else returns falsehood.
+Synonym for @code{\less?}.
+
+Example:
+
+@example
+@{\lt? 1 3 7 10@}
+@end example
+
+@noindent
+is true.
+
+@end defun
+
+@defun modulo a b
+
+Returns @var{a} modulo @var{b}.
+
+@end defun
+
+@defun multiply number @dots{}
+
+Multiplies all the given @var{number}s.
+
+@end defun
+
+@defun random n
+
+Returns a random integer greater than or equal to 0 and less than
+@var{n}.
+
+@end defun
+
+@defun subtract number @dots{}
+
+Subtracts from the first @var{number} each successive argument.  If only
+one @var{number} is given, negates the number.
+
+@end defun
+
+@defun zero? number
+
+Returns truth if @var{number} is 0, falsehood otherwise.  Equivalent to:
+
+@example
+@{\equal? 0 @var{number}@}
+@end example
+
+@end defun
+
+@node File functions, Other functions, Arithmetical functions, Latte builtins
+@section File functions
+
+@defun file-contents filename
+
+Returns, as a Latte string, the contents of the file named by
+@var{filename}.
+
+@end defun
+
+@defun process-output program args @dots{}
+
+Runs @var{program} with arguments @var{args}, returning the output of
+the program as a Latte string.
+
+@end defun
+
+@defun load-file filename
+
+Evaluates the contents of the Latte file @var{filename}.  Textual
+results are discarded, but variable and function definitions and other
+side effects are retained.
+
+@end defun
+
+@defun load-library filename
+
+Like @code{\load-file}, but searches for @var{filename} using Latte's
+library-search algorithm.  For each directory in the Latte search path,
+tries to load @file{@var{filename}} from that directory, or if that
+fails, @file{@var{filename}.latte}.
+
+The default Latte search path is set at installation time, usually to
+the directories @file{/usr/local/share/latte} and @file{.}.  It can be
+changed by setting the environment variable @code{LATTE_PATH} to a
+colon-separated list of directories.
+
+@end defun
+
+@defun include filename
+
+This works like @code{\load-file} but the text of @var{filename} is not
+discarded.  This can therefore be used to assemble an aggregate Latte
+document out of smaller pieces.
+
+@end defun
+
+@node Other functions, Predefined variables, File functions, Latte builtins
+@section Other functions
+
+@defun equal? expr @dots{}
+
+Returns truth if all the @var{expr}s are equal, falsehood otherwise.
+
+Equality is defined recursively on groups: two groups are @code{\equal?}
+if and only if each of their corresponding subexpressions are
+@code{\equal?}.
+
+@end defun
+
+@defun getenv name
+
+Returns the value of the environment variable named @var{name}.  If no
+such environment variable exists, returns falsehood.
+
+@end defun
+
+@defun error text @dots{}
+
+Exits from Latte with an error message given by @var{text} plus the file
+location where @code{\error} was called.
+
+@end defun
+
+@defun group? expr
+
+Returns truth if the given @var{expr} is a group, falsehood otherwise.
+
+@end defun
+
+@defun operator? expr
+
+Returns truth if the given @var{expr} is an operator (i.e., function),
+falsehood otherwise.
+
+@end defun
+
+@defun string? expr
+
+Returns truth if the given @var{expr} is a string, falsehood otherwise.
+
+@end defun
+
+@defun warn text @dots{}
+
+Emits a warning message given by @var{text} plus the file location where
+@code{\warn} was called.
+
+@end defun
+
+@node Predefined variables,  , Other functions, Latte builtins
+@section Predefined variables
+
+@defvar __latte-version__
+
+This variable is predefined to contain the version number of
+@code{latte-html}.
+
+@end defvar
+
+@node Writing HTML with Latte, The latte-text translator, Latte builtins, Top
+@chapter Writing HTML with Latte
+
+Latte was originally created to provide a saner alternative to HTML.
+Although it has expanded in purpose, simplifying the production of HTML
+documents remains its primary use, at least for now.  This chapter
+discusses how.  An understanding of HTML is assumed.
+
+@menu
+* Automatic HTML processing::   
+* HTML functions::              
+* Nonstandard HTML::            
+* Predefined variables in latte-html::  
+* Invoking latte-html::         
+* Makefile rules::              
+* Latte mode for Emacs::        
+@end menu
+
+@node Automatic HTML processing, HTML functions, Writing HTML with Latte, Writing HTML with Latte
+@section Automatic HTML processing
+
+As @code{latte-html} evaluates top-level Latte expressions, it performs
+two kinds of automatic HTML processing on the result before sending it
+to the output:
+
+@table @asis
+
+@item Automatic @code{<p>}-tag generation
+Wherever one or more blank lines appear, any subsequent text is preceded
+with a @code{<p>} tag.
+
+@item Automatic character-entity translation
+Wherever an HTML metacharacter is encountered, its character-entity code
+is substituted; e.g., @code{&lt;} and @code{&gt;} for @samp{<} and
+@samp{>}.
+
+@end table
+
+These processing steps can be controlled using the @code{\_pre} and
+@code{\html} functions; see @ref{HTML functions}.
+
+
+@node HTML functions, Nonstandard HTML, Automatic HTML processing, Writing HTML with Latte
+@section HTML functions
+
+This section describes the HTML functions available in
+@code{latte-html}.  Most are defined in @file{html.latte}, but some are
+intrinsic to @code{latte-html}.
+
+@defun _pre text @dots{}
+
+This is a subroutine of the HTML tag function @code{\pre} (which is used
+for including preformatted text).  Any text enclosed in @w{@code{@{\_pre
+@dots{}@}}} is not subject to automatic @code{<p>}-tag generation.  So
+whereas @code{latte-html} would normally turn this:
+
+@example
+First paragraph.
+
+Second paragraph.
+@end example
+
+@noindent
+into this:
+
+@example
+First paragraph.
+
+<p>Second paragraph.
+@end example
+
+@noindent
+it turns this:
+
+@example
+@{\_pre First paragraph.
+
+Second paragraph.@}
+@end example
+
+@noindent
+into this:
+
+@example
+First paragraph.
+
+Second paragraph.
+@end example
+
+Note that @code{\_pre} does @emph{not} turn off automatic
+character-entity translation (see @code{\html} below), though it is
+possible to use @code{\_pre} in combination with @code{\html} to achieve
+that effect.
+
+@end defun
+
+@defun html text @dots{}
+
+Text enclosed in @w{@code{@{\html @dots{}@}}} is not subject to
+automatic HTML character-entity translation.  In other words, where
+@code{latte-html} would normally translate this:
+
+@example
+"Penn & Teller"
+@end example
+
+@noindent
+into this:
+
+@example
+&quot;Penn &amp; Teller&quot;
+@end example
+
+@noindent
+it turns this:
+
+@example
+@{\html "Penn & Teller"@}
+@end example
+
+@noindent
+into this:
+
+@example
+"Penn & Teller"
+@end example
+
+@noindent
+This is of course essential to implementing all of the HTML-tag Latte
+functions, since they must be able to emit HTML metacharacters
+(particularly @samp{<} and @samp{>}) literally.
+
+Note that @code{\html} does @emph{not} turn off automatic @code{<p>}-tag
+generation, though it is possible to use @code{\html} in combination
+with @code{\_pre} to achieve that effect.
+
+@end defun
+
+All remaining HTML functions fall into three categories:
+character-entity functions; balanced tag functions; and non-balanced tag
+functions.
+
+@menu
+* Character entity functions::  
+* Balanced tag functions::      
+* Non-balanced tag functions::  
+@end menu
+
+@node Character entity functions, Balanced tag functions, HTML functions, HTML functions
+@subsection Character entity functions
+
+For each named HTML character entity @code{&@var{foo};},
+@file{html.latte} defines a function of zero arguments named
+@w{@code{\c-@var{foo}}}.  So, for example, to emit a copyright symbol,
+write @w{@code{@{\c-copy@}}} (which produces @code{&copy;}).
+
+The @w{@code{\c-@var{foo}}} functions are implemented in terms of
+@code{\ch}.  Write @code{@{\ch @var{name}@}} to emit
+@code{&@var{name};}.
+
+There is also @code{\chx}, which takes a two-digit hexadecimal number as
+an argument.  It produces @code{&#@var{num};}.
+
+@node Balanced tag functions, Non-balanced tag functions, Character entity functions, HTML functions
+@subsection Balanced tag functions
+
+``Balanced tag functions'' are Latte functions that produce a balanced
+pair of HTML tags surrounding some text, with optional HTML attributes
+in the opening tag.  For example, @code{\b} is a balanced tag function
+because
+
+@example
+@{\b some text@}
+@end example
+
+@noindent
+produces
+
+@example
+<b>some text</b>
+@end example
+
+There is a balanced tag function corresponding to every HTML tag defined
+in the HTML 4.0 ``Transitional'' standard (which includes deprecated
+forms).  The Latte names of these functions are always all-lowercase.
+
+Every tag function has optional named parameters (@pxref{Function
+parameters}) corresponding to the attributes permitted for that tag.
+For instance, @code{\a} has named parameters @code{\href} and
+@code{\name}, among others.  These attribute names are always
+all-lowercase too.
+
+When you specify a value for an HTML attribute, the value is
+automatically surrounded with double quotes.  For example,
+
+@example
+@{\a \href=http://www.latte.org/ The Latte language@}
+@end example
+
+@noindent
+produces this:
+
+@example
+<a href="http://www.latte.org/">The Latte language</a>
+@end example
+
+Some tags have boolean attributes that do not take values.  For
+instance, in
+
+@example
+<textarea readonly>Some text</textarea>
+@end example
+
+@noindent
+@code{readonly} is a boolean attribute.  The Latte way to include this
+attribute is to write @code{\readonly=1}.  The @code{1} is ignored; any
+true value will do.  A false value will cause the attribute not to
+appear in the tag.
+
+Every balanced tag function in @code{latte-html} accepts an arbitrary
+amount of text (as its rest parameter; @pxref{Function parameters}) to
+be enclosed by the paired beginning-ending HTML tags.
+
+@node Non-balanced tag functions,  , Balanced tag functions, HTML functions
+@subsection Non-balanced tag functions
+
+Non-balanced tags are those that are not paired with a closing tag and
+do not enclose text; for example,
+
+@example
+<img src="foo.gif" alt="picture of foo">
+@end example
+
+@noindent
+(There is no @code{</img>} tag.)
+
+Non-balanced tag functions in @code{latte-html} work exactly like
+balanced tag functions do, except that they only accept various named
+parameters as arguments (corresponding to their HTML attributes) and do
+not accept an arbitrary amount of text to enclose.
+
+@node Nonstandard HTML, Predefined variables in latte-html, HTML functions, Writing HTML with Latte
+@section Nonstandard HTML
+
+It is possible to write nonstandard HTML tags and attributes even though
+@file{html.latte} doesn't predefine tag functions or named parameters
+for them.
+
+@subheading Nonstandard tags
+
+To write a nonstandard balanced tag, use @code{\_bal-tag}.  To write a
+nonstandard non-balanced tag, use @code{\_tag}.  These functions are
+used to define all the HTML tag functions in @file{html.latte}.
+
+@defun _bal-tag name attrs bools deprs nonstandard \=depr \&rest
+
+Emits a balanced pair of HTML tags named @var{name}.  The tag's
+attributes and their values are given by @var{attrs}, which is a group
+of the form
+
+@example
+@{@var{attribute} @var{value} @var{attribute} @var{value} @dots{}@}
+@end example
+
+@noindent
+An attribute in @var{attrs} with a false @var{value} does not appear in
+the output.
+
+The tag's boolean attributes and their (boolean) values are given by
+@var{bools}, which has the same form as @var{attrs}.
+
+The tag's deprecated attributes and their values are given by
+@var{deprs}, which also has the same form as @var{attrs}.  Any
+attributes in @var{deprs} with true values will cause a warning to be
+emitted if @code{\strict-html4} is true (@pxref{Predefined
+variables}).
+
+Any nonstandard attributes and their values are listed in
+@var{nonstandard} and will also cause warnings to be emitted if
+@code{\strict-html4} is true.
+
+The named parameter @code{\depr}, if set to true, indicates that this
+tag is deprecated and should generate a warning if used and
+@code{\strict-html4} is true.
+
+The rest parameter accumulates text to appear between the opening and
+closing HTML tags.
+
+Example:
+
+@example
+@{\_bal-tag whee
+           @{foo bar right wrong@}
+           @{x 1 y @{@}@}
+           @{@}
+           @{@}
+           The text in the tags@}
+@end example
+
+@noindent
+yields
+
+@example
+<whee foo="bar" right="wrong" x>The text in the tags</whee>
+@end example
+
+Of greater utility would be defining a tag function named @code{\whee}
+along these lines:
+
+@example
+@{\def @{\whee \=foo \=right \=x \=y \&rest@}
+  @{\_bal-tag whee
+             @{foo \foo right \right@}
+             @{x \x y \y@}
+             @{@}
+             @{@}
+             \rest@}@}
+@end example
+
+@noindent
+so that you can then write
+
+@example
+@{\whee \foo=bar \right=wrong \x=1 The text in the tags@}
+@end example
+
+@noindent
+to get the same result as above.
+
+@end defun
+
+@defun _tag name params bools deprs nonstandard \=depr
+
+This works exactly like @code{\_bal-tag} (see above) except that it does
+not have a rest parameter, does not enclose text, and does not emit an
+``ending tag.''
+
+Example:
+
+@example
+@{\_tag zoom
+       @{whoosh zing@}
+       @{@}
+       @{@}
+       @{@}@}
+  @result{} <zoom whoosh="zing">
+@end example
+
+@end defun
+
+@subheading Nonstandard attributes
+
+Including nonstandard attributes in a standard HTML tag is quite a bit
+easier.  Every tag function in @file{html.latte} includes a named
+parameter called @code{\nonstandard} whose value is a list of
+attribute-value pairs to include in the tag.  So, for example,
+
+@example
+@{\b \nonstandard=@{boldness high@}
+    Very bold!@}
+  @result{} <b boldness="high">Very bold!</b>
+@end example
+
+@noindent
+even though @code{\b} does not have a @code{boldness} parameter.
+
+Use of @code{\nonstandard} will trigger warnings if @code{\strict-html4}
+is true.
+
+@node Predefined variables in latte-html, Invoking latte-html, Nonstandard HTML, Writing HTML with Latte
+@section Predefined variables in latte-html
+
+In addition to the variables predefined by all Latte translators
+(@pxref{Predefined variables}), @code{latte-html} predefines the
+following additional variables:
+
+@defvar __FILE__
+
+The name of the file being processed.
+
+@end defvar
+
+@defvar strict-html4
+
+This variable contains a true value if @code{latte-html} was invoked
+with the @w{@code{--strict}} option (@pxref{Invoking latte-html}),
+otherwise it contains falsehood.
+
+@end defvar
+
+@node Invoking latte-html, Makefile rules, Predefined variables in latte-html, Writing HTML with Latte
+@section Invoking latte-html
+
+Usage: @code{latte-html @var{[options]} @var{[file]}}
+
+If @var{file} is not given or is @code{-}, the standard input is
+processed.
+
+Options are:
+
+@table @code
+
+@item -v
+@itemx --version
+Print the version number of @code{latte-html} and exit.
+
+@item -h
+@itemx --help
+Print a short help summary and exit.
+
+@item -l @var{library}
+@itemx --load=@var{library}
+Load the Latte library file @var{library} before processing @var{file}.
+Any number of library files may be preloaded this way.  Loading works as
+in @code{\load-library} (@pxref{File functions}).  Libraries requested
+with this option are loaded after the default libraries (see
+@code{-n}).
+
+@item -n
+@itemx --no-default
+Do not load the default libraries.  Normally, @code{latte-html}
+implicitly loads @file{standard.latte} (@pxref{Latte builtins}) and
+@file{html.latte} (@pxref{HTML functions}) on startup.
+
+If you wish to suppress loading of just one default library file, use
+@code{-n} and also use @code{-l} to explicitly load the other library
+file, like so:
+
+@example
+latte-html -n -l standard @dots{}
+@end example
+
+@item -o @var{file}
+@itemx --output=@var{file}
+Place output in @var{file}.  Without this option, @code{latte-html}
+places its output on the standard output.
+
+@item -f
+@itemx --fragment
+Produce an HTML fragment rather than a complete HTML document.  This
+causes @code{latte-html} to suppress the @w{@code{<!DOCTYPE @dots{}>}}
+and @code{<html>} tags with which it normally surrounds its output.
+This can be useful when multiple Latte documents must be processed
+separately then combined to create a single HTML document.
+
+@item -s
+@itemx --strict
+Causes @code{latte-html} to emit warnings whenever HTML tags or
+attributes are used that have been deprecated in the HTML 4.0 standard.
+
+The Latte variable @w{@code{--strict}} is set to true if this option is
+given, otherwise it's set to false.
+
+@item -L @var{lang}
+@itemx --lang=@var{lang}
+Set the language code of the resulting HTML document to @var{lang}.
+This causes the @code{<html>} tag that is automatically emitted to
+include the @code{lang=@var{lang}} attribute.
+
+@item -d @var{flags}
+@itemx --debug=@var{flags}
+Turn on Latte debugging; @var{flags} is a comma-separated list of flags
+chosen from the set @code{eval} and @code{mem}.  When the @code{eval}
+debugging flag is turned on, each Latte evaluation and result is
+displayed, with its nesting level indicated with indentation.  When the
+@code{mem} debugging flag is turned on, a summary of extant and total
+objects allocated is periodically displayed.
+
+The output format of @code{--debug=eval} is designed to be used with the
+``selective display'' feature of Emacs (q.v.), which is able to hide
+lines with greater than a given amount of indentation.
+
+@end table
+
+@node Makefile rules, Latte mode for Emacs, Invoking latte-html, Writing HTML with Latte
+@section Makefile rules
+
+It is convenient to delegate the work of invoking @code{latte-html} to
+@code{make}, especially when your project involves multiple Latte files
+that must be converted into multiple HTML files.
+
+Here's a suffix rule you can add to your @file{Makefile}:
+
+@example
+.latte.html:
+        -rm -f $@@
+        latte-html -o $@@ $<
+@end example
+
+You may also find it convenient to list your HTML targets like so:
+
+@example
+HTMLFILES = foo.html bar.html @dots{}
+
+all: $(HTMLFILES)
+@end example
+
+This, combined with the suffix rule above, will cause @code{make all} to
+create @file{foo.html} from @file{foo.latte}, @file{bar.html} from
+@file{bar.latte}, and so on.
+
+@subheading Autoloading shared Latte definitions
+
+It is typical to place common Latte function definitions into a separate
+file that is shared by all the other Latte files in a project.  If you
+have such definitions in @file{defns.latte} (say), you may wish to
+change the suffix rule to
+
+@example
+.latte.html:
+        -rm -f $@@
+        latte-html --load=defns -o $@@ $<
+@end example
+
+@noindent
+so that @file{defns.latte} is automatically loaded as each Latte file is
+processed.  (The alternative is to begin each Latte file with a call to
+@w{@code{@{\load-library defns@}}}.)
+
+@subheading Managing multi-author documents
+
+Latte can aid in producing HTML documents from multiple sources, such as
+documents written by multiple authors, each of whom ``owns'' a section
+of the document.  Each section can be its own Latte file, allowing all
+authors to edit their portions concurrently.  The final document can be
+a Latte file that uses @code{\include} to include the subparts
+(@pxref{HTML functions}), or it can be an HTML template that, when glued
+together with HTML fragments generated from the individual Latte files,
+forms a complete HTML file.
+
+Here's an example of the first approach.  Suppose Hank and Lorna
+are each responsible for one piece of @file{article.html}, which is
+produced from the Latte file @file{article.latte}.  Hank edits his
+portion in @file{hank.latte}, and Lorna edits hers in
+@file{lorna.html}.
+
+The file @file{article.latte} may look like this:
+
+@example
+@{\head @{\title Our article@}@}
+@{\body
+ @{\h1 Thesis@}
+
+ @{\include hank.latte@}
+
+ @{\h1 Antithesis@}
+
+ @{\include lorna.latte@}@}
+@end example
+
+@noindent
+and the final version can be produced simply by running
+@w{@code{latte-html article.latte}}.  In this example, the files
+@file{hank.latte} and @file{lorna.latte} need not (indeed,
+should not) contain any calls to @code{\head} or @code{\body}.
+
+The second approach, where the output of individual Latte files is
+pasted together into an HTML template, is slightly trickier, but not
+much.  Imagine that @file{article.html} is to be produced from
+@file{head.html} and @file{foot.html}, which presumably contain HTML
+boilerplate for beginning and ending files, with the middle of the
+document supplied by @file{hank.latte} and @file{lorna.latte}.
+The @file{Makefile} rules for creating this document must generate HTML
+files from the Latte pieces, then concatenate all the HTML parts with
+the Unix command @code{cat}.  Here's how it can do that:
+
+@example
+hank.html: hank.latte
+        -rm -f hank.html
+        latte-html --fragment -o hank.html hank.latte 
+
+lorna.html: lorna.latte
+        -rm -f lorna.html
+        latte-html --fragment -o lorna.html lorna.latte
+
+article.html: head.html foot.html hank.html lorna.html
+        -rm -f article.html
+        cat head.html hank.html lorna.html foot.html > article.html
+@end example
+
+@noindent
+Note the use of the @w{@code{--fragment}} option to @code{latte-html} to
+suppress the automatic generation of an HTML preamble (containing a
+@code{DOCTYPE} declaration and commentary), an @code{<html>} tag, and a
+closing @code{</html>} tag.
+
+@node Latte mode for Emacs,  , Makefile rules, Writing HTML with Latte
+@section Latte mode for Emacs
+
+The Latte package comes with @file{latte.el}, which is an implementation
+of an Emacs editing mode for Latte files.  It's based on Emacs's text
+mode and provides some consistent indentation rules plus syntax-based
+coloring of Latte language elements.
+
+When Latte is installed, @file{latte.el} (and a ``byte-compiled''
+version of it, @file{latte.elc}) is installed the proper place for Emacs
+extensions.  To use Latte mode while editing a Latte file, first ensure
+that the library is loaded by typing
+
+@display
+@kbd{M-x load-library @key{RET} latte @key{RET}}
+@end display
+
+@noindent
+then invoke @code{latte-mode} with
+
+@display
+@kbd{M-x latte-mode @key{RET}}
+@end display
+
+Since this is somewhat cumbersome, you may wish to have Emacs invoke
+Latte mode automatically when you edit files whose names end in
+@file{.latte}.  To arrange this, add the following lines to your
+@file{.emacs} file:
+
+@example
+(autoload 'latte-mode "latte" "Latte mode" t)
+
+(setq auto-mode-alist
+      (cons '("\\.latte$" . latte-mode)
+            auto-mode-alist))
+@end example
+
+@node The latte-text translator, Future directions, Writing HTML with Latte, Top
+@chapter The latte-text translator
+
+Latte includes a program called @code{latte-text} that works very much
+like @code{latte-html} except that it produces plain text as output.
+The implementation is very rudimentary at present, but it's suitable for
+experimenting with.  In future releases, @code{latte-text} will become
+more sophisticated.
+
+In principle, a file that is written to be processed with
+@code{latte-html} can also be processed with @code{latte-text} to obtain
+a reasonable plain-text facsimile of the HTML version.  The library file
+@file{text.latte} defines most of the same markup functions as does
+@file{html.latte} but gives them non-HTML definitions.  For example, in
+@code{html.latte}, the function @code{\b} (``boldface'') surrounds its
+arguments with @code{<b>} and @code{</b>}.  In @code{text.latte}, the
+same function surrounds its arguments with *asterisks*.
+
+@node Future directions, Further information, The latte-text translator, Top
+@chapter Future directions
+
+Here's what's planned for Latte beyond the current release.
+
+@table @asis
+
+@item Other translators and tools
+Translators to languages other than HTML would increase the usefulness
+of Latte.  One vision is for marked-up text to always be writable in
+Latte format, then translatable to whatever language is required for its
+final processing step (HTML for documents destined for the web, @TeX{}
+for documents destined for the printer, ASCII for documents destined for
+plain-text displays, etc.).  Whether that's actually a desirable goal is
+an open question, but it's certainly an interesting
+idea.  At any rate, additional translators can only be a good thing.
+
+There is a niche for tools that process Latte files without necessarily
+translating them.  For instance, a Latte dependency-tracker can
+determine what files a particular one depends on via calls to
+@code{\file-contents}, @code{\include}, and so on.  This would aid in
+writing accurate dependencies in Makefiles.
+
+@item Higher-level libraries
+The functions now available in @code{latte-html} provide a bare minimum
+of basic functionality plus HTML equivalence.  They don't include any
+useful higher-level functions to assist with such things as page
+layout---you still have to write HTML-analogous code.  Of course, Latte
+allows you to encapsulate that code as reusable functions, and indeed
+many such functions have been written by Latte users for specific
+purposes.  Some of those functions should be cleaned up, documented,
+made more general, and assembled into a useful library.
+
+Another set of high-level functions could abstract away the details of
+the target language.  It should be possible to write a single Latte
+document that can produce both HTML and @TeX{}, for example.  But a
+Latte file containing calls to @code{\img} and @code{\h3} clearly has an
+HTML bias, whereas a Latte file containing calls to (hypothetical
+functions) @code{\setlength} and @code{\verbatim} clearly has a @TeX{}
+bias.  A set of common markup functions that translates well into all
+target languages could be just what the doctor ordered.
+
+@item Richer string handling
+Latte needs some Perl-like facilities for pattern matching, composition,
+and decomposition of strings.
+
+@item Improved system interface
+Latte should be able to perform file operations such as linking and
+unlinking files, testing access permissions, reading directories, and so
+on, as well as other system operations such as querying the current
+time, getting and setting environment variables, and so on.
+
+@item Character set awareness
+Presently, @code{latte-html} presumes the character set of the text in
+its input is ASCII or a superset thereof (such as ISO Latin-1).  It
+should become possible to advise @code{latte-html} that the text is in
+some other character set.  This would produce character set information
+in the generated HTML file, and would also affect which characters
+undergo automatic character-entity translation (@pxref{Automatic HTML
+processing}), and what entities they're translated to.
+
+@item Better debugging
+The debugging output produced by @w{@code{latte-html -d eval}} is
+voluminous and useful only to the very dauntless.  It should be possible
+to usefully restrict what output is seen, and that output should become
+more representative of the actions of the Latte engine.
+
+@item Apache module
+It should be possible to write a module for the Apache HTTP server that
+would allow it to serve Latte documents without their needing to be
+translated to HTML first; the translation would occur on the fly at
+document-serving time.
+
+@end table
+
+@node Further information, Pedigree, Future directions, Top
+@chapter Further information
+
+Further information about Latte can be found on the Latte home page at
+
+@display
+@url{http://www.latte.org/}
+@end display
+
+To participate in Latte-related discussion, you may subscribe to the
+Latte mailing list by sending a request to
+
+@display
+@email{latte-request@@zanshin.com}
+@end display
+
+To reach the developers, send mail to @email{latte-dev@@zanshin.com}.
+Use this address for reporting bugs.  Please make sure your bug reports
+contain as much relevant information as possible, including:
+
+@itemize @bullet
+
+@item
+The version number of Latte (find out by running @w{@code{latte-html
+--version}});
+
+@item
+Your operating system type and version number;
+
+@item
+The arguments you used to invoke @code{latte-html};
+
+@item
+A concise description of the problem, including what you expected should
+happen and what actually happened;
+
+@item
+The smallest data sample you can devise that reliably demonstrates the
+problem, and the erroneous output, if any, that it produces.
+
+@end itemize
+
+@noindent
+Before reporting a bug, please be sure that the problem isn't a Latte
+usage error on your part.  The Latte ``Frequently Asked Questions'' page
+can help you make this determination.  It's at
+
+@display
+@url{http://www.latte.org/faq.html}
+@end display
+
+Latte is @dfn{open source} software, licensed under the terms of the
+Zanshin Public License.  A copy of the license comes with Latte in the
+file @file{COPYING}.  The license can also be found at
+
+@display
+@url{http://www.zanshin.com/ZPL.html}
+@end display
+
+Latte is a product of Zanshin, Inc.  More about Zanshin can be found on
+the Zanshin home page at
+
+@display
+@url{http://www.zanshin.com/}
+@end display
+
+@node Pedigree, Function and Variable Index, Further information, Top
+@appendix Pedigree
+
+@quotation
+The language designer's task is consolidation, not innovation.
+
+@flushright
+---C.A.R. Hoare (paraphrased)
+@end flushright
+@end quotation
+
+Some users may recognize the influence of other languages in the design
+of Latte.
+
+Latte borrows the choice of metacharacters (@samp{\}, @samp{@{}, and
+@samp{@}}) from @TeX{}.  One of @TeX{}'s drawbacks is that there
+actually are numerous other metacharacters, some of which are active in
+some contexts and not in others.  This makes it tricky to write
+syntactically correct @TeX{}, so Latte specifically rejects making any
+other characters ``meta,'' even though some of @TeX{}'s metacharacters
+are frequently convenient (such as @samp{~} for a non-breaking space).
+
+Many of Latte's other features come from Scheme (a dialect of Lisp),
+including: @b{prefix notation}, in which function calls are written with
+the operator preceding the operands; @b{lexical scope}, described in
+section @ref{Scope}, where the binding of a variable is fixed at
+lexical-analysis time (i.e., when the program is parsed rather than when
+it runs); @b{manifest types}, which means that ``type'' is a property of
+a value rather than of a variable; @b{quasiquoting}, which aids in
+writing macros; and @b{first-class functions}, meaning that function
+objects (created with @code{\lambda} and @code{\macro}; @pxref{Functions
+on functions}) can be assigned to variables or passed to and returned
+from other functions.
+
+@node Function and Variable Index,  , Pedigree, Top
+@unnumbered Function and Variable Index
+
+@printindex fn
+
+@contents
+
+@bye

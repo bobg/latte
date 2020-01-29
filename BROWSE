@@ -1,0 +1,2582 @@
+[ebrowse-hs "ebrowse 5.0" " -x" () ()][ebrowse-ts [ebrowse-cs "SideEffectFn" "Latte_Nested" 0"latte.h" "  struct SideEffectFn {" 9590"latte.h" ]
+()([ebrowse-ms "m_nested" () 0 () "    const Latte_Nested &m_nested;" 9736 2  () () 0]
+)
+([ebrowse-ms "SideEffectFn" () 0 () "    SideEffectFn(const Latte_Nested &nested) :" 9613 0  () "    SideEffectFn(const Latte_Nested &nested) :" 9613]
+[ebrowse-ms "operator ()" () 4 () "    bool operator () ()" 9682 0  "nested.cxx" "Latte_Nested::SideEffectFn::operator () ()" 1576]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "deque" () 32() () 0() ]
+([ebrowse-ts [ebrowse-cs "latte_deque" () 32"latte-deque.h" "class latte_deque :" 989"latte-deque.h" ]
+([ebrowse-ts [ebrowse-cs "rep" "shdeque<>" 0"shdeque.h" "  class rep :" 937"shdeque.h" ]
+()()
+([ebrowse-ms "begin" () 4 () "    const_iterator begin()" 3803 0  () "    const_iterator begin()" 3803]
+[ebrowse-ms "begin" () 0 () "    iterator begin()" 3671 0  () "    iterator begin()" 3671]
+[ebrowse-ms "end" () 4 () "    const_iterator end()" 3941 0  () "    const_iterator end()" 3941]
+[ebrowse-ms "end" () 0 () "    iterator end()" 3734 0  () "    iterator end()" 3734]
+[ebrowse-ms "rep" () 0 () "    rep(const rep &other) :" 3598 0  () "    rep(const rep &other) :" 3598]
+[ebrowse-ms "rep" () 0 () "    rep(const iterator &a, const iterator &b) :" 3535 0  () "    rep(const iterator &a, const iterator &b) :" 3535]
+[ebrowse-ms "rep" () 0 () "    rep() {" 3518 0  () "    rep() {" 3518]
+)
+()
+()
+()
+([ebrowse-ms "super" () 0 () "    typedef latte_deque<T> super;" 1040 2  () () 0]
+)
+()()
+])()
+([ebrowse-ms "append" () 0 () "  void append(const" 1367 0  () "  void append(const" 1367]
+[ebrowse-ms "latte_deque" () 0 () "	      const const_iterator &b) {" 1197 0  () "	      const const_iterator &b) {" 1197]
+[ebrowse-ms "latte_deque" () 0 () "  latte_deque() {" 1032 0  () "  latte_deque() {" 1032]
+)
+()
+()
+()
+()
+()()
+])()
+()
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "option" () 256"getopt.h" "struct option
+{" 3026() ]
+()([ebrowse-ms "flag" () 0 () "  int *flag;" 3272 0  () () 0]
+[ebrowse-ms "has_arg" () 0 () "  int has_arg;" 3259 0  () () 0]
+[ebrowse-ms "name" () 0 () "  char *name;" 3101 0  () () 0]
+[ebrowse-ms "val" () 0 () "  int val;" 3283 0  () () 0]
+)
+()
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "ostream" () 0() () 0() ]
+([ebrowse-ts [ebrowse-cs "DevNull" () 0"latte-log.h" "class DevNull :" 999"latte-log.h" ]
+()([ebrowse-ms "buf" () 0 () "  DevNullBuf buf;" 1248 2  () () 0]
+)
+([ebrowse-ms "DevNull" () 0 () "  DevNull() :" 1181 0  () "  DevNull() :" 1181]
+)
+()
+()
+()
+()
+()()
+])()
+()
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Restorer" () 32"restorer.h" "class Restorer {" 942"restorer.h" ]
+()([ebrowse-ms "t" () 0 () "  T &t;" 1112 2  () () 0]
+[ebrowse-ms "val" () 0 () "  T val;" 1121 2  () () 0]
+)
+([ebrowse-ms "Restorer" () 0 () "  Restorer(T &t, const T &now, const T &later) :" 999 0  () "  Restorer(T &t, const T &now, const T &later) :" 999]
+[ebrowse-ms "Restorer" () 0 () "  Restorer(T &t) :" 964 0  () "  Restorer(T &t) :" 964]
+[ebrowse-ms "~Restorer" () 0 () "  ~Restorer()" 1080 0  () "  ~Restorer()" 1080]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_OpError" () 0() () 0() ]
+([ebrowse-ts [ebrowse-cs "BadType" "Latte_Operator" 0"latte.h" "  class BadType :" 18511"latte.h" ]
+()([ebrowse-ms "m_argno" () 0 () "    long m_argno;" 18742 2  () () 0]
+)
+([ebrowse-ms "BadType" () 0 () "rator &op, long arg, const Latte_FileLoc &loc) :" 18563 0  () "rator &op, long arg, const Latte_FileLoc &loc) :" 18563]
+[ebrowse-ms "argno" () 4 () "    long argno()" 18685 0  () "    long argno()" 18685]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "IllegalAssignment" "Latte_Operator" 0"latte.h" "  class IllegalAssignment :" 17996"latte.h" ]
+()([ebrowse-ms "m_varname" () 0 () "    shstring m_varname;" 18315 2  () () 0]
+)
+([ebrowse-ms "IllegalAssignment" () 0 () "                     const Latte_FileLoc &loc) :" 18058 0  () "                     const Latte_FileLoc &loc) :" 18058]
+[ebrowse-ms "varname" () 4 () "    const shstring &varname()" 18250 0  () "    const shstring &varname()" 18250]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "InsufficientArgs" "Latte_Operator" 0"latte.h" "  class InsufficientArgs :" 18347"latte.h" ]
+()()
+([ebrowse-ms "InsufficientArgs" () 0 () " Latte_Operator &op, const Latte_FileLoc &loc) :" 18408 0  () " Latte_Operator &op, const Latte_FileLoc &loc) :" 18408]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "OutOfRange" "Latte_Operator" 0"latte.h" "  class OutOfRange :" 18768"latte.h" ]
+()([ebrowse-ms "m_argno" () 0 () "    long m_argno;" 19002 2  () () 0]
+)
+([ebrowse-ms "OutOfRange" () 0 () "rator &op, long arg, const Latte_FileLoc &loc) :" 18823 0  () "rator &op, long arg, const Latte_FileLoc &loc) :" 18823]
+[ebrowse-ms "argno" () 4 () "    long argno()" 18945 0  () "    long argno()" 18945]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Useless" "Latte_Closure" 0"latte.h" "  class Useless :" 19818"latte.h" ]
+()()
+([ebrowse-ms "Useless" () 0 () "te_Closure &closure, const Latte_FileLoc &loc) :" 19870 0  () "te_Closure &closure, const Latte_FileLoc &loc) :" 19870]
+)
+()
+()
+()
+()
+()()
+])()
+()
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Tangible" () 0"grammar.cxx" "struct Tangible {" 564"grammar.cxx" ]
+()([ebrowse-ms "loc" () 0 () "  Latte_FileLoc loc;" 682 0  () () 0]
+[ebrowse-ms "ws" () 0 () "  Latte_Wstate ws;" 661 0  () () 0]
+)
+([ebrowse-ms "Tangible" () 0 () "const Latte_Wstate &w, const Latte_FileLoc &l) :" 581 0  () "const Latte_Wstate &w, const Latte_FileLoc &l) :" 581]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "yy_buffer_state" () 0"syntax.cxx" "struct yy_buffer_state
+	{" 3460() ]
+()([ebrowse-ms "yy_at_bol" () 0 () "	int yy_at_bol;" 4360 0  () () 0]
+[ebrowse-ms "yy_buf_pos" () 0 () "	char *yy_buf_pos;" 3543 0  () () 0]
+[ebrowse-ms "yy_buf_size" () 0 () "	yy_size_t yy_buf_size;" 3691 0  () () 0]
+[ebrowse-ms "yy_buffer_status" () 0 () "	int yy_buffer_status;" 4488 0  () () 0]
+[ebrowse-ms "yy_ch_buf" () 0 () "	char *yy_ch_buf;" 3504 0  () () 0]
+[ebrowse-ms "yy_fill_buffer" () 0 () "	int yy_fill_buffer;" 4464 0  () () 0]
+[ebrowse-ms "yy_input_file" () 0 () "	istream* yy_input_file;" 3485 0  () () 0]
+[ebrowse-ms "yy_is_interactive" () 0 () "	int yy_is_interactive;" 4201 0  () () 0]
+[ebrowse-ms "yy_is_our_buffer" () 0 () "	int yy_is_our_buffer;" 3962 0  () () 0]
+[ebrowse-ms "yy_n_chars" () 0 () "	int yy_n_chars;" 3794 0  () () 0]
+)
+()
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "shstring" () 0"shstring.h" "class shstring {" 1017"shstring.cxx" ]
+([ebrowse-ts [ebrowse-cs "Latte_Assignment" () 0"latte.h" "class Latte_Assignment :" 20597"assignment.cxx" ]
+()()
+([ebrowse-ms "Latte_Assignment" () 0 () "  Latte_Assignment(const Latte_Assignment &);" 20815 0  () "atte_Assignment(const Latte_Assignment &other) :" 989]
+[ebrowse-ms "Latte_Assignment" () 0 () "		   const shstring &);" 20722 0  () "			 const shstring &name) :" 825]
+[ebrowse-ms "as_assignment" () 5 () "  const Latte_Assignment *as_assignment()" 20985 0  "latte.h" "  const Latte_Assignment *as_assignment()" 20985]
+[ebrowse-ms "as_assignment" () 1 () "  Latte_Assignment 	 *as_assignment()" 20925 0  "latte.h" "  Latte_Assignment 	 *as_assignment()" 20925]
+[ebrowse-ms "as_tangible" () 5 () "  const Latte_Tangible *as_tangible()" 21096 0  "latte.h" "  const Latte_Tangible *as_tangible()" 21096]
+[ebrowse-ms "as_tangible" () 1 () "  Latte_Tangible *as_tangible()" 21041 0  "latte.h" "  Latte_Tangible *as_tangible()" 21041]
+[ebrowse-ms "do_eval" () 1 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 21292 1  () "Latte_Assignment::do_eval(Latte_Activation" 1326]
+[ebrowse-ms "name" () 4 () "  const shstring &name()" 20862 0  "latte.h" "  const shstring &name()" 20862]
+[ebrowse-ms "render" () 5 () "  void render(ostream" 21174 0  () "Latte_Assignment::render(ostream" 1100]
+[ebrowse-ms "self_evaluating" () 5 () "  bool self_evaluating()" 21210 0  "latte.h" "  bool self_evaluating()" 21210]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 21147 0  () "Latte_Assignment::visit(Latte_Visitor" 1211]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Param" () 0"latte.h" "class Latte_Param :" 12712"latte.h" ]
+()([ebrowse-ms "m_type" () 0 () "  Type m_type;" 13322 2  () () 0]
+)
+([ebrowse-ms "Latte_Param" () 0 () "  Latte_Param(const Latte_Param &other);" 12944 0  "param.cxx" "e_Param::Latte_Param(const Latte_Param &other) :" 1016]
+[ebrowse-ms "Latte_Param" () 0 () "	      enum Type);" 12834 0  "param.cxx" "			 enum Latte_Param::Type type) :" 815]
+[ebrowse-ms "as_param" () 4 () "  const Latte_Param *as_param()" 13208 0  () "  const Latte_Param *as_param()" 13208]
+[ebrowse-ms "as_param" () 0 () "  Latte_Param *as_param()" 13159 0  () "  Latte_Param *as_param()" 13159]
+[ebrowse-ms "is_named" () 4 () "  bool is_named()" 13034 0  () "  bool is_named()" 13034]
+[ebrowse-ms "is_rest" () 4 () "  bool is_rest()" 13092 0  () "  bool is_rest()" 13092]
+[ebrowse-ms "name" () 4 () "  const shstring &name()" 12991 0  () "  const shstring &name()" 12991]
+[ebrowse-ms "render" () 4 () "  void render(ostream" 13286 0  "param.cxx" "Latte_Param::render(ostream" 1148]
+[ebrowse-ms "visit" () 0 () "  void visit(Latte_Visitor" 13259 0  "param.cxx" "Latte_Param::visit(Latte_Visitor" 1400]
+)
+()
+()
+()
+([ebrowse-ms "Type" () 0 () "  enum Type {" 12782 0  () "  enum Type {" 12782]
+)
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Str" () 0"latte.h" "class Latte_Str :" 21318"latte.h" ]
+()([ebrowse-ms "m_numval" () 0 () "  mutable Latte_Number_t m_numval;" 21941 2  () () 0]
+[ebrowse-ms "m_numval_known" () 0 () "  mutable bool m_numval_known;" 21906 2  () () 0]
+)
+([ebrowse-ms "Latte_Str" () 0 () "  Latte_Str(const Latte_Str &);" 21553 0  "str.cxx" "Latte_Str::Latte_Str(const Latte_Str &other) :" 1404]
+[ebrowse-ms "Latte_Str" () 0 () "	    const Latte_Number_t &);" 21466 0  "str.cxx" "		     const Latte_Number_t &num) :" 1034]
+[ebrowse-ms "as_str" () 4 () "  const Latte_Str     *as_str()" 21734 0  () "  const Latte_Str     *as_str()" 21734]
+[ebrowse-ms "as_str" () 0 () "  Latte_Str 	      *as_str()" 21682 0  () "  Latte_Str 	      *as_str()" 21682]
+[ebrowse-ms "numeric_val" () 4 () "  Latte_Number_t numeric_val()" 21792 0  "str.cxx" "Latte_Str::numeric_val()" 1725]
+[ebrowse-ms "render" () 4 () "  void render(ostream" 21854 0  "str.cxx" "Latte_Str::render(ostream" 1652]
+[ebrowse-ms "str" () 4 () "  const shstring &str()" 21628 0  () "  const shstring &str()" 21628]
+[ebrowse-ms "str" () 0 () "  shstring &str()" 21586 0  () "  shstring &str()" 21586]
+[ebrowse-ms "visit" () 0 () "  void visit(Latte_Visitor" 21827 0  "str.cxx" "Latte_Str::visit(Latte_Visitor" 1578]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_VarRef" () 0"latte.h" "class Latte_VarRef :" 21966"latte.h" ]
+()([ebrowse-ms "m_depth_offset_known" () 0 () "  mutable bool m_depth_offset_known;" 23308 2  () () 0]
+[ebrowse-ms "m_offset" () 0 () "  mutable unsigned long m_depth, m_offset;" 23271 2  () () 0]
+)
+([ebrowse-ms "Latte_VarRef" () 0 () "  Latte_VarRef(const Latte_VarRef &);" 22123 0  "varref.cxx" "arRef::Latte_VarRef(const Latte_VarRef &other) :" 1046]
+[ebrowse-ms "Latte_VarRef" () 0 () "ate &, const Latte_FileLoc &, const shstring &);" 22044 0  "varref.cxx" "			   const shstring &name) :" 861]
+[ebrowse-ms "as_varref" () 4 () "  const Latte_VarRef  *as_varref()" 22409 0  () "  const Latte_VarRef  *as_varref()" 22409]
+[ebrowse-ms "as_varref" () 0 () "  Latte_VarRef        *as_varref()" 22354 0  () "  Latte_VarRef        *as_varref()" 22354]
+[ebrowse-ms "do_eval" () 0 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 23140 1  "varref.cxx" "Latte_VarRef::do_eval(Latte_Activation" 2168]
+[ebrowse-ms "lookup" () 4 () "t Refcounter<Latte_Obj> &lookup(Latte_Activation" 22246 0  "varref.cxx" "Latte_VarRef::lookup(Latte_Activation" 2044]
+[ebrowse-ms "lookup_rw" () 4 () "efcounter<Latte_Obj> &lookup_rw(Latte_Activation" 22308 0  "varref.cxx" "Latte_VarRef::lookup_rw(Latte_Activation" 1913]
+[ebrowse-ms "lookup_rw_aux" () 4 () "unter<Latte_Obj> &lookup_rw_aux(Latte_Activation" 23211 2  "varref.cxx" "Latte_VarRef::lookup_rw_aux(Latte_Activation" 1295]
+[ebrowse-ms "name" () 4 () "  const shstring &name()" 22166 0  () "  const shstring &name()" 22166]
+[ebrowse-ms "render" () 4 () "  void render(ostream" 22576 0  "varref.cxx" "Latte_VarRef::render(ostream" 2367]
+[ebrowse-ms "self_evaluating" () 4 () "  bool self_evaluating()" 22459 0  () "  bool self_evaluating()" 22459]
+[ebrowse-ms "side_effects" () 4 () "  bool side_effects()" 22501 0  () "  bool side_effects()" 22501]
+[ebrowse-ms "visit" () 0 () "  void visit(Latte_Visitor" 22549 0  "varref.cxx" "Latte_VarRef::visit(Latte_Visitor" 2287]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "NotFound" "Latte_BindingEnv" 0"latte.h" "  class NotFound :" 4207"latte.h" ]
+()()
+([ebrowse-ms "NotFound" () 0 () "    NotFound(const shstring &name) :" 4255 0  () "    NotFound(const shstring &name) :" 4255]
+)
+()
+()
+()
+()
+()()
+])([ebrowse-ms "rep" () 0 () "  Refcounter<Rep> rep;" 2425 2  () () 0]
+)
+([ebrowse-ms "begin" () 4 () "  const_iterator begin()" 1681 0  "shstring.h" "  const_iterator begin()" 1681]
+[ebrowse-ms "begin" () 0 () "  iterator begin()" 1631 0  "shstring.h" "  iterator begin()" 1631]
+[ebrowse-ms "empty" () 4 () "  bool empty()" 1475 0  "shstring.h" "  bool empty()" 1475]
+[ebrowse-ms "end" () 4 () "  const_iterator end()" 1776 0  "shstring.h" "  const_iterator end()" 1776]
+[ebrowse-ms "end" () 0 () "  iterator end()" 1730 0  "shstring.h" "  iterator end()" 1730]
+[ebrowse-ms "null" () 4 () "  bool null()" 1431 0  "shstring.h" "  bool null()" 1431]
+[ebrowse-ms "operator <" () 4 () "  bool operator < (const" 1542 0  () "shstring::operator < (const" 2144]
+[ebrowse-ms "operator =" () 0 () "  shstring &operator = (const" 1407 0  () () 0]
+[ebrowse-ms "operator =" () 0 () "  shstring &operator = (const" 1364 0  () "shstring::operator = (const" 1487]
+[ebrowse-ms "operator ==" () 4 () "  bool operator == (const" 1587 0  () "shstring::operator == (const" 2373]
+[ebrowse-ms "shstring" () 0 () "const const_iterator &, const const_iterator &);" 1274 0  () "		   const shstring::const_iterator &e) :" 1261]
+[ebrowse-ms "shstring" () 0 () "  shstring(const shstring &);" 1244 0  () "shstring::shstring(const shstring &other) :" 1155]
+[ebrowse-ms "shstring" () 0 () "  shstring(const char *, size_t);" 1182 0  () "shstring::shstring(const char *str, size_t n) :" 972]
+[ebrowse-ms "shstring" () 0 () "  shstring(const char *);" 1156 0  () "shstring::shstring(const char *str) :" 888]
+[ebrowse-ms "shstring" () 0 () "  shstring();" 1138 0  () "shstring::shstring() :" 849]
+[ebrowse-ms "size" () 4 () "  size_t size()" 1822 0  "shstring.h" "  size_t size()" 1822]
+[ebrowse-ms "str" () 4 () "  const latte_string &str()" 1937 0  "shstring.h" "  const latte_string &str()" 1937]
+[ebrowse-ms "~shstring" () 0 () "  ~shstring()" 1332 0  () "shstring::~shstring()" 1401]
+)
+()
+()
+([ebrowse-ms "operator <<" () 0 () "  friend ostream &operator << (ostream" 2465 2  "wstate.cxx" "operator << (ostream" 3202]
+)
+([ebrowse-ms "const_iterator" () 0 () "def latte_string::const_iterator const_iterator;" 1124 0  () () 0]
+[ebrowse-ms "iterator" () 0 () "  typedef latte_string::iterator iterator;" 1069 0  () () 0]
+)
+()()
+][ebrowse-ts [ebrowse-cs "iterator" "super" 0() () 0() ]
+([ebrowse-ts [ebrowse-cs "iterator" "shdeque<>::rep" 0"shdeque.h" "    class iterator :" 1100"shdeque.h" ]
+()([ebrowse-ms "m_rep" () 0 () "      const rep *m_rep;" 2012 2  () () 0]
+)
+([ebrowse-ms "iterator" () 0 () "      iterator(const iterator &other) :" 1251 0  () "      iterator(const iterator &other) :" 1251]
+[ebrowse-ms "iterator" () 0 () "    iterator(rep &r, const super::iterator &i) :" 1157 0  () "    iterator(rep &r, const super::iterator &i) :" 1157]
+[ebrowse-ms "operator +" () 4 () "      iterator operator + (long" 1569 0  () "      iterator operator + (long" 1569]
+[ebrowse-ms "operator =" () 0 () "      iterator &operator = (const" 1359 0  () "      iterator &operator = (const" 1359]
+[ebrowse-ms "operator ==" () 4 () "      bool operator == (const" 1721 0  () "      bool operator == (const" 1721]
+)
+()
+()
+()
+()
+()()
+])()
+()
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_FileLoc" () 0"latte.h" "class Latte_FileLoc {" 2188"fileloc.cxx" ]
+([ebrowse-ts [ebrowse-cs "Latte_Error" () 0"latte.h" "class Latte_Error :" 2685"latte.cxx" ]
+([ebrowse-ts [ebrowse-cs "Frozen" "Latte_VarRef" 0"latte.h" "  class Frozen :" 22853"latte.h" ]
+()([ebrowse-ms "m_name" () 0 () "    shstring m_name;" 23073 2  () () 0]
+)
+([ebrowse-ms "Frozen" () 0 () "onst Latte_FileLoc &loc, const shstring &name) :" 22902 0  () "onst Latte_FileLoc &loc, const shstring &name) :" 22902]
+[ebrowse-ms "name" () 4 () "    const shstring &name()" 23014 0  () "    const shstring &name()" 23014]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_OpError" "Latte_Operator" 0"latte.h" "  class Latte_OpError :" 17700"latte.h" ]
+()([ebrowse-ms "m_opname" () 0 () "    shstring m_opname;" 17962 2  () () 0]
+)
+([ebrowse-ms "Latte_OpError" () 0 () "                  const Latte_FileLoc &loc) :" 17756 0  () "                  const Latte_FileLoc &loc) :" 17756]
+[ebrowse-ms "opname" () 4 () "    const shstring &opname()" 17899 0  () "    const shstring &opname()" 17899]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_SysError" () 0"latte.h" "class Latte_SysError :" 3269"latte.h" ]
+([ebrowse-ts [ebrowse-cs "Latte_FileError" () 0"latte.h" "class Latte_FileError :" 3414"latte.h" ]
+()([ebrowse-ms "m_filename" () 0 () "  latte_string m_filename;" 3838 2  () () 0]
+)
+([ebrowse-ms "Latte_FileError" () 0 () "te_FileLoc &loc, const latte_string &filename) :" 3637 0  () "te_FileLoc &loc, const latte_string &filename) :" 3637]
+[ebrowse-ms "Latte_FileError" () 0 () " Latte_FileError(const latte_string &filename) :" 3563 0  () " Latte_FileError(const latte_string &filename) :" 3563]
+[ebrowse-ms "Latte_FileError" () 0 () "  Latte_FileError() {" 3467 0  () "  Latte_FileError() {" 3467]
+[ebrowse-ms "errfile" () 4 () "  const latte_string &errfile()" 3771 0  () "  const latte_string &errfile()" 3771]
+)
+()
+()
+()
+()
+()()
+])()
+([ebrowse-ms "Latte_SysError" () 0 () "  Latte_SysError(const Latte_FileLoc &loc) :" 3344 0  () "  Latte_SysError(const Latte_FileLoc &loc) :" 3344]
+[ebrowse-ms "Latte_SysError" () 0 () "  Latte_SysError() {" 3318 0  () "  Latte_SysError() {" 3318]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "NoParamList" "Latte_Lambda" 0"latte.h" "  class NoParamList :" 27034"latte.h" ]
+()()
+([ebrowse-ms "NoParamList" () 0 () "    NoParamList(const Latte_FileLoc &loc) :" 27088 0  () "    NoParamList(const Latte_FileLoc &loc) :" 27088]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "SyntaxError" "Latte_Reader" 0"latte.h" "  class SyntaxError :" 25603"latte.h" ]
+()()
+([ebrowse-ms "SyntaxError" () 0 () "    SyntaxError(const Latte_FileLoc &loc) :" 25657 0  () "    SyntaxError(const Latte_FileLoc &loc) :" 25657]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Undefined" "Latte_VarRef" 0"latte.h" "  class Undefined :" 22607"latte.h" ]
+()([ebrowse-ms "m_name" () 0 () "    shstring m_name;" 22830 2  () () 0]
+)
+([ebrowse-ms "Undefined" () 0 () "onst Latte_FileLoc &loc, const shstring &name) :" 22659 0  () "onst Latte_FileLoc &loc, const shstring &name) :" 22659]
+[ebrowse-ms "name" () 4 () "    const shstring &name()" 22771 0  () "    const shstring &name()" 22771]
+)
+()
+()
+()
+()
+()()
+])([ebrowse-ms "m_backtrace" () 0 () " mutable latte_deque<Latte_FileLoc> m_backtrace;" 3242 2  () () 0]
+)
+([ebrowse-ms "Latte_Error" () 0 () "  Latte_Error(const Latte_FileLoc &loc) :" 2756 0  "latte.h" "  Latte_Error(const Latte_FileLoc &loc) :" 2756]
+[ebrowse-ms "Latte_Error" () 0 () "  Latte_Error() {" 2733 0  "latte.h" "  Latte_Error() {" 2733]
+[ebrowse-ms "add_fileloc" () 4 () "  void add_fileloc(const" 2946 0  () "Latte_Error::add_fileloc(const" 2659]
+[ebrowse-ms "backtrace_begin" () 4 () "Latte_FileLoc>::const_iterator backtrace_begin()" 3034 0  "latte.h" "Latte_FileLoc>::const_iterator backtrace_begin()" 3034]
+[ebrowse-ms "backtrace_end" () 4 () "e<Latte_FileLoc>::const_iterator backtrace_end()" 3139 0  "latte.h" "e<Latte_FileLoc>::const_iterator backtrace_end()" 3139]
+[ebrowse-ms "fileloc" () 4 () "  const Latte_FileLoc &fileloc()" 2834 0  "latte.h" "  const Latte_FileLoc &fileloc()" 2834]
+[ebrowse-ms "set_fileloc" () 0 () "  void set_fileloc(const" 2884 0  "latte.h" "  void set_fileloc(const" 2884]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Tangible" () 0"latte.h" "class Latte_Tangible :" 11227"latte.h" ]
+([ebrowse-ts [ebrowse-cs "Latte_Assignment" () 0"latte.h" "class Latte_Assignment :" 20597"assignment.cxx" ]
+()()
+([ebrowse-ms "Latte_Assignment" () 0 () "  Latte_Assignment(const Latte_Assignment &);" 20815 0  () "atte_Assignment(const Latte_Assignment &other) :" 989]
+[ebrowse-ms "Latte_Assignment" () 0 () "		   const shstring &);" 20722 0  () "			 const shstring &name) :" 825]
+[ebrowse-ms "as_assignment" () 5 () "  const Latte_Assignment *as_assignment()" 20985 0  "latte.h" "  const Latte_Assignment *as_assignment()" 20985]
+[ebrowse-ms "as_assignment" () 1 () "  Latte_Assignment 	 *as_assignment()" 20925 0  "latte.h" "  Latte_Assignment 	 *as_assignment()" 20925]
+[ebrowse-ms "as_tangible" () 5 () "  const Latte_Tangible *as_tangible()" 21096 0  "latte.h" "  const Latte_Tangible *as_tangible()" 21096]
+[ebrowse-ms "as_tangible" () 1 () "  Latte_Tangible *as_tangible()" 21041 0  "latte.h" "  Latte_Tangible *as_tangible()" 21041]
+[ebrowse-ms "do_eval" () 1 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 21292 1  () "Latte_Assignment::do_eval(Latte_Activation" 1326]
+[ebrowse-ms "name" () 4 () "  const shstring &name()" 20862 0  "latte.h" "  const shstring &name()" 20862]
+[ebrowse-ms "render" () 5 () "  void render(ostream" 21174 0  () "Latte_Assignment::render(ostream" 1100]
+[ebrowse-ms "self_evaluating" () 5 () "  bool self_evaluating()" 21210 0  "latte.h" "  bool self_evaluating()" 21210]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 21147 0  () "Latte_Assignment::visit(Latte_Visitor" 1211]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Group" () 0"latte.h" "class Latte_Group :" 15922"group.cxx" ]
+()([ebrowse-ms "m_self_eval" () 0 () "  memo<bool, SelfEvalFn> m_self_eval;" 16786 2  () () 0]
+)
+([ebrowse-ms "Latte_Group" () 0 () "  Latte_Group(const Latte_Group &);" 16206 0  () "e_Group::Latte_Group(const Latte_Group &other) :" 1235]
+[ebrowse-ms "Latte_Group" () 0 () "	      const Latte_List::const_iterator &);" 16060 0  () "			 const Latte_List::const_iterator &b) :" 974]
+[ebrowse-ms "Latte_Group" () 0 () "up(const Latte_Wstate &, const Latte_FileLoc &);" 16000 0  () "			 const Latte_FileLoc &loc) :" 815]
+[ebrowse-ms "as_group" () 4 () "  const Latte_Group *as_group()" 16310 0  "latte.h" "  const Latte_Group *as_group()" 16310]
+[ebrowse-ms "as_group" () 0 () "  Latte_Group       *as_group()" 16255 0  "latte.h" "  Latte_Group       *as_group()" 16255]
+[ebrowse-ms "bool_val" () 5 () "  bool bool_val()" 16352 0  "latte.h" "  bool bool_val()" 16352]
+[ebrowse-ms "do_eval" () 1 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 16567 1  () "Latte_Group::do_eval(Latte_Activation" 1834]
+[ebrowse-ms "render" () 5 () "  void render(ostream" 16495 0  () "Latte_Group::render(ostream" 2995]
+[ebrowse-ms "self_evaluating" () 5 () "  bool self_evaluating()" 16405 0  "latte.h" "  bool self_evaluating()" 16405]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 16468 0  () "Latte_Group::visit(Latte_Visitor" 2917]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Param" () 0"latte.h" "class Latte_Param :" 12712"latte.h" ]
+()([ebrowse-ms "m_type" () 0 () "  Type m_type;" 13322 2  () () 0]
+)
+([ebrowse-ms "Latte_Param" () 0 () "  Latte_Param(const Latte_Param &other);" 12944 0  "param.cxx" "e_Param::Latte_Param(const Latte_Param &other) :" 1016]
+[ebrowse-ms "Latte_Param" () 0 () "	      enum Type);" 12834 0  "param.cxx" "			 enum Latte_Param::Type type) :" 815]
+[ebrowse-ms "as_param" () 4 () "  const Latte_Param *as_param()" 13208 0  () "  const Latte_Param *as_param()" 13208]
+[ebrowse-ms "as_param" () 0 () "  Latte_Param *as_param()" 13159 0  () "  Latte_Param *as_param()" 13159]
+[ebrowse-ms "is_named" () 4 () "  bool is_named()" 13034 0  () "  bool is_named()" 13034]
+[ebrowse-ms "is_rest" () 4 () "  bool is_rest()" 13092 0  () "  bool is_rest()" 13092]
+[ebrowse-ms "name" () 4 () "  const shstring &name()" 12991 0  () "  const shstring &name()" 12991]
+[ebrowse-ms "render" () 4 () "  void render(ostream" 13286 0  "param.cxx" "Latte_Param::render(ostream" 1148]
+[ebrowse-ms "visit" () 0 () "  void visit(Latte_Visitor" 13259 0  "param.cxx" "Latte_Param::visit(Latte_Visitor" 1400]
+)
+()
+()
+()
+([ebrowse-ms "Type" () 0 () "  enum Type {" 12782 0  () "  enum Type {" 12782]
+)
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Quote" () 0"latte.h" "class Latte_Quote :" 11910"latte.h" ]
+()([ebrowse-ms "m_obj" () 0 () "  Refcounter<Latte_Obj> m_obj;" 12668 2  () () 0]
+)
+([ebrowse-ms "Latte_Quote" () 0 () "  Latte_Quote(const Latte_Quote &);" 12151 0  "quote.cxx" "e_Quote::Latte_Quote(const Latte_Quote &other) :" 1015]
+[ebrowse-ms "Latte_Quote" () 0 () "              enum Type);" 12052 0  "quote.cxx" "                  enum Latte_Quote::Type type) :" 815]
+[ebrowse-ms "as_quote" () 4 () "  const Latte_Quote *as_quote()" 12397 0  () "  const Latte_Quote *as_quote()" 12397]
+[ebrowse-ms "as_quote" () 0 () "  Latte_Quote *as_quote()" 12348 0  () "  Latte_Quote *as_quote()" 12348]
+[ebrowse-ms "do_eval" () 0 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 12622 1  "quote.cxx" "Latte_Quote::do_eval(Latte_Activation" 3891]
+[ebrowse-ms "obj" () 4 () "  const Refcounter<Latte_Obj> &obj()" 12297 0  () "  const Refcounter<Latte_Obj> &obj()" 12297]
+[ebrowse-ms "render" () 4 () "  void render(ostream" 12475 0  "quote.cxx" "Latte_Quote::render(ostream" 1303]
+[ebrowse-ms "self_evaluating" () 4 () "  bool self_evaluating()" 12511 0  () "  bool self_evaluating()" 12511]
+[ebrowse-ms "set_obj" () 0 () "  void set_obj(const" 12234 0  "quote.cxx" "Latte_Quote::set_obj(const" 1139]
+[ebrowse-ms "side_effects" () 4 () "  bool side_effects()" 12553 0  "quote.cxx" "Latte_Quote::side_effects()" 4094]
+[ebrowse-ms "visit" () 0 () "  void visit(Latte_Visitor" 12448 0  "quote.cxx" "Latte_Quote::visit(Latte_Visitor" 1225]
+)
+()
+()
+()
+([ebrowse-ms "Type" () 0 () "  enum Type {" 11957 0  () "  enum Type {" 11957]
+[ebrowse-ms "m_type" () 0 () "  enum Type m_type;" 12688 2  () () 0]
+[ebrowse-ms "type" () 4 () "  enum Type type()" 12187 0  () "  enum Type type()" 12187]
+)
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Str" () 0"latte.h" "class Latte_Str :" 21318"latte.h" ]
+()([ebrowse-ms "m_numval" () 0 () "  mutable Latte_Number_t m_numval;" 21941 2  () () 0]
+[ebrowse-ms "m_numval_known" () 0 () "  mutable bool m_numval_known;" 21906 2  () () 0]
+)
+([ebrowse-ms "Latte_Str" () 0 () "  Latte_Str(const Latte_Str &);" 21553 0  "str.cxx" "Latte_Str::Latte_Str(const Latte_Str &other) :" 1404]
+[ebrowse-ms "Latte_Str" () 0 () "	    const Latte_Number_t &);" 21466 0  "str.cxx" "		     const Latte_Number_t &num) :" 1034]
+[ebrowse-ms "as_str" () 4 () "  const Latte_Str     *as_str()" 21734 0  () "  const Latte_Str     *as_str()" 21734]
+[ebrowse-ms "as_str" () 0 () "  Latte_Str 	      *as_str()" 21682 0  () "  Latte_Str 	      *as_str()" 21682]
+[ebrowse-ms "numeric_val" () 4 () "  Latte_Number_t numeric_val()" 21792 0  "str.cxx" "Latte_Str::numeric_val()" 1725]
+[ebrowse-ms "render" () 4 () "  void render(ostream" 21854 0  "str.cxx" "Latte_Str::render(ostream" 1652]
+[ebrowse-ms "str" () 4 () "  const shstring &str()" 21628 0  () "  const shstring &str()" 21628]
+[ebrowse-ms "str" () 0 () "  shstring &str()" 21586 0  () "  shstring &str()" 21586]
+[ebrowse-ms "visit" () 0 () "  void visit(Latte_Visitor" 21827 0  "str.cxx" "Latte_Str::visit(Latte_Visitor" 1578]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_VarRef" () 0"latte.h" "class Latte_VarRef :" 21966"latte.h" ]
+()([ebrowse-ms "m_depth_offset_known" () 0 () "  mutable bool m_depth_offset_known;" 23308 2  () () 0]
+[ebrowse-ms "m_offset" () 0 () "  mutable unsigned long m_depth, m_offset;" 23271 2  () () 0]
+)
+([ebrowse-ms "Latte_VarRef" () 0 () "  Latte_VarRef(const Latte_VarRef &);" 22123 0  "varref.cxx" "arRef::Latte_VarRef(const Latte_VarRef &other) :" 1046]
+[ebrowse-ms "Latte_VarRef" () 0 () "ate &, const Latte_FileLoc &, const shstring &);" 22044 0  "varref.cxx" "			   const shstring &name) :" 861]
+[ebrowse-ms "as_varref" () 4 () "  const Latte_VarRef  *as_varref()" 22409 0  () "  const Latte_VarRef  *as_varref()" 22409]
+[ebrowse-ms "as_varref" () 0 () "  Latte_VarRef        *as_varref()" 22354 0  () "  Latte_VarRef        *as_varref()" 22354]
+[ebrowse-ms "do_eval" () 0 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 23140 1  "varref.cxx" "Latte_VarRef::do_eval(Latte_Activation" 2168]
+[ebrowse-ms "lookup" () 4 () "t Refcounter<Latte_Obj> &lookup(Latte_Activation" 22246 0  "varref.cxx" "Latte_VarRef::lookup(Latte_Activation" 2044]
+[ebrowse-ms "lookup_rw" () 4 () "efcounter<Latte_Obj> &lookup_rw(Latte_Activation" 22308 0  "varref.cxx" "Latte_VarRef::lookup_rw(Latte_Activation" 1913]
+[ebrowse-ms "lookup_rw_aux" () 4 () "unter<Latte_Obj> &lookup_rw_aux(Latte_Activation" 23211 2  "varref.cxx" "Latte_VarRef::lookup_rw_aux(Latte_Activation" 1295]
+[ebrowse-ms "name" () 4 () "  const shstring &name()" 22166 0  () "  const shstring &name()" 22166]
+[ebrowse-ms "render" () 4 () "  void render(ostream" 22576 0  "varref.cxx" "Latte_VarRef::render(ostream" 2367]
+[ebrowse-ms "self_evaluating" () 4 () "  bool self_evaluating()" 22459 0  () "  bool self_evaluating()" 22459]
+[ebrowse-ms "side_effects" () 4 () "  bool side_effects()" 22501 0  () "  bool side_effects()" 22501]
+[ebrowse-ms "visit" () 0 () "  void visit(Latte_Visitor" 22549 0  "varref.cxx" "Latte_VarRef::visit(Latte_Visitor" 2287]
+)
+()
+()
+()
+()
+()()
+])()
+([ebrowse-ms "Latte_Tangible" () 0 () "  Latte_Tangible(const Latte_Tangible &);" 11410 0  "tangible.cxx" "e::Latte_Tangible(const Latte_Tangible &other) :" 958]
+[ebrowse-ms "Latte_Tangible" () 0 () "le(const Latte_Wstate &, const Latte_FileLoc &);" 11347 0  "tangible.cxx" "			       const Latte_FileLoc &loc) :" 821]
+[ebrowse-ms "as_tangible" () 5 () "  const Latte_Tangible *as_tangible()" 11528 0  () "  const Latte_Tangible *as_tangible()" 11528]
+[ebrowse-ms "as_tangible" () 1 () "  Latte_Tangible       *as_tangible()" 11468 0  () "  Latte_Tangible       *as_tangible()" 11468]
+[ebrowse-ms "fileloc" () 4 () "  const Latte_FileLoc &fileloc()" 11792 0  () "  const Latte_FileLoc &fileloc()" 11792]
+[ebrowse-ms "fileloc" () 0 () "  Latte_FileLoc &fileloc()" 11741 0  () "  Latte_FileLoc &fileloc()" 11741]
+[ebrowse-ms "set_fileloc" () 0 () "  void set_fileloc(const" 11841 0  () "  void set_fileloc(const" 11841]
+[ebrowse-ms "set_ws" () 0 () "  void set_ws(const" 11670 0  () "  void set_ws(const" 11670]
+[ebrowse-ms "wstate" () 4 () "  const Latte_Wstate &wstate()" 11626 0  () "  const Latte_Wstate &wstate()" 11626]
+[ebrowse-ms "wstate" () 0 () "  Latte_Wstate &wstate()" 11577 0  () "  Latte_Wstate &wstate()" 11577]
+)
+()
+()
+()
+()
+()()
+])([ebrowse-ms "m_filename" () 0 () "  shstring m_filename;" 2570 2  () () 0]
+[ebrowse-ms "m_lineno" () 0 () "  unsigned int m_lineno;" 2595 2  () () 0]
+)
+([ebrowse-ms "Latte_FileLoc" () 0 () "  Latte_FileLoc() :" 2215 0  "latte.h" "  Latte_FileLoc() :" 2215]
+[ebrowse-ms "Latte_FileLoc" () 0 () "  Latte_FileLoc(const Latte_FileLoc &);" 2303 0  () "Loc::Latte_FileLoc(const Latte_FileLoc &other) :" 951]
+[ebrowse-ms "Latte_FileLoc" () 0 () "  Latte_FileLoc(const shstring &, unsigned int);" 2254 0  () "			     unsigned int lineno) :" 819]
+[ebrowse-ms "filename" () 4 () "  const shstring &filename()" 2456 0  "latte.h" "  const shstring &filename()" 2456]
+[ebrowse-ms "lineno" () 4 () "  unsigned int lineno()" 2509 0  "latte.h" "  unsigned int lineno()" 2509]
+[ebrowse-ms "operator =" () 0 () "  Latte_FileLoc &operator = (const" 2357 0  () "Latte_FileLoc::operator = (const" 1086]
+[ebrowse-ms "operator ==" () 4 () "  bool operator == (const" 2402 0  () "Latte_FileLoc::operator == (const" 1262]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "latteFlexLexer" () 0() () 0() ]
+([ebrowse-ts [ebrowse-cs "Latte_Reader" () 0"latte.h" "class Latte_Reader :" 25047"grammar.cxx" ]
+()([ebrowse-ms "m_column" () 0 () "  unsigned int m_column;" 26780 2  () () 0]
+[ebrowse-ms "m_filename" () 0 () "  shstring m_filename;" 26803 2  () () 0]
+[ebrowse-ms "m_global_activation" () 0 () "efcounter<Latte_Activation> m_global_activation;" 26876 2  () () 0]
+[ebrowse-ms "m_quoted_string_line" () 0 () "  unsigned int m_quoted_string_line;" 26913 2  () () 0]
+[ebrowse-ms "m_ws" () 0 () "  Latte_Wstate m_ws;" 26824 2  () () 0]
+)
+([ebrowse-ms "Latte_Reader" () 0 () "stream &, const shstring &, Latte_Activation &);" 25148 0  "reader.cxx" "			   Latte_Activation &activation) :" 1093]
+[ebrowse-ms "Latte_Reader" () 0 () "  Latte_Reader(istream &, const shstring &);" 25103 0  "reader.cxx" "r::Latte_Reader(istream &i, const shstring &f) :" 819]
+[ebrowse-ms "define_global" () 0 () "  void define_global(const" 25462 0  "reader.cxx" "Latte_Reader::define_global(const" 1663]
+[ebrowse-ms "filename" () 4 () "  const shstring &filename()" 26613 0  "latte.h" "  const shstring &filename()" 26613]
+[ebrowse-ms "global_activation" () 4 () "Refcounter<Latte_Activation> global_activation()" 26700 0  "latte.h" "Refcounter<Latte_Activation> global_activation()" 26700]
+[ebrowse-ms "global_activation" () 0 () "  Latte_Activation &global_activation()" 25547 0  "latte.h" "  Latte_Activation &global_activation()" 25547]
+[ebrowse-ms "process" () 0 () "  void process(Latte_Visitor" 25235 0  () "Latte_Reader::process(Latte_Visitor" 30250]
+[ebrowse-ms "processed" () 4 () "  bool processed()" 25265 0  "latte.h" "  bool processed()" 25265]
+[ebrowse-ms "unprocessed" () 4 () "  const Latte_Obj &unprocessed()" 25390 0  "latte.h" "  const Latte_Obj &unprocessed()" 25390]
+[ebrowse-ms "ws" () 4 () "  const Latte_Wstate &ws()" 26560 0  "latte.h" "  const Latte_Wstate &ws()" 26560]
+[ebrowse-ms "ws" () 0 () "  Latte_Wstate &ws()" 26516 0  "latte.h" "  Latte_Wstate &ws()" 26516]
+[ebrowse-ms "yylex" () 0 () "  int yylex()" 25205 0  () () 0]
+)
+()
+()
+()
+()
+()()
+])()
+()
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Wstate" () 0"latte.h" "class Latte_Wstate {" 1310"latte.h" ]
+([ebrowse-ts [ebrowse-cs "Latte_Tangible" () 0"latte.h" "class Latte_Tangible :" 11227"latte.h" ]
+([ebrowse-ts [ebrowse-cs "Latte_Assignment" () 0"latte.h" "class Latte_Assignment :" 20597"assignment.cxx" ]
+()()
+([ebrowse-ms "Latte_Assignment" () 0 () "  Latte_Assignment(const Latte_Assignment &);" 20815 0  () "atte_Assignment(const Latte_Assignment &other) :" 989]
+[ebrowse-ms "Latte_Assignment" () 0 () "		   const shstring &);" 20722 0  () "			 const shstring &name) :" 825]
+[ebrowse-ms "as_assignment" () 5 () "  const Latte_Assignment *as_assignment()" 20985 0  "latte.h" "  const Latte_Assignment *as_assignment()" 20985]
+[ebrowse-ms "as_assignment" () 1 () "  Latte_Assignment 	 *as_assignment()" 20925 0  "latte.h" "  Latte_Assignment 	 *as_assignment()" 20925]
+[ebrowse-ms "as_tangible" () 5 () "  const Latte_Tangible *as_tangible()" 21096 0  "latte.h" "  const Latte_Tangible *as_tangible()" 21096]
+[ebrowse-ms "as_tangible" () 1 () "  Latte_Tangible *as_tangible()" 21041 0  "latte.h" "  Latte_Tangible *as_tangible()" 21041]
+[ebrowse-ms "do_eval" () 1 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 21292 1  () "Latte_Assignment::do_eval(Latte_Activation" 1326]
+[ebrowse-ms "name" () 4 () "  const shstring &name()" 20862 0  "latte.h" "  const shstring &name()" 20862]
+[ebrowse-ms "render" () 5 () "  void render(ostream" 21174 0  () "Latte_Assignment::render(ostream" 1100]
+[ebrowse-ms "self_evaluating" () 5 () "  bool self_evaluating()" 21210 0  "latte.h" "  bool self_evaluating()" 21210]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 21147 0  () "Latte_Assignment::visit(Latte_Visitor" 1211]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Group" () 0"latte.h" "class Latte_Group :" 15922"group.cxx" ]
+()([ebrowse-ms "m_self_eval" () 0 () "  memo<bool, SelfEvalFn> m_self_eval;" 16786 2  () () 0]
+)
+([ebrowse-ms "Latte_Group" () 0 () "  Latte_Group(const Latte_Group &);" 16206 0  () "e_Group::Latte_Group(const Latte_Group &other) :" 1235]
+[ebrowse-ms "Latte_Group" () 0 () "	      const Latte_List::const_iterator &);" 16060 0  () "			 const Latte_List::const_iterator &b) :" 974]
+[ebrowse-ms "Latte_Group" () 0 () "up(const Latte_Wstate &, const Latte_FileLoc &);" 16000 0  () "			 const Latte_FileLoc &loc) :" 815]
+[ebrowse-ms "as_group" () 4 () "  const Latte_Group *as_group()" 16310 0  "latte.h" "  const Latte_Group *as_group()" 16310]
+[ebrowse-ms "as_group" () 0 () "  Latte_Group       *as_group()" 16255 0  "latte.h" "  Latte_Group       *as_group()" 16255]
+[ebrowse-ms "bool_val" () 5 () "  bool bool_val()" 16352 0  "latte.h" "  bool bool_val()" 16352]
+[ebrowse-ms "do_eval" () 1 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 16567 1  () "Latte_Group::do_eval(Latte_Activation" 1834]
+[ebrowse-ms "render" () 5 () "  void render(ostream" 16495 0  () "Latte_Group::render(ostream" 2995]
+[ebrowse-ms "self_evaluating" () 5 () "  bool self_evaluating()" 16405 0  "latte.h" "  bool self_evaluating()" 16405]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 16468 0  () "Latte_Group::visit(Latte_Visitor" 2917]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Param" () 0"latte.h" "class Latte_Param :" 12712"latte.h" ]
+()([ebrowse-ms "m_type" () 0 () "  Type m_type;" 13322 2  () () 0]
+)
+([ebrowse-ms "Latte_Param" () 0 () "  Latte_Param(const Latte_Param &other);" 12944 0  "param.cxx" "e_Param::Latte_Param(const Latte_Param &other) :" 1016]
+[ebrowse-ms "Latte_Param" () 0 () "	      enum Type);" 12834 0  "param.cxx" "			 enum Latte_Param::Type type) :" 815]
+[ebrowse-ms "as_param" () 4 () "  const Latte_Param *as_param()" 13208 0  () "  const Latte_Param *as_param()" 13208]
+[ebrowse-ms "as_param" () 0 () "  Latte_Param *as_param()" 13159 0  () "  Latte_Param *as_param()" 13159]
+[ebrowse-ms "is_named" () 4 () "  bool is_named()" 13034 0  () "  bool is_named()" 13034]
+[ebrowse-ms "is_rest" () 4 () "  bool is_rest()" 13092 0  () "  bool is_rest()" 13092]
+[ebrowse-ms "name" () 4 () "  const shstring &name()" 12991 0  () "  const shstring &name()" 12991]
+[ebrowse-ms "render" () 4 () "  void render(ostream" 13286 0  "param.cxx" "Latte_Param::render(ostream" 1148]
+[ebrowse-ms "visit" () 0 () "  void visit(Latte_Visitor" 13259 0  "param.cxx" "Latte_Param::visit(Latte_Visitor" 1400]
+)
+()
+()
+()
+([ebrowse-ms "Type" () 0 () "  enum Type {" 12782 0  () "  enum Type {" 12782]
+)
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Quote" () 0"latte.h" "class Latte_Quote :" 11910"latte.h" ]
+()([ebrowse-ms "m_obj" () 0 () "  Refcounter<Latte_Obj> m_obj;" 12668 2  () () 0]
+)
+([ebrowse-ms "Latte_Quote" () 0 () "  Latte_Quote(const Latte_Quote &);" 12151 0  "quote.cxx" "e_Quote::Latte_Quote(const Latte_Quote &other) :" 1015]
+[ebrowse-ms "Latte_Quote" () 0 () "              enum Type);" 12052 0  "quote.cxx" "                  enum Latte_Quote::Type type) :" 815]
+[ebrowse-ms "as_quote" () 4 () "  const Latte_Quote *as_quote()" 12397 0  () "  const Latte_Quote *as_quote()" 12397]
+[ebrowse-ms "as_quote" () 0 () "  Latte_Quote *as_quote()" 12348 0  () "  Latte_Quote *as_quote()" 12348]
+[ebrowse-ms "do_eval" () 0 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 12622 1  "quote.cxx" "Latte_Quote::do_eval(Latte_Activation" 3891]
+[ebrowse-ms "obj" () 4 () "  const Refcounter<Latte_Obj> &obj()" 12297 0  () "  const Refcounter<Latte_Obj> &obj()" 12297]
+[ebrowse-ms "render" () 4 () "  void render(ostream" 12475 0  "quote.cxx" "Latte_Quote::render(ostream" 1303]
+[ebrowse-ms "self_evaluating" () 4 () "  bool self_evaluating()" 12511 0  () "  bool self_evaluating()" 12511]
+[ebrowse-ms "set_obj" () 0 () "  void set_obj(const" 12234 0  "quote.cxx" "Latte_Quote::set_obj(const" 1139]
+[ebrowse-ms "side_effects" () 4 () "  bool side_effects()" 12553 0  "quote.cxx" "Latte_Quote::side_effects()" 4094]
+[ebrowse-ms "visit" () 0 () "  void visit(Latte_Visitor" 12448 0  "quote.cxx" "Latte_Quote::visit(Latte_Visitor" 1225]
+)
+()
+()
+()
+([ebrowse-ms "Type" () 0 () "  enum Type {" 11957 0  () "  enum Type {" 11957]
+[ebrowse-ms "m_type" () 0 () "  enum Type m_type;" 12688 2  () () 0]
+[ebrowse-ms "type" () 4 () "  enum Type type()" 12187 0  () "  enum Type type()" 12187]
+)
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Str" () 0"latte.h" "class Latte_Str :" 21318"latte.h" ]
+()([ebrowse-ms "m_numval" () 0 () "  mutable Latte_Number_t m_numval;" 21941 2  () () 0]
+[ebrowse-ms "m_numval_known" () 0 () "  mutable bool m_numval_known;" 21906 2  () () 0]
+)
+([ebrowse-ms "Latte_Str" () 0 () "  Latte_Str(const Latte_Str &);" 21553 0  "str.cxx" "Latte_Str::Latte_Str(const Latte_Str &other) :" 1404]
+[ebrowse-ms "Latte_Str" () 0 () "	    const Latte_Number_t &);" 21466 0  "str.cxx" "		     const Latte_Number_t &num) :" 1034]
+[ebrowse-ms "as_str" () 4 () "  const Latte_Str     *as_str()" 21734 0  () "  const Latte_Str     *as_str()" 21734]
+[ebrowse-ms "as_str" () 0 () "  Latte_Str 	      *as_str()" 21682 0  () "  Latte_Str 	      *as_str()" 21682]
+[ebrowse-ms "numeric_val" () 4 () "  Latte_Number_t numeric_val()" 21792 0  "str.cxx" "Latte_Str::numeric_val()" 1725]
+[ebrowse-ms "render" () 4 () "  void render(ostream" 21854 0  "str.cxx" "Latte_Str::render(ostream" 1652]
+[ebrowse-ms "str" () 4 () "  const shstring &str()" 21628 0  () "  const shstring &str()" 21628]
+[ebrowse-ms "str" () 0 () "  shstring &str()" 21586 0  () "  shstring &str()" 21586]
+[ebrowse-ms "visit" () 0 () "  void visit(Latte_Visitor" 21827 0  "str.cxx" "Latte_Str::visit(Latte_Visitor" 1578]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_VarRef" () 0"latte.h" "class Latte_VarRef :" 21966"latte.h" ]
+()([ebrowse-ms "m_depth_offset_known" () 0 () "  mutable bool m_depth_offset_known;" 23308 2  () () 0]
+[ebrowse-ms "m_offset" () 0 () "  mutable unsigned long m_depth, m_offset;" 23271 2  () () 0]
+)
+([ebrowse-ms "Latte_VarRef" () 0 () "  Latte_VarRef(const Latte_VarRef &);" 22123 0  "varref.cxx" "arRef::Latte_VarRef(const Latte_VarRef &other) :" 1046]
+[ebrowse-ms "Latte_VarRef" () 0 () "ate &, const Latte_FileLoc &, const shstring &);" 22044 0  "varref.cxx" "			   const shstring &name) :" 861]
+[ebrowse-ms "as_varref" () 4 () "  const Latte_VarRef  *as_varref()" 22409 0  () "  const Latte_VarRef  *as_varref()" 22409]
+[ebrowse-ms "as_varref" () 0 () "  Latte_VarRef        *as_varref()" 22354 0  () "  Latte_VarRef        *as_varref()" 22354]
+[ebrowse-ms "do_eval" () 0 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 23140 1  "varref.cxx" "Latte_VarRef::do_eval(Latte_Activation" 2168]
+[ebrowse-ms "lookup" () 4 () "t Refcounter<Latte_Obj> &lookup(Latte_Activation" 22246 0  "varref.cxx" "Latte_VarRef::lookup(Latte_Activation" 2044]
+[ebrowse-ms "lookup_rw" () 4 () "efcounter<Latte_Obj> &lookup_rw(Latte_Activation" 22308 0  "varref.cxx" "Latte_VarRef::lookup_rw(Latte_Activation" 1913]
+[ebrowse-ms "lookup_rw_aux" () 4 () "unter<Latte_Obj> &lookup_rw_aux(Latte_Activation" 23211 2  "varref.cxx" "Latte_VarRef::lookup_rw_aux(Latte_Activation" 1295]
+[ebrowse-ms "name" () 4 () "  const shstring &name()" 22166 0  () "  const shstring &name()" 22166]
+[ebrowse-ms "render" () 4 () "  void render(ostream" 22576 0  "varref.cxx" "Latte_VarRef::render(ostream" 2367]
+[ebrowse-ms "self_evaluating" () 4 () "  bool self_evaluating()" 22459 0  () "  bool self_evaluating()" 22459]
+[ebrowse-ms "side_effects" () 4 () "  bool side_effects()" 22501 0  () "  bool side_effects()" 22501]
+[ebrowse-ms "visit" () 0 () "  void visit(Latte_Visitor" 22549 0  "varref.cxx" "Latte_VarRef::visit(Latte_Visitor" 2287]
+)
+()
+()
+()
+()
+()()
+])()
+([ebrowse-ms "Latte_Tangible" () 0 () "  Latte_Tangible(const Latte_Tangible &);" 11410 0  "tangible.cxx" "e::Latte_Tangible(const Latte_Tangible &other) :" 958]
+[ebrowse-ms "Latte_Tangible" () 0 () "le(const Latte_Wstate &, const Latte_FileLoc &);" 11347 0  "tangible.cxx" "			       const Latte_FileLoc &loc) :" 821]
+[ebrowse-ms "as_tangible" () 5 () "  const Latte_Tangible *as_tangible()" 11528 0  () "  const Latte_Tangible *as_tangible()" 11528]
+[ebrowse-ms "as_tangible" () 1 () "  Latte_Tangible       *as_tangible()" 11468 0  () "  Latte_Tangible       *as_tangible()" 11468]
+[ebrowse-ms "fileloc" () 4 () "  const Latte_FileLoc &fileloc()" 11792 0  () "  const Latte_FileLoc &fileloc()" 11792]
+[ebrowse-ms "fileloc" () 0 () "  Latte_FileLoc &fileloc()" 11741 0  () "  Latte_FileLoc &fileloc()" 11741]
+[ebrowse-ms "set_fileloc" () 0 () "  void set_fileloc(const" 11841 0  () "  void set_fileloc(const" 11841]
+[ebrowse-ms "set_ws" () 0 () "  void set_ws(const" 11670 0  () "  void set_ws(const" 11670]
+[ebrowse-ms "wstate" () 4 () "  const Latte_Wstate &wstate()" 11626 0  () "  const Latte_Wstate &wstate()" 11626]
+[ebrowse-ms "wstate" () 0 () "  Latte_Wstate &wstate()" 11577 0  () "  Latte_Wstate &wstate()" 11577]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_WsNode" () 0"latte.h" "class Latte_WsNode :" 10190"latte.h" ]
+()()
+([ebrowse-ms "Latte_WsNode" () 0 () "  Latte_WsNode(const Latte_WsNode &);" 10321 0  "wsnode.cxx" "sNode::Latte_WsNode(const Latte_WsNode &other) :" 929]
+[ebrowse-ms "Latte_WsNode" () 0 () "Latte_WsNode(Latte_Obj &, const Latte_Wstate &);" 10274 0  "wsnode.cxx" "WsNode(Latte_Obj &obj, const Latte_Wstate &ws) :" 821]
+[ebrowse-ms "as_wsnode" () 5 () "  const Latte_WsNode *as_wsnode()" 10474 0  () "  const Latte_WsNode *as_wsnode()" 10474]
+[ebrowse-ms "as_wsnode" () 1 () "  Latte_WsNode *as_wsnode()" 10423 0  () "  Latte_WsNode *as_wsnode()" 10423]
+[ebrowse-ms "do_eval" () 1 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 10664 1  "wsnode.cxx" "Latte_WsNode::do_eval(Latte_Activation" 1565]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 10525 0  "wsnode.cxx" "Latte_WsNode::visit(Latte_Visitor" 1458]
+[ebrowse-ms "wstate" () 4 () "  const Latte_Wstate &wstate()" 10370 0  () "  const Latte_Wstate &wstate()" 10370]
+)
+()
+([ebrowse-ms "wrap" () 0 () "  static Refcounter<Latte_Obj> wrap(Latte_Obj" 10576 0  "wsnode.cxx" "Latte_WsNode::wrap(Latte_Obj" 1051]
+)
+()
+()
+()()
+])([ebrowse-ms "m_newlines" () 0 () "  unsigned int m_newlines;" 2031 2  () () 0]
+[ebrowse-ms "m_spaces" () 0 () "  unsigned int m_spaces;" 2004 2  () () 0]
+[ebrowse-ms "m_str" () 0 () "  shstring m_str;" 1947 2  () () 0]
+)
+([ebrowse-ms "Latte_Wstate" () 0 () "  Latte_Wstate(const Latte_Wstate &);" 1358 0  "wstate.cxx" "state::Latte_Wstate(const Latte_Wstate &other) :" 925]
+[ebrowse-ms "Latte_Wstate" () 0 () "  Latte_Wstate();" 1336 0  "wstate.cxx" "Latte_Wstate::Latte_Wstate() :" 856]
+[ebrowse-ms "cr" () 0 () "  void cr(unsigned" 1526 0  "wstate.cxx" "Latte_Wstate::cr(unsigned" 2806]
+[ebrowse-ms "crlf" () 0 () "  void crlf(unsigned" 1497 0  "wstate.cxx" "Latte_Wstate::crlf(unsigned" 2606]
+[ebrowse-ms "lf" () 0 () "  void lf(unsigned" 1555 0  "wstate.cxx" "Latte_Wstate::lf(unsigned" 3004]
+[ebrowse-ms "newlines" () 4 () "  unsigned int newlines()" 1680 0  () "  unsigned int newlines()" 1680]
+[ebrowse-ms "operator =" () 0 () "  Latte_Wstate &operator = (const" 1410 0  "wstate.cxx" "Latte_Wstate::operator = (const" 1143]
+[ebrowse-ms "operator ==" () 4 () "  bool operator == (const" 1831 0  "wstate.cxx" "Latte_Wstate::operator == (const" 1404]
+[ebrowse-ms "reset_ws" () 0 () "  void reset_ws()" 1474 0  "wstate.cxx" "Latte_Wstate::reset_ws()" 1801]
+[ebrowse-ms "space" () 0 () "  void space(unsigned" 1587 0  "wstate.cxx" "Latte_Wstate::space(unsigned" 1953]
+[ebrowse-ms "spaces" () 4 () "  unsigned int spaces()" 1733 0  () "  unsigned int spaces()" 1733]
+[ebrowse-ms "tab" () 0 () "  unsigned int tab(unsigned" 1625 0  "wstate.cxx" "Latte_Wstate::tab(unsigned" 2141]
+[ebrowse-ms "transfer" () 0 () "  Latte_Wstate transfer()" 1454 0  "wstate.cxx" "Latte_Wstate::transfer()" 1703]
+)
+([ebrowse-ms "tab_width" () 0 () "  static unsigned int tab_width;" 1898 2  "wstate.cxx" "unsigned int Latte_Wstate::tab_width = 8;" 826]
+)
+([ebrowse-ms "set_tab_width" () 0 () "  static void set_tab_width(unsigned" 1798 0  () () 0]
+)
+([ebrowse-ms "operator <<" () 0 () "  friend ostream &operator << (ostream" 2071 2  "wstate.cxx" "operator << (ostream" 3202]
+)
+()
+()()
+][ebrowse-ts [ebrowse-cs "stack" () 32() () 0() ]
+([ebrowse-ts [ebrowse-cs "latte_stack" () 32"latte-stack.h" "class latte_stack :" 1167() ]
+()()
+()
+()
+()
+()
+()
+()()
+])()
+()
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "GetOperatorFn" "Latte_List" 0"latte.h" "  struct GetOperatorFn {" 15657"latte.h" ]
+()([ebrowse-ms "m_list" () 0 () "    const Latte_List &m_list;" 15802 2  () () 0]
+)
+([ebrowse-ms "GetOperatorFn" () 0 () "    GetOperatorFn(const Latte_List &list) :" 15681 0  () "    GetOperatorFn(const Latte_List &list) :" 15681]
+[ebrowse-ms "operator ()" () 4 () "    Latte_Operator *operator () ()" 15752 0  "list.cxx" "Latte_List::GetOperatorFn::operator () ()" 1635]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "GetOperatorFn" "Latte_Nested" 0"latte.h" "  struct GetOperatorFn {" 9766"latte.h" ]
+()([ebrowse-ms "m_nested" () 0 () "    const Latte_Nested &m_nested;" 9924 2  () () 0]
+)
+([ebrowse-ms "GetOperatorFn" () 0 () "    GetOperatorFn(const Latte_Nested &nested) :" 9790 0  () "    GetOperatorFn(const Latte_Nested &nested) :" 9790]
+[ebrowse-ms "operator ()" () 4 () "    Latte_Operator *operator () ()" 9870 0  "nested.cxx" "Latte_Nested::GetOperatorFn::operator () ()" 1692]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "super" () 0() () 0() ]
+()()
+()
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Frozen" "Latte_Activation" 0"latte.h" "  class Frozen {" 14072() ]
+()()
+()
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "ImpossibleDepth" "Latte_Activation" 0"latte.h" "  class ImpossibleDepth {" 14036() ]
+()()
+()
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "SelfEvalFn" "Latte_List" 0"latte.h" "  struct SelfEvalFn {" 15496"latte.h" ]
+()([ebrowse-ms "m_list" () 0 () "    const Latte_List &m_list;" 15627 2  () () 0]
+)
+([ebrowse-ms "SelfEvalFn" () 0 () "    SelfEvalFn(const Latte_List &list) :" 15517 0  () "    SelfEvalFn(const Latte_List &list) :" 15517]
+[ebrowse-ms "operator ()" () 4 () "    bool operator () ()" 15577 0  "list.cxx" "Latte_List::SelfEvalFn::operator () ()" 1336]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "SelfEvalFn" "Latte_Nested" 0"latte.h" "  struct SelfEvalFn {" 9417"latte.h" ]
+()([ebrowse-ms "m_nested" () 0 () "    const Latte_Nested &m_nested;" 9561 2  () () 0]
+)
+([ebrowse-ms "SelfEvalFn" () 0 () "    SelfEvalFn(const Latte_Nested &nested) :" 9438 0  () "    SelfEvalFn(const Latte_Nested &nested) :" 9438]
+[ebrowse-ms "operator ()" () 4 () "    bool operator () ()" 9507 0  "nested.cxx" "Latte_Nested::SelfEvalFn::operator () ()" 1470]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "SelfEvalFn" "Latte_Group" 0"latte.h" "  struct SelfEvalFn {" 16604"group.cxx" ]
+()([ebrowse-ms "m_group" () 0 () "    const Latte_Group &m_group;" 16742 2  () () 0]
+)
+([ebrowse-ms "SelfEvalFn" () 0 () "    SelfEvalFn(const Latte_Group &group) :" 16625 0  "latte.h" "    SelfEvalFn(const Latte_Group &group) :" 16625]
+[ebrowse-ms "operator ()" () 4 () "    bool operator () ()" 16690 0  () "Latte_Group::SelfEvalFn::operator () ()" 1420]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Visitor" () 0"latte.h" "class Latte_Visitor {" 23334"latte.h" ]
+([ebrowse-ts [ebrowse-cs "LatteHtml_HtmlVisitor" () 0"latte-html.h" "class LatteHtml_HtmlVisitor :" 1460"latte-html.cxx" ]
+()([ebrowse-ms "m_close_par" () 0 () "  bool m_close_par;" 1675 2  () () 0]
+[ebrowse-ms "m_out" () 0 () "  ostream &m_out;" 1655 2  () () 0]
+)
+([ebrowse-ms "LatteHtml_HtmlVisitor" () 0 () "_HtmlVisitor(ostream &out, bool close_par = 0) :" 1524 0  "latte-html.h" "_HtmlVisitor(ostream &out, bool close_par = 0) :" 1524]
+[ebrowse-ms "visit_str" () 1 () "  void visit_str(Latte_Str" 1622 0  () "LatteHtml_HtmlVisitor::visit_str(Latte_Str" 3418]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "LatteText_TextVisitor" () 0"latte-text.h" "class LatteText_TextVisitor :" 1575"latte-text.cxx" ]
+()([ebrowse-ms "m_column" () 0 () "  unsigned int m_column;" 2132 2  () () 0]
+[ebrowse-ms "m_new_sentence" () 0 () "  bool m_new_sentence;" 2239 2  () () 0]
+[ebrowse-ms "m_out" () 0 () "  ostream &m_out;" 2081 2  () () 0]
+[ebrowse-ms "m_sentence_end_chars" () 0 () "  const char *m_sentence_end_chars;" 2168 2  () () 0]
+[ebrowse-ms "m_sentence_end_transparent_chars" () 0 () "  const char *m_sentence_end_transparent_chars;" 2216 2  () () 0]
+[ebrowse-ms "m_wrapcol" () 0 () "  unsigned int m_wrapcol;" 2107 2  () () 0]
+)
+([ebrowse-ms "LatteText_TextVisitor" () 0 () "onst char *sentence_end_transparent_chars = 0) :" 1639 0  "latte-text.h" "onst char *sentence_end_transparent_chars = 0) :" 1639]
+[ebrowse-ms "visit_str" () 1 () "  void visit_str(Latte_Str" 2048 0  () "LatteText_TextVisitor::visit_str(Latte_Str" 4003]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Listify" () 0"latte.h" "class Latte_Listify :" 24386"latte.h" ]
+()([ebrowse-ms "m_list" () 0 () "  Refcounter<Latte_List> m_list;" 25022 2  () () 0]
+)
+([ebrowse-ms "Latte_Listify" () 0 () "  Latte_Listify() :" 24436 0  () "  Latte_Listify() :" 24436]
+[ebrowse-ms "list" () 4 () "  const Latte_List &list()" 24902 0  () "  const Latte_List &list()" 24902]
+[ebrowse-ms "release" () 4 () "  Latte_List &release()" 24952 0  () "  Latte_List &release()" 24952]
+[ebrowse-ms "visit_assignment" () 1 () "  void visit_assignment(Latte_Assignment" 24506 0  "visitor.cxx" "Latte_Listify::visit_assignment(Latte_Assignment" 2437]
+[ebrowse-ms "visit_boolean" () 1 () "  void visit_boolean(Latte_Boolean" 24545 0  "visitor.cxx" "Latte_Listify::visit_boolean(Latte_Boolean" 2545]
+[ebrowse-ms "visit_closure" () 1 () "  void visit_closure(Latte_Closure" 24584 0  "visitor.cxx" "Latte_Listify::visit_closure(Latte_Closure" 2653]
+[ebrowse-ms "visit_group" () 1 () "  void visit_group(Latte_Group" 24619 0  "visitor.cxx" "Latte_Listify::visit_group(Latte_Group" 2757]
+[ebrowse-ms "visit_list" () 1 () "  void visit_list(Latte_List" 24652 0  "visitor.cxx" "Latte_Listify::visit_list(Latte_List" 2859]
+[ebrowse-ms "visit_nested" () 1 () "  void visit_nested(Latte_Nested" 24689 0  "visitor.cxx" "Latte_Listify::visit_nested(Latte_Nested" 2965]
+[ebrowse-ms "visit_operator" () 1 () "  void visit_operator(Latte_Operator" 24730 0  "visitor.cxx" "Latte_Listify::visit_operator(Latte_Operator" 3075]
+[ebrowse-ms "visit_param" () 1 () "  void visit_param(Latte_Param" 24765 0  "visitor.cxx" "Latte_Listify::visit_param(Latte_Param" 3179]
+[ebrowse-ms "visit_str" () 1 () "  void visit_str(Latte_Str" 24870 0  "visitor.cxx" "Latte_Listify::visit_str(Latte_Str" 3491]
+[ebrowse-ms "visit_varref" () 1 () "  void visit_varref(Latte_VarRef" 24802 0  "visitor.cxx" "Latte_Listify::visit_varref(Latte_VarRef" 3285]
+[ebrowse-ms "visit_wsnode" () 1 () "  void visit_wsnode(Latte_WsNode" 24839 0  "visitor.cxx" "Latte_Listify::visit_wsnode(Latte_WsNode" 3391]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Stringify" () 0"latte.h" "class Latte_Stringify :" 24120"latte.h" ]
+()([ebrowse-ms "m_space_separated" () 0 () "  bool m_space_separated;" 24335 2  () () 0]
+[ebrowse-ms "m_string" () 0 () "  latte_string m_string;" 24360 2  () () 0]
+)
+([ebrowse-ms "Latte_Stringify" () 0 () "  Latte_Stringify(bool sp = 0) :" 24175 0  () "  Latte_Stringify(bool sp = 0) :" 24175]
+[ebrowse-ms "str" () 4 () "  const latte_string &str()" 24271 0  () "  const latte_string &str()" 24271]
+[ebrowse-ms "visit_str" () 1 () "  void visit_str(Latte_Str" 24238 0  "visitor.cxx" "Latte_Stringify::visit_str(Latte_Str" 2170]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "LoadVisitor" () 0"load.cxx" "class LoadVisitor :" 851"load.cxx" ]
+()()
+([ebrowse-ms "visit_str" () 1 () "  void visit_str(Latte_Str" 910 0  () "  void visit_str(Latte_Str" 910]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "WarnOpVisitor" () 0"definitions.cxx" "class WarnOpVisitor :" 21734"definitions.cxx" ]
+()()
+([ebrowse-ms "visit_str" () 1 () "  void visit_str(Latte_Str" 21793 0  () "  void visit_str(Latte_Str" 21793]
+)
+()
+()
+()
+()
+()()
+])([ebrowse-ms "my_wstate" () 0 () "  Latte_Wstate my_wstate;" 24092 2  () () 0]
+[ebrowse-ms "use_my_wstate" () 0 () "  bool use_my_wstate;" 24066 2  () () 0]
+)
+([ebrowse-ms "Latte_Visitor" () 0 () "  Latte_Visitor() :" 23361 0  () "  Latte_Visitor() :" 23361]
+[ebrowse-ms "suggest_wstate" () 0 () "  const Latte_Wstate &suggest_wstate(const" 24016 0  "visitor.cxx" "Latte_Visitor::suggest_wstate(const" 1384]
+[ebrowse-ms "visit_assignment" () 1 () "  virtual void visit_assignment(Latte_Assignment" 23464 0  () "  virtual void visit_assignment(Latte_Assignment" 23464]
+[ebrowse-ms "visit_boolean" () 1 () "  virtual void visit_boolean(Latte_Boolean" 23513 0  () "  virtual void visit_boolean(Latte_Boolean" 23513]
+[ebrowse-ms "visit_closure" () 1 () "  virtual void visit_closure(Latte_Closure" 23562 0  () "  virtual void visit_closure(Latte_Closure" 23562]
+[ebrowse-ms "visit_group" () 1 () "  virtual void visit_group(Latte_Group" 23607 0  "visitor.cxx" "Latte_Visitor::visit_group(Latte_Group" 925]
+[ebrowse-ms "visit_list" () 1 () "  virtual void visit_list(Latte_List" 23648 0  "visitor.cxx" "Latte_Visitor::visit_list(Latte_List" 1835]
+[ebrowse-ms "visit_nested" () 1 () "  virtual void visit_nested(Latte_Nested" 23693 0  "visitor.cxx" "Latte_Visitor::visit_nested(Latte_Nested" 830]
+[ebrowse-ms "visit_operator" () 1 () "  virtual void visit_operator(Latte_Operator" 23742 0  () "  virtual void visit_operator(Latte_Operator" 23742]
+[ebrowse-ms "visit_param" () 1 () "  virtual void visit_param(Latte_Param" 23787 0  () "  virtual void visit_param(Latte_Param" 23787]
+[ebrowse-ms "visit_quote" () 1 () "  virtual void visit_quote(Latte_Quote" 23832 0  "visitor.cxx" "Latte_Visitor::visit_quote(Latte_Quote" 2037]
+[ebrowse-ms "visit_str" () 9 () "  virtual void visit_str(Latte_Str" 23964 0  () () 0]
+[ebrowse-ms "visit_varref" () 1 () "  virtual void visit_varref(Latte_VarRef" 23877 0  () "  virtual void visit_varref(Latte_VarRef" 23877]
+[ebrowse-ms "visit_wsnode" () 1 () "  virtual void visit_wsnode(Latte_WsNode" 23924 0  "visitor.cxx" "Latte_Visitor::visit_wsnode(Latte_WsNode" 1550]
+[ebrowse-ms "~Latte_Visitor" () 1 () "  virtual ~Latte_Visitor()" 23411 0  () "  virtual ~Latte_Visitor()" 23411]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "memo" () 32"memo.h" "class memo {" 1012"memo.h" ]
+()([ebrowse-ms "m_fn" () 0 () "  F m_fn;" 1531 2  () () 0]
+[ebrowse-ms "m_known" () 0 () "  mutable unsigned int m_known;" 1502 2  () () 0]
+[ebrowse-ms "m_val" () 0 () "  mutable T m_val;" 1521 2  () () 0]
+)
+([ebrowse-ms "memo" () 0 () "  memo(const F &fn) :" 1034 0  () "  memo(const F &fn) :" 1034]
+[ebrowse-ms "reset" () 0 () "  void reset()" 1390 0  () "  void reset()" 1390]
+[ebrowse-ms "val" () 4 () "  const T &val()" 1224 0  () "  const T &val()" 1224]
+[ebrowse-ms "val" () 0 () "  T &val()" 1079 0  () "  T &val()" 1079]
+)
+()
+([ebrowse-ms "reset_all" () 0 () "  static void reset_all()" 1434 0  () "  static void reset_all()" 1434]
+)
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "shdeque" () 32"shdeque.h" "class shdeque {" 913"shdeque.h" ]
+()([ebrowse-ms "m_end" () 0 () "  const_iterator m_begin, m_end;" 4232 2  () () 0]
+[ebrowse-ms "m_rep" () 0 () "  Refcounter<const rep> m_rep;" 4187 2  () () 0]
+)
+([ebrowse-ms "adjust" () 0 () "  void adjust()" 4273 2  () "  void adjust()" 4273]
+[ebrowse-ms "append" () 0 () "  void append(const" 5843 0  () "  void append(const" 5843]
+[ebrowse-ms "back" () 4 () "  const T &back()" 5299 0  () "  const T &back()" 5299]
+[ebrowse-ms "begin" () 4 () "  const_iterator begin()" 5032 0  () "  const_iterator begin()" 5032]
+[ebrowse-ms "empty" () 4 () "  bool empty()" 4920 0  () "  bool empty()" 4920]
+[ebrowse-ms "end" () 4 () "  const_iterator end()" 5126 0  () "  const_iterator end()" 5126]
+[ebrowse-ms "front" () 4 () "  const T &front()" 5213 0  () "  const T &front()" 5213]
+[ebrowse-ms "operator []" () 4 () "  const T &operator [] (long" 5434 0  () "  const T &operator [] (long" 5434]
+[ebrowse-ms "pop_back" () 0 () "  void pop_back()" 5760 0  () "  void pop_back()" 5760]
+[ebrowse-ms "pop_front" () 0 () "  void pop_front()" 5679 0  () "  void pop_front()" 5679]
+[ebrowse-ms "push_back" () 0 () "  void push_back(const" 5589 0  () "  void push_back(const" 5589]
+[ebrowse-ms "push_front" () 0 () "  void push_front(const" 5495 0  () "  void push_front(const" 5495]
+[ebrowse-ms "shdeque" () 0 () "  shdeque(const shdeque<T> &other) :" 4763 0  () "  shdeque(const shdeque<T> &other) :" 4763]
+[ebrowse-ms "shdeque" () 0 () "st const_iterator &a, const const_iterator &b) :" 4641 0  () "st const_iterator &a, const const_iterator &b) :" 4641]
+[ebrowse-ms "shdeque" () 0 () "  shdeque() :" 4357 0  () "  shdeque() :" 4357]
+[ebrowse-ms "size" () 4 () "  size_t size()" 4871 0  () "  size_t size()" 4871]
+)
+()
+()
+()
+([ebrowse-ms "const_iterator" () 0 () "  typedef rep::const_iterator const_iterator;" 4145 0  () () 0]
+[ebrowse-ms "iterator" () 0 () "  typedef rep::iterator iterator;" 4099 0  () () 0]
+)
+()()
+][ebrowse-ts [ebrowse-cs "const_iterator" "super" 0() () 0() ]
+([ebrowse-ts [ebrowse-cs "const_iterator" "shdeque<>::rep" 0"shdeque.h" "    class const_iterator :" 2221"shdeque.h" ]
+()([ebrowse-ms "m_rep" () 0 () "      const rep *m_rep;" 3332 2  () () 0]
+)
+([ebrowse-ms "const_iterator" () 0 () "   const_iterator(const const_iterator &other) :" 2502 0  () "   const_iterator(const const_iterator &other) :" 2502]
+[ebrowse-ms "const_iterator" () 0 () "(const rep &r, const super::const_iterator &i) :" 2292 0  () "(const rep &r, const super::const_iterator &i) :" 2292]
+[ebrowse-ms "operator +" () 4 () "      const_iterator operator + (long" 2856 0  () "      const_iterator operator + (long" 2856]
+[ebrowse-ms "operator =" () 0 () "      const_iterator &operator = (const" 2628 0  () "      const_iterator &operator = (const" 2628]
+[ebrowse-ms "operator ==" () 4 () "      bool operator == (const" 3023 0  () "      bool operator == (const" 3023]
+)
+()
+()
+()
+()
+()()
+])()
+()
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "latteparse_control" () 0"grammar.cxx" "struct latteparse_control {" 927() ]
+()([ebrowse-ms "lexer" () 0 () "  Latte_Reader *lexer;" 950 0  () () 0]
+[ebrowse-ms "loc" () 0 () "  Latte_FileLoc loc;" 1016 0  () () 0]
+[ebrowse-ms "visitor" () 0 () "  Latte_Visitor *visitor;" 976 0  () () 0]
+[ebrowse-ms "ws" () 0 () "  Latte_Wstate ws;" 995 0  () () 0]
+)
+()
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "FlexLexer" () 0() () 0() ]
+([ebrowse-ts [ebrowse-cs "yyFlexLexer" () 0"FlexLexer.h" "class yyFlexLexer :" 3376"syntax.cxx" ]
+()([ebrowse-ms "yy_c_buf_p" () 0 () "	char* yy_c_buf_p;" 4948 1  () () 0]
+[ebrowse-ms "yy_did_buffer_switch_on_eof" () 0 () "	int yy_did_buffer_switch_on_eof;" 5196 1  () () 0]
+[ebrowse-ms "yy_full_lp" () 0 () "	int yy_full_lp;" 5516 1  () () 0]
+[ebrowse-ms "yy_full_match" () 0 () "	char* yy_full_match;" 5478 1  () () 0]
+[ebrowse-ms "yy_full_state" () 0 () "	int* yy_full_state;" 5499 1  () () 0]
+[ebrowse-ms "yy_hold_char" () 0 () "	char yy_hold_char;" 4821 1  () () 0]
+[ebrowse-ms "yy_init" () 0 () "	int yy_init;" 4963 1  () () 0]
+[ebrowse-ms "yy_last_accepting_cpos" () 0 () "	char* yy_last_accepting_cpos;" 5394 1  () () 0]
+[ebrowse-ms "yy_last_accepting_state" () 0 () "	yy_state_type yy_last_accepting_state;" 5363 1  () () 0]
+[ebrowse-ms "yy_looking_for_trail_begin" () 0 () "	int yy_looking_for_trail_begin;" 5562 1  () () 0]
+[ebrowse-ms "yy_lp" () 0 () "	int yy_lp;" 5529 1  () () 0]
+[ebrowse-ms "yy_more_flag" () 0 () "	int yy_more_flag;" 5582 1  () () 0]
+[ebrowse-ms "yy_more_len" () 0 () "	int yy_more_len;" 5600 1  () () 0]
+[ebrowse-ms "yy_more_offset" () 0 () "	int yy_more_offset;" 5621 1  () () 0]
+[ebrowse-ms "yy_n_chars" () 0 () "	int yy_n_chars;" 4885 1  () () 0]
+[ebrowse-ms "yy_prev_more_offset" () 0 () "	int yy_prev_more_offset;" 5647 1  () () 0]
+[ebrowse-ms "yy_start" () 0 () "	int yy_start;" 5012 1  () () 0]
+[ebrowse-ms "yy_start_stack" () 0 () "	int* yy_start_stack;" 4364 1  () () 0]
+[ebrowse-ms "yy_start_stack_depth" () 0 () "	int yy_start_stack_depth;" 4342 1  () () 0]
+[ebrowse-ms "yy_start_stack_ptr" () 0 () "	int yy_start_stack_ptr;" 4315 1  () () 0]
+[ebrowse-ms "yy_state_buf" () 0 () "	yy_state_type* yy_state_buf;" 5425 1  () () 0]
+[ebrowse-ms "yy_state_ptr" () 0 () "	yy_state_type* yy_state_ptr;" 5455 1  () () 0]
+[ebrowse-ms "yyin" () 0 () "	istream* yyin;" 4595 1  () () 0]
+[ebrowse-ms "yyout" () 0 () "	ostream* yyout;" 4651 1  () () 0]
+)
+([ebrowse-ms "LexerError" () 0 () () 0 0  () "void yyFlexLexer::LexerError( yyconst" 37598]
+[ebrowse-ms "LexerError" () 1 () "	virtual void LexerError( const" 4074 1  () () 0]
+[ebrowse-ms "LexerInput" () 1 () "	virtual int LexerInput( char" 3964 1  () "int yyFlexLexer::LexerInput( char" 26004]
+[ebrowse-ms "LexerOutput" () 1 () "	virtual void LexerOutput( const" 4019 1  () "void yyFlexLexer::LexerOutput( const" 26431]
+[ebrowse-ms "switch_streams" () 1 () "	virtual void switch_streams( istream" 3893 0  () "void yyFlexLexer::switch_streams( istream" 25747]
+[ebrowse-ms "yyFlexLexer" () 0 () "istream* arg_yyin = 0, ostream* arg_yyout = 0 );" 3548 0  () "exer( istream* arg_yyin, ostream* arg_yyout )
+	{" 25049]
+[ebrowse-ms "yy_create_buffer" () 0 () () 0 0  () "FER_STATE yyFlexLexer::yy_create_buffer( istream" 34898]
+[ebrowse-ms "yy_delete_buffer" () 0 () () 0 0  () "d yyFlexLexer::yy_delete_buffer( YY_BUFFER_STATE" 35523]
+[ebrowse-ms "yy_delete_buffer" () 0 () "	void yy_delete_buffer( struct" 3779 0  () () 0]
+[ebrowse-ms "yy_flush_buffer" () 0 () () 0 0  () "id yyFlexLexer::yy_flush_buffer( YY_BUFFER_STATE" 36004]
+[ebrowse-ms "yy_flush_buffer" () 0 () "	void yy_flush_buffer( struct" 4267 1  () () 0]
+[ebrowse-ms "yy_get_next_buffer" () 0 () "	int yy_get_next_buffer()" 4577 1  () "int yyFlexLexer::yy_get_next_buffer()" 26763]
+[ebrowse-ms "yy_get_previous_state" () 0 () "	yy_state_type yy_get_previous_state()" 4486 1  () "_state_type yyFlexLexer::yy_get_previous_state()" 29904]
+[ebrowse-ms "yy_init_buffer" () 0 () () 0 0  () "oid yyFlexLexer::yy_init_buffer( YY_BUFFER_STATE" 35823]
+[ebrowse-ms "yy_init_buffer" () 0 () "	void yy_init_buffer( struct" 4203 1  () () 0]
+[ebrowse-ms "yy_load_buffer_state" () 0 () "	void yy_load_buffer_state()" 4173 1  () "void yyFlexLexer::yy_load_buffer_state()" 34661]
+[ebrowse-ms "yy_pop_state" () 0 () "	void yy_pop_state()" 4424 1  () "void yyFlexLexer::yy_pop_state()" 37235]
+[ebrowse-ms "yy_push_state" () 0 () "	void yy_push_state( int" 4390 1  () "void yyFlexLexer::yy_push_state( int" 36623]
+[ebrowse-ms "yy_switch_to_buffer" () 0 () () 0 0  () "yFlexLexer::yy_switch_to_buffer( YY_BUFFER_STATE" 34033]
+[ebrowse-ms "yy_switch_to_buffer" () 0 () "	void yy_switch_to_buffer( struct" 3650 0  () () 0]
+[ebrowse-ms "yy_top_state" () 0 () "	int yy_top_state()" 4445 1  () "int yyFlexLexer::yy_top_state()" 37439]
+[ebrowse-ms "yy_try_NUL_trans" () 0 () "	yy_state_type yy_try_NUL_trans( yy_state_type" 4534 1  () "ype yyFlexLexer::yy_try_NUL_trans( yy_state_type" 30776]
+[ebrowse-ms "yyinput" () 0 () "	int yyinput()" 4142 1  () "int yyFlexLexer::yyinput()" 32278]
+[ebrowse-ms "yylex" () 1 () "	virtual int yylex()" 3854 0  () "int yyFlexLexer::yylex()" 6049]
+[ebrowse-ms "yyrestart" () 0 () "	void yyrestart( istream" 3826 0  () "void yyFlexLexer::yyrestart( istream" 33791]
+[ebrowse-ms "yyunput" () 0 () "	void yyunput( int" 4107 1  () "void yyFlexLexer::yyunput( int" 31310]
+[ebrowse-ms "~yyFlexLexer" () 1 () "	virtual ~yyFlexLexer()" 3614 0  () "yyFlexLexer::~yyFlexLexer()" 25636]
+)
+()
+()
+()
+()
+()()
+])()
+()
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "vector" () 32() () 0() ]
+([ebrowse-ts [ebrowse-cs "latte_vector" () 32"latte-vector.h" "class latte_vector :" 1140"latte-vector.h" ]
+([ebrowse-ts [ebrowse-cs "Latte_BindingEnv" () 0"latte.h" "class Latte_BindingEnv :" 3867"env.cxx" ]
+()([ebrowse-ms "m_outer" () 0 () "  Refcounter<Latte_BindingEnv> m_outer;" 4347 2  () () 0]
+)
+([ebrowse-ms "Latte_BindingEnv" () 0 () "  Latte_BindingEnv(Latte_BindingEnv &env) :" 4004 0  "latte.h" "  Latte_BindingEnv(Latte_BindingEnv &env) :" 4004]
+[ebrowse-ms "Latte_BindingEnv" () 0 () "  Latte_BindingEnv() :" 3952 0  "latte.h" "  Latte_BindingEnv() :" 3952]
+[ebrowse-ms "define" () 0 () "  unsigned long define(const" 4174 0  () "Latte_BindingEnv::define(const" 1324]
+[ebrowse-ms "extend" () 0 () "  unsigned long extend(const" 4132 0  () "Latte_BindingEnv::extend(const" 1216]
+[ebrowse-ms "lookup" () 4 () "  void lookup(const" 4050 0  () "Latte_BindingEnv::lookup(const" 820]
+)
+()
+()
+()
+()
+()()
+])()
+([ebrowse-ms "resize" () 0 () "  void resize(size_t" 1189 0  () "  void resize(size_t" 1189]
+)
+()
+()
+()
+()
+()()
+])()
+()
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_ObjDeque" () 0() () 0() ]
+([ebrowse-ts [ebrowse-cs "Latte_List" () 0"latte.h" "class Latte_List :" 14778"latte.h" ]
+([ebrowse-ts [ebrowse-cs "Latte_Group" () 0"latte.h" "class Latte_Group :" 15922"group.cxx" ]
+()([ebrowse-ms "m_self_eval" () 0 () "  memo<bool, SelfEvalFn> m_self_eval;" 16786 2  () () 0]
+)
+([ebrowse-ms "Latte_Group" () 0 () "  Latte_Group(const Latte_Group &);" 16206 0  () "e_Group::Latte_Group(const Latte_Group &other) :" 1235]
+[ebrowse-ms "Latte_Group" () 0 () "	      const Latte_List::const_iterator &);" 16060 0  () "			 const Latte_List::const_iterator &b) :" 974]
+[ebrowse-ms "Latte_Group" () 0 () "up(const Latte_Wstate &, const Latte_FileLoc &);" 16000 0  () "			 const Latte_FileLoc &loc) :" 815]
+[ebrowse-ms "as_group" () 4 () "  const Latte_Group *as_group()" 16310 0  "latte.h" "  const Latte_Group *as_group()" 16310]
+[ebrowse-ms "as_group" () 0 () "  Latte_Group       *as_group()" 16255 0  "latte.h" "  Latte_Group       *as_group()" 16255]
+[ebrowse-ms "bool_val" () 5 () "  bool bool_val()" 16352 0  "latte.h" "  bool bool_val()" 16352]
+[ebrowse-ms "do_eval" () 1 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 16567 1  () "Latte_Group::do_eval(Latte_Activation" 1834]
+[ebrowse-ms "render" () 5 () "  void render(ostream" 16495 0  () "Latte_Group::render(ostream" 2995]
+[ebrowse-ms "self_evaluating" () 5 () "  bool self_evaluating()" 16405 0  "latte.h" "  bool self_evaluating()" 16405]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 16468 0  () "Latte_Group::visit(Latte_Visitor" 2917]
+)
+()
+()
+()
+()
+()()
+])([ebrowse-ms "m_operator" () 0 () "emo<Latte_Operator *, GetOperatorFn> m_operator;" 15898 2  () () 0]
+[ebrowse-ms "m_self_eval" () 0 () "  memo<bool, SelfEvalFn> m_self_eval;" 15846 2  () () 0]
+)
+([ebrowse-ms "Latte_List" () 0 () "  Latte_List(const Latte_ObjDeque &);" 14953 0  "list.cxx" "_List::Latte_List(const Latte_ObjDeque &other) :" 1144]
+[ebrowse-ms "Latte_List" () 0 () "const const_iterator &, const const_iterator &);" 14891 0  "list.cxx" "		       const const_iterator &b) :" 938]
+[ebrowse-ms "Latte_List" () 0 () "  Latte_List();" 14871 0  "list.cxx" "Latte_List::Latte_List() :" 809]
+[ebrowse-ms "as_list" () 5 () "  const Latte_List     *as_list()" 15061 0  () "  const Latte_List     *as_list()" 15061]
+[ebrowse-ms "as_list" () 1 () "  Latte_List 	       *as_list()" 15005 0  () "  Latte_List 	       *as_list()" 15005]
+[ebrowse-ms "bool_val" () 5 () "  bool bool_val()" 15244 0  () "  bool bool_val()" 15244]
+[ebrowse-ms "do_eval" () 1 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 15459 1  "list.cxx" "Latte_List::do_eval(Latte_Activation" 1787]
+[ebrowse-ms "get_operator" () 5 () "  const Latte_Operator *get_operator()" 15190 0  () "  const Latte_Operator *get_operator()" 15190]
+[ebrowse-ms "get_operator" () 1 () "  Latte_Operator *get_operator()" 15122 0  () "  Latte_Operator *get_operator()" 15122]
+[ebrowse-ms "render" () 5 () "  void render(ostream" 15387 0  "list.cxx" "Latte_List::render(ostream" 2229]
+[ebrowse-ms "self_evaluating" () 5 () "  bool self_evaluating()" 15296 0  () "  bool self_evaluating()" 15296]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 15360 0  "list.cxx" "Latte_List::visit(Latte_Visitor" 2153]
+)
+()
+()
+()
+()
+()()
+])()
+()
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "streambuf" () 0() () 0() ]
+([ebrowse-ts [ebrowse-cs "DevNullBuf" "DevNull" 0"latte-log.h" "  class DevNullBuf :" 1037"latte-log.cxx" ]
+()([ebrowse-ms "buf" () 0 () "    char buf[64];" 1140 2  () () 0]
+)
+([ebrowse-ms "DevNullBuf" () 0 () "    DevNullBuf();" 1084 0  () "DevNull::DevNullBuf::DevNullBuf()
+{" 1106]
+[ebrowse-ms "overflow" () 0 () "    int overflow(int" 1107 0  () "DevNull::DevNullBuf::overflow(int" 981]
+)
+()
+()
+()
+()
+()()
+])()
+()
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "SyntaxError" () 0() () 0() ]
+([ebrowse-ts [ebrowse-cs "Incomplete" "Latte_Reader" 0"latte.h" "  class Incomplete :" 26394"latte.h" ]
+()()
+([ebrowse-ms "Incomplete" () 0 () "    Incomplete(const Latte_FileLoc &loc) :" 26447 0  () "    Incomplete(const Latte_FileLoc &loc) :" 26447]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "IncompleteAssignment" "Latte_Reader" 0"latte.h" "  class IncompleteAssignment :" 26262"latte.h" ]
+()()
+([ebrowse-ms "IncompleteAssignment" () 0 () "IncompleteAssignment(const Latte_FileLoc &loc) :" 26325 0  () "IncompleteAssignment(const Latte_FileLoc &loc) :" 26325]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "IncompleteGroup" "Latte_Reader" 0"latte.h" "  class IncompleteGroup :" 26125"latte.h" ]
+()()
+([ebrowse-ms "IncompleteGroup" () 0 () "    IncompleteGroup(const Latte_FileLoc &loc) :" 26183 0  () "    IncompleteGroup(const Latte_FileLoc &loc) :" 26183]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "IncompleteString" "Latte_Reader" 0"latte.h" "  class IncompleteString :" 25992"latte.h" ]
+()()
+([ebrowse-ms "IncompleteString" () 0 () "    IncompleteString(const Latte_FileLoc &loc) :" 26051 0  () "    IncompleteString(const Latte_FileLoc &loc) :" 26051]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "NotIdentifier" "Latte_Reader" 0"latte.h" "  class NotIdentifier :" 25729"latte.h" ]
+()()
+([ebrowse-ms "NotIdentifier" () 0 () "    NotIdentifier(const Latte_FileLoc &loc) :" 25785 0  () "    NotIdentifier(const Latte_FileLoc &loc) :" 25785]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "UnexpectedClose" "Latte_Reader" 0"latte.h" "  class UnexpectedClose :" 25859"latte.h" ]
+()()
+([ebrowse-ms "UnexpectedClose" () 0 () "    UnexpectedClose(const Latte_FileLoc &loc) :" 25917 0  () "    UnexpectedClose(const Latte_FileLoc &loc) :" 25917]
+)
+()
+()
+()
+()
+()()
+])()
+()
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Refcounter" () 32"refcount.h" "class Refcounter {" 965"refcount.h" ]
+()([ebrowse-ms "val" () 0 () "  T *val;" 1587 2  () () 0]
+)
+([ebrowse-ms "Refcounter" () 0 () "  Refcounter(const Refcounter<T> &other) :" 1091 0  () "  Refcounter(const Refcounter<T> &other) :" 1091]
+[ebrowse-ms "Refcounter" () 64 () "  explicit Refcounter(T *v) :" 1025 0  () "  explicit Refcounter(T *v) :" 1025]
+[ebrowse-ms "Refcounter" () 0 () "  Refcounter() :" 989 0  () "  Refcounter() :" 989]
+[ebrowse-ms "get" () 4 () "  T *get()" 1459 0  () "  T *get()" 1459]
+[ebrowse-ms "operator *" () 4 () "  T &operator * ()" 1501 0  () "  T &operator * ()" 1501]
+[ebrowse-ms "operator ->" () 4 () "  T *operator -> ()" 1544 0  () "  T *operator -> ()" 1544]
+[ebrowse-ms "operator =" () 0 () "  Refcounter &operator = (const" 1260 0  () "  Refcounter &operator = (const" 1260]
+[ebrowse-ms "~Refcounter" () 0 () "  ~Refcounter()" 1193 0  () "  ~Refcounter()" 1193]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Refcounted" () 0"refcount.h" "class Refcounted {" 1610"refcount.h" ]
+([ebrowse-ts [ebrowse-cs "Latte_Activation" () 0"latte.h" "class Latte_Activation :" 13351"activation.cxx" ]
+()([ebrowse-ms "m_env" () 0 () "  Refcounter<Latte_BindingEnv> m_env;" 14466 2  () () 0]
+[ebrowse-ms "m_frozen" () 0 () "  bool m_frozen;" 14523 2  () () 0]
+[ebrowse-ms "m_objs" () 0 () "le latte_vector< Refcounter<Latte_Obj> > m_objs;" 14428 2  () () 0]
+[ebrowse-ms "m_outer" () 0 () "  Refcounter<Latte_Activation> m_outer;" 14506 2  () () 0]
+)
+([ebrowse-ms "Latte_Activation" () 0 () "ivation(Latte_BindingEnv &, Latte_Activation &);" 13478 0  () "				   Latte_Activation &outer) :" 1039]
+[ebrowse-ms "Latte_Activation" () 0 () "  Latte_Activation(Latte_BindingEnv &);" 13438 0  () "ation::Latte_Activation(Latte_BindingEnv &env) :" 935]
+[ebrowse-ms "Latte_Activation" () 0 () "  Latte_Activation();" 13401 0  () "Latte_Activation::Latte_Activation() :" 821]
+[ebrowse-ms "define" () 0 () "  unsigned long define(const" 13804 0  () "Latte_Activation::define(const" 2596]
+[ebrowse-ms "env" () 4 () "  const Refcounter<Latte_BindingEnv> &env()" 13893 0  "latte.h" "  const Refcounter<Latte_BindingEnv> &env()" 13893]
+[ebrowse-ms "freeze" () 0 () "  void freeze(bool" 13937 0  "latte.h" "  void freeze(bool" 13937]
+[ebrowse-ms "frozen" () 4 () "  bool frozen()" 13982 0  "latte.h" "  bool frozen()" 13982]
+[ebrowse-ms "install_standard_definitions" () 0 () "  void install_standard_definitions()" 14129 0  "definitions.cxx" "Latte_Activation::install_standard_definitions()" 41989]
+[ebrowse-ms "lookup" () 4 () "  const Refcounter<Latte_Obj> &lookup(const" 13622 0  () "Latte_Activation::lookup(const" 2491]
+[ebrowse-ms "lookup" () 4 () "  const Refcounter<Latte_Obj> &lookup(unsigned" 13550 0  () "Latte_Activation::lookup(unsigned" 2318]
+[ebrowse-ms "lookup_rw" () 4 () "  Refcounter<Latte_Obj> &lookup_rw(const" 13755 0  () "Latte_Activation::lookup_rw(const" 2194]
+[ebrowse-ms "lookup_rw" () 4 () "  Refcounter<Latte_Obj> &lookup_rw(unsigned" 13686 0  () "Latte_Activation::lookup_rw(unsigned" 2021]
+[ebrowse-ms "lookup_rw_aux" () 4 () "  Refcounter<Latte_Obj> &lookup_rw_aux(const" 14346 2  () "Latte_Activation::lookup_rw_aux(const" 1741]
+[ebrowse-ms "lookup_rw_aux" () 4 () "  Refcounter<Latte_Obj> &lookup_rw_aux(unsigned" 14189 2  () "Latte_Activation::lookup_rw_aux(unsigned" 1193]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_BindingEnv" () 0"latte.h" "class Latte_BindingEnv :" 3867"env.cxx" ]
+()([ebrowse-ms "m_outer" () 0 () "  Refcounter<Latte_BindingEnv> m_outer;" 4347 2  () () 0]
+)
+([ebrowse-ms "Latte_BindingEnv" () 0 () "  Latte_BindingEnv(Latte_BindingEnv &env) :" 4004 0  "latte.h" "  Latte_BindingEnv(Latte_BindingEnv &env) :" 4004]
+[ebrowse-ms "Latte_BindingEnv" () 0 () "  Latte_BindingEnv() :" 3952 0  "latte.h" "  Latte_BindingEnv() :" 3952]
+[ebrowse-ms "define" () 0 () "  unsigned long define(const" 4174 0  () "Latte_BindingEnv::define(const" 1324]
+[ebrowse-ms "extend" () 0 () "  unsigned long extend(const" 4132 0  () "Latte_BindingEnv::extend(const" 1216]
+[ebrowse-ms "lookup" () 4 () "  void lookup(const" 4050 0  () "Latte_BindingEnv::lookup(const" 820]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Obj" () 0"latte.h" "class Latte_Obj :" 4873"latte.cxx" ]
+([ebrowse-ts [ebrowse-cs "Latte_Boolean" () 0"latte.h" "class Latte_Boolean :" 10694"boolean.cxx" ]
+()([ebrowse-ms "m_val" () 0 () "  bool m_val;" 11098 2  () () 0]
+)
+([ebrowse-ms "Latte_Boolean" () 0 () "  Latte_Boolean(const Latte_Boolean &);" 10775 0  () "ean::Latte_Boolean(const Latte_Boolean &other) :" 1111]
+[ebrowse-ms "Latte_Boolean" () 0 () "  Latte_Boolean(bool);" 10751 0  () "Latte_Boolean::Latte_Boolean(bool val) :" 1053]
+[ebrowse-ms "as_boolean" () 5 () "  const Latte_Boolean *as_boolean()" 10877 0  "latte.h" "  const Latte_Boolean *as_boolean()" 10877]
+[ebrowse-ms "as_boolean" () 1 () "  Latte_Boolean *as_boolean()" 10824 0  "latte.h" "  Latte_Boolean *as_boolean()" 10824]
+[ebrowse-ms "bool_val" () 5 () "  bool bool_val()" 10919 0  "latte.h" "  bool bool_val()" 10919]
+[ebrowse-ms "numeric_val" () 5 () "  Latte_Number_t numeric_val()" 10974 0  "latte.h" "  Latte_Number_t numeric_val()" 10974]
+[ebrowse-ms "render" () 5 () "  void render(ostream" 11063 0  () "Latte_Boolean::render(ostream" 1281]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 11036 0  () "Latte_Boolean::visit(Latte_Visitor" 1199]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_List" () 0"latte.h" "class Latte_List :" 14778"latte.h" ]
+([ebrowse-ts [ebrowse-cs "Latte_Group" () 0"latte.h" "class Latte_Group :" 15922"group.cxx" ]
+()([ebrowse-ms "m_self_eval" () 0 () "  memo<bool, SelfEvalFn> m_self_eval;" 16786 2  () () 0]
+)
+([ebrowse-ms "Latte_Group" () 0 () "  Latte_Group(const Latte_Group &);" 16206 0  () "e_Group::Latte_Group(const Latte_Group &other) :" 1235]
+[ebrowse-ms "Latte_Group" () 0 () "	      const Latte_List::const_iterator &);" 16060 0  () "			 const Latte_List::const_iterator &b) :" 974]
+[ebrowse-ms "Latte_Group" () 0 () "up(const Latte_Wstate &, const Latte_FileLoc &);" 16000 0  () "			 const Latte_FileLoc &loc) :" 815]
+[ebrowse-ms "as_group" () 4 () "  const Latte_Group *as_group()" 16310 0  "latte.h" "  const Latte_Group *as_group()" 16310]
+[ebrowse-ms "as_group" () 0 () "  Latte_Group       *as_group()" 16255 0  "latte.h" "  Latte_Group       *as_group()" 16255]
+[ebrowse-ms "bool_val" () 5 () "  bool bool_val()" 16352 0  "latte.h" "  bool bool_val()" 16352]
+[ebrowse-ms "do_eval" () 1 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 16567 1  () "Latte_Group::do_eval(Latte_Activation" 1834]
+[ebrowse-ms "render" () 5 () "  void render(ostream" 16495 0  () "Latte_Group::render(ostream" 2995]
+[ebrowse-ms "self_evaluating" () 5 () "  bool self_evaluating()" 16405 0  "latte.h" "  bool self_evaluating()" 16405]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 16468 0  () "Latte_Group::visit(Latte_Visitor" 2917]
+)
+()
+()
+()
+()
+()()
+])([ebrowse-ms "m_operator" () 0 () "emo<Latte_Operator *, GetOperatorFn> m_operator;" 15898 2  () () 0]
+[ebrowse-ms "m_self_eval" () 0 () "  memo<bool, SelfEvalFn> m_self_eval;" 15846 2  () () 0]
+)
+([ebrowse-ms "Latte_List" () 0 () "  Latte_List(const Latte_ObjDeque &);" 14953 0  "list.cxx" "_List::Latte_List(const Latte_ObjDeque &other) :" 1144]
+[ebrowse-ms "Latte_List" () 0 () "const const_iterator &, const const_iterator &);" 14891 0  "list.cxx" "		       const const_iterator &b) :" 938]
+[ebrowse-ms "Latte_List" () 0 () "  Latte_List();" 14871 0  "list.cxx" "Latte_List::Latte_List() :" 809]
+[ebrowse-ms "as_list" () 5 () "  const Latte_List     *as_list()" 15061 0  () "  const Latte_List     *as_list()" 15061]
+[ebrowse-ms "as_list" () 1 () "  Latte_List 	       *as_list()" 15005 0  () "  Latte_List 	       *as_list()" 15005]
+[ebrowse-ms "bool_val" () 5 () "  bool bool_val()" 15244 0  () "  bool bool_val()" 15244]
+[ebrowse-ms "do_eval" () 1 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 15459 1  "list.cxx" "Latte_List::do_eval(Latte_Activation" 1787]
+[ebrowse-ms "get_operator" () 5 () "  const Latte_Operator *get_operator()" 15190 0  () "  const Latte_Operator *get_operator()" 15190]
+[ebrowse-ms "get_operator" () 1 () "  Latte_Operator *get_operator()" 15122 0  () "  Latte_Operator *get_operator()" 15122]
+[ebrowse-ms "render" () 5 () "  void render(ostream" 15387 0  "list.cxx" "Latte_List::render(ostream" 2229]
+[ebrowse-ms "self_evaluating" () 5 () "  bool self_evaluating()" 15296 0  () "  bool self_evaluating()" 15296]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 15360 0  "list.cxx" "Latte_List::visit(Latte_Visitor" 2153]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Nested" () 0"latte.h" "class Latte_Nested :" 7120"latte.h" ]
+([ebrowse-ts [ebrowse-cs "LatteHtml_HtmlObj" () 0"latte-html.h" "class LatteHtml_HtmlObj :" 1161"latte-html.cxx" ]
+()()
+([ebrowse-ms "LatteHtml_HtmlObj" () 0 () "teHtml_HtmlObj(const LatteHtml_HtmlObj &other) :" 1277 0  "latte-html.h" "teHtml_HtmlObj(const LatteHtml_HtmlObj &other) :" 1277]
+[ebrowse-ms "LatteHtml_HtmlObj" () 0 () "  LatteHtml_HtmlObj(Latte_Obj &obj) :" 1222 0  "latte-html.h" "  LatteHtml_HtmlObj(Latte_Obj &obj) :" 1222]
+[ebrowse-ms "do_eval" () 1 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 1422 1  () "LatteHtml_HtmlObj::do_eval(Latte_Activation" 1564]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 1356 0  () "LatteHtml_HtmlObj::visit(Latte_Visitor" 1392]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "LatteHtml_PreObj" () 0"latte-html.h" "class LatteHtml_PreObj :" 869"latte-html.cxx" ]
+()()
+([ebrowse-ms "LatteHtml_PreObj" () 0 () "atteHtml_PreObj(const LatteHtml_PreObj &other) :" 983 0  "latte-html.h" "atteHtml_PreObj(const LatteHtml_PreObj &other) :" 983]
+[ebrowse-ms "LatteHtml_PreObj" () 0 () "  LatteHtml_PreObj(Latte_Obj &obj) :" 929 0  "latte-html.h" "  LatteHtml_PreObj(Latte_Obj &obj) :" 929]
+[ebrowse-ms "do_eval" () 1 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 1127 1  () "LatteHtml_PreObj::do_eval(Latte_Activation" 1151]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 1061 0  () "LatteHtml_PreObj::visit(Latte_Visitor" 983]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "LatteText_IndentObj" () 0"latte-text.h" "class LatteText_IndentObj :" 1163"latte-text.cxx" ]
+()([ebrowse-ms "m_level" () 0 () "  unsigned int m_level;" 1541 2  () () 0]
+)
+([ebrowse-ms "LatteText_IndentObj" () 0 () "xt_IndentObj(const LatteText_IndentObj &other) :" 1327 0  "latte-text.h" "xt_IndentObj(const LatteText_IndentObj &other) :" 1327]
+[ebrowse-ms "LatteText_IndentObj" () 0 () "entObj(Latte_Obj &obj, unsigned int level = 2) :" 1226 0  "latte-text.h" "entObj(Latte_Obj &obj, unsigned int level = 2) :" 1226]
+[ebrowse-ms "do_eval" () 1 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 1502 1  () "LatteText_IndentObj::do_eval(Latte_Activation" 1607]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 1436 0  () "LatteText_IndentObj::visit(Latte_Visitor" 1406]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "LatteText_PreObj" () 0"latte-text.h" "class LatteText_PreObj :" 869"latte-text.cxx" ]
+()()
+([ebrowse-ms "LatteText_PreObj" () 0 () "atteText_PreObj(const LatteText_PreObj &other) :" 983 0  "latte-text.h" "atteText_PreObj(const LatteText_PreObj &other) :" 983]
+[ebrowse-ms "LatteText_PreObj" () 0 () "  LatteText_PreObj(Latte_Obj &obj) :" 929 0  "latte-text.h" "  LatteText_PreObj(Latte_Obj &obj) :" 929]
+[ebrowse-ms "do_eval" () 1 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 1127 1  () "LatteText_PreObj::do_eval(Latte_Activation" 1163]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 1061 0  () "LatteText_PreObj::visit(Latte_Visitor" 995]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Assignment" () 0"latte.h" "class Latte_Assignment :" 20597"assignment.cxx" ]
+()()
+([ebrowse-ms "Latte_Assignment" () 0 () "  Latte_Assignment(const Latte_Assignment &);" 20815 0  () "atte_Assignment(const Latte_Assignment &other) :" 989]
+[ebrowse-ms "Latte_Assignment" () 0 () "		   const shstring &);" 20722 0  () "			 const shstring &name) :" 825]
+[ebrowse-ms "as_assignment" () 5 () "  const Latte_Assignment *as_assignment()" 20985 0  "latte.h" "  const Latte_Assignment *as_assignment()" 20985]
+[ebrowse-ms "as_assignment" () 1 () "  Latte_Assignment 	 *as_assignment()" 20925 0  "latte.h" "  Latte_Assignment 	 *as_assignment()" 20925]
+[ebrowse-ms "as_tangible" () 5 () "  const Latte_Tangible *as_tangible()" 21096 0  "latte.h" "  const Latte_Tangible *as_tangible()" 21096]
+[ebrowse-ms "as_tangible" () 1 () "  Latte_Tangible *as_tangible()" 21041 0  "latte.h" "  Latte_Tangible *as_tangible()" 21041]
+[ebrowse-ms "do_eval" () 1 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 21292 1  () "Latte_Assignment::do_eval(Latte_Activation" 1326]
+[ebrowse-ms "name" () 4 () "  const shstring &name()" 20862 0  "latte.h" "  const shstring &name()" 20862]
+[ebrowse-ms "render" () 5 () "  void render(ostream" 21174 0  () "Latte_Assignment::render(ostream" 1100]
+[ebrowse-ms "self_evaluating" () 5 () "  bool self_evaluating()" 21210 0  "latte.h" "  bool self_evaluating()" 21210]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 21147 0  () "Latte_Assignment::visit(Latte_Visitor" 1211]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_WsNode" () 0"latte.h" "class Latte_WsNode :" 10190"latte.h" ]
+()()
+([ebrowse-ms "Latte_WsNode" () 0 () "  Latte_WsNode(const Latte_WsNode &);" 10321 0  "wsnode.cxx" "sNode::Latte_WsNode(const Latte_WsNode &other) :" 929]
+[ebrowse-ms "Latte_WsNode" () 0 () "Latte_WsNode(Latte_Obj &, const Latte_Wstate &);" 10274 0  "wsnode.cxx" "WsNode(Latte_Obj &obj, const Latte_Wstate &ws) :" 821]
+[ebrowse-ms "as_wsnode" () 5 () "  const Latte_WsNode *as_wsnode()" 10474 0  () "  const Latte_WsNode *as_wsnode()" 10474]
+[ebrowse-ms "as_wsnode" () 1 () "  Latte_WsNode *as_wsnode()" 10423 0  () "  Latte_WsNode *as_wsnode()" 10423]
+[ebrowse-ms "do_eval" () 1 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 10664 1  "wsnode.cxx" "Latte_WsNode::do_eval(Latte_Activation" 1565]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 10525 0  "wsnode.cxx" "Latte_WsNode::visit(Latte_Visitor" 1458]
+[ebrowse-ms "wstate" () 4 () "  const Latte_Wstate &wstate()" 10370 0  () "  const Latte_Wstate &wstate()" 10370]
+)
+()
+([ebrowse-ms "wrap" () 0 () "  static Refcounter<Latte_Obj> wrap(Latte_Obj" 10576 0  "wsnode.cxx" "Latte_WsNode::wrap(Latte_Obj" 1051]
+)
+()
+()
+()()
+])([ebrowse-ms "m_nested" () 0 () "  Refcounter<Latte_Obj> m_nested;" 9964 2  () () 0]
+[ebrowse-ms "m_operator" () 0 () "emo<Latte_Operator *, GetOperatorFn> m_operator;" 10096 2  () () 0]
+[ebrowse-ms "m_self_eval" () 0 () "  memo<bool, SelfEvalFn> m_self_eval;" 10002 2  () () 0]
+[ebrowse-ms "m_side_effect" () 0 () "  memo<bool, SideEffectFn> m_side_effect;" 10044 2  () () 0]
+)
+([ebrowse-ms "Latte_Nested" () 0 () "  Latte_Nested(const Latte_Nested &);" 7224 0  "nested.cxx" "ested::Latte_Nested(const Latte_Nested &other) :" 1219]
+[ebrowse-ms "Latte_Nested" () 0 () "  Latte_Nested(Latte_Obj &);" 7199 0  "nested.cxx" "Latte_Nested::Latte_Nested(Latte_Obj &obj) :" 1006]
+[ebrowse-ms "Latte_Nested" () 0 () "  Latte_Nested();" 7173 0  "nested.cxx" "Latte_Nested::Latte_Nested() :" 813]
+[ebrowse-ms "as_assignment" () 5 () "  const Latte_Assignment *as_assignment()" 8192 0  () "  const Latte_Assignment *as_assignment()" 8192]
+[ebrowse-ms "as_assignment" () 1 () "  Latte_Assignment *as_assignment()" 8106 0  () "  Latte_Assignment *as_assignment()" 8106]
+[ebrowse-ms "as_boolean" () 5 () "  const Latte_Boolean *as_boolean()" 7868 0  () "  const Latte_Boolean *as_boolean()" 7868]
+[ebrowse-ms "as_boolean" () 1 () "  Latte_Boolean       *as_boolean()" 7794 0  () "  Latte_Boolean       *as_boolean()" 7794]
+[ebrowse-ms "as_group" () 5 () "  const Latte_Group *as_group()" 7584 0  () "  const Latte_Group *as_group()" 7584]
+[ebrowse-ms "as_group" () 1 () "  Latte_Group 	    *as_group()" 7513 0  () "  Latte_Group 	    *as_group()" 7513]
+[ebrowse-ms "as_list" () 5 () "  const Latte_List *as_list()" 7719 0  () "  const Latte_List *as_list()" 7719]
+[ebrowse-ms "as_list" () 1 () "  Latte_List 	   *as_list()" 7652 0  () "  Latte_List 	   *as_list()" 7652]
+[ebrowse-ms "as_nested" () 5 () "  const Latte_Nested *as_nested()" 7321 0  () "  const Latte_Nested *as_nested()" 7321]
+[ebrowse-ms "as_nested" () 1 () "  Latte_Nested *as_nested()" 7270 0  () "  Latte_Nested *as_nested()" 7270]
+[ebrowse-ms "as_operator" () 5 () "  const Latte_Operator *as_operator()" 8027 0  () "  const Latte_Operator *as_operator()" 8027]
+[ebrowse-ms "as_operator" () 1 () "  Latte_Operator       *as_operator()" 7948 0  () "  Latte_Operator       *as_operator()" 7948]
+[ebrowse-ms "as_param" () 5 () "  const Latte_Param *as_param()" 8638 0  () "  const Latte_Param *as_param()" 8638]
+[ebrowse-ms "as_param" () 1 () "  Latte_Param *as_param()" 8561 0  () "  Latte_Param *as_param()" 8561]
+[ebrowse-ms "as_str" () 5 () "  const Latte_Str *as_str()" 8336 0  () "  const Latte_Str *as_str()" 8336]
+[ebrowse-ms "as_str" () 1 () "  Latte_Str *as_str()" 8265 0  () "  Latte_Str *as_str()" 8265]
+[ebrowse-ms "as_tangible" () 5 () "  const Latte_Tangible *as_tangible()" 8492 0  () "  const Latte_Tangible *as_tangible()" 8492]
+[ebrowse-ms "as_tangible" () 1 () "  Latte_Tangible *as_tangible()" 8406 0  () "  Latte_Tangible *as_tangible()" 8406]
+[ebrowse-ms "as_varref" () 5 () "  const Latte_VarRef *as_varref()" 8786 0  () "  const Latte_VarRef *as_varref()" 8786]
+[ebrowse-ms "as_varref" () 1 () "  Latte_VarRef *as_varref()" 8706 0  () "  Latte_VarRef *as_varref()" 8706]
+[ebrowse-ms "as_wsnode" () 5 () "  const Latte_WsNode *as_wsnode()" 7441 0  () "  const Latte_WsNode *as_wsnode()" 7441]
+[ebrowse-ms "as_wsnode" () 1 () "  Latte_WsNode *as_wsnode()" 7373 0  () "  Latte_WsNode *as_wsnode()" 7373]
+[ebrowse-ms "bool_val" () 5 () "  bool bool_val()" 9026 0  "nested.cxx" "Latte_Nested::bool_val()" 2069]
+[ebrowse-ms "do_eval" () 1 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 9380 1  "nested.cxx" "Latte_Nested::do_eval(Latte_Activation" 1808]
+[ebrowse-ms "get_operator" () 5 () "  const Latte_Operator *get_operator()" 8934 0  () "  const Latte_Operator *get_operator()" 8934]
+[ebrowse-ms "get_operator" () 1 () "  Latte_Operator       *get_operator()" 8866 0  () "  Latte_Operator       *get_operator()" 8866]
+[ebrowse-ms "nested_obj" () 4 () "  const Refcounter<Latte_Obj> &nested_obj()" 9291 0  () "  const Refcounter<Latte_Obj> &nested_obj()" 9291]
+[ebrowse-ms "numeric_val" () 5 () "  Latte_Number_t numeric_val()" 9001 0  "nested.cxx" "Latte_Nested::numeric_val()" 1994]
+[ebrowse-ms "render" () 5 () "  void render(ostream" 9150 0  () "  void render(ostream" 9150]
+[ebrowse-ms "self_evaluating" () 5 () "  bool self_evaluating()" 9059 0  () "  bool self_evaluating()" 9059]
+[ebrowse-ms "set_nested_obj" () 0 () "  void set_nested_obj(const" 9218 0  "nested.cxx" "Latte_Nested::set_nested_obj(const" 2151]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 9123 0  "nested.cxx" "Latte_Nested::visit(Latte_Visitor" 1905]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Operator" () 0"latte.h" "class Latte_Operator :" 16835"latte.h" ]
+([ebrowse-ts [ebrowse-cs "AddOp" () 0"definitions.cxx" "class AddOp :" 4125"definitions.cxx" ]
+()([ebrowse-ms "m_add" () 0 () "  bool m_add;" 5218 2  () () 0]
+)
+([ebrowse-ms "AddOp" () 0 () "  AddOp(bool add) :" 4171 0  () "  AddOp(bool add) :" 4171]
+[ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 4387 1  () "  Refcounter<Latte_Obj> apply(const" 4387]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 4218 0  () "  const shstring &name()" 4218]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "AndOp" () 0"definitions.cxx" "class AndOp :" 20420"definitions.cxx" ]
+()()
+([ebrowse-ms "AndOp" () 0 () "  AndOp() :" 20463 0  () "  AndOp() :" 20463]
+[ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 20614 1  () "  Refcounter<Latte_Obj> apply(const" 20614]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 20512 0  () "  const shstring &name()" 20512]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "AppendOp" () 0"definitions.cxx" "class AppendOp :" 26333"definitions.cxx" ]
+()()
+([ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 26506 1  () "  Refcounter<Latte_Obj> apply(const" 26506]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 26391 0  () "  const shstring &name()" 26391]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "ApplyOp" () 0"definitions.cxx" "class ApplyOp :" 12451"definitions.cxx" ]
+()([ebrowse-ms "m_funcall" () 0 () "  bool m_funcall;" 13783 2  () () 0]
+)
+([ebrowse-ms "ApplyOp" () 0 () "  ApplyOp(bool funcall) :" 12499 0  () "  ApplyOp(bool funcall) :" 12499]
+[ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 12730 1  () "  Refcounter<Latte_Obj> apply(const" 12730]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 12558 0  () "  const shstring &name()" 12558]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "CaseOp" () 0"definitions.cxx" "class CaseOp :" 31118"definitions.cxx" ]
+()([ebrowse-ms "m_up" () 0 () "  bool m_up;" 32710 2  () () 0]
+)
+([ebrowse-ms "CaseOp" () 0 () "  CaseOp(bool up) :" 31165 0  () "  CaseOp(bool up) :" 31165]
+[ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 31377 1  () "  Refcounter<Latte_Obj> apply(const" 31377]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 31209 0  () "  const shstring &name()" 31209]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "ConsOp" () 0"definitions.cxx" "class ConsOp :" 7294"definitions.cxx" ]
+()([ebrowse-ms "m_front" () 0 () "  bool m_front;" 8934 2  () () 0]
+)
+([ebrowse-ms "ConsOp" () 0 () "  ConsOp(bool front) :" 7341 0  () "  ConsOp(bool front) :" 7341]
+[ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 7567 1  () "  Refcounter<Latte_Obj> apply(const" 7567]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 7394 0  () "  const shstring &name()" 7394]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "DefOp" () 0"definitions.cxx" "class DefOp :" 2652"definitions.cxx" ]
+()()
+([ebrowse-ms "DefOp" () 0 () "  DefOp() :" 2695 0  () "  DefOp() :" 2695]
+[ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 2846 1  () "  Refcounter<Latte_Obj> apply(const" 2846]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 2744 0  () "  const shstring &name()" 2744]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "EqualOp" () 0"definitions.cxx" "class EqualOp :" 33627"definitions.cxx" ]
+()()
+([ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 33800 1  () "  Refcounter<Latte_Obj> apply(const" 33800]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 33685 0  () "  const shstring &name()" 33685]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "ExplodeOp" () 0"definitions.cxx" "class ExplodeOp :" 39023"definitions.cxx" ]
+()()
+([ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 39197 1  () "  Refcounter<Latte_Obj> apply(const" 39197]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 39081 0  () "  const shstring &name()" 39081]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "FileContentsOp" () 0"definitions.cxx" "class FileContentsOp :" 23719"definitions.cxx" ]
+()()
+([ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 23899 1  () "  Refcounter<Latte_Obj> apply(const" 23899]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 23777 0  () "  const shstring &name()" 23777]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "GetenvOp" () 0"definitions.cxx" "class GetenvOp :" 41149"definitions.cxx" ]
+()()
+([ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 41322 1  () "  Refcounter<Latte_Obj> apply(const" 41322]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 41207 0  () "  const shstring &name()" 41207]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "HtmlOp" () 0"latte-html.cxx" "class HtmlOp :" 2542"latte-html.cxx" ]
+()()
+([ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 2703 1  () "  Refcounter<Latte_Obj> apply(const" 2703]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 2600 0  () "  const shstring &name()" 2600]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "IfOp" () 0"definitions.cxx" "class IfOp :" 9825"definitions.cxx" ]
+()()
+([ebrowse-ms "IfOp" () 0 () "  IfOp() :" 9867 0  () "  IfOp() :" 9867]
+[ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 10017 1  () "  Refcounter<Latte_Obj> apply(const" 10017]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 9916 0  () "  const shstring &name()" 9916]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "IncludeOp" () 0"definitions.cxx" "class IncludeOp :" 40390"definitions.cxx" ]
+()()
+([ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 40564 1  () "  Refcounter<Latte_Obj> apply(const" 40564]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 40448 0  () "  const shstring &name()" 40448]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "IndentOp" () 0"latte-text.cxx" "class IndentOp :" 2585"latte-text.cxx" ]
+()()
+([ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 2759 1  () "  Refcounter<Latte_Obj> apply(const" 2759]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 2643 0  () "  const shstring &name()" 2643]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "IneqOp" () 0"definitions.cxx" "class IneqOp :" 17210"definitions.cxx" ]
+()([ebrowse-ms "m_equal" () 0 () "  bool m_greater, m_equal;" 18699 2  () () 0]
+)
+([ebrowse-ms "IneqOp" () 0 () "  IneqOp(bool greater, bool equal) :" 17257 0  () "  IneqOp(bool greater, bool equal) :" 17257]
+[ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 17715 1  () "  Refcounter<Latte_Obj> apply(const" 17715]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 17344 0  () "  const shstring &name()" 17344]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Closure" () 0"latte.h" "class Latte_Closure :" 19303"closure.cxx" ]
+()([ebrowse-ms "m_activation" () 0 () "  Refcounter<Latte_Activation> m_activation;" 20281 2  () () 0]
+[ebrowse-ms "m_body" () 0 () "  Refcounter<Latte_List> m_body;" 20314 2  () () 0]
+[ebrowse-ms "m_env" () 0 () "  Refcounter<Latte_BindingEnv> m_env;" 20236 2  () () 0]
+[ebrowse-ms "m_macro" () 0 () "  bool m_macro;" 20568 2  () () 0]
+[ebrowse-ms "m_positional_params" () 0 () "  long m_positional_params;" 20470 2  () () 0]
+[ebrowse-ms "m_rest_offset" () 0 () "  long m_rest_offset;" 20336 2  () () 0]
+)
+([ebrowse-ms "Latte_Closure" () 0 () "  Latte_Closure(const Latte_Closure &);" 19547 0  () "ure::Latte_Closure(const Latte_Closure &other) :" 2194]
+[ebrowse-ms "Latte_Closure" () 0 () "		Latte_Activation &);" 19358 0  () "			     Latte_Activation &activation) :" 819]
+[ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 20013 1  () "Latte_Closure::apply(const" 2467]
+[ebrowse-ms "as_closure" () 5 () "  const Latte_Closure *as_closure()" 19776 0  "latte.h" "  const Latte_Closure *as_closure()" 19776]
+[ebrowse-ms "as_closure" () 1 () "  Latte_Closure *as_closure()" 19723 0  "latte.h" "  Latte_Closure *as_closure()" 19723]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 19623 0  () "Latte_Closure::name()" 4337]
+[ebrowse-ms "set_macro" () 0 () "  void set_macro(bool" 19653 0  "latte.h" "  void set_macro(bool" 19653]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 19593 0  () "Latte_Closure::visit(Latte_Visitor" 4251]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Lambda" () 0"latte.h" "class Latte_Lambda :" 26938"definitions.cxx" ]
+([ebrowse-ts [ebrowse-cs "MacroOp" () 0"definitions.cxx" "class MacroOp :" 1849"definitions.cxx" ]
+()()
+([ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 1997 2  () "  Refcounter<Latte_Obj> apply(const" 1997]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 1896 2  () "  const shstring &name()" 1896]
+)
+()
+()
+()
+()
+()()
+])()
+([ebrowse-ms "Latte_Lambda" () 0 () "  Latte_Lambda() :" 26988 0  "latte.h" "  Latte_Lambda() :" 26988]
+[ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 27217 1  () "Latte_Lambda::apply(const" 1198]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 27161 0  () "Latte_Lambda::name()" 1068]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "LengthOp" () 0"definitions.cxx" "class LengthOp :" 16398"definitions.cxx" ]
+()()
+([ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 16571 1  () "  Refcounter<Latte_Obj> apply(const" 16571]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 16456 0  () "  const shstring &name()" 16456]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "LetOp" () 0"definitions.cxx" "class LetOp :" 14808"definitions.cxx" ]
+()()
+([ebrowse-ms "LetOp" () 0 () "  LetOp() :" 14851 0  () "  LetOp() :" 14851]
+[ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 15002 1  () "  Refcounter<Latte_Obj> apply(const" 15002]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 14900 0  () "  const shstring &name()" 14900]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "LoadFileOp" () 0"definitions.cxx" "class LoadFileOp :" 13806"definitions.cxx" ]
+()([ebrowse-ms "m_file" () 0 () "  bool m_file;" 14685 2  () () 0]
+)
+([ebrowse-ms "LoadFileOp" () 0 () "  LoadFileOp(bool file) :" 13857 0  () "  LoadFileOp(bool file) :" 13857]
+[ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 14086 1  () "  Refcounter<Latte_Obj> apply(const" 14086]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 13907 0  () "  const shstring &name()" 13907]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "ModuloOp" () 0"definitions.cxx" "class ModuloOp :" 6393"definitions.cxx" ]
+()()
+([ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 6566 1  () "  Refcounter<Latte_Obj> apply(const" 6566]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 6451 0  () "  const shstring &name()" 6451]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "MultiplyOp" () 0"definitions.cxx" "class MultiplyOp :" 5241"definitions.cxx" ]
+()([ebrowse-ms "m_multiply" () 0 () "  bool m_multiply;" 6372 2  () () 0]
+)
+([ebrowse-ms "MultiplyOp" () 0 () "  MultiplyOp(bool multiply) :" 5292 0  () "  MultiplyOp(bool multiply) :" 5292]
+[ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 5531 1  () "  Refcounter<Latte_Obj> apply(const" 5531]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 5354 0  () "  const shstring &name()" 5354]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "NotOp" () 0"definitions.cxx" "class NotOp :" 11855"definitions.cxx" ]
+()()
+([ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 12015 1  () "  Refcounter<Latte_Obj> apply(const" 12015]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 11913 0  () "  const shstring &name()" 11913]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "NthOp" () 0"definitions.cxx" "class NthOp :" 29624"definitions.cxx" ]
+()()
+([ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 29794 1  () "  Refcounter<Latte_Obj> apply(const" 29794]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 29682 0  () "  const shstring &name()" 29682]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "OrOp" () 0"definitions.cxx" "class OrOp :" 21064"definitions.cxx" ]
+()()
+([ebrowse-ms "OrOp" () 0 () "  OrOp() :" 21106 0  () "  OrOp() :" 21106]
+[ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 21256 1  () "  Refcounter<Latte_Obj> apply(const" 21256]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 21155 0  () "  const shstring &name()" 21155]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "PreOp" () 0"latte-text.cxx" "class PreOp :" 1818"latte-html.cxx" ]
+()()
+([ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 1979 1  "latte-text.cxx" "  Refcounter<Latte_Obj> apply(const" 1979]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 1876 0  "latte-text.cxx" "  const shstring &name()" 1876]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "ProcessOutputOp" () 0"definitions.cxx" "class ProcessOutputOp :" 24896"definitions.cxx" ]
+()()
+([ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 25077 1  () "  Refcounter<Latte_Obj> apply(const" 25077]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 24954 0  () "  const shstring &name()" 24954]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "RandomOp" () 0"definitions.cxx" "class RandomOp :" 22954"definitions.cxx" ]
+()()
+([ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 23127 1  () "  Refcounter<Latte_Obj> apply(const" 23127]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 23012 0  () "  const shstring &name()" 23012]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "SetOp" () 0"definitions.cxx" "class SetOp :" 8952"definitions.cxx" ]
+()()
+([ebrowse-ms "SetOp" () 0 () "  SetOp() :" 8995 0  () "  SetOp() :" 8995]
+[ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 9147 1  () "  Refcounter<Latte_Obj> apply(const" 9147]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 9044 0  () "  const shstring &name()" 9044]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "StrIneqOp" () 0"definitions.cxx" "class StrIneqOp :" 18721"definitions.cxx" ]
+()([ebrowse-ms "m_equal" () 0 () "  bool m_greater, m_equal;" 20402 2  () () 0]
+)
+([ebrowse-ms "StrIneqOp" () 0 () "  StrIneqOp(bool greater, bool equal) :" 18771 0  () "  StrIneqOp(bool greater, bool equal) :" 18771]
+[ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 19257 1  () "  Refcounter<Latte_Obj> apply(const" 19257]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 18858 0  () "  const shstring &name()" 18858]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "StringAppendOp" () 0"definitions.cxx" "class StringAppendOp :" 27552"definitions.cxx" ]
+()()
+([ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 27732 1  () "  Refcounter<Latte_Obj> apply(const" 27732]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 27610 0  () "  const shstring &name()" 27610]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "SubseqOp" () 0"definitions.cxx" "class SubseqOp :" 34459"definitions.cxx" ]
+()()
+([ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 34632 1  () "  Refcounter<Latte_Obj> apply(const" 34632]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 34517 0  () "  const shstring &name()" 34517]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "SubstrOp" () 0"definitions.cxx" "class SubstrOp :" 36215"definitions.cxx" ]
+()()
+([ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 36388 1  () "  Refcounter<Latte_Obj> apply(const" 36388]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 36273 0  () "  const shstring &name()" 36273]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "TruncOp" () 0"definitions.cxx" "class TruncOp :" 38052"definitions.cxx" ]
+()([ebrowse-ms "m_floor" () 0 () "  bool m_floor;" 39001 2  () () 0]
+)
+([ebrowse-ms "TruncOp" () 0 () "  TruncOp(bool floor) :" 38100 0  () "  TruncOp(bool floor) :" 38100]
+[ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 38325 1  () "  Refcounter<Latte_Obj> apply(const" 38325]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 38153 0  () "  const shstring &name()" 38153]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "TypePredicateOp" () 0"definitions.cxx" "class TypePredicateOp :" 28407"definitions.cxx" ]
+()([ebrowse-ms "m_type" () 0 () "  type_type m_type;" 29606 2  () () 0]
+)
+([ebrowse-ms "TypePredicateOp" () 0 () "  TypePredicateOp(type_type type) :" 28530 0  () "  TypePredicateOp(type_type type) :" 28530]
+[ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 28897 1  () "  Refcounter<Latte_Obj> apply(const" 28897]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 28580 0  () "  const shstring &name()" 28580]
+)
+()
+()
+()
+([ebrowse-ms "type_type" () 0 () "  enum type_type {" 28459 0  () "  enum type_type {" 28459]
+)
+()()
+][ebrowse-ts [ebrowse-cs "WarnOp" () 0"definitions.cxx" "class WarnOp :" 21879"definitions.cxx" ]
+()([ebrowse-ms "m_die" () 0 () "  bool m_die;" 22933 2  () () 0]
+)
+([ebrowse-ms "WarnOp" () 0 () "  WarnOp(bool die) :" 21926 0  () "  WarnOp(bool die) :" 21926]
+[ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 22140 1  () "  Refcounter<Latte_Obj> apply(const" 22140]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 21973 0  () "  const shstring &name()" 21973]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "WhileOp" () 0"definitions.cxx" "class WhileOp :" 10661"definitions.cxx" ]
+()()
+([ebrowse-ms "WhileOp" () 0 () "  WhileOp() :" 10706 0  () "  WhileOp() :" 10706]
+[ebrowse-ms "apply" () 5 () "  Refcounter<Latte_Obj> apply(const" 10859 1  () "  Refcounter<Latte_Obj> apply(const" 10859]
+[ebrowse-ms "name" () 5 () "  const shstring &name()" 10755 0  () "  const shstring &name()" 10755]
+)
+()
+()
+()
+()
+()()
+])([ebrowse-ms "m_eval_args" () 0 () "  bool m_eval_args;" 19277 2  () () 0]
+)
+([ebrowse-ms "Latte_Operator" () 0 () "  Latte_Operator(bool eval = 1) :" 16893 0  () "  Latte_Operator(bool eval = 1) :" 16893]
+[ebrowse-ms "apply" () 13 () "  virtual Refcounter<Latte_Obj> apply(const" 19064 1  () () 0]
+[ebrowse-ms "as_closure" () 5 () "  virtual const Latte_Closure *as_closure()" 17655 0  () "  virtual const Latte_Closure *as_closure()" 17655]
+[ebrowse-ms "as_closure" () 1 () "  virtual Latte_Closure *as_closure()" 17597 0  () "  virtual Latte_Closure *as_closure()" 17597]
+[ebrowse-ms "as_operator" () 5 () "  const Latte_Operator *as_operator()" 17025 0  () "  const Latte_Operator *as_operator()" 17025]
+[ebrowse-ms "as_operator" () 1 () "  Latte_Operator       *as_operator()" 16965 0  () "  Latte_Operator       *as_operator()" 16965]
+[ebrowse-ms "call_apply" () 4 () "  Refcounter<Latte_Obj> call_apply(const" 17392 0  "operator.cxx" "Latte_Operator::call_apply(const" 839]
+[ebrowse-ms "eval_args" () 4 () "  bool eval_args()" 17238 0  () "  bool eval_args()" 17238]
+[ebrowse-ms "get_operator" () 5 () "  const Latte_Operator *get_operator()" 17150 0  () "  const Latte_Operator *get_operator()" 17150]
+[ebrowse-ms "get_operator" () 1 () "  Latte_Operator       *get_operator()" 17088 0  () "  Latte_Operator       *get_operator()" 17088]
+[ebrowse-ms "name" () 13 () "  virtual const shstring &name()" 17207 0  () () 0]
+[ebrowse-ms "set_eval_args" () 0 () "  void set_eval_args(bool" 17294 0  () "  void set_eval_args(bool" 17294]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 17346 0  "operator.cxx" "Latte_Operator::visit(Latte_Visitor" 1126]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Tangible" () 0"latte.h" "class Latte_Tangible :" 11227"latte.h" ]
+([ebrowse-ts [ebrowse-cs "Latte_Assignment" () 0"latte.h" "class Latte_Assignment :" 20597"assignment.cxx" ]
+()()
+([ebrowse-ms "Latte_Assignment" () 0 () "  Latte_Assignment(const Latte_Assignment &);" 20815 0  () "atte_Assignment(const Latte_Assignment &other) :" 989]
+[ebrowse-ms "Latte_Assignment" () 0 () "		   const shstring &);" 20722 0  () "			 const shstring &name) :" 825]
+[ebrowse-ms "as_assignment" () 5 () "  const Latte_Assignment *as_assignment()" 20985 0  "latte.h" "  const Latte_Assignment *as_assignment()" 20985]
+[ebrowse-ms "as_assignment" () 1 () "  Latte_Assignment 	 *as_assignment()" 20925 0  "latte.h" "  Latte_Assignment 	 *as_assignment()" 20925]
+[ebrowse-ms "as_tangible" () 5 () "  const Latte_Tangible *as_tangible()" 21096 0  "latte.h" "  const Latte_Tangible *as_tangible()" 21096]
+[ebrowse-ms "as_tangible" () 1 () "  Latte_Tangible *as_tangible()" 21041 0  "latte.h" "  Latte_Tangible *as_tangible()" 21041]
+[ebrowse-ms "do_eval" () 1 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 21292 1  () "Latte_Assignment::do_eval(Latte_Activation" 1326]
+[ebrowse-ms "name" () 4 () "  const shstring &name()" 20862 0  "latte.h" "  const shstring &name()" 20862]
+[ebrowse-ms "render" () 5 () "  void render(ostream" 21174 0  () "Latte_Assignment::render(ostream" 1100]
+[ebrowse-ms "self_evaluating" () 5 () "  bool self_evaluating()" 21210 0  "latte.h" "  bool self_evaluating()" 21210]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 21147 0  () "Latte_Assignment::visit(Latte_Visitor" 1211]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Group" () 0"latte.h" "class Latte_Group :" 15922"group.cxx" ]
+()([ebrowse-ms "m_self_eval" () 0 () "  memo<bool, SelfEvalFn> m_self_eval;" 16786 2  () () 0]
+)
+([ebrowse-ms "Latte_Group" () 0 () "  Latte_Group(const Latte_Group &);" 16206 0  () "e_Group::Latte_Group(const Latte_Group &other) :" 1235]
+[ebrowse-ms "Latte_Group" () 0 () "	      const Latte_List::const_iterator &);" 16060 0  () "			 const Latte_List::const_iterator &b) :" 974]
+[ebrowse-ms "Latte_Group" () 0 () "up(const Latte_Wstate &, const Latte_FileLoc &);" 16000 0  () "			 const Latte_FileLoc &loc) :" 815]
+[ebrowse-ms "as_group" () 4 () "  const Latte_Group *as_group()" 16310 0  "latte.h" "  const Latte_Group *as_group()" 16310]
+[ebrowse-ms "as_group" () 0 () "  Latte_Group       *as_group()" 16255 0  "latte.h" "  Latte_Group       *as_group()" 16255]
+[ebrowse-ms "bool_val" () 5 () "  bool bool_val()" 16352 0  "latte.h" "  bool bool_val()" 16352]
+[ebrowse-ms "do_eval" () 1 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 16567 1  () "Latte_Group::do_eval(Latte_Activation" 1834]
+[ebrowse-ms "render" () 5 () "  void render(ostream" 16495 0  () "Latte_Group::render(ostream" 2995]
+[ebrowse-ms "self_evaluating" () 5 () "  bool self_evaluating()" 16405 0  "latte.h" "  bool self_evaluating()" 16405]
+[ebrowse-ms "visit" () 1 () "  void visit(Latte_Visitor" 16468 0  () "Latte_Group::visit(Latte_Visitor" 2917]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Param" () 0"latte.h" "class Latte_Param :" 12712"latte.h" ]
+()([ebrowse-ms "m_type" () 0 () "  Type m_type;" 13322 2  () () 0]
+)
+([ebrowse-ms "Latte_Param" () 0 () "  Latte_Param(const Latte_Param &other);" 12944 0  "param.cxx" "e_Param::Latte_Param(const Latte_Param &other) :" 1016]
+[ebrowse-ms "Latte_Param" () 0 () "	      enum Type);" 12834 0  "param.cxx" "			 enum Latte_Param::Type type) :" 815]
+[ebrowse-ms "as_param" () 4 () "  const Latte_Param *as_param()" 13208 0  () "  const Latte_Param *as_param()" 13208]
+[ebrowse-ms "as_param" () 0 () "  Latte_Param *as_param()" 13159 0  () "  Latte_Param *as_param()" 13159]
+[ebrowse-ms "is_named" () 4 () "  bool is_named()" 13034 0  () "  bool is_named()" 13034]
+[ebrowse-ms "is_rest" () 4 () "  bool is_rest()" 13092 0  () "  bool is_rest()" 13092]
+[ebrowse-ms "name" () 4 () "  const shstring &name()" 12991 0  () "  const shstring &name()" 12991]
+[ebrowse-ms "render" () 4 () "  void render(ostream" 13286 0  "param.cxx" "Latte_Param::render(ostream" 1148]
+[ebrowse-ms "visit" () 0 () "  void visit(Latte_Visitor" 13259 0  "param.cxx" "Latte_Param::visit(Latte_Visitor" 1400]
+)
+()
+()
+()
+([ebrowse-ms "Type" () 0 () "  enum Type {" 12782 0  () "  enum Type {" 12782]
+)
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Quote" () 0"latte.h" "class Latte_Quote :" 11910"latte.h" ]
+()([ebrowse-ms "m_obj" () 0 () "  Refcounter<Latte_Obj> m_obj;" 12668 2  () () 0]
+)
+([ebrowse-ms "Latte_Quote" () 0 () "  Latte_Quote(const Latte_Quote &);" 12151 0  "quote.cxx" "e_Quote::Latte_Quote(const Latte_Quote &other) :" 1015]
+[ebrowse-ms "Latte_Quote" () 0 () "              enum Type);" 12052 0  "quote.cxx" "                  enum Latte_Quote::Type type) :" 815]
+[ebrowse-ms "as_quote" () 4 () "  const Latte_Quote *as_quote()" 12397 0  () "  const Latte_Quote *as_quote()" 12397]
+[ebrowse-ms "as_quote" () 0 () "  Latte_Quote *as_quote()" 12348 0  () "  Latte_Quote *as_quote()" 12348]
+[ebrowse-ms "do_eval" () 0 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 12622 1  "quote.cxx" "Latte_Quote::do_eval(Latte_Activation" 3891]
+[ebrowse-ms "obj" () 4 () "  const Refcounter<Latte_Obj> &obj()" 12297 0  () "  const Refcounter<Latte_Obj> &obj()" 12297]
+[ebrowse-ms "render" () 4 () "  void render(ostream" 12475 0  "quote.cxx" "Latte_Quote::render(ostream" 1303]
+[ebrowse-ms "self_evaluating" () 4 () "  bool self_evaluating()" 12511 0  () "  bool self_evaluating()" 12511]
+[ebrowse-ms "set_obj" () 0 () "  void set_obj(const" 12234 0  "quote.cxx" "Latte_Quote::set_obj(const" 1139]
+[ebrowse-ms "side_effects" () 4 () "  bool side_effects()" 12553 0  "quote.cxx" "Latte_Quote::side_effects()" 4094]
+[ebrowse-ms "visit" () 0 () "  void visit(Latte_Visitor" 12448 0  "quote.cxx" "Latte_Quote::visit(Latte_Visitor" 1225]
+)
+()
+()
+()
+([ebrowse-ms "Type" () 0 () "  enum Type {" 11957 0  () "  enum Type {" 11957]
+[ebrowse-ms "m_type" () 0 () "  enum Type m_type;" 12688 2  () () 0]
+[ebrowse-ms "type" () 4 () "  enum Type type()" 12187 0  () "  enum Type type()" 12187]
+)
+()()
+][ebrowse-ts [ebrowse-cs "Latte_Str" () 0"latte.h" "class Latte_Str :" 21318"latte.h" ]
+()([ebrowse-ms "m_numval" () 0 () "  mutable Latte_Number_t m_numval;" 21941 2  () () 0]
+[ebrowse-ms "m_numval_known" () 0 () "  mutable bool m_numval_known;" 21906 2  () () 0]
+)
+([ebrowse-ms "Latte_Str" () 0 () "  Latte_Str(const Latte_Str &);" 21553 0  "str.cxx" "Latte_Str::Latte_Str(const Latte_Str &other) :" 1404]
+[ebrowse-ms "Latte_Str" () 0 () "	    const Latte_Number_t &);" 21466 0  "str.cxx" "		     const Latte_Number_t &num) :" 1034]
+[ebrowse-ms "as_str" () 4 () "  const Latte_Str     *as_str()" 21734 0  () "  const Latte_Str     *as_str()" 21734]
+[ebrowse-ms "as_str" () 0 () "  Latte_Str 	      *as_str()" 21682 0  () "  Latte_Str 	      *as_str()" 21682]
+[ebrowse-ms "numeric_val" () 4 () "  Latte_Number_t numeric_val()" 21792 0  "str.cxx" "Latte_Str::numeric_val()" 1725]
+[ebrowse-ms "render" () 4 () "  void render(ostream" 21854 0  "str.cxx" "Latte_Str::render(ostream" 1652]
+[ebrowse-ms "str" () 4 () "  const shstring &str()" 21628 0  () "  const shstring &str()" 21628]
+[ebrowse-ms "str" () 0 () "  shstring &str()" 21586 0  () "  shstring &str()" 21586]
+[ebrowse-ms "visit" () 0 () "  void visit(Latte_Visitor" 21827 0  "str.cxx" "Latte_Str::visit(Latte_Visitor" 1578]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Latte_VarRef" () 0"latte.h" "class Latte_VarRef :" 21966"latte.h" ]
+()([ebrowse-ms "m_depth_offset_known" () 0 () "  mutable bool m_depth_offset_known;" 23308 2  () () 0]
+[ebrowse-ms "m_offset" () 0 () "  mutable unsigned long m_depth, m_offset;" 23271 2  () () 0]
+)
+([ebrowse-ms "Latte_VarRef" () 0 () "  Latte_VarRef(const Latte_VarRef &);" 22123 0  "varref.cxx" "arRef::Latte_VarRef(const Latte_VarRef &other) :" 1046]
+[ebrowse-ms "Latte_VarRef" () 0 () "ate &, const Latte_FileLoc &, const shstring &);" 22044 0  "varref.cxx" "			   const shstring &name) :" 861]
+[ebrowse-ms "as_varref" () 4 () "  const Latte_VarRef  *as_varref()" 22409 0  () "  const Latte_VarRef  *as_varref()" 22409]
+[ebrowse-ms "as_varref" () 0 () "  Latte_VarRef        *as_varref()" 22354 0  () "  Latte_VarRef        *as_varref()" 22354]
+[ebrowse-ms "do_eval" () 0 () "  Refcounter<Latte_Obj> do_eval(Latte_Activation" 23140 1  "varref.cxx" "Latte_VarRef::do_eval(Latte_Activation" 2168]
+[ebrowse-ms "lookup" () 4 () "t Refcounter<Latte_Obj> &lookup(Latte_Activation" 22246 0  "varref.cxx" "Latte_VarRef::lookup(Latte_Activation" 2044]
+[ebrowse-ms "lookup_rw" () 4 () "efcounter<Latte_Obj> &lookup_rw(Latte_Activation" 22308 0  "varref.cxx" "Latte_VarRef::lookup_rw(Latte_Activation" 1913]
+[ebrowse-ms "lookup_rw_aux" () 4 () "unter<Latte_Obj> &lookup_rw_aux(Latte_Activation" 23211 2  "varref.cxx" "Latte_VarRef::lookup_rw_aux(Latte_Activation" 1295]
+[ebrowse-ms "name" () 4 () "  const shstring &name()" 22166 0  () "  const shstring &name()" 22166]
+[ebrowse-ms "render" () 4 () "  void render(ostream" 22576 0  "varref.cxx" "Latte_VarRef::render(ostream" 2367]
+[ebrowse-ms "self_evaluating" () 4 () "  bool self_evaluating()" 22459 0  () "  bool self_evaluating()" 22459]
+[ebrowse-ms "side_effects" () 4 () "  bool side_effects()" 22501 0  () "  bool side_effects()" 22501]
+[ebrowse-ms "visit" () 0 () "  void visit(Latte_Visitor" 22549 0  "varref.cxx" "Latte_VarRef::visit(Latte_Visitor" 2287]
+)
+()
+()
+()
+()
+()()
+])()
+([ebrowse-ms "Latte_Tangible" () 0 () "  Latte_Tangible(const Latte_Tangible &);" 11410 0  "tangible.cxx" "e::Latte_Tangible(const Latte_Tangible &other) :" 958]
+[ebrowse-ms "Latte_Tangible" () 0 () "le(const Latte_Wstate &, const Latte_FileLoc &);" 11347 0  "tangible.cxx" "			       const Latte_FileLoc &loc) :" 821]
+[ebrowse-ms "as_tangible" () 5 () "  const Latte_Tangible *as_tangible()" 11528 0  () "  const Latte_Tangible *as_tangible()" 11528]
+[ebrowse-ms "as_tangible" () 1 () "  Latte_Tangible       *as_tangible()" 11468 0  () "  Latte_Tangible       *as_tangible()" 11468]
+[ebrowse-ms "fileloc" () 4 () "  const Latte_FileLoc &fileloc()" 11792 0  () "  const Latte_FileLoc &fileloc()" 11792]
+[ebrowse-ms "fileloc" () 0 () "  Latte_FileLoc &fileloc()" 11741 0  () "  Latte_FileLoc &fileloc()" 11741]
+[ebrowse-ms "set_fileloc" () 0 () "  void set_fileloc(const" 11841 0  () "  void set_fileloc(const" 11841]
+[ebrowse-ms "set_ws" () 0 () "  void set_ws(const" 11670 0  () "  void set_ws(const" 11670]
+[ebrowse-ms "wstate" () 4 () "  const Latte_Wstate &wstate()" 11626 0  () "  const Latte_Wstate &wstate()" 11626]
+[ebrowse-ms "wstate" () 0 () "  Latte_Wstate &wstate()" 11577 0  () "  Latte_Wstate &wstate()" 11577]
+)
+()
+()
+()
+()
+()()
+])()
+([ebrowse-ms "Latte_Obj" () 0 () "  Latte_Obj();" 4916 0  () "Latte_Obj::Latte_Obj()
+{" 2451]
+[ebrowse-ms "as_assignment" () 5 () " virtual const Latte_Assignment *as_assignment()" 5917 0  "latte.h" " virtual const Latte_Assignment *as_assignment()" 5917]
+[ebrowse-ms "as_assignment" () 1 () "  virtual Latte_Assignment 	 *as_assignment()" 5852 0  "latte.h" "  virtual Latte_Assignment 	 *as_assignment()" 5852]
+[ebrowse-ms "as_boolean" () 5 () "  virtual const Latte_Boolean 	 *as_boolean()" 5523 0  "latte.h" "  virtual const Latte_Boolean 	 *as_boolean()" 5523]
+[ebrowse-ms "as_boolean" () 1 () "  virtual Latte_Boolean		 *as_boolean()" 5461 0  "latte.h" "  virtual Latte_Boolean		 *as_boolean()" 5461]
+[ebrowse-ms "as_group" () 5 () "  virtual const Latte_Group 	 *as_group()" 5286 0  "latte.h" "  virtual const Latte_Group 	 *as_group()" 5286]
+[ebrowse-ms "as_group" () 1 () "  virtual Latte_Group 		 *as_group()" 5228 0  "latte.h" "  virtual Latte_Group 		 *as_group()" 5228]
+[ebrowse-ms "as_list" () 5 () "  virtual const Latte_List 	 *as_list()" 5399 0  "latte.h" "  virtual const Latte_List 	 *as_list()" 5399]
+[ebrowse-ms "as_list" () 1 () "  virtual Latte_List 		 *as_list()" 5343 0  "latte.h" "  virtual Latte_List 		 *as_list()" 5343]
+[ebrowse-ms "as_nested" () 5 () "  virtual const Latte_Nested *as_nested()" 5034 0  "latte.h" "  virtual const Latte_Nested *as_nested()" 5034]
+[ebrowse-ms "as_nested" () 1 () "  virtual Latte_Nested *as_nested()" 4978 0  "latte.h" "  virtual Latte_Nested *as_nested()" 4978]
+[ebrowse-ms "as_operator" () 5 () "  virtual const Latte_Operator 	 *as_operator()" 5650 0  "latte.h" "  virtual const Latte_Operator 	 *as_operator()" 5650]
+[ebrowse-ms "as_operator" () 1 () "  virtual Latte_Operator 	 *as_operator()" 5587 0  "latte.h" "  virtual Latte_Operator 	 *as_operator()" 5587]
+[ebrowse-ms "as_param" () 5 () "  virtual const Latte_Param 	 *as_param()" 6269 0  "latte.h" "  virtual const Latte_Param 	 *as_param()" 6269]
+[ebrowse-ms "as_param" () 1 () "  virtual Latte_Param 		 *as_param()" 6211 0  "latte.h" "  virtual Latte_Param 		 *as_param()" 6211]
+[ebrowse-ms "as_quote" () 5 () "  virtual const Latte_Quote      *as_quote()" 5780 0  "latte.h" "  virtual const Latte_Quote      *as_quote()" 5780]
+[ebrowse-ms "as_quote" () 1 () "  virtual Latte_Quote 	         *as_quote()" 5716 0  "latte.h" "  virtual Latte_Quote 	         *as_quote()" 5716]
+[ebrowse-ms "as_str" () 5 () "  virtual const Latte_Str 	 *as_str()" 6025 0  "latte.h" "  virtual const Latte_Str 	 *as_str()" 6025]
+[ebrowse-ms "as_str" () 1 () "  virtual Latte_Str 		 *as_str()" 5971 0  "latte.h" "  virtual Latte_Str 		 *as_str()" 5971]
+[ebrowse-ms "as_tangible" () 5 () "  virtual const Latte_Tangible 	 *as_tangible()" 6152 0  "latte.h" "  virtual const Latte_Tangible 	 *as_tangible()" 6152]
+[ebrowse-ms "as_tangible" () 1 () "  virtual Latte_Tangible 	 *as_tangible()" 6089 0  "latte.h" "  virtual Latte_Tangible 	 *as_tangible()" 6089]
+[ebrowse-ms "as_varref" () 5 () "  virtual const Latte_VarRef 	 *as_varref()" 6390 0  "latte.h" "  virtual const Latte_VarRef 	 *as_varref()" 6390]
+[ebrowse-ms "as_varref" () 1 () "  virtual Latte_VarRef 		 *as_varref()" 6330 0  "latte.h" "  virtual Latte_VarRef 		 *as_varref()" 6330]
+[ebrowse-ms "as_wsnode" () 5 () "  virtual const Latte_WsNode 	 *as_wsnode()" 5169 0  "latte.h" "  virtual const Latte_WsNode 	 *as_wsnode()" 5169]
+[ebrowse-ms "as_wsnode" () 1 () "  virtual Latte_WsNode           *as_wsnode()" 5101 0  "latte.h" "  virtual Latte_WsNode           *as_wsnode()" 5101]
+[ebrowse-ms "bool_val" () 5 () "  virtual bool bool_val()" 6573 0  "latte.h" "  virtual bool bool_val()" 6573]
+[ebrowse-ms "do_eval" () 1 () "l Refcounter<Latte_Obj> do_eval(Latte_Activation" 6982 1  () "Latte_Obj::do_eval(Latte_Activation" 1842]
+[ebrowse-ms "eval" () 0 () "  Refcounter<Latte_Obj> eval(Latte_Activation" 6908 0  () "Latte_Obj::eval(Latte_Activation" 977]
+[ebrowse-ms "get_operator" () 5 () "  virtual const Latte_Operator *get_operator()" 6526 0  "latte.h" "  virtual const Latte_Operator *get_operator()" 6526]
+[ebrowse-ms "get_operator" () 1 () "  virtual Latte_Operator       *get_operator()" 6459 0  "latte.h" "  virtual Latte_Operator       *get_operator()" 6459]
+[ebrowse-ms "numeric_val" () 5 () "  virtual Latte_Number_t numeric_val()" 6632 0  "latte.h" "  virtual Latte_Number_t numeric_val()" 6632]
+[ebrowse-ms "render" () 5 () "  virtual void render(ostream" 6848 0  () "Latte_Obj::render(ostream" 1919]
+[ebrowse-ms "self_evaluating" () 5 () "  virtual bool self_evaluating()" 6686 0  "latte.h" "  virtual bool self_evaluating()" 6686]
+[ebrowse-ms "side_effects" () 5 () "  virtual bool side_effects()" 6736 0  "latte.h" "  virtual bool side_effects()" 6736]
+[ebrowse-ms "visit" () 9 () "  virtual void visit(Latte_Visitor" 6809 0  () () 0]
+[ebrowse-ms "~Latte_Obj" () 1 () "  virtual ~Latte_Obj()" 4940 0  () "Latte_Obj::~Latte_Obj()" 2556]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "Rep" "shstring" 0"shstring.h" "  class Rep :" 1991"shstring.cxx" ]
+()()
+([ebrowse-ms "Rep" () 0 () "	const string::const_iterator &);" 2136 0  () "		   const latte_string::const_iterator &e) :" 1889]
+[ebrowse-ms "Rep" () 0 () "    Rep(const string &);" 2111 0  () "shstring::Rep::Rep(const string &s) :" 1830]
+[ebrowse-ms "Rep" () 0 () "    Rep(const char *, size_t);" 2080 0  () "shstring::Rep::Rep(const char *s, size_t n) :" 1760]
+[ebrowse-ms "Rep" () 0 () "    Rep(const char *);" 2057 0  () "shstring::Rep::Rep(const char *s) :" 1703]
+[ebrowse-ms "str" () 4 () "    const latte_string &str()" 2269 0  "shstring.h" "    const latte_string &str()" 2269]
+[ebrowse-ms "str" () 0 () "    latte_string &str()" 2221 0  "shstring.h" "    latte_string &str()" 2221]
+)
+()
+()
+([ebrowse-ms "operator <<" () 0 () "    friend ostream &operator << (ostream" 2347 2  "wstate.cxx" "operator << (ostream" 3202]
+)
+()
+()()
+][ebrowse-ts [ebrowse-cs "rep" "shdeque<>" 0"shdeque.h" "  class rep :" 937"shdeque.h" ]
+()()
+([ebrowse-ms "begin" () 4 () "    const_iterator begin()" 3803 0  () "    const_iterator begin()" 3803]
+[ebrowse-ms "begin" () 0 () "    iterator begin()" 3671 0  () "    iterator begin()" 3671]
+[ebrowse-ms "end" () 4 () "    const_iterator end()" 3941 0  () "    const_iterator end()" 3941]
+[ebrowse-ms "end" () 0 () "    iterator end()" 3734 0  () "    iterator end()" 3734]
+[ebrowse-ms "rep" () 0 () "    rep(const rep &other) :" 3598 0  () "    rep(const rep &other) :" 3598]
+[ebrowse-ms "rep" () 0 () "    rep(const iterator &a, const iterator &b) :" 3535 0  () "    rep(const iterator &a, const iterator &b) :" 3535]
+[ebrowse-ms "rep" () 0 () "    rep() {" 3518 0  () "    rep() {" 3518]
+)
+()
+()
+()
+([ebrowse-ms "super" () 0 () "    typedef latte_deque<T> super;" 1040 2  () () 0]
+)
+()()
+])([ebrowse-ms "refcount" () 0 () "  mutable unsigned long refcount;" 1923 2  () () 0]
+)
+([ebrowse-ms "Refcounted" () 0 () "  Refcounted() :" 1634 0  () "  Refcounted() :" 1634]
+[ebrowse-ms "dec_refcount" () 4 () "  void dec_refcount()" 1828 0  () "  void dec_refcount()" 1828]
+[ebrowse-ms "inc_refcount" () 4 () "  void inc_refcount()" 1774 0  () "  void inc_refcount()" 1774]
+[ebrowse-ms "~Refcounted" () 1 () "  virtual ~Refcounted()" 1748 0  () "  virtual ~Refcounted()" 1748]
+)
+()
+()
+()
+()
+()()
+][ebrowse-ts [ebrowse-cs "*Globals*" () 0() () 0"FlexLexer.h" ]
+()([ebrowse-ms "YYSTYPE" () 0 () () 0 0  "grammar.tab.h" "} YYSTYPE;" 167]
+[ebrowse-ms "assignment" () 0 () () 0 0  "grammar.tab.h" "  Latte_Assignment *assignment;" 105]
+[ebrowse-ms "count" () 0 () () 0 0  "grammar.cxx" "     unsigned int count;" 12305]
+[ebrowse-ms "from" () 0 () () 0 0  "grammar.cxx" "     char *from;" 12280]
+[ebrowse-ms "g_memo_last_reset" () 0 () () 0 0  "memo.h" "extern unsigned int g_memo_last_reset;" 970]
+[ebrowse-ms "group" () 0 () () 0 0  "grammar.tab.h" "  Latte_Group *group;" 56]
+[ebrowse-ms "latte_log_flags" () 0 () () 0 0  "latte-log.h" "extern unsigned long latte_log_flags;" 982]
+[ebrowse-ms "latte_pkgdatadir" () 0 () () 0 0  "latte.h" "extern const char latte_pkgdatadir[];" 27934]
+[ebrowse-ms "latte_url" () 0 () () 0 0  "latte.h" "extern const char latte_url[];" 28000]
+[ebrowse-ms "latte_version" () 0 () () 0 0  "latte.h" "extern const char latte_version[];" 27969]
+[ebrowse-ms "n" () 0 () () 0 0  "syntax.cxx" "int n;" 38192]
+[ebrowse-ms "optarg" () 256 () () 0 0  "getopt.h" "extern char *optarg;" 1265]
+[ebrowse-ms "opterr" () 256 () () 0 0  "getopt.h" "extern int opterr;" 1896]
+[ebrowse-ms "optind" () 256 () () 0 0  "getopt.h" "extern int optind;" 1770]
+[ebrowse-ms "optopt" () 256 () () 0 0  "getopt.h" "extern int optopt;" 1975]
+[ebrowse-ms "quote" () 0 () () 0 0  "grammar.tab.h" "  Latte_Quote *quote;" 127]
+[ebrowse-ms "s2" () 0 () () 0 0  "syntax.cxx" "yyconst char *s2;" 38185]
+[ebrowse-ms "size" () 0 () () 0 0  "syntax.cxx" "yy_size_t size;" 38821]
+[ebrowse-ms "str" () 0 () () 0 0  "grammar.tab.h" "  shstring *str;" 73]
+[ebrowse-ms "yychar" () 0 () () 0 0  "grammar.cxx" "int	yychar;" 10835]
+[ebrowse-ms "yydebug" () 0 () () 0 0  "grammar.cxx" "int yydebug;" 11169]
+[ebrowse-ms "yyleng" () 0 () () 0 0  "syntax.cxx" "extern int yyleng;" 2270]
+[ebrowse-ms "yylloc" () 0 () () 0 0  "grammar.cxx" "YYLTYPE yylloc;" 10985]
+[ebrowse-ms "yylval" () 0 () () 0 0  "grammar.cxx" "YYSTYPE	yylval;" 10882]
+[ebrowse-ms "yynerrs" () 0 () () 0 0  "grammar.cxx" "int yynerrs;" 11068]
+)
+([ebrowse-ms "LatteLog" () 0 "latte-log.cxx" "LatteLog(unsigned" 1298 0  "latte-log.cxx" "LatteLog(unsigned" 1298]
+[ebrowse-ms "LatteLog" () 0 "latte-log.cxx" "LatteLog(unsigned" 1171 0  "latte-log.cxx" "LatteLog(unsigned" 1171]
+[ebrowse-ms "YY_PROTO" () 256 "syntax.cxx" "extern \"C\" int yywrap YY_PROTO((" 13645 0  () () 0]
+[ebrowse-ms "_getopt_internal" () 256 "getopt.h" "extern int _getopt_internal ()" 4500 0  () () 0]
+[ebrowse-ms "_getopt_internal" () 256 "getopt.h" "extern int _getopt_internal (int" 4222 0  () () 0]
+[ebrowse-ms "actual_latte_log" () 0 "latte-log.cxx" "actual_latte_log()" 817 0  "latte-log.cxx" "actual_latte_log()" 817]
+[ebrowse-ms "getopt" () 256 "getopt.h" "extern int getopt ()" 3816 0  () () 0]
+[ebrowse-ms "getopt" () 256 "getopt.h" "extern int getopt (int" 3714 0  () () 0]
+[ebrowse-ms "getopt_long" () 256 "getopt.h" "extern int getopt_long ()" 4435 0  () () 0]
+[ebrowse-ms "getopt_long" () 256 "getopt.h" "extern int getopt_long (int" 3874 0  () () 0]
+[ebrowse-ms "getopt_long_only" () 256 "getopt.h" "extern int getopt_long_only ()" 4467 0  () () 0]
+[ebrowse-ms "getopt_long_only" () 256 "getopt.h" "extern int getopt_long_only (int" 4011 0  () () 0]
+[ebrowse-ms "latte_default_path" () 0 "latte.h" "void latte_default_path()" 27533 0  "load.cxx" "latte_default_path()" 1582]
+[ebrowse-ms "latte_false" () 0 "boolean.cxx" "latte_false()" 828 0  "boolean.cxx" "latte_false()" 828]
+[ebrowse-ms "latte_html" () 0 "latte-html.cxx" "latte_html(const" 5049 0  "latte-html.cxx" "latte_html(const" 5049]
+[ebrowse-ms "latte_html_init_globals" () 0 "latte-html.cxx" "latte_html_init_globals(Latte_Activation" 4294 0  "latte-html.cxx" "latte_html_init_globals(Latte_Activation" 4294]
+[ebrowse-ms "latte_init" () 0 "latte.cxx" "latte_init(bool" 850 0  "latte.cxx" "latte_init(bool" 850]
+[ebrowse-ms "latte_load_file" () 0 "latte.h" "tern Refcounter<Latte_Obj> latte_load_file(const" 27680 0  "load.cxx" "latte_load_file(const" 1159]
+[ebrowse-ms "latte_load_file" () 0 "latte.h" "tern Refcounter<Latte_Obj> latte_load_file(const" 27586 0  "load.cxx" "latte_load_file(const" 964]
+[ebrowse-ms "latte_load_library" () 0 "latte.h" "n Refcounter<Latte_Obj> latte_load_library(const" 27839 0  () () 0]
+[ebrowse-ms "latte_path" () 0 "latte.h" "extern Latte_Path &latte_path()" 27506 0  "load.cxx" "latte_path()" 1536]
+[ebrowse-ms "latte_text" () 0 "latte-text.cxx" "latte_text(bool" 5943 0  "latte-text.cxx" "latte_text(bool" 5943]
+[ebrowse-ms "latte_text_init_globals" () 0 "latte-text.cxx" "latte_text_init_globals(Latte_Activation" 5273 0  "latte-text.cxx" "latte_text_init_globals(Latte_Activation" 5273]
+[ebrowse-ms "latte_true" () 0 "boolean.cxx" "latte_true()" 945 0  "boolean.cxx" "latte_true()" 945]
+[ebrowse-ms "latteerror" () 0 "grammar.cxx" "extern void latteerror(const" 1089 0  "grammar.cxx" "latteerror(const" 30584]
+[ebrowse-ms "lattelex" () 0 "grammar.cxx" "extern int lattelex(YYSTYPE" 1048 0  "grammar.cxx" "lattelex(YYSTYPE" 29089]
+[ebrowse-ms "main" () 0 "syntax.cxx" "int main()" 39397 0  "syntax.cxx" "int main()" 39397]
+[ebrowse-ms "main" () 0 "latte-html-cli.cxx" "main(int" 1194 0  "latte-text-cli.cxx" "main(int" 1194]
+[ebrowse-ms "mutate" () 32 "mutable.h" "mutate(const" 1024 0  "mutable.h" "mutate(const" 1024]
+[ebrowse-ms "operator <" () 0 "latte-string.cxx" "operator < (const" 917 0  "latte-string.cxx" "operator < (const" 917]
+[ebrowse-ms "operator <<" () 0 "fileloc.cxx" "operator << (ostream" 1449 0  "wstate.cxx" "operator << (ostream" 3202]
+[ebrowse-ms "operator ==" () 0 "latte-string.cxx" "operator == (const" 1062 0  "latte-string.cxx" "operator == (const" 1062]
+[ebrowse-ms "yyparse" () 0 "grammar.cxx" "yyparse(YYPARSE_PARAM_ARG" 13623 0  "grammar.cxx" "yyparse(YYPARSE_PARAM_ARG" 13623]
+[ebrowse-ms "yyparse" () 0 "grammar.cxx" "int yyparse (void" 13576 0  () () 0]
+[ebrowse-ms "yyparse" () 0 "grammar.cxx" "int yyparse (void" 13548 0  () () 0]
+)
+([ebrowse-ms "all_objs" () 0 () () 0 0  "latte.cxx" "static unsigned long all_objs = 0;" 2190]
+[ebrowse-ms "ctor_dtor_calls" () 0 () () 0 0  "latte.cxx" "static unsigned long ctor_dtor_calls = 0;" 2155]
+[ebrowse-ms "dev_null" () 0 () () 0 0  "latte-log.cxx" "static DevNull *dev_null = new DevNull;" 1071]
+[ebrowse-ms "extant_objs" () 0 () () 0 0  "latte.cxx" "static unsigned long extant_objs = 0;" 2113]
+[ebrowse-ms "in_html" () 0 () () 0 0  "latte-html.cxx" "static bool in_html = 0;" 939]
+[ebrowse-ms "in_pre" () 0 () () 0 0  "latte-text.cxx" "static bool in_pre = 0;" 914]
+[ebrowse-ms "left_margin" () 0 () () 0 0  "latte-text.cxx" "static unsigned int left_margin = 0;" 951]
+[ebrowse-ms "path" () 0 () () 0 0  "load.cxx" "static Latte_Path path;" 1509]
+[ebrowse-ms "yy_accept" () 0 () () 0 0  "syntax.cxx" "    } ;" 7368]
+[ebrowse-ms "yy_acclist" () 0 () () 0 0  "syntax.cxx" "    } ;" 6960]
+[ebrowse-ms "yy_base" () 0 () () 0 0  "syntax.cxx" "    } ;" 9699]
+[ebrowse-ms "yy_chk" () 0 () () 0 0  "syntax.cxx" "    } ;" 12254]
+[ebrowse-ms "yy_def" () 0 () () 0 0  "syntax.cxx" "    } ;" 10140]
+[ebrowse-ms "yy_ec" () 0 () () 0 0  "syntax.cxx" "    } ;" 9081]
+[ebrowse-ms "yy_meta" () 0 () () 0 0  "syntax.cxx" "    } ;" 9257]
+[ebrowse-ms "yy_nxt" () 0 () () 0 0  "syntax.cxx" "    } ;" 11197]
+[ebrowse-ms "yy_start_stack" () 0 () () 0 0  "syntax.cxx" "static int *yy_start_stack = 0;" 14048]
+[ebrowse-ms "yy_start_stack_depth" () 0 () () 0 0  "syntax.cxx" "static int yy_start_stack_depth = 0;" 14016]
+[ebrowse-ms "yy_start_stack_ptr" () 0 () () 0 0  "syntax.cxx" "static int yy_start_stack_ptr = 0;" 13979]
+[ebrowse-ms "yycheck" () 0 () () 0 0  "grammar.cxx" " -1,    -1,    -1,    -1,    -1,    -1,    25
+};" 6348]
+[ebrowse-ms "yydefact" () 0 () () 0 0  "grammar.cxx" " 13,    15,     0,    17,    20,     0,     0
+};" 5094]
+[ebrowse-ms "yydefgoto" () 0 () () 0 0  "grammar.cxx" " 14,    16,    15,    17,    18,    19,    25
+};" 5196]
+[ebrowse-ms "yypact" () 0 () () 0 0  "grammar.cxx" "768,-32768,    12,-32768,-32768,     2,-32768
+};" 5444]
+[ebrowse-ms "yypgoto" () 0 () () 0 0  "grammar.cxx" "768,-32768,-32768,-32768,-32768,-32768,-32768
+};" 5544]
+[ebrowse-ms "yyprhs" () 0 () () 0 0  "grammar.cxx" "    48
+};" 3556]
+[ebrowse-ms "yyr1" () 0 () () 0 0  "grammar.cxx" "    22
+};" 4654]
+[ebrowse-ms "yyr2" () 0 () () 0 0  "grammar.cxx" "     0
+};" 4844]
+[ebrowse-ms "yyrhs" () 0 () () 0 0  "grammar.cxx" "  0,     1,     0,    22,    15,     0,     0
+};" 3938]
+[ebrowse-ms "yyrline" () 0 () () 0 0  "grammar.cxx" "   174
+};" 4152]
+[ebrowse-ms "yytable" () 0 () () 0 0  "grammar.cxx" "  0,     0,     0,     0,     0,     0,    27
+};" 5957]
+[ebrowse-ms "yytname" () 0 () () 0 0  "grammar.cxx" "\",\"@3\",\"@4\",\"@5\",\"@6\",\"exprs\", NULL
+};" 4457]
+[ebrowse-ms "yytranslate" () 0 () () 0 0  "grammar.cxx" "     7,     8,     9,    10,    11
+};" 3347]
+)
+([ebrowse-ms "YY_PROTO" () 0 "syntax.cxx" "static void *yy_flex_alloc YY_PROTO((" 5282 0  () () 0]
+[ebrowse-ms "__yy_memcpy" () 0 "grammar.cxx" "__yy_memcpy (char" 12598 0  "grammar.cxx" "__yy_memcpy (char" 12598]
+[ebrowse-ms "__yy_memcpy" () 0 "grammar.cxx" "__yy_memcpy (to" 12234 0  () () 0]
+[ebrowse-ms "equalp" () 0 "definitions.cxx" "equalp(const" 32739 0  "definitions.cxx" "equalp(const" 32739]
+[ebrowse-ms "maybe_report_objs" () 0 "latte.cxx" "maybe_report_objs()" 2223 0  "latte.cxx" "maybe_report_objs()" 2223]
+[ebrowse-ms "quasiquote" () 0 "quote.cxx" "quasiquote(const" 1671 0  "quote.cxx" "quasiquote(const" 1671]
+[ebrowse-ms "report_backtrace" () 0 "latte-html-cli.cxx" "report_backtrace(const" 933 0  "latte-text-cli.cxx" "report_backtrace(const" 933]
+[ebrowse-ms "yy_flex_alloc" () 0 "syntax.cxx" "static void *yy_flex_alloc( yy_size_t" 38556 0  () () 0]
+[ebrowse-ms "yy_flex_free" () 0 "syntax.cxx" "static void yy_flex_free( void" 39290 0  () () 0]
+[ebrowse-ms "yy_flex_realloc" () 0 "syntax.cxx" "static void *yy_flex_realloc( void" 38723 0  () () 0]
+[ebrowse-ms "yy_flex_strlen" () 0 "syntax.cxx" "static int yy_flex_strlen( yyconst" 38352 0  () () 0]
+[ebrowse-ms "yy_flex_strncpy" () 0 "syntax.cxx" "static void yy_flex_strncpy( char" 38079 0  () () 0]
+)
+([ebrowse-ms "BEGIN" () 512 () () 0 0  "syntax.cxx" "#define BEGIN " 1643]
+[ebrowse-ms "DONT_INCLUDE_FLEXLEXER" () 512 () () 0 0  "syntax.cxx" "#define DONT_INCLUDE_FLEXLEXER
+" 13412]
+[ebrowse-ms "ECHO" () 512 () () 0 0  "syntax.cxx" "#define ECHO " 14894]
+[ebrowse-ms "ENABLE_FLOATING_POINT" () 512 () () 0 0  "latte-conf.h" "#define ENABLE_FLOATING_POINT " 296]
+[ebrowse-ms "ENABLE_WHITESPACE_OPT" () 512 () () 0 0  "latte-conf.h" "#define ENABLE_WHITESPACE_OPT " 517]
+[ebrowse-ms "EOB_ACT_CONTINUE_SCAN" () 512 () () 0 0  "syntax.cxx" "#define EOB_ACT_CONTINUE_SCAN " 2302]
+[ebrowse-ms "EOB_ACT_END_OF_FILE" () 512 () () 0 0  "syntax.cxx" "#define EOB_ACT_END_OF_FILE " 2332]
+[ebrowse-ms "EOB_ACT_LAST_MATCH" () 512 () () 0 0  "syntax.cxx" "#define EOB_ACT_LAST_MATCH " 2361]
+[ebrowse-ms "FLEX_SCANNER" () 512 () () 0 0  "syntax.cxx" "#define FLEX_SCANNER
+" 241]
+[ebrowse-ms "HAVE_FSTREAM" () 512 () () 0 0  "latte-conf.h" "#define HAVE_FSTREAM " 1217]
+[ebrowse-ms "HAVE_FSTREAM_H" () 512 () () 0 0  "latte-conf.h" "#define HAVE_FSTREAM_H " 1298]
+[ebrowse-ms "HAVE_IOSFWD" () 512 () () 0 0  "latte-conf.h" "#define HAVE_IOSFWD " 1373]
+[ebrowse-ms "HAVE_IOSTREAM" () 512 () () 0 0  "latte-conf.h" "#define HAVE_IOSTREAM " 1534]
+[ebrowse-ms "HAVE_IOSTREAM_H" () 512 () () 0 0  "latte-conf.h" "#define HAVE_IOSTREAM_H " 1617]
+[ebrowse-ms "HAVE_LIBINTL_H" () 512 () () 0 0  "latte-conf.h" "#define HAVE_LIBINTL_H " 1698]
+[ebrowse-ms "HAVE_MUTABLE" () 512 () () 0 0  "latte-conf.h" "#define HAVE_MUTABLE " 594]
+[ebrowse-ms "HAVE_NOV96_DEQUE" () 512 () () 0 0  "latte-conf.h" "#define HAVE_NOV96_DEQUE " 701]
+[ebrowse-ms "HAVE_NOV96_STACK" () 512 () () 0 0  "latte-conf.h" "#define HAVE_NOV96_STACK " 802]
+[ebrowse-ms "HAVE_STRING_H" () 512 () () 0 0  "latte-conf.h" "#define HAVE_STRING_H " 1777]
+[ebrowse-ms "HAVE_TWO_ITERATOR_STRING_CTOR" () 512 () () 0 0  "latte-conf.h" "#define HAVE_TWO_ITERATOR_STRING_CTOR " 907]
+[ebrowse-ms "HAVE_VECTOR_RESIZE" () 512 () () 0 0  "latte-conf.h" "#define HAVE_VECTOR_RESIZE " 977]
+[ebrowse-ms "HAVE_WAIT_H" () 512 () () 0 0  "latte-conf.h" "#define HAVE_WAIT_H " 1852]
+[ebrowse-ms "INITIAL" () 512 () () 0 0  "syntax.cxx" "#define INITIAL " 12574]
+[ebrowse-ms "LATTE_CONF_H" () 512 () () 0 0  "latte-conf.h" "# define LATTE_CONF_H
+" 201]
+[ebrowse-ms "LATTE_DEQUE_H" () 512 () () 0 0  "latte-deque.h" "# define LATTE_DEQUE_H
+" 826]
+[ebrowse-ms "LATTE_FSTREAM_H" () 512 () () 0 0  "latte-fstream.h" "# define LATTE_FSTREAM_H
+" 830]
+[ebrowse-ms "LATTE_H" () 512 () () 0 0  "latte.h" "# define LATTE_H
+" 814]
+[ebrowse-ms "LATTE_HTML_H" () 512 () () 0 0  "latte-html.h" "# define LATTE_HTML_H
+" 824]
+[ebrowse-ms "LATTE_IOSFWD_H" () 512 () () 0 0  "latte-iosfwd.h" "# define LATTE_IOSFWD_H
+" 828]
+[ebrowse-ms "LATTE_LOG_H" () 512 () () 0 0  "latte-log.h" "# define LATTE_LOG_H
+" 822]
+[ebrowse-ms "LATTE_MEMO_H" () 512 () () 0 0  "memo.h" "# define LATTE_MEMO_H
+" 824]
+[ebrowse-ms "LATTE_SHDEQUE_H" () 512 () () 0 0  "shdeque.h" "# define LATTE_SHDEQUE_H
+" 830]
+[ebrowse-ms "LATTE_STACK_H" () 512 () () 0 0  "latte-stack.h" "# define LATTE_STACK_H
+" 826]
+[ebrowse-ms "LATTE_STRING_H" () 512 () () 0 0  "latte-string.h" "# define LATTE_STRING_H
+" 828]
+[ebrowse-ms "LATTE_TEXT_H" () 512 () () 0 0  "latte-text.h" "# define LATTE_TEXT_H
+" 824]
+[ebrowse-ms "LATTE_VECTOR_H" () 512 () () 0 0  "latte-vector.h" "# define LATTE_VECTOR_H
+" 828]
+[ebrowse-ms "MUTABLE_H" () 512 () () 0 0  "mutable.h" "# define MUTABLE_H
+" 818]
+[ebrowse-ms "PACKAGE" () 512 () () 0 0  "latte-conf.h" "#define PACKAGE " 1893]
+[ebrowse-ms "PARAM" () 512 () () 0 0  "grammar.cxx" "#define PARAM " 1168]
+[ebrowse-ms "PARAM_ASSIGN" () 512 () () 0 0  "grammar.tab.h" "#define	PARAM_ASSIGN	" 189]
+[ebrowse-ms "PARAM_NAME" () 512 () () 0 0  "grammar.tab.h" "#define	PARAM_NAME	" 212]
+[ebrowse-ms "QUASIQUOTE" () 512 () () 0 0  "grammar.tab.h" "#define	QUASIQUOTE	" 294]
+[ebrowse-ms "QUOTE" () 512 () () 0 0  "grammar.tab.h" "#define	QUOTE	" 312]
+[ebrowse-ms "QuotedStr" () 512 () () 0 0  "syntax.cxx" "#define QuotedStr " 13356]
+[ebrowse-ms "REF" () 512 () () 0 0  "definitions.cxx" "#define REF " 42697]
+[ebrowse-ms "REFCOUNT_H" () 512 () () 0 0  "refcount.h" "# define REFCOUNT_H
+" 820]
+[ebrowse-ms "REJECT" () 512 () () 0 0  "syntax.cxx" "#define REJECT " 12271]
+[ebrowse-ms "RESTORER_H" () 512 () () 0 0  "restorer.h" "# define RESTORER_H
+" 820]
+[ebrowse-ms "REST_PARAM" () 512 () () 0 0  "grammar.tab.h" "#define	REST_PARAM	" 235]
+[ebrowse-ms "SHSTRING_H" () 512 () () 0 0  "shstring.h" "# define SHSTRING_H
+" 820]
+[ebrowse-ms "STR" () 512 () () 0 0  "grammar.tab.h" "#define	STR	" 251]
+[ebrowse-ms "UNQUOTE" () 512 () () 0 0  "grammar.tab.h" "#define	UNQUOTE	" 332]
+[ebrowse-ms "UNQUOTE_SPLICING" () 512 () () 0 0  "grammar.tab.h" "#define	UNQUOTE_SPLICING	" 361]
+[ebrowse-ms "VAR_REF" () 512 () () 0 0  "grammar.tab.h" "#define	VAR_REF	" 271]
+[ebrowse-ms "VERSION" () 512 () () 0 0  "latte-conf.h" "#define VERSION " 1950]
+[ebrowse-ms "YYABORT" () 512 () () 0 0  "grammar.cxx" "#define YYABORT " 9682]
+[ebrowse-ms "YYACCEPT" () 512 () () 0 0  "grammar.cxx" "#define YYACCEPT	" 9649]
+[ebrowse-ms "YYBACKUP" () 512 () () 0 0  "grammar.cxx" "#define YYBACKUP(" 10022]
+[ebrowse-ms "YYBISON" () 512 () () 0 0  "grammar.cxx" "#define YYBISON " 91]
+[ebrowse-ms "YYEMPTY" () 512 () () 0 0  "grammar.cxx" "#define YYEMPTY	" 9611]
+[ebrowse-ms "YYEOF" () 512 () () 0 0  "grammar.cxx" "#define YYEOF	" 9629]
+[ebrowse-ms "YYERRCODE" () 512 () () 0 0  "grammar.cxx" "#define YYERRCODE	" 10376]
+[ebrowse-ms "YYERROR" () 512 () () 0 0  "grammar.cxx" "#define YYERROR	" 9715]
+[ebrowse-ms "YYFAIL" () 512 () () 0 0  "grammar.cxx" "#define YYFAIL	" 9950]
+[ebrowse-ms "YYFINAL" () 512 () () 0 0  "grammar.cxx" "#define	YYFINAL	" 1304]
+[ebrowse-ms "YYFLAG" () 512 () () 0 0  "grammar.cxx" "#define	YYFLAG	" 1323]
+[ebrowse-ms "YYINITDEPTH" () 512 () () 0 0  "grammar.cxx" "#define YYINITDEPTH " 11419]
+[ebrowse-ms "YYLAST" () 512 () () 0 0  "grammar.cxx" "#define	YYLAST	" 5562]
+[ebrowse-ms "YYLEX" () 512 () () 0 0  "grammar.cxx" "#define YYLEX	" 10695]
+[ebrowse-ms "YYLEX_PARAM" () 512 () () 0 0  "grammar.cxx" "#define YYLEX_PARAM " 1148]
+[ebrowse-ms "YYMAXDEPTH" () 512 () () 0 0  "grammar.cxx" "#define YYMAXDEPTH " 11647]
+[ebrowse-ms "YYNTBASE" () 512 () () 0 0  "grammar.cxx" "#define	YYNTBASE	" 1348]
+[ebrowse-ms "YYPARSE_PARAM" () 512 () () 0 0  "grammar.cxx" "#define YYPARSE_PARAM " 1122]
+[ebrowse-ms "YYPARSE_PARAM_ARG" () 512 () () 0 0  "grammar.cxx" "#define YYPARSE_PARAM_ARG
+" 13388]
+[ebrowse-ms "YYPARSE_PARAM_DECL" () 512 () () 0 0  "grammar.cxx" "#define YYPARSE_PARAM_DECL
+" 13415]
+[ebrowse-ms "YYPOPSTACK" () 512 () () 0 0  "grammar.cxx" "#define YYPOPSTACK " 14383]
+[ebrowse-ms "YYPURE" () 512 () () 0 0  "grammar.cxx" "#define YYPURE " 6364]
+[ebrowse-ms "YYRECOVERING" () 512 () () 0 0  "grammar.cxx" "#define YYRECOVERING(" 9986]
+[ebrowse-ms "YYSTACK_ALLOC" () 512 () () 0 0  "grammar.cxx" "#define YYSTACK_ALLOC " 9361]
+[ebrowse-ms "YYSTACK_USE_ALLOCA" () 512 () () 0 0  "grammar.cxx" "#define YYSTACK_USE_ALLOCA
+" 9036]
+[ebrowse-ms "YYSTATE" () 512 () () 0 0  "syntax.cxx" "#define YYSTATE " 1880]
+[ebrowse-ms "YYTERROR" () 512 () () 0 0  "grammar.cxx" "#define YYTERROR	" 10356]
+[ebrowse-ms "YYTRANSLATE" () 512 () () 0 0  "grammar.cxx" "#define YYTRANSLATE(" 1372]
+[ebrowse-ms "YY_AT_BOL" () 512 () () 0 0  "syntax.cxx" "#define YY_AT_BOL(" 5843]
+[ebrowse-ms "YY_BREAK" () 512 () () 0 0  "syntax.cxx" "#define YY_BREAK " 16131]
+[ebrowse-ms "YY_BUFFER_EOF_PENDING" () 512 () () 0 0  "syntax.cxx" "#define YY_BUFFER_EOF_PENDING " 5041]
+[ebrowse-ms "YY_BUFFER_NEW" () 512 () () 0 0  "syntax.cxx" "#define YY_BUFFER_NEW " 4511]
+[ebrowse-ms "YY_BUFFER_NORMAL" () 512 () () 0 0  "syntax.cxx" "#define YY_BUFFER_NORMAL " 4538]
+[ebrowse-ms "YY_BUF_SIZE" () 512 () () 0 0  "syntax.cxx" "#define YY_BUF_SIZE " 2195]
+[ebrowse-ms "YY_CURRENT_BUFFER" () 512 () () 0 0  "syntax.cxx" "#define YY_CURRENT_BUFFER " 5224]
+[ebrowse-ms "YY_DECL" () 512 () () 0 0  "syntax.cxx" "#define YY_DECL " 15868]
+[ebrowse-ms "YY_DO_BEFORE_ACTION" () 512 () () 0 0  "syntax.cxx" "#define YY_DO_BEFORE_ACTION " 6322]
+[ebrowse-ms "YY_END_OF_BUFFER" () 512 () () 0 0  "syntax.cxx" "#define YY_END_OF_BUFFER " 6532]
+[ebrowse-ms "YY_END_OF_BUFFER_CHAR" () 512 () () 0 0  "syntax.cxx" "#define YY_END_OF_BUFFER_CHAR " 2136]
+[ebrowse-ms "YY_EXIT_FAILURE" () 512 () () 0 0  "syntax.cxx" "#define YY_EXIT_FAILURE " 37550]
+[ebrowse-ms "YY_FATAL_ERROR" () 512 () () 0 0  "syntax.cxx" "#define YY_FATAL_ERROR(" 15704]
+[ebrowse-ms "YY_FLEX_MAJOR_VERSION" () 512 () () 0 0  "syntax.cxx" "#define YY_FLEX_MAJOR_VERSION " 271]
+[ebrowse-ms "YY_FLEX_MINOR_VERSION" () 512 () () 0 0  "syntax.cxx" "#define YY_FLEX_MINOR_VERSION " 303]
+[ebrowse-ms "YY_INPUT" () 512 () () 0 0  "syntax.cxx" "#define YY_INPUT(" 15078]
+[ebrowse-ms "YY_MORE_ADJ" () 512 () () 0 0  "syntax.cxx" "#define YY_MORE_ADJ " 12491]
+[ebrowse-ms "YY_NEW_FILE" () 512 () () 0 0  "syntax.cxx" "#define YY_NEW_FILE " 2087]
+[ebrowse-ms "YY_NO_POP_STATE" () 512 () () 0 0  "syntax.cxx" "#define YY_NO_POP_STATE " 14345]
+[ebrowse-ms "YY_NO_PUSH_STATE" () 512 () () 0 0  "syntax.cxx" "#define YY_NO_PUSH_STATE " 14319]
+[ebrowse-ms "YY_NO_TOP_STATE" () 512 () () 0 0  "syntax.cxx" "#define YY_NO_TOP_STATE " 14371]
+[ebrowse-ms "YY_NULL" () 512 () () 0 0  "syntax.cxx" "#define YY_NULL " 1167]
+[ebrowse-ms "YY_NUM_RULES" () 512 () () 0 0  "syntax.cxx" "#define YY_NUM_RULES " 6504]
+[ebrowse-ms "YY_PROTO" () 512 () () 0 0  "syntax.cxx" "#define YY_PROTO(" 1100]
+[ebrowse-ms "YY_READ_BUF_SIZE" () 512 () () 0 0  "syntax.cxx" "#define YY_READ_BUF_SIZE " 14788]
+[ebrowse-ms "YY_RESTORE_YY_MORE_OFFSET" () 512 () () 0 0  "syntax.cxx" "#define YY_RESTORE_YY_MORE_OFFSET
+" 12537]
+[ebrowse-ms "YY_RULE_SETUP" () 512 () () 0 0  "syntax.cxx" "#define YY_RULE_SETUP " 16168]
+[ebrowse-ms "YY_SC_TO_UI" () 512 () () 0 0  "syntax.cxx" "#define YY_SC_TO_UI(" 1418]
+[ebrowse-ms "YY_SKIP_YYWRAP" () 512 () () 0 0  "syntax.cxx" "#define YY_SKIP_YYWRAP
+" 5944]
+[ebrowse-ms "YY_START" () 512 () () 0 0  "syntax.cxx" "#define YY_START " 1843]
+[ebrowse-ms "YY_START_STACK_INCR" () 512 () () 0 0  "syntax.cxx" "#define YY_START_STACK_INCR " 15619]
+[ebrowse-ms "YY_STATE_EOF" () 512 () () 0 0  "syntax.cxx" "#define YY_STATE_EOF(" 1968]
+[ebrowse-ms "YY_USER_ACTION" () 512 () () 0 0  "syntax.cxx" "#define YY_USER_ACTION
+" 16044]
+[ebrowse-ms "YY_USES_REJECT" () 512 () () 0 0  "syntax.cxx" "#define YY_USES_REJECT
+" 5901]
+[ebrowse-ms "YY_USE_CONST" () 512 () () 0 0  "syntax.cxx" "#define YY_USE_CONST
+" 923]
+[ebrowse-ms "YY_USE_PROTOS" () 512 () () 0 0  "syntax.cxx" "#define YY_USE_PROTOS
+" 945]
+[ebrowse-ms "_GETOPT_H" () 512 () () 0 0  "getopt.h" "#define _GETOPT_H " 955]
+[ebrowse-ms "__FLEX_LEXER_H" () 512 () () 0 0  () "#define __FLEX_LEXER_H
+" 1900]
+[ebrowse-ms "__cplusplus" () 512 () () 0 0  "syntax.cxx" "#define __cplusplus
+" 429]
+[ebrowse-ms "__yy_memcpy" () 512 () () 0 0  "grammar.cxx" "#define __yy_memcpy(" 11988]
+[ebrowse-ms "alloca" () 512 () () 0 0  "grammar.cxx" "#define alloca " 9051]
+[ebrowse-ms "const" () 512 () () 0 0  "grammar.cxx" "#define const
+" 1271]
+[ebrowse-ms "ext" () 512 () () 0 0  "load.cxx" "# define ext " 2217]
+[ebrowse-ms "latte_use_intrinsic_string" () 512 () () 0 0  "latte-string.h" "# define latte_use_intrinsic_string " 1078]
+[ebrowse-ms "mutable" () 512 () () 0 0  "mutable.h" "# define mutable
+" 988]
+[ebrowse-ms "mutate" () 512 () () 0 0  "mutable.h" "# define mutate(" 942]
+[ebrowse-ms "no_argument" () 512 () () 0 0  "getopt.h" "#define	no_argument	" 3380]
+[ebrowse-ms "optional_argument" () 512 () () 0 0  "getopt.h" "#define optional_argument	" 3437]
+[ebrowse-ms "required_argument" () 512 () () 0 0  "getopt.h" "#define required_argument	" 3409]
+[ebrowse-ms "sep" () 512 () () 0 0  "load.cxx" "# define sep " 2266]
+[ebrowse-ms "unput" () 512 () () 0 0  "syntax.cxx" "#define unput(" 3177]
+[ebrowse-ms "yyFlexLexer" () 512 () () 0 0  "syntax.cxx" "#define yyFlexLexer " 20]
+[ebrowse-ms "yyFlexLexerOnce" () 512 () () 0 0  () "#define yyFlexLexerOnce
+" 3356]
+[ebrowse-ms "yy_new_buffer" () 512 () () 0 0  "syntax.cxx" "#define yy_new_buffer " 5429]
+[ebrowse-ms "yy_set_bol" () 512 () () 0 0  "syntax.cxx" "#define yy_set_bol(" 5671]
+[ebrowse-ms "yy_set_interactive" () 512 () () 0 0  "syntax.cxx" "#define yy_set_interactive(" 5474]
+[ebrowse-ms "yychar" () 512 () () 0 0  "grammar.cxx" "#define yychar " 242]
+[ebrowse-ms "yyclearin" () 512 () () 0 0  "grammar.cxx" "#define yyclearin	" 9576]
+[ebrowse-ms "yyconst" () 512 () () 0 0  "syntax.cxx" "#define yyconst
+" 1017]
+[ebrowse-ms "yydebug" () 512 () () 0 0  "grammar.cxx" "#define yydebug " 268]
+[ebrowse-ms "yyerrok" () 512 () () 0 0  "grammar.cxx" "#define yyerrok	" 9539]
+[ebrowse-ms "yyerror" () 512 () () 0 0  "grammar.cxx" "#define yyerror " 191]
+[ebrowse-ms "yyless" () 512 () () 0 0  "syntax.cxx" "#define yyless(" 37753]
+[ebrowse-ms "yylex" () 512 () () 0 0  "grammar.cxx" "#define yylex " 166]
+[ebrowse-ms "yylval" () 512 () () 0 0  "grammar.cxx" "#define yylval " 217]
+[ebrowse-ms "yymore" () 512 () () 0 0  "syntax.cxx" "#define yymore(" 12450]
+[ebrowse-ms "yynerrs" () 512 () () 0 0  "grammar.cxx" "#define yynerrs " 295]
+[ebrowse-ms "yyparse" () 512 () () 0 0  "grammar.cxx" "#define yyparse " 141]
+[ebrowse-ms "yyterminate" () 512 () () 0 0  "syntax.cxx" "#define yyterminate(" 15476]
+[ebrowse-ms "yytext_ptr" () 512 () () 0 0  "syntax.cxx" "#define yytext_ptr " 5994]
+[ebrowse-ms "yywrap" () 512 () () 0 0  "syntax.cxx" "#define yywrap(" 5917]
+)
+([ebrowse-ms "LatteLogFlags" () 0 () () 0 0  "latte-log.h" "enum LatteLogFlags {" 885]
+[ebrowse-ms "Latte_Number_t" () 0 () () 0 0  "latte.h" "typedef long Latte_Number_t;" 4822]
+[ebrowse-ms "Latte_ObjDeque" () 0 () () 0 0  "latte.h" "shdeque< Refcounter<Latte_Obj> > Latte_ObjDeque;" 14727]
+[ebrowse-ms "Latte_Path" () 0 () () 0 0  "latte.h" "typedef latte_deque<shstring> Latte_Path;" 27438]
+[ebrowse-ms "YY_CHAR" () 0 () () 0 0  "syntax.cxx" "typedef unsigned char YY_CHAR;" 5974]
+[ebrowse-ms "latte_string" () 0 () () 0 0  "latte-string.h" "typedef string latte_string;" 1206]
+[ebrowse-ms "qqpair" () 0 () () 0 0  "quote.cxx" "ypedef pair<Refcounter<Latte_Obj>, bool> qqpair;" 1639]
+[ebrowse-ms "yy_size_t" () 0 () () 0 0  "syntax.cxx" "typedef unsigned int yy_size_t;" 3432]
+)
+()()
+][ebrowse-ts [ebrowse-cs "string" () 0() () 0() ]
+([ebrowse-ts [ebrowse-cs "latte_string" () 0"latte-string.h" "class latte_string :" 1265"latte-string.h" ]
+([ebrowse-ts [ebrowse-cs "Rep" "shstring" 0"shstring.h" "  class Rep :" 1991"shstring.cxx" ]
+()()
+([ebrowse-ms "Rep" () 0 () "	const string::const_iterator &);" 2136 0  () "		   const latte_string::const_iterator &e) :" 1889]
+[ebrowse-ms "Rep" () 0 () "    Rep(const string &);" 2111 0  () "shstring::Rep::Rep(const string &s) :" 1830]
+[ebrowse-ms "Rep" () 0 () "    Rep(const char *, size_t);" 2080 0  () "shstring::Rep::Rep(const char *s, size_t n) :" 1760]
+[ebrowse-ms "Rep" () 0 () "    Rep(const char *);" 2057 0  () "shstring::Rep::Rep(const char *s) :" 1703]
+[ebrowse-ms "str" () 4 () "    const latte_string &str()" 2269 0  "shstring.h" "    const latte_string &str()" 2269]
+[ebrowse-ms "str" () 0 () "    latte_string &str()" 2221 0  "shstring.h" "    latte_string &str()" 2221]
+)
+()
+()
+([ebrowse-ms "operator <<" () 0 () "    friend ostream &operator << (ostream" 2347 2  "wstate.cxx" "operator << (ostream" 3202]
+)
+()
+()()
+])()
+([ebrowse-ms "erase" () 0 () "  latte_string &erase(size_t" 1877 0  () "  latte_string &erase(size_t" 1877]
+[ebrowse-ms "latte_string" () 0 () "st const_iterator &a, const const_iterator &b) {" 1663 0  () "st const_iterator &a, const const_iterator &b) {" 1663]
+[ebrowse-ms "latte_string" () 0 () "  latte_string(const string &other) :" 1442 0  () "  latte_string(const string &other) :" 1442]
+[ebrowse-ms "latte_string" () 0 () "  latte_string(const char *str, size_t n) :" 1380 0  () "  latte_string(const char *str, size_t n) :" 1380]
+[ebrowse-ms "latte_string" () 0 () "  latte_string(const char *str) :" 1331 0  () "  latte_string(const char *str) :" 1331]
+[ebrowse-ms "latte_string" () 0 () "  latte_string() {" 1307 0  () "  latte_string() {" 1307]
+)
+()
+()
+()
+()
+()()
+])()
+()
+()
+()
+()
+()
+()()
+]
